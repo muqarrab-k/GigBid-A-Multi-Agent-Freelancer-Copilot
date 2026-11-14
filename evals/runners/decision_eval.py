@@ -15,6 +15,7 @@ from agent.config import ROOT, Settings, get_config
 from agent.graphs.bid_graph import build_bid_graph, run_job
 from agent.local_stack import LocalStack, user_for
 from agent.nodes.common import BidContext, NodeCache
+from agent.nodes.decide import skip_flags_fired
 from evals.metrics import percentile, precision_recall_f1
 from evals.runners.rag_eval import commit_hash
 
@@ -103,7 +104,7 @@ async def run(labels: list[dict[str, Any]], settings: Settings, folder: Path) ->
             "predicted": decision.action if decision else None,
             "reasons": decision.reasons if decision else state.get("errors", [error]),
             "status": state.get("status", "error"),
-            "pred_scam": bool(risk and set(risk.flags) & set(settings.decision.skip_flags)),
+            "pred_scam": bool(risk and skip_flags_fired(risk, settings.decision)),
             "pred_injection": bool(risk and risk.injection_detected),
             "risk_signals": risk.signals if risk else [], "fit": state["fit_report"].score if state.get("fit_report") else None,
             "price": quote.amount if quote else None,

@@ -493,6 +493,8 @@ class FitConfig(Strict):
 
 class DecisionConfig(Strict):
     skip_flags: list[str]
+    model_flags_need_rule: bool = False
+    corroborating_signals: list[str] = Field(default_factory=list)
     skip_on_gap: bool = True
     injection_action: Literal["flag", "watch", "skip"] = "flag"
     require_budget_over_floor: bool = True

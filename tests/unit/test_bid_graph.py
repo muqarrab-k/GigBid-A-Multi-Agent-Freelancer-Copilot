@@ -170,6 +170,21 @@ def test_decision_rules() -> None:
     assert decide(state_for(job, injected, fit_of(0.8)), cfg, profile).action == "bid"
 
 
+def test_model_flags_need_a_rule() -> None:
+    cfg, profile = get_config(), load_profile("ai_ml")
+    job = {"job_id": "j", "budget_type": "fixed", "budget_max": 800.0, "connects_cost": 8}
+    alone = RiskReport(score=0.3, flags=["unpaid_work"], signals=["llm:unpaid_work"], explanation="x")
+    assert decide(state_for(job, alone, fit_of(0.8)), cfg, profile).action == "bid"
+    backed = alone.model_copy(update={"signals": ["llm:unpaid_work", "client:odd_spend"]})
+    assert decide(state_for(job, backed, fit_of(0.8)), cfg, profile).action == "skip"
+    rule = RiskReport(score=0.3, flags=["off_platform"], signals=["pattern:off_platform"], explanation="x")
+    assert decide(state_for(job, rule, fit_of(0.8)), cfg, profile).action == "skip"
+    # injected text alone never corroborates
+    injected = RiskReport(score=0.3, flags=["off_platform", "injection"], injection_detected=True,
+                          signals=["llm:off_platform", "pattern:injection"], explanation="x")
+    assert decide(state_for(job, injected, fit_of(0.8)), cfg, profile).action == "bid"
+
+
 def test_classification_metrics() -> None:
     p, r, f1 = precision_recall_f1([True, True, False, False, True], [True, False, True, False, True])
     assert (p, r) == (pytest.approx(2 / 3), pytest.approx(2 / 3)) and f1 == pytest.approx(2 / 3)

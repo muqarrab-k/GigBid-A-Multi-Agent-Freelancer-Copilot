@@ -2,8 +2,8 @@
 
 from typing import Any
 
-from agent.config import Settings
-from agent.handoffs import BidDecision
+from agent.config import DecisionConfig, Settings
+from agent.handoffs import BidDecision, RiskReport
 from agent.profile import Profile
 from agent.state import BidState
 
@@ -25,6 +25,17 @@ def budget_problem(job: dict[str, Any], profile: Profile) -> str | None:
     return None
 
 
+def skip_flags_fired(risk: RiskReport, rules: DecisionConfig) -> list[str]:
+    """Skip flags that count: rule flags always, model flags only with a rule signal beside them."""
+    corroborated = bool(set(risk.signals) & set(rules.corroborating_signals))
+    fired = []
+    for flag in sorted(set(risk.flags) & set(rules.skip_flags)):
+        from_rule = f"pattern:{flag}" in risk.signals or f"llm:{flag}" not in risk.signals
+        if from_rule or not rules.model_flags_need_rule or corroborated:
+            fired.append(flag)
+    return fired
+
+
 def decide(state: BidState, settings: Settings, profile: Profile) -> BidDecision:
     """First matching rule wins; every rule that fired is a reason."""
     job, rules, limits = state["job"], settings.decision, settings.thresholds
@@ -39,7 +50,7 @@ def decide(state: BidState, settings: Settings, profile: Profile) -> BidDecision
         if rules.injection_action != "flag":
             return done(rules.injection_action)
     if risk:
-        bad = sorted(set(risk.flags) & set(rules.skip_flags))
+        bad = skip_flags_fired(risk, rules)
         if bad:
             reasons.append(f"risk flags {bad}")
             return done("skip")

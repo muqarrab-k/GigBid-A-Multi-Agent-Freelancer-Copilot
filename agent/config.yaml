@@ -404,6 +404,11 @@ fit:
 decision:
   # any of these flags means skip
   skip_flags: [scam, unpaid_work, off_platform]
+  # model-only skip flags count only next to a rule signal
+  model_flags_need_rule: true
+  # injection never corroborates
+  corroborating_signals: [pattern:scam, pattern:unpaid_work, pattern:off_platform, client:new_account_no_hires,
+                          client:odd_spend, client:many_posts_no_hires]
   skip_on_gap: true
   # flag only: injected text never changes the decision
   injection_action: flag
