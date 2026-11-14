@@ -1,0 +1,124 @@
+# runtime config
+
+models:
+  active_profile: open
+  request_timeout_s: 60
+  max_retries: 2
+
+  # keys from env
+  providers:
+    ollama:
+      api_key_env: null
+      base_url_env: OLLAMA_BASE_URL
+    groq:
+      api_key_env: GROQ_API_KEY
+    openrouter:
+      api_key_env: OPENROUTER_API_KEY
+    together:
+      api_key_env: TOGETHER_API_KEY
+
+  # shared open models
+  embeddings:
+    provider: ollama
+    model: nomic-embed-text
+    base_url: http://localhost:11434/v1
+  reranker:
+    provider: huggingface
+    model: BAAI/bge-reranker-v2-m3
+
+  profiles:
+    open:
+      scout: &open_small
+        provider: ollama
+        model: qwen3:4b
+        base_url: http://localhost:11434/v1
+        temperature: 0.0
+        fallback:
+          provider: groq
+          model: openai/gpt-oss-20b
+          base_url: https://api.groq.com/openai/v1
+          temperature: 0.0
+      analyst: *open_small
+      risk_assessor: *open_small
+      fit_matcher: *open_small
+      pricing: *open_small
+      verifier: *open_small
+      compliance: *open_small
+      writer: &open_strong
+        provider: groq
+        model: openai/gpt-oss-120b
+        base_url: https://api.groq.com/openai/v1
+        temperature: 0.4
+      critic:
+        <<: *open_strong
+        temperature: 0.0
+      client_liaison:
+        <<: *open_strong
+        temperature: 0.3
+
+    paid:
+      scout: *open_small
+      analyst: *open_small
+      risk_assessor: *open_small
+      fit_matcher: *open_small
+      pricing: *open_small
+      verifier: *open_small
+      compliance: *open_small
+      writer: &paid_strong
+        provider: openrouter
+        model: openai/gpt-5-mini
+        base_url: https://openrouter.ai/api/v1
+        temperature: 0.4
+      critic:
+        <<: *paid_strong
+        temperature: 0.0
+      client_liaison:
+        <<: *paid_strong
+        temperature: 0.3
+
+marketplace:
+  mode: gigsim
+  upwork_mcp_url: https://mcp.upwork.com/mcp
+  timeout_s: 15
+  max_retries: 3
+  rate_limits:
+    gigsim:
+      requests_per_minute: 20
+      poll_interval_minutes: 30
+    upwork:
+      requests_per_minute: 10
+      poll_interval_minutes: 180
+
+budgets:
+  max_graph_steps: 30
+  max_revisions: 2
+  max_tokens_per_job: 12000
+  # declared targets
+  targets:
+    p95_latency_s_per_job: 20
+    p95_latency_s_per_proposal: 60
+    cost_usd_per_job: 0.002
+    cost_usd_per_proposal: 0.01
+
+thresholds:
+  minimum_fit_score: 0.60
+  watch_fit_score: 0.45
+  maximum_risk_score: 0.70
+
+bidding_rules:
+  currency: USD
+  weekly_connects_budget: 80
+  max_connects_per_job: 16
+  connects_unit_cost_usd: 0.15
+  min_hourly_rate: 25
+  min_fixed_price: 100
+  platform_fee_pct: 10
+  max_proposals_per_day: 10
+  # new platform rules
+  extra: {}
+
+paths:
+  policy_pack: data/policy_pack
+  prompts_dir: agent/prompts
+  personas_dir: data/personas
+  processed_dir: data/processed
