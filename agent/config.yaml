@@ -20,15 +20,6 @@ models:
     openai:
       api_key_env: OPENAI_API_KEY
 
-  # shared open models
-  embeddings:
-    provider: ollama
-    model: nomic-embed-text
-    base_url: http://localhost:11434/v1
-  reranker:
-    provider: huggingface
-    model: BAAI/bge-reranker-v2-m3
-
   # synthetic corpus renderer, never an agent
   active_generator: default
   generators:
@@ -139,7 +130,7 @@ mcp:
   # stdio runs as this user
   default_user: noor
   issuer_url: http://localhost:8100
-  ports: {marketplace: 8101, workspace: 8102}
+  ports: {marketplace: 8101, workspace: 8102, portfolio: 8103}
   limits:
     search_limit_max: 50
     cover_letter_max_chars: 6000
@@ -258,3 +249,46 @@ synth:
   # bid rule thresholds
   bid_min_skill_hits: 2
   bid_min_coverage: 0.3
+
+# portfolio retrieval, open models on CPU
+rag:
+  variant: v0
+  default_k: 5
+  # chunks pulled before grouping by evidence
+  candidate_multiplier: 6
+  embeddings:
+    provider: sentence_transformers
+    model: nomic-ai/nomic-embed-text-v1.5
+    dim: 768
+    batch_size: 32
+    trust_remote_code: true
+    query_prefix: "search_query: "
+    document_prefix: "search_document: "
+    # low-memory hosts
+    fallback:
+      provider: sentence_transformers
+      model: BAAI/bge-small-en-v1.5
+      dim: 384
+      batch_size: 64
+      query_prefix: "Represent this sentence for searching relevant passages: "
+      document_prefix: ""
+    ollama:
+      provider: ollama
+      model: nomic-embed-text
+      dim: 768
+      base_url: http://localhost:11434
+      query_prefix: "search_query: "
+      document_prefix: "search_document: "
+    cache_path: data/cache/embeddings.sqlite
+  chunking:
+    strategy: fixed
+    size_words: 200
+    overlap_words: 40
+  store:
+    backend: pgvector
+    dsn_env: DATABASE_URL
+    dsn_default: postgresql://gigbid:gigbid@localhost:5432/gigbid
+    schema: rag
+  reranker:
+    provider: huggingface
+    model: BAAI/bge-reranker-v2-m3

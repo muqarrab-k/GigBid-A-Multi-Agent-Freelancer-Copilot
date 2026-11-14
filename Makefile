@@ -1,4 +1,7 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace snapshot-update
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval
+
+VARIANT ?= v0
+COMPOSE := docker compose -f infra/docker-compose.yml
 
 UV := $(shell command -v uv 2>/dev/null)
 ifdef UV
@@ -45,6 +48,21 @@ mcp-marketplace:
 
 mcp-workspace:
 	$(RUN) python -m mcp_servers.workspace.server --http
+
+mcp-portfolio:
+	$(RUN) python -m mcp_servers.portfolio.server --http
+
+db-up:
+	$(COMPOSE) up -d --wait postgres
+
+db-down:
+	$(COMPOSE) stop postgres
+
+index:
+	$(RUN) python -m rag.ingest.run
+
+rag-eval:
+	$(RUN) python -m evals.runners.rag_eval --variant $(VARIANT)
 
 snapshot-update:
 	UPDATE_SNAPSHOTS=1 $(RUN) pytest -q tests/contract

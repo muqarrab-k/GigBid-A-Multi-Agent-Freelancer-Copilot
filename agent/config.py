@@ -79,17 +79,6 @@ class Provider(Strict):
     base_url_env: str | None = None
 
 
-class EmbeddingSpec(Strict):
-    provider: str
-    model: str
-    base_url: str
-
-
-class RerankerSpec(Strict):
-    provider: str
-    model: str
-
-
 class GeneratorSpec(ModelSpec):
     max_tokens: int = Field(default=2000, gt=0)
     reasoning_effort: Literal["none", "low", "medium", "high"] | None = None
@@ -102,8 +91,6 @@ class ModelsConfig(Strict):
     request_timeout_s: float = Field(default=60, gt=0)
     max_retries: int = Field(default=2, ge=0, le=10)
     providers: dict[str, Provider]
-    embeddings: EmbeddingSpec
-    reranker: RerankerSpec
     active_generator: str = "default"
     generators: dict[str, GeneratorSpec] = Field(default_factory=dict)
     profiles: dict[str, Profile]
@@ -349,6 +336,67 @@ class McpConfig(Strict):
         return next(u for u in self.users if u.user == name)
 
 
+class EmbedderSpec(Strict):
+    provider: Literal["sentence_transformers", "ollama", "fake"]
+    model: str
+    dim: int = Field(gt=0)
+    batch_size: int = Field(default=32, gt=0)
+    trust_remote_code: bool = False
+    query_prefix: str = ""
+    document_prefix: str = ""
+    base_url: str | None = None
+
+
+class EmbeddingsConfig(EmbedderSpec):
+    fallback: EmbedderSpec | None = None
+    ollama: EmbedderSpec | None = None
+    cache_path: Path
+
+    @field_validator("cache_path")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+
+class ChunkingConfig(Strict):
+    strategy: Literal["fixed"] = "fixed"
+    size_words: int = Field(gt=10)
+    overlap_words: int = Field(ge=0)
+
+    @model_validator(mode="after")
+    def check_overlap(self) -> "ChunkingConfig":
+        if self.overlap_words >= self.size_words:
+            raise ValueError("overlap_words must be smaller than size_words")
+        return self
+
+
+class StoreConfig(Strict):
+    backend: Literal["pgvector", "memory"] = "pgvector"
+    dsn_env: str = "DATABASE_URL"
+    dsn_default: str
+    schema_name: str = Field(default="rag", alias="schema", pattern=r"^[a-z_]+$")
+
+    @property
+    def dsn(self) -> str:
+        # psycopg wants plain postgresql://
+        return (os.getenv(self.dsn_env) or self.dsn_default).replace("postgresql+psycopg://", "postgresql://")
+
+
+class RerankerSpec(Strict):
+    provider: str
+    model: str
+
+
+class RagConfig(Strict):
+    variant: str = "v0"
+    default_k: int = Field(default=5, gt=0)
+    candidate_multiplier: int = Field(default=6, gt=0)
+    embeddings: EmbeddingsConfig
+    chunking: ChunkingConfig
+    store: StoreConfig
+    reranker: RerankerSpec
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -359,6 +407,7 @@ class Settings(Strict):
     data: DataConfig
     synth: SynthConfig
     mcp: McpConfig
+    rag: RagConfig
 
     @property
     def profile(self) -> Profile:
