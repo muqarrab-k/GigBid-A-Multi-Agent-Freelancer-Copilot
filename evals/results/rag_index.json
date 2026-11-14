@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-14T13:47:46+00:00",
+  "embedder": "nomic-ai/nomic-embed-text-v1.5",
+  "dim": 768,
+  "store": "pgvector",
+  "chunking": {
+    "strategy": "fixed",
+    "size_words": 200,
+    "overlap_words": 40
+  },
+  "model_load_seconds": 17.4,
+  "embed_seconds": 66.4,
+  "texts_embedded": 937,
+  "texts_from_cache": 0,
+  "total_seconds": 84.4,
+  "personas": {
+    "ai_ml": {
+      "persona": "ai_ml",
+      "documents": 217,
+      "added": 217,
+      "updated": 0,
+      "removed": 0,
+      "unchanged": 0,
+      "chunks_embedded": 307,
+      "seconds": 22.76,
+      "chunks_total": 307,
+      "chunks_by_type": {
+        "case_study": 36,
+        "code": 18,
+        "cv": 3,
+        "proposal": 218,
+        "readme": 7,
+        "review": 25
+      }
+    },
+    "data_analyst": {
+      "persona": "data_analyst",
+      "documents": 212,
+      "added": 212,
+      "updated": 0,
+      "removed": 0,
+      "unchanged": 0,
+      "chunks_embedded": 310,
+      "seconds": 20.82,
+      "chunks_total": 310,
+      "chunks_by_type": {
+        "case_study": 36,
+        "code": 17,
+        "cv": 2,
+        "proposal": 224,
+        "readme": 6,
+        "review": 25
+      }
+    },
+    "fullstack": {
+      "persona": "fullstack",
+      "documents": 216,
+      "added": 216,
+      "updated": 0,
+      "removed": 0,
+      "unchanged": 0,
+      "chunks_embedded": 320,
+      "seconds": 23.26,
+      "chunks_total": 320,
+      "chunks_by_type": {
+        "case_study": 36,
+        "code": 22,
+        "cv": 2,
+        "proposal": 228,
+        "readme": 7,
+        "review": 25
+      }
+    }
+  }
+}
