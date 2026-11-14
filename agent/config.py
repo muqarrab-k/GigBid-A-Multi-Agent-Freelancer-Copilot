@@ -1,3 +1,4 @@
+from datetime import date
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Literal, get_args
@@ -161,6 +162,36 @@ class Thresholds(Strict):
         return self
 
 
+class ConnectsTier(Strict):
+    max_budget: float | None = Field(default=None, gt=0)
+    connects: int = Field(gt=0)
+
+
+class ConnectsRule(Strict):
+    hourly_default: int = Field(gt=0)
+    unknown_default: int = Field(gt=0)
+    fixed_tiers: list[ConnectsTier] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def check_tiers(self) -> "ConnectsRule":
+        if self.fixed_tiers[-1].max_budget is not None:
+            raise ValueError("last connects tier needs max_budget: null")
+        caps = [t.max_budget for t in self.fixed_tiers[:-1] if t.max_budget is not None]
+        if len(caps) != len(self.fixed_tiers) - 1 or caps != sorted(caps):
+            raise ValueError("connects tiers must be sorted by max_budget")
+        return self
+
+    def connects_for(self, budget_type: str | None, budget: float | None) -> int:
+        if budget_type == "hourly":
+            return self.hourly_default
+        if budget is None:
+            return self.unknown_default
+        for tier in self.fixed_tiers:
+            if tier.max_budget is None or budget <= tier.max_budget:
+                return tier.connects
+        return self.unknown_default
+
+
 class BiddingRules(Strict):
     currency: str = "USD"
     weekly_connects_budget: int = Field(ge=0)
@@ -170,6 +201,7 @@ class BiddingRules(Strict):
     min_fixed_price: float = Field(ge=0)
     platform_fee_pct: float = Field(ge=0, lt=100)
     max_proposals_per_day: int = Field(gt=0)
+    connects_rule: ConnectsRule
     extra: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -178,11 +210,32 @@ class Paths(Strict):
     prompts_dir: Path
     personas_dir: Path
     processed_dir: Path
+    raw_dir: Path
+    seed_dir: Path
 
     @field_validator("*")
     @classmethod
     def from_root(cls, value: Path) -> Path:
         return value if value.is_absolute() else ROOT / value
+
+
+class SplitSizes(Strict):
+    history: int = Field(gt=0)
+    stream: int = Field(gt=0)
+    dev_pool: int = Field(gt=0)
+
+
+class DataConfig(Strict):
+    seed: int
+    split_sizes: SplitSizes
+    off_topic_share: float = Field(ge=0, lt=1)
+    stream_dup_cap: int = Field(default=1, ge=1)
+    min_description_words: int = Field(default=20, ge=0)
+    pricing_min_count: int = Field(default=30, gt=0)
+    max_fixed_budget: float = Field(gt=0)
+    max_hourly_rate: float = Field(gt=0)
+    contract_date_min: date
+    contract_date_max: date
 
 
 class Settings(Strict):
@@ -192,6 +245,7 @@ class Settings(Strict):
     thresholds: Thresholds
     bidding_rules: BiddingRules
     paths: Paths
+    data: DataConfig
 
     @property
     def profile(self) -> Profile:

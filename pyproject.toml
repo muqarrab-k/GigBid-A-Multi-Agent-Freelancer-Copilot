@@ -34,12 +34,21 @@ dev = [
   "mypy==2.4.1",
   "types-PyYAML==6.0.12.20261113",
 ]
+data = [
+  "pandas==3.1.1",
+  "pyarrow==26.0.1",
+  "kaggle==2.2.5",
+  "openpyxl==3.1.5",
+  # kaggle needs it
+  "six==1.17.0",
+]
 
 [tool.setuptools.packages.find]
-include = ["agent*", "apps*", "rag*", "mcp_servers*", "evals*", "worker*"]
+include = ["agent*", "apps*", "rag*", "mcp_servers*", "evals*", "worker*", "data_pipeline*"]
 
 [tool.setuptools.package-data]
 agent = ["config.yaml", "prompts/*.md"]
+data_pipeline = ["*.yaml"]
 
 [tool.ruff]
 line-length = 100

@@ -114,6 +114,16 @@ bidding_rules:
   min_fixed_price: 100
   platform_fee_pct: 10
   max_proposals_per_day: 10
+  # fitted on 2023 jobs
+  connects_rule:
+    hourly_default: 12
+    unknown_default: 8
+    fixed_tiers:
+      - {max_budget: 10, connects: 2}
+      - {max_budget: 40, connects: 4}
+      - {max_budget: 500, connects: 8}
+      - {max_budget: 2000, connects: 12}
+      - {max_budget: null, connects: 16}
   # new platform rules
   extra: {}
 
@@ -122,3 +132,21 @@ paths:
   prompts_dir: agent/prompts
   personas_dir: data/personas
   processed_dir: data/processed
+  raw_dir: data/raw/kaggle
+  seed_dir: gigsim/seed
+
+data:
+  seed: 4016
+  split_sizes:
+    history: 1500
+    stream: 400
+    dev_pool: 600
+  off_topic_share: 0.15
+  stream_dup_cap: 3
+  min_description_words: 20
+  pricing_min_count: 30
+  # outside caps -> null
+  max_fixed_budget: 100000
+  max_hourly_rate: 500
+  contract_date_min: 2000-01-01
+  contract_date_max: 2024-12-31

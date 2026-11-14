@@ -1,0 +1,25 @@
+# kaggle sources
+jobs_2024_50k:
+  slug: asaniczka/upwork-job-postings-dataset-2024-50k-records
+  kind: jobs
+  origin: real
+jobs_200k:
+  slug: asaniczka/all-jobs-on-upwork-200k-plus
+  kind: jobs
+  origin: real
+jobs_2023_60k:
+  slug: ahmedmyalo/upwork-freelance-jobs-60k
+  kind: jobs
+  origin: real
+contracts_1_3m:
+  slug: asaniczka/freelance-contracts-dataset-1-3-million-entries
+  kind: contracts
+  origin: real
+freelancer_success:
+  slug: sarveshchhetri/freelancer-success-earnings-and-churn-prediction
+  kind: freelancers
+  origin: synthetic
+fake_jobs:
+  slug: adityammantri/trial-1
+  kind: scams
+  origin: real
