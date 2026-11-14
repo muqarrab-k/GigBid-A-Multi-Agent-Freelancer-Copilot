@@ -32,6 +32,7 @@ class MarketJob(Record):
     connects_source: Literal["real", "rule"] | None = None
     persona_tags: list[Persona] = Field(default_factory=list)
     dup_group: str | None = None
+    client_id: str | None = None
 
     @model_validator(mode="after")
     def check_ranges(self) -> "MarketJob":

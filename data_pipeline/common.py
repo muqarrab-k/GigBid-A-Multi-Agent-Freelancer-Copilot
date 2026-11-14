@@ -11,6 +11,7 @@ PATHS = get_config().paths
 RAW_DIR = PATHS.raw_dir
 PROCESSED_DIR = PATHS.processed_dir
 SEED_DIR = PATHS.seed_dir
+REAL_SEED_DIR = SEED_DIR / "real"
 SOURCES_PATH = Path(__file__).with_name("sources.yaml")
 TABLE_SUFFIXES = (".csv", ".xlsx", ".parquet")
 

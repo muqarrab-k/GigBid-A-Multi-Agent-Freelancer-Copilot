@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from agent.config import DataConfig, get_config
-from data_pipeline.common import PROCESSED_DIR, SEED_DIR
+from data_pipeline.common import PROCESSED_DIR, REAL_SEED_DIR
 from data_pipeline.schema import MarketJob
 
 BUCKETS = ("ai_ml", "fullstack", "data_analyst", "off_topic")
@@ -75,7 +75,7 @@ def write_jsonl(df: pd.DataFrame, path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         for record in df[list(MarketJob.model_fields)].to_dict(orient="records"):
             job = MarketJob.model_validate({k: plain(v) for k, v in record.items()})
-            f.write(job.model_dump_json() + "\n")
+            f.write(job.model_dump_json(exclude={"client_id"}) + "\n")
 
 
 def splits_report(splits: dict[str, pd.DataFrame], cfg: DataConfig) -> str:
@@ -110,11 +110,11 @@ def main() -> dict[str, pd.DataFrame]:
     cfg = get_config().data
     jobs = pd.read_parquet(PROCESSED_DIR / "jobs.parquet")
     splits = split_jobs(jobs, cfg)
-    SEED_DIR.mkdir(parents=True, exist_ok=True)
+    REAL_SEED_DIR.mkdir(parents=True, exist_ok=True)
     for name, df in splits.items():
-        write_jsonl(df, str(SEED_DIR / f"jobs_{name}.jsonl"))
+        write_jsonl(df, str(REAL_SEED_DIR / f"jobs_{name}.jsonl"))
         print(f"  {name:<9} {len(df):>5} rows")
-    (SEED_DIR / "SPLITS.md").write_text(splits_report(splits, cfg))
+    (REAL_SEED_DIR / "SPLITS.md").write_text(splits_report(splits, cfg))
     return splits
 
 
