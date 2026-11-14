@@ -1,0 +1,20 @@
+# SYNTHETIC freelancer accounts, one per persona
+# tokens: env var wins, default is local dev only
+- account_id: acct_ai_ml
+  persona: ai_ml
+  name: Noor Halden
+  weekly_connects: 80
+  token_env: GIGSIM_TOKEN_AI_ML
+  token_default: dev-ai_ml-token
+- account_id: acct_fullstack
+  persona: fullstack
+  name: Tobias Reyne
+  weekly_connects: 100
+  token_env: GIGSIM_TOKEN_FULLSTACK
+  token_default: dev-fullstack-token
+- account_id: acct_data_analyst
+  persona: data_analyst
+  name: Mina Castellan
+  weekly_connects: 60
+  token_env: GIGSIM_TOKEN_DATA_ANALYST
+  token_default: dev-data_analyst-token

@@ -1,0 +1,35 @@
+# gigsim runtime config, paths relative to gigsim/
+seed: 4016
+start_time: "2024-08-01T00:00:00Z"
+scenario: live
+storage: data/gigsim.db
+seed_dir: seed
+policies_dir: policies
+policy: v1
+
+auth:
+  admin_token_env: GIGSIM_ADMIN_TOKEN
+  # local dev only, override via env
+  admin_token_default: dev-admin-token
+
+stream_release_days: 14
+screening_share: 0.4
+pagination: {default_limit: 20, max_limit: 100}
+
+# per token, real seconds
+rate_limit: {capacity: 30, refill_per_second: 0.5}
+chaos: {error_rate: 0.02, latency_ms_max: 120}
+
+clients:
+  mode: rule_only
+  view_delay_hours: [2, 36]
+  final_delay_hours: [24, 120]
+  followup_delay_hours: [4, 24]
+  base_view: 0.55
+  injection_share: 0.05
+  llm:
+    model: gpt-5.4-mini-2026-03-17
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    weight: 0.4
+    cache_dir: data/llm_cache

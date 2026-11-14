@@ -1,0 +1,38 @@
+# GigSim platform policy v1
+version: v1
+effective: "2024-08-01"
+
+connects:
+  unit_price_usd: 0.15
+  hourly_default: 12
+  unknown_default: 8
+  fixed_tiers:
+    - {max_budget: 10, connects: 2}
+    - {max_budget: 40, connects: 4}
+    - {max_budget: 500, connects: 8}
+    - {max_budget: 2000, connects: 12}
+    - {max_budget: null, connects: 16}
+  # balance resets to the account's weekly amount
+  weekly_refill: reset
+  refill_weekday: monday
+
+proposals:
+  min_words: 20
+  max_words: 500
+  max_submissions_per_day: 10
+
+# checked on proposals, screening answers and messages
+banned_content:
+  - id: no_email
+    description: No email addresses.
+    pattern: "[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}"
+  - id: no_phone
+    description: No phone numbers.
+    pattern: "\\+?\\d[\\d\\s().-]{7,}\\d"
+    min_digits: 9
+  - id: no_external_links
+    description: No links outside the platform, except github.com.
+    pattern: "(?i)https?://(?!(www\\.)?github\\.com)\\S+"
+  - id: no_off_platform_payment
+    description: No off-platform contact or payment.
+    pattern: "(?i)\\b(telegram|whatsapp|skype|paypal|wire transfer|western union|zelle|crypto(currency)?|usdt|pay (me )?outside)\\b"
