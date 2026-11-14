@@ -1,0 +1,8 @@
+.venv
+.git
+**/__pycache__
+data/raw
+data/processed
+data/cache
+gigsim/data
+node_modules

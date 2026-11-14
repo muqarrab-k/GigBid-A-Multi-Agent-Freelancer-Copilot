@@ -1,3 +1,22 @@
-# TODO: Define web, API, worker, MCP servers, GigSim, Postgres, Redis,
-# vector store and local model service as appropriate.
-services: {}
+# TODO: web, api, worker, MCP servers, postgres, redis, vector store, ollama
+services:
+  gigsim:
+    build:
+      context: ..
+      dockerfile: gigsim/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      GIGSIM_ADMIN_TOKEN: ${GIGSIM_ADMIN_TOKEN:-}
+      GIGSIM_TOKEN_AI_ML: ${GIGSIM_TOKEN_AI_ML:-}
+      GIGSIM_TOKEN_FULLSTACK: ${GIGSIM_TOKEN_FULLSTACK:-}
+      GIGSIM_TOKEN_DATA_ANALYST: ${GIGSIM_TOKEN_DATA_ANALYST:-}
+    volumes:
+      - gigsim-data:/app/gigsim/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8081/health')"]
+      interval: 10s
+      retries: 5
+
+volumes:
+  gigsim-data:

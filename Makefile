@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset
 
 UV := $(shell command -v uv 2>/dev/null)
 ifdef UV
@@ -33,6 +33,12 @@ data:
 
 synth:
 	$(RUN) python -m synth.run
+
+gigsim:
+	$(RUN) uvicorn gigsim.app:create_app --factory --port 8081
+
+gigsim-reset:
+	$(RUN) python -m gigsim.reset --scenario live
 
 seed:
 	@echo "seed: not yet"
