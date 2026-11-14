@@ -22,6 +22,7 @@ from gigsim.settings import load_settings
 from mcp_servers.marketplace.adapters.gigsim import GigSimAdapter
 from mcp_servers.marketplace.server import build_server as marketplace_server
 from mcp_servers.portfolio.server import build_server as portfolio_server
+from mcp_servers.workspace.server import build_server as workspace_server
 
 RESULTS = ROOT / "evals" / "results" / "single_agent_demo.json"
 PLANTS = ROOT / "evals" / "datasets" / "plant_log.jsonl"
@@ -39,6 +40,7 @@ def inprocess_layer(tmp: Path) -> McpLayer:
             adapter_factory=lambda u: GigSimAdapter(token=u.gigsim_token, base_url="http://gigsim", transport=transport),
             audit_path=tmp / "marketplace.jsonl"),
         "portfolio": portfolio_server(audit_path=tmp / "portfolio.jsonl"),
+        "workspace": workspace_server(folder=tmp / "workspace", audit_path=tmp / "workspace.jsonl"),
     }
 
     def session(name: str) -> AbstractAsyncContextManager[ClientSession]:

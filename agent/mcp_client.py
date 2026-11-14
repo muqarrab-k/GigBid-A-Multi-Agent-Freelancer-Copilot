@@ -122,7 +122,7 @@ class McpLayer:
     def check_allowlists(self) -> None:
         """Fail loudly when an allowlist names a tool no server offers."""
         reached = {server for server, _ in self.tools.values()}
-        down = [s for s in CORE_SERVERS if s not in reached]
+        down = [s for s in CORE_SERVERS if s in self.conns and s not in reached]
         if down:
             log.warning("cannot check allowlists, servers down: %s", down)
             return
