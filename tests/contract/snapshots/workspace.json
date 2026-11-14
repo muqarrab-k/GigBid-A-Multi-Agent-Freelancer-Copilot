@@ -1,0 +1,538 @@
+[
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "input_schema": {
+      "properties": {
+        "body": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "title": "Body",
+          "type": "string"
+        },
+        "dry_run": {
+          "default": false,
+          "description": "Preview only, nothing is written.",
+          "title": "Dry Run",
+          "type": "boolean"
+        },
+        "idempotency_key": {
+          "description": "Required. Reuse it when retrying.",
+          "maxLength": 200,
+          "minLength": 8,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "to": {
+          "maxLength": 254,
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}$",
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "to",
+        "subject",
+        "body",
+        "idempotency_key"
+      ],
+      "title": "create_email_draftArguments",
+      "type": "object"
+    },
+    "name": "create_email_draft",
+    "output_schema": {
+      "$defs": {
+        "EmailDraft": {
+          "properties": {
+            "body": {
+              "title": "Body",
+              "type": "string"
+            },
+            "draft_id": {
+              "title": "Draft Id",
+              "type": "string"
+            },
+            "status": {
+              "default": "draft",
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "title": "Subject",
+              "type": "string"
+            },
+            "to": {
+              "title": "To",
+              "type": "string"
+            }
+          },
+          "required": [
+            "draft_id",
+            "to",
+            "subject",
+            "body"
+          ],
+          "title": "EmailDraft",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "draft": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailDraft"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "dry_run": {
+          "default": false,
+          "title": "Dry Run",
+          "type": "boolean"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "would_create": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Would Create"
+        }
+      },
+      "title": "EmailOut",
+      "type": "object"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "input_schema": {
+      "$defs": {
+        "Slot": {
+          "properties": {
+            "end": {
+              "format": "date-time",
+              "title": "End",
+              "type": "string"
+            },
+            "start": {
+              "format": "date-time",
+              "title": "Start",
+              "type": "string"
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ],
+          "title": "Slot",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "dry_run": {
+          "default": false,
+          "description": "Preview only, nothing is written.",
+          "title": "Dry Run",
+          "type": "boolean"
+        },
+        "idempotency_key": {
+          "description": "Required. Reuse it when retrying.",
+          "maxLength": 200,
+          "minLength": 8,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "slot": {
+          "$ref": "#/$defs/Slot"
+        },
+        "title": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slot",
+        "title",
+        "idempotency_key"
+      ],
+      "title": "create_tentative_holdArguments",
+      "type": "object"
+    },
+    "name": "create_tentative_hold",
+    "output_schema": {
+      "$defs": {
+        "Hold": {
+          "properties": {
+            "end": {
+              "format": "date-time",
+              "title": "End",
+              "type": "string"
+            },
+            "hold_id": {
+              "title": "Hold Id",
+              "type": "string"
+            },
+            "start": {
+              "format": "date-time",
+              "title": "Start",
+              "type": "string"
+            },
+            "status": {
+              "default": "tentative",
+              "title": "Status",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            }
+          },
+          "required": [
+            "hold_id",
+            "start",
+            "end",
+            "title"
+          ],
+          "title": "Hold",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "dry_run": {
+          "default": false,
+          "title": "Dry Run",
+          "type": "boolean"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "hold": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Hold"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "would_create": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Would Create"
+        }
+      },
+      "title": "HoldOut",
+      "type": "object"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "input_schema": {
+      "properties": {
+        "duration_minutes": {
+          "maximum": 240,
+          "minimum": 15,
+          "title": "Duration Minutes",
+          "type": "integer"
+        },
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        },
+        "timezone": {
+          "description": "IANA zone for the results",
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "duration_minutes",
+        "timezone"
+      ],
+      "title": "free_slotsArguments",
+      "type": "object"
+    },
+    "name": "free_slots",
+    "output_schema": {
+      "$defs": {
+        "Slot": {
+          "properties": {
+            "end": {
+              "format": "date-time",
+              "title": "End",
+              "type": "string"
+            },
+            "start": {
+              "format": "date-time",
+              "title": "Start",
+              "type": "string"
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ],
+          "title": "Slot",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "slots": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Slot"
+          },
+          "title": "Slots",
+          "type": "array"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timezone"
+        }
+      },
+      "title": "SlotsOut",
+      "type": "object"
+    }
+  }
+]
