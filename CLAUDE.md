@@ -28,10 +28,12 @@ Author: Muqarrab · i230511 · Section C
   Do not edit `data/policy_pack/*.md`.
 - Everything synthetic is marked SYNTHETIC. Labels (scam, injection, bid/skip) never live inside
   job files: only in `evals/datasets/`. Client secrets only in `client_secrets.jsonl`.
+- Agents reach marketplaces only through our Marketplace MCP server -> `MarketplacePort` -> adapter;
+  never call GigSim or Upwork directly. Tool schema changes need `make snapshot-update` on purpose.
 - No Claude co-author trailer in commits. Keep commit messages short and natural.
 
 ## Commands
 - `make install` (uv if present, else pip), `make data` (real data), `make synth` (synthetic data)
-- `make gigsim` (serve on :8081), `make gigsim-reset`
-- `make test`, `make lint`, `make dev`
-- `make eval`, `make seed`, `make demo` are stubs for now
+- `make gigsim` (serve on :8081), `make gigsim-reset`, `make mcp-marketplace`, `make mcp-workspace`,
+  `make snapshot-update`
+- `make test`, `make lint`, `make dev`; `make eval`, `make seed`, `make demo` are stubs for now
