@@ -102,15 +102,5 @@ class FolderLoader:
         return docs
 
 
-class GitHubLoader:
-    """Repos come in through the GitHub MCP server in a later task."""
-
-    def __init__(self, owner: str, repo: str) -> None:
-        self.owner, self.repo = owner, repo
-
-    def load(self) -> list[Document]:
-        raise NotImplementedError("GitHub ingestion arrives with the GitHub MCP server")
-
-
 def persona_names(root: Path = PERSONAS_DIR) -> list[str]:
     return sorted(p.name for p in root.iterdir() if (p / "manifest.jsonl").exists())

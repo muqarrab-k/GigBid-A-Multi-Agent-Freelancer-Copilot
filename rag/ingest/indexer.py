@@ -1,4 +1,5 @@
 import time
+from collections.abc import Callable
 
 import numpy as np
 from pydantic import BaseModel
@@ -36,14 +37,14 @@ def write(docs: list[Document], persona: str, store: VectorStore, embedder: Embe
 
 
 def index_documents(docs: list[Document], persona: str, store: VectorStore, embedder: Embedder,
-                    chunker: Chunker) -> IndexStats:
-    """Full sync for one persona: re-embed changed docs, drop deleted ones."""
+                    chunker: Chunker, managed: Callable[[str], bool] = lambda _: True) -> IndexStats:
+    """Full sync for one persona: re-embed changed docs, drop deleted ones this loader manages."""
     start = time.perf_counter()
     if any(d.persona != persona for d in docs):
         raise ValueError(f"all documents must belong to {persona}")
     stats = IndexStats(persona=persona, documents=len(docs))
     known = store.doc_hashes(persona)
-    gone = sorted(set(known) - {d.evidence_id for d in docs})
+    gone = sorted(e for e in set(known) - {d.evidence_id for d in docs} if managed(e))
     store.delete(persona, gone)
     stats.removed = len(gone)
     write(docs, persona, store, embedder, chunker, stats, known)

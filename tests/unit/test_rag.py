@@ -12,7 +12,7 @@ from rag.index.store import Filters, MemoryStore
 from rag.ingest.chunking import FixedChunker, get_chunker
 from rag.ingest.documents import Document
 from rag.ingest.indexer import index_documents, index_new_work
-from rag.ingest.loaders import FolderLoader, GitHubLoader, PersonaLoader, persona_names
+from rag.ingest.loaders import FolderLoader, PersonaLoader, persona_names
 from rag.retriever import get_retriever
 from rag.variants.base import query_text
 from rag.variants.v0_naive import V0Naive
@@ -61,8 +61,6 @@ def test_folder_loader_infers_metadata(tmp_path: Path) -> None:
     assert docs["local:shop/README.md"].type == "readme" and "FastAPI" in docs["local:shop/README.md"].skills
     assert docs["local:shop/app.py"].type == "code" and docs["local:shop/app.py"].skills == ["Python"]
     assert docs["local:shop/app.py"].project == "shop"
-    with pytest.raises(NotImplementedError):
-        GitHubLoader("me", "repo").load()
 
 
 def test_chunker_is_deterministic_and_overlaps() -> None:
