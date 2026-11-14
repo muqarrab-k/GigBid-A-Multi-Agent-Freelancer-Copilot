@@ -13,3 +13,5 @@ data/processed/
 *.egg-info/
 data/raw/
 gigsim/data/
+data/audit/
+data/workspace/

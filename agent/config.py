@@ -1,3 +1,4 @@
+import os
 from datetime import date
 from functools import lru_cache
 from pathlib import Path
@@ -133,6 +134,7 @@ class ModelsConfig(Strict):
 
 class RateLimit(Strict):
     requests_per_minute: int = Field(gt=0)
+    burst: int = Field(default=5, gt=0)
     poll_interval_minutes: int = Field(gt=0)
 
 
@@ -143,10 +145,18 @@ class RateLimits(Strict):
 
 class MarketplaceConfig(Strict):
     mode: Literal["gigsim", "upwork"] = "gigsim"
+    gigsim_base_url_env: str = "GIGSIM_BASE_URL"
+    gigsim_base_url_default: str = "http://localhost:8081"
     upwork_mcp_url: str
     timeout_s: float = Field(default=15, gt=0)
     max_retries: int = Field(default=3, ge=0, le=10)
+    backoff_s: float = Field(default=0.5, ge=0)
+    backoff_max_s: float = Field(default=8, ge=0)
     rate_limits: RateLimits
+
+    @property
+    def gigsim_base_url(self) -> str:
+        return os.getenv(self.gigsim_base_url_env) or self.gigsim_base_url_default
 
     @property
     def rate_limit(self) -> RateLimit:
@@ -271,6 +281,74 @@ class SynthConfig(Strict):
     bid_min_coverage: float = Field(ge=0, le=1)
 
 
+class McpUser(Strict):
+    user: str
+    tenant: str
+    timezone: str
+    token_env: str
+    token_default: str
+    gigsim_token_env: str
+    gigsim_token_default: str
+
+    @property
+    def token(self) -> str:
+        return os.getenv(self.token_env) or self.token_default
+
+    @property
+    def gigsim_token(self) -> str:
+        return os.getenv(self.gigsim_token_env) or self.gigsim_token_default
+
+
+class McpLimits(Strict):
+    search_limit_max: int = Field(gt=0)
+    cover_letter_max_chars: int = Field(gt=0)
+    screening_answer_max_chars: int = Field(gt=0)
+    max_screening_answers: int = Field(ge=0)
+    message_max_chars: int = Field(gt=0)
+    bid_max_usd: float = Field(gt=0)
+    idempotency_key_max_chars: int = Field(gt=0)
+    free_slots_max_days: int = Field(gt=0)
+    slot_min_minutes: int = Field(gt=0)
+    slot_max_minutes: int = Field(gt=0)
+    email_subject_max_chars: int = Field(gt=0)
+    email_body_max_chars: int = Field(gt=0)
+
+
+class WorkspaceMock(Strict):
+    seed: int
+    work_start_hour: int = Field(ge=0, le=23)
+    work_end_hour: int = Field(ge=1, le=24)
+    busy_blocks_per_day: int = Field(ge=0)
+
+
+class McpConfig(Strict):
+    audit_dir: Path
+    workspace_dir: Path
+    default_user: str
+    issuer_url: str
+    ports: dict[str, int]
+    limits: McpLimits
+    workspace: WorkspaceMock
+    users: list[McpUser] = Field(min_length=1)
+
+    @field_validator("audit_dir", "workspace_dir")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+    @model_validator(mode="after")
+    def check_users(self) -> "McpConfig":
+        names = [u.user for u in self.users]
+        if len(set(names)) != len(names):
+            raise ValueError("duplicate mcp users")
+        if self.default_user not in names:
+            raise ValueError(f"default_user '{self.default_user}' not in mcp.users")
+        return self
+
+    def user(self, name: str) -> McpUser:
+        return next(u for u in self.users if u.user == name)
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -280,6 +358,7 @@ class Settings(Strict):
     paths: Paths
     data: DataConfig
     synth: SynthConfig
+    mcp: McpConfig
 
     @property
     def profile(self) -> Profile:

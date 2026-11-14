@@ -114,16 +114,73 @@ models:
 
 marketplace:
   mode: gigsim
+  gigsim_base_url_env: GIGSIM_BASE_URL
+  gigsim_base_url_default: http://localhost:8081
   upwork_mcp_url: https://mcp.upwork.com/mcp
   timeout_s: 15
   max_retries: 3
+  backoff_s: 0.5
+  backoff_max_s: 8
+  # below gigsim's 30 burst, 0.5/s
   rate_limits:
     gigsim:
       requests_per_minute: 20
+      burst: 10
       poll_interval_minutes: 30
     upwork:
       requests_per_minute: 10
+      burst: 3
       poll_interval_minutes: 180
+
+# our MCP servers
+mcp:
+  audit_dir: data/audit
+  workspace_dir: data/workspace
+  # stdio runs as this user
+  default_user: noor
+  issuer_url: http://localhost:8100
+  ports: {marketplace: 8101, workspace: 8102}
+  limits:
+    search_limit_max: 50
+    cover_letter_max_chars: 6000
+    screening_answer_max_chars: 2000
+    max_screening_answers: 10
+    message_max_chars: 5000
+    bid_max_usd: 100000
+    idempotency_key_max_chars: 200
+    free_slots_max_days: 14
+    slot_min_minutes: 15
+    slot_max_minutes: 240
+    email_subject_max_chars: 200
+    email_body_max_chars: 5000
+  workspace:
+    seed: 4016
+    work_start_hour: 9
+    work_end_hour: 17
+    busy_blocks_per_day: 2
+  # tokens: env wins, defaults are local dev only
+  users:
+    - user: noor
+      tenant: ai_ml
+      timezone: Asia/Karachi
+      token_env: MCP_TOKEN_AI_ML
+      token_default: dev-mcp-ai_ml
+      gigsim_token_env: GIGSIM_TOKEN_AI_ML
+      gigsim_token_default: dev-ai_ml-token
+    - user: tobias
+      tenant: fullstack
+      timezone: Europe/Lisbon
+      token_env: MCP_TOKEN_FULLSTACK
+      token_default: dev-mcp-fullstack
+      gigsim_token_env: GIGSIM_TOKEN_FULLSTACK
+      gigsim_token_default: dev-fullstack-token
+    - user: mina
+      tenant: data_analyst
+      timezone: America/Bogota
+      token_env: MCP_TOKEN_DATA_ANALYST
+      token_default: dev-mcp-data_analyst
+      gigsim_token_env: GIGSIM_TOKEN_DATA_ANALYST
+      gigsim_token_default: dev-data_analyst-token
 
 budgets:
   max_graph_steps: 30
