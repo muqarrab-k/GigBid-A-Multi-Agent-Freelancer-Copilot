@@ -8,6 +8,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.shared.memory import create_connected_server_and_client_session
 
 from mcp_servers.marketplace.server import build_server as marketplace
+from mcp_servers.portfolio.server import build_server as portfolio
 from mcp_servers.workspace.server import build_server as workspace
 
 SNAPSHOTS = Path(__file__).with_name("snapshots")
@@ -29,9 +30,12 @@ async def tool_contract(server: FastMCP) -> list[dict[str, Any]]:
     ]
 
 
-@pytest.mark.parametrize("name", ["marketplace", "workspace"])
+BUILDERS = {"marketplace": marketplace, "workspace": workspace, "portfolio": portfolio}
+
+
+@pytest.mark.parametrize("name", sorted(BUILDERS))
 async def test_tool_contract_unchanged(name: str, tmp_path: Path) -> None:
-    build = marketplace if name == "marketplace" else workspace
+    build = BUILDERS[name]
     current = await tool_contract(build(audit_path=tmp_path / "audit.jsonl"))
     path = SNAPSHOTS / f"{name}.json"
     text = json.dumps(current, indent=2, sort_keys=True) + "\n"

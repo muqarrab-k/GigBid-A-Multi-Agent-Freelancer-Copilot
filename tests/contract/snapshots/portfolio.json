@@ -1,0 +1,551 @@
+[
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "input_schema": {
+      "properties": {
+        "case_id": {
+          "description": "Project id (p05) or evidence id",
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case_id"
+      ],
+      "title": "get_case_studyArguments",
+      "type": "object"
+    },
+    "name": "get_case_study",
+    "output_schema": {
+      "$defs": {
+        "CaseStudy": {
+          "properties": {
+            "client_industry": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Client Industry"
+            },
+            "date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date"
+            },
+            "evidence_id": {
+              "title": "Evidence Id",
+              "type": "string"
+            },
+            "project": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Project"
+            },
+            "skills": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Skills",
+              "type": "array"
+            },
+            "source": {
+              "title": "Source",
+              "type": "string"
+            },
+            "text": {
+              "title": "Text",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidence_id",
+            "project",
+            "title",
+            "client_industry",
+            "date",
+            "skills",
+            "source",
+            "text"
+          ],
+          "title": "CaseStudy",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "case": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CaseStudy"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        }
+      },
+      "title": "CaseOut",
+      "type": "object"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "input_schema": {
+      "properties": {},
+      "title": "list_skillsArguments",
+      "type": "object"
+    },
+    "name": "list_skills",
+    "output_schema": {
+      "$defs": {
+        "SkillEntry": {
+          "properties": {
+            "evidence_count": {
+              "title": "Evidence Count",
+              "type": "integer"
+            },
+            "implied": {
+              "title": "Implied",
+              "type": "boolean"
+            },
+            "projects": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Projects",
+              "type": "array"
+            },
+            "skill": {
+              "title": "Skill",
+              "type": "string"
+            }
+          },
+          "required": [
+            "skill",
+            "evidence_count",
+            "projects",
+            "implied"
+          ],
+          "title": "SkillEntry",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "skills": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SkillEntry"
+          },
+          "title": "Skills",
+          "type": "array"
+        }
+      },
+      "title": "SkillsOut",
+      "type": "object"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "input_schema": {
+      "properties": {
+        "k": {
+          "default": 5,
+          "maximum": 20,
+          "minimum": 1,
+          "title": "K",
+          "type": "integer"
+        },
+        "outcomes": {
+          "anyOf": [
+            {
+              "items": {
+                "enum": [
+                  "won",
+                  "replied",
+                  "ignored"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outcomes"
+        },
+        "project": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Project"
+        },
+        "requirement": {
+          "description": "A job requirement or question",
+          "maxLength": 2000,
+          "minLength": 3,
+          "title": "Requirement",
+          "type": "string"
+        },
+        "types": {
+          "anyOf": [
+            {
+              "items": {
+                "enum": [
+                  "case_study",
+                  "readme",
+                  "code",
+                  "review",
+                  "proposal",
+                  "cv",
+                  "document"
+                ],
+                "type": "string"
+              },
+              "maxItems": 7,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Types"
+        }
+      },
+      "required": [
+        "requirement"
+      ],
+      "title": "search_evidenceArguments",
+      "type": "object"
+    },
+    "name": "search_evidence",
+    "output_schema": {
+      "$defs": {
+        "EvidenceItem": {
+          "properties": {
+            "client_industry": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Client Industry"
+            },
+            "date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date"
+            },
+            "evidence_id": {
+              "title": "Evidence Id",
+              "type": "string"
+            },
+            "outcome": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Outcome"
+            },
+            "project": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Project"
+            },
+            "score": {
+              "title": "Score",
+              "type": "number"
+            },
+            "skills": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Skills",
+              "type": "array"
+            },
+            "snippet": {
+              "title": "Snippet",
+              "type": "string"
+            },
+            "source": {
+              "title": "Source",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidence_id",
+            "type",
+            "source",
+            "date",
+            "outcome",
+            "score",
+            "project",
+            "client_industry",
+            "skills",
+            "snippet"
+          ],
+          "title": "EvidenceItem",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "items": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        }
+      },
+      "title": "SearchOut",
+      "type": "object"
+    }
+  }
+]
