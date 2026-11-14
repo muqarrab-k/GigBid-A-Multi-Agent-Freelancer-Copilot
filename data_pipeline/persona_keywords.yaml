@@ -1,0 +1,89 @@
+# score: title/skill hit 2, description hit 1
+min_score: 2
+
+personas:
+  ai_ml:
+    - machine learning
+    - deep learning
+    - artificial intelligence
+    - ai
+    - ml
+    - llm
+    - gpt
+    - openai
+    - chatgpt
+    - langchain
+    - rag
+    - nlp
+    - computer vision
+    - pytorch
+    - tensorflow
+    - keras
+    - scikit-learn
+    - hugging face
+    - neural network
+    - chatbot
+    - generative ai
+    - fine-tuning
+    - prompt engineering
+    - data science
+    - model training
+    - predictive modeling
+  fullstack:
+    - full stack
+    - full-stack
+    - web development
+    - web app
+    - react
+    - next.js
+    - vue
+    - angular
+    - node.js
+    - express
+    - django
+    - flask
+    - fastapi
+    - laravel
+    - php
+    - ruby on rails
+    - javascript
+    - typescript
+    - frontend
+    - front-end
+    - backend
+    - back-end
+    - rest api
+    - graphql
+    - mongodb
+    - postgresql
+    - mysql
+    - saas
+  data_analyst:
+    - data analysis
+    - data analyst
+    - data analytics
+    - data visualization
+    - dashboard
+    - power bi
+    - tableau
+    - looker
+    - excel
+    - google sheets
+    - sql
+    - bigquery
+    - etl
+    - dbt
+    - pandas
+    - statistics
+    - statistical analysis
+    - reporting
+    - business intelligence
+    - data cleaning
+    - data entry
+
+# freelancer_success primary_skill
+skill_personas:
+  AI & Machine Learning: ai_ml
+  Web Development: fullstack
+  Mobile App Development: fullstack
+  Data Science & Analytics: data_analyst
