@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data
+.PHONY: install dev api test eval seed demo lint data synth
 
 UV := $(shell command -v uv 2>/dev/null)
 ifdef UV
@@ -30,6 +30,9 @@ eval:
 
 data:
 	$(RUN) python -m data_pipeline.run
+
+synth:
+	$(RUN) python -m synth.run
 
 seed:
 	@echo "seed: not yet"
