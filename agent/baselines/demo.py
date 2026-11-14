@@ -5,50 +5,18 @@ import asyncio
 import json
 import re
 import tempfile
-from contextlib import AbstractAsyncContextManager
 from pathlib import Path
 from typing import Any
-
-import httpx
-from mcp import ClientSession
-from mcp.shared.memory import create_connected_server_and_client_session
 
 from agent.baselines.single_react import run_single
 from agent.config import ROOT, ConfigError, get_config
 from agent.llm import get_model
-from agent.mcp_client import McpLayer
-from gigsim.app import create_app
-from gigsim.settings import load_settings
-from mcp_servers.marketplace.adapters.gigsim import GigSimAdapter
-from mcp_servers.marketplace.server import build_server as marketplace_server
-from mcp_servers.portfolio.server import build_server as portfolio_server
-from mcp_servers.workspace.server import build_server as workspace_server
+from agent.local_stack import LocalStack
 
 RESULTS = ROOT / "evals" / "results" / "single_agent_demo.json"
 PLANTS = ROOT / "evals" / "datasets" / "plant_log.jsonl"
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}")
 PHONE_RE = re.compile(r"\+?\d[\d\s().-]{8,}\d")
-
-
-def inprocess_layer(tmp: Path) -> McpLayer:
-    """GigSim plus our MCP servers in this process, over in-memory sessions."""
-    gigsim = create_app(load_settings(overrides={"storage": str(tmp / "gigsim.db"), "scenario": "dev",
-                                                  "chaos": {"error_rate": 0.0, "latency_ms_max": 0}}))
-    transport = httpx.ASGITransport(app=gigsim)
-    servers = {
-        "marketplace": marketplace_server(
-            adapter_factory=lambda u: GigSimAdapter(token=u.gigsim_token, base_url="http://gigsim", transport=transport),
-            audit_path=tmp / "marketplace.jsonl"),
-        "portfolio": portfolio_server(audit_path=tmp / "portfolio.jsonl"),
-        "workspace": workspace_server(folder=tmp / "workspace", audit_path=tmp / "workspace.jsonl"),
-    }
-
-    def session(name: str) -> AbstractAsyncContextManager[ClientSession]:
-        return create_connected_server_and_client_session(servers[name]._mcp_server)
-
-    cfg = get_config().mcp_client
-    cfg = cfg.model_copy(update={"servers": {k: v for k, v in cfg.servers.items() if k in servers}})
-    return McpLayer(session_factory=session, cfg=cfg)
 
 
 def injection_check(run: dict[str, Any], plant: dict[str, Any] | None) -> dict[str, Any]:
@@ -72,7 +40,7 @@ async def main_async(job_id: str) -> dict[str, Any]:
     except ConfigError as err:
         raise SystemExit(f"cannot run the demo: {err}. Add the key to .env and retry.") from err
     with tempfile.TemporaryDirectory() as tmp:
-        layer = inprocess_layer(Path(tmp))
+        layer = LocalStack(Path(tmp)).layer()
         await layer.discover()
         run = await run_single(job_id, layer, model)
     plants = {p["job_id"]: p for p in map(json.loads, PLANTS.read_text().splitlines())}

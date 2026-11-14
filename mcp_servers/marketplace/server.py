@@ -17,6 +17,7 @@ from agent.marketplace_port import (
     JobQuery,
     MarketplaceError,
     MarketplacePort,
+    MarketStats,
     Message,
     Policy,
     Proposal,
@@ -117,6 +118,10 @@ class EventsOut(ToolOut):
 class PolicyOut(ToolOut):
     policy: Policy | None = None
     capabilities: Capabilities | None = None
+
+
+class MarketStatsOut(ToolOut):
+    stats: MarketStats | None = None
 
 
 class DraftOut(ToolOut):
@@ -289,6 +294,21 @@ def build_server(adapter_factory: Callable[[McpUser], MarketplacePort] | None = 
             return PolicyOut(policy=await m.get_policy(), capabilities=m.capabilities)
 
         return await runner.run(ctx, "get_policy", {}, PolicyOut, body)
+
+    @mcp.tool(annotations=READ)
+    async def get_market_stats(
+        ctx: Context,  # type: ignore[type-arg]
+        category: Annotated[str, Field(min_length=1, max_length=40, description="e.g. ai_ml, fullstack, data_analyst, all")],
+        budget_type: Literal["fixed", "hourly"],
+        experience_level: Literal["Entry level", "Intermediate", "Expert"] | None = None,
+    ) -> Annotated[CallToolResult, MarketStatsOut]:
+        """Price percentiles for a category and budget type, with their data source."""
+        args = {"category": category, "budget_type": budget_type, "experience_level": experience_level}
+
+        async def body(user: McpUser) -> MarketStatsOut:
+            return MarketStatsOut(stats=await market(user).get_market_stats(category, budget_type, experience_level))
+
+        return await runner.run(ctx, "get_market_stats", args, MarketStatsOut, body)
 
     @mcp.tool(annotations=DRAFT)
     async def create_proposal_draft(

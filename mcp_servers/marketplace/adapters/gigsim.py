@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import random
 from typing import Any
@@ -19,6 +20,7 @@ from agent.marketplace_port import (
     JobQuery,
     MarketplaceError,
     MarketplaceUnavailable,
+    MarketStats,
     Message,
     NotFound,
     Policy,
@@ -141,6 +143,23 @@ class GigSimAdapter:
 
     async def get_policy(self) -> Policy:
         return Policy(**await self.request("GET", "/policy"))
+
+    async def get_market_stats(self, category: str, budget_type: str,
+                               experience_level: str | None = None) -> MarketStats:
+        """GigSim has no stats endpoint: serve make data's pricing_stats.json, labelled."""
+        try:
+            cells = json.loads(self.cfg.market_stats_path.read_text())["cells"]
+        except (OSError, ValueError, KeyError) as err:
+            raise MarketplaceUnavailable(f"market stats file unavailable: {err}", retry_after=3600) from err
+        # most specific first: level from posted jobs, then what contracts paid
+        wanted = [(experience_level, "jobs")] if experience_level else []
+        wanted += [("any", "contracts"), ("any", "jobs")]
+        for level, source in wanted:
+            for cell in cells:
+                if (cell["category"], cell["budget_type"], cell["experience_level"], cell["source"]) == (
+                        category, budget_type, level, source):
+                    return MarketStats(**{**cell, "source": f"pricing_stats.json ({source}, Kaggle 2023-24)"})
+        raise NotFound(f"no market stats for {category}/{budget_type}")
 
     async def create_proposal_draft(self, draft: ProposalDraftIn, idempotency_key: str) -> Proposal:
         body = await self.request("POST", "/proposals/drafts", json=draft.model_dump(), idempotency_key=idempotency_key)

@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -66,6 +66,15 @@ index-github:
 
 demo-single:
 	$(RUN) python -m agent.baselines.demo $(JOB)
+
+scout:
+	$(RUN) python -m agent.nodes.scout --persona $(or $(PERSONA),ai_ml)
+
+decision-eval:
+	$(RUN) python -m evals.runners.decision_eval $(if $(MODEL),--cheap-model $(MODEL)) $(if $(FULL),--full)
+
+graph-render:
+	$(RUN) python -m agent.graphs.render
 
 rag-eval:
 	$(RUN) python -m evals.runners.rag_eval --variant $(VARIANT)

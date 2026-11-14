@@ -1076,6 +1076,197 @@
       "readOnlyHint": true
     },
     "input_schema": {
+      "properties": {
+        "budget_type": {
+          "enum": [
+            "fixed",
+            "hourly"
+          ],
+          "title": "Budget Type",
+          "type": "string"
+        },
+        "category": {
+          "description": "e.g. ai_ml, fullstack, data_analyst, all",
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "experience_level": {
+          "anyOf": [
+            {
+              "enum": [
+                "Entry level",
+                "Intermediate",
+                "Expert"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Experience Level"
+        }
+      },
+      "required": [
+        "category",
+        "budget_type"
+      ],
+      "title": "get_market_statsArguments",
+      "type": "object"
+    },
+    "name": "get_market_stats",
+    "output_schema": {
+      "$defs": {
+        "MarketStats": {
+          "properties": {
+            "budget_type": {
+              "enum": [
+                "fixed",
+                "hourly"
+              ],
+              "title": "Budget Type",
+              "type": "string"
+            },
+            "category": {
+              "title": "Category",
+              "type": "string"
+            },
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "experience_level": {
+              "default": "any",
+              "title": "Experience Level",
+              "type": "string"
+            },
+            "p10": {
+              "title": "P10",
+              "type": "number"
+            },
+            "p25": {
+              "title": "P25",
+              "type": "number"
+            },
+            "p50": {
+              "title": "P50",
+              "type": "number"
+            },
+            "p75": {
+              "title": "P75",
+              "type": "number"
+            },
+            "p90": {
+              "title": "P90",
+              "type": "number"
+            },
+            "source": {
+              "title": "Source",
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "category",
+            "budget_type",
+            "count",
+            "p10",
+            "p25",
+            "p50",
+            "p75",
+            "p90"
+          ],
+          "title": "MarketStats",
+          "type": "object"
+        },
+        "ToolError": {
+          "properties": {
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "retry_after": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry After"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            }
+          },
+          "required": [
+            "code",
+            "detail"
+          ],
+          "title": "ToolError",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolError"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ok": {
+          "default": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "stats": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MarketStats"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "MarketStatsOut",
+      "type": "object"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true,
+      "readOnlyHint": true
+    },
+    "input_schema": {
       "properties": {},
       "title": "get_policyArguments",
       "type": "object"

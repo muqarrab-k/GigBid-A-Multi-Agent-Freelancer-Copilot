@@ -28,3 +28,14 @@ def percentile(values: list[float], q: float) -> float:
         return 0.0
     ordered = sorted(values)
     return ordered[max(0, math.ceil(q / 100 * len(ordered)) - 1)]
+
+
+def precision_recall_f1(predicted: list[bool], actual: list[bool]) -> tuple[float, float, float]:
+    """For the positive class."""
+    tp = sum(p and a for p, a in zip(predicted, actual, strict=True))
+    fp = sum(p and not a for p, a in zip(predicted, actual, strict=True))
+    fn = sum(a and not p for p, a in zip(predicted, actual, strict=True))
+    precision = tp / (tp + fp) if tp + fp else 0.0
+    recall = tp / (tp + fn) if tp + fn else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    return precision, recall, f1

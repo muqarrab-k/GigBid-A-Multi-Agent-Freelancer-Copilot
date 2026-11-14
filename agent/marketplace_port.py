@@ -135,6 +135,19 @@ class Policy(PortModel):
     banned_content: list[BannedRule] = Field(default_factory=list)
 
 
+class MarketStats(PortModel):
+    source: str
+    category: str
+    budget_type: Literal["fixed", "hourly"]
+    experience_level: str = "any"
+    count: int
+    p10: float
+    p25: float
+    p50: float
+    p75: float
+    p90: float
+
+
 class Capabilities(PortModel):
     marketplace: str
     can_submit: bool
@@ -214,6 +227,8 @@ class MarketplacePort(Protocol):
     async def list_messages(self, thread_id: str) -> list[Message]: ...
     async def get_events(self, since: int = 0, limit: int = 50) -> EventPage: ...
     async def get_policy(self) -> Policy: ...
+    async def get_market_stats(self, category: str, budget_type: str,
+                               experience_level: str | None = None) -> MarketStats: ...
     async def create_proposal_draft(self, draft: ProposalDraftIn, idempotency_key: str) -> Proposal: ...
     async def submit_proposal(self, proposal_id: str, idempotency_key: str) -> Proposal: ...
     async def send_message(self, thread_id: str, text: str, idempotency_key: str) -> Message: ...
