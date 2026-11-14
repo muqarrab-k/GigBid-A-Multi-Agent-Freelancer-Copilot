@@ -91,7 +91,7 @@ class RerankerSpec(Strict):
 
 class GeneratorSpec(ModelSpec):
     max_tokens: int = Field(default=2000, gt=0)
-    reasoning_effort: Literal["low", "medium", "high"] | None = None
+    reasoning_effort: Literal["none", "low", "medium", "high"] | None = None
     usd_per_mtok_in: float = Field(ge=0)
     usd_per_mtok_out: float = Field(ge=0)
 

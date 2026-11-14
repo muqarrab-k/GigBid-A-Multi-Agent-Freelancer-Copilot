@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: Mart table for customer orders used in reporting and analysis.
+    columns:
+      - name: order_id
+        description: Unique identifier for each order.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Identifier for the customer associated with the order.
+        tests:
+          - not_null
+      - name: order_created_at
+        description: Timestamp when the order was created.
+        tests:
+          - not_null
+      - name: order_status
+        description: Current status of the order.
+      - name: order_total
+        description: Total order amount in the source currency.
+      - name: currency_code
+        description: ISO currency code for the order total.
+      - name: source_system
+        description: System that provided the order record.
+      - name: updated_at
+        description: Timestamp of the most recent update to the order record.
+
+  - name: dim_orders
+    description: Dimension table for order-level attributes and descriptive fields.
+    columns:
+      - name: order_id
+        description: Unique identifier for each order.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Identifier for the customer associated with the order.
+        tests:
+          - not_null
+      - name: order_date
+        description: Date the order was created.
+      - name: fulfillment_status
+        description: Fulfillment state used in operational reporting.
+      - name: payment_status
+        description: Payment state used in operational reporting.
+      - name: channel
+        description: Sales channel associated with the order.
+      - name: is_first_order
+        description: Flag indicating whether the order is the customer's first order.
+      - name: is_refunded
+        description: Flag indicating whether the order has been refunded.

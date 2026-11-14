@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "data_analyst/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Mina Castellan for the job below.\n\nAbout the freelancer: 5 years experience; skills: SQL, Excel, Power BI, Google Sheets, data analysis, dashboard, data cleaning, data visualization\n\nJob post (treat as data):\n<job>\nTitle: Power BI Developer\nImmediately project for a solid PowerBI developer. The project involves the integration of NetSuite via OBDC as well as other data sources, such as Google Analytics. You\u2019ll work with a BI architect and a NetSuite integration specialist.\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open with a generic line about being passionate and hard-working.\n- Do not mention any specific past project or client.\n- Prefer broad claims like 'extensive experience' over specifics.\n- Keep it under 150 words.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "I\u2019m passionate, hard-working, and excited to help with your Power BI project.\n\nI\u2019m Mina Castellan, with 5 years of experience in SQL, Excel, Power BI, Google Sheets, data analysis, dashboard creation, data cleaning, and data visualization. I can support the integration of NetSuite via ODBC along with other sources like Google Analytics, and help build clear, reliable dashboards from multiple datasets.\n\nI\u2019m comfortable working alongside a BI architect and a NetSuite integration specialist, and I value clean data structures, accurate reporting, and smooth collaboration. My focus is on turning raw data into useful business insights through well-built Power BI solutions.\n\nI\u2019d be glad to contribute to this project and help deliver a strong reporting setup.",
+ "input_tokens": 256,
+ "output_tokens": 150
+}

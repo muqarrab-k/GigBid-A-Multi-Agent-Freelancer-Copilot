@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Event CRM cleanup\nclient: Northlight Events\nclient_industry: events\nstart: 2023-06\nend: 2023-07\nengagement: fixed\nstack:\n- Python\n- pandas\n- Airtable\n- rapidfuzz\nimplied_skills:\n- record linkage\nbuilt: Merged duplicate contacts from five ticketing exports into one Airtable base.\nmetrics:\n- 62k contacts reduced to 41k unique\n- email bounce rate from 14% to 3%\n\nThe review is from: Northlight Events\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"record linkage\".",
+ "text": "Mina did exactly what we needed for our Event CRM cleanup. She merged duplicate contacts from five ticketing exports into one Airtable base, cutting our list from 62k contacts to 41k unique. After the cleanup, our email bounce rate dropped from 14% to 3%. Smooth fixed-price project and easy to work with.",
+ "input_tokens": 280,
+ "output_tokens": 72
+}

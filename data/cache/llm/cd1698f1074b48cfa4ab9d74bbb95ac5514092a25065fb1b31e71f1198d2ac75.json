@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: HR attrition dashboard\nclient: confidential\nclient_industry: manufacturing\nstart: 2023-03\nend: 2023-05\nengagement: hourly\nstack:\n- Power BI\n- Excel\n- SQL\nimplied_skills:\n- row-level security\nbuilt: An attrition and absence dashboard where each plant manager only sees their\n  own plant.\nmetrics:\n- 1,900 employees covered\n- attrition hotspots found in 2 plants\n\nThe review is from: a client in manufacturing (name withheld)\nRating: 4.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"row-level security\".",
+ "text": "Mina built an attrition and absence dashboard for our manufacturing team that helped us cover 1,900 employees and spot attrition hotspots in 2 plants. The dashboard was set up so each plant manager could only see their own plant, which was exactly what we needed. Work was solid overall, though communication could have been a bit quicker at times.",
+ "input_tokens": 277,
+ "output_tokens": 74
+}

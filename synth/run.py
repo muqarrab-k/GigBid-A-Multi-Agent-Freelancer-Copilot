@@ -9,7 +9,7 @@ from agent.config import ROOT, get_config
 from data_pipeline.common import PROCESSED_DIR, REAL_SEED_DIR, SEED_DIR
 from data_pipeline.schema import MarketJob
 from evals.datasets.labeling_rules import assign_personas, label_job
-from synth import augment
+from synth import augment, quality
 from synth.clients import build_clients
 from synth.facts import PERSONAS, PERSONAS_DIR, load_facts
 from synth.generator import Generator, write_cost_report
@@ -26,6 +26,8 @@ def render_corpus() -> Renderer:
     for persona in PERSONAS:
         stats = renderer.render_persona(persona)
         print(f"  {persona:<13} {stats['rendered']}/{stats['items']} items rendered")
+    calls = renderer.generator.stats
+    print(f"  llm calls this run: {calls['calls']} new, {calls['cache_hits']} cached")
     if renderer.stopped:
         print(f"  render stopped: {renderer.stopped}")
     return renderer
@@ -125,8 +127,11 @@ def summary(market: dict[str, list[dict[str, Any]]], labels: list[dict[str, Any]
     by_persona = Counter((lab["persona"], lab["decision"]) for lab in labels)
     print(f"  dev labels: {dict(sorted(by_persona.items()))}")
     print(f"  dev scams: {sum(lab['is_scam'] for lab in labels)}, injections: {sum(lab['has_injection'] for lab in labels)}")
-    print(f"  render checks: {dict(renderer.checks)}")
-    cost = write_cost_report()
+    for persona, q in quality.main().items():
+        g, c = q["grounding"], q["code"]
+        print(f"  quality {persona}: stray numbers {g['with_stray_numbers']}/{g['proposals']}, "
+              f"python parses {c['python_parses']}, three-ways overlap {q['three_ways']['mean_trigram_jaccard']}")
+    cost = write_cost_report(renderer.generator.used)
     print(f"  llm: {cost['calls']} calls, {cost['input_tokens']:,} in / {cost['output_tokens']:,} out, ~${cost['cost_usd']}")
 
 

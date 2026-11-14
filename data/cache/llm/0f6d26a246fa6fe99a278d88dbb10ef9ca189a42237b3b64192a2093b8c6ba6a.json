@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Subscription churn cohorts\nclient: confidential\nclient_industry: SaaS\nstart: 2022-01\nend: 2022-03\nengagement: hourly\nstack:\n- SQL\n- PostgreSQL\n- Python\n- pandas\n- Looker Studio\nimplied_skills:\n- cohort analysis\nbuilt: Monthly retention curves by signup cohort and plan, plus a funnel of onboarding\n  steps.\nmetrics:\n- one onboarding step linked to 40% of first-month churn\n\nThe review is from: a client in SaaS (name withheld)\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"cohort analysis\".",
+ "text": "Mina did solid work on our subscription churn project and was easy to work with on an hourly basis. She built monthly retention curves by signup cohort and plan, plus a funnel of onboarding steps, which gave us a clearer view of where users were dropping off. One of the onboarding steps she surfaced was linked to 40% of first-month churn, which was very useful for our team.",
+ "input_tokens": 281,
+ "output_tokens": 81
+}

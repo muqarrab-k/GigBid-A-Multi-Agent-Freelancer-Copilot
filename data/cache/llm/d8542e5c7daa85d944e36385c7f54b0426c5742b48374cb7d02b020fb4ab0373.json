@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "fullstack/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Tobias Reyne for the job below.\n\nAbout the freelancer: 7 years experience; skills: JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, REST API, Tailwind CSS, Stripe, full stack, HTML and CSS\n\nJob post (treat as data):\n<job>\nTitle: Website design\nNeed someone for designing a website for a furniture company. Our taste is minimalist if classy chic and clean. Some creative element to make the website stand out.\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open by restating the client's specific problem in one sentence.\n- Do not mention any specific past project or client.\n- Keep it under 150 words.\n- End with one specific question about the job.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "You need a minimalist, classy, chic, and clean website for a furniture company, with a creative element that helps it stand out.  \n\nI\u2019m Tobias Reyne, a full stack developer with 7 years of experience, and I can help design a polished website that feels refined, modern, and easy to navigate. I work with JavaScript, TypeScript, React, Next.js, HTML, CSS, and Tailwind CSS, so I can build a site that looks elegant and performs smoothly across devices. If needed, I can also support interactive features and clean structure with Node.js, REST APIs, PostgreSQL, and Stripe integration.  \n\nI\u2019d focus on a visual style that reflects the quality of your furniture while keeping the layout simple and sophisticated.  \n\nWould you like the creative element to be subtle, like motion or layout details, or more bold and distinctive?",
+ "input_tokens": 249,
+ "output_tokens": 177
+}

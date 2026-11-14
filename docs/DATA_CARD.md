@@ -143,8 +143,12 @@ client priors).
    `evals/results/synth_cost.json`. The CV is built straight from the facts and rendered to PDF
    with reportlab (no LLM).
 
-Generator: `models.generators` in `agent/config.yaml` (default Groq `openai/gpt-oss-20b`,
-`large` = `openai/gpt-oss-120b`, reasoning effort low). Prices in that config are estimates.
+Generator: `models.generators.default` in `agent/config.yaml` = **OpenAI
+`gpt-5.4-mini-2026-03-17`** (temperature 0.8, reasoning effort none), priced at $0.75 / $4.50 per
+1M input / output tokens from the OpenAI pricing page. This is a **paid API used only to generate
+synthetic data**; no agent node can use it (agents stay on the open profile, enforced by
+`tests/unit/test_config.py`). Groq `gpt-oss-20b` / `gpt-oss-120b` remain in config as
+alternatives (`groq`, `groq_large`).
 
 ### Corpus per persona
 
@@ -154,9 +158,21 @@ Generator: `models.generators` in `agent/config.yaml` (default Groq `openai/gpt-
 | fullstack | 1 | 18 | 7 | 15 | 25 | 150 | 216 |
 | data_analyst | 1 | 18 | 6 | 12 | 25 | 150 | 212 |
 
-**Status: only the CVs are rendered so far.** No generator key was available when this was
-built, so the 642 LLM items exist in the manifests with `rendered: false`. Re-running
-`make synth` with `GROQ_API_KEY` set fills them in from the same plan.
+**All 645 items are rendered** (642 by the LLM, 3 CVs straight from facts).
+
+Generation cost (`evals/results/synth_cost.json`): **1,026 paid calls, 472,583 input and 274,751
+output tokens, about $1.59.** 654 of those calls make up the final corpus (including 12 repair
+calls); 372 were superseded when the review and proposal prompts were fixed (see below). A second
+`make synth` run makes 0 new calls and produces byte-identical files.
+
+Fixes after the first full render:
+- 11 of 75 reviews were exact duplicates (same project and rating gave the same prompt). Reviews
+  now get a varied focus (`synth_review.v2.md`), so no two review prompts are identical.
+- Proposals saw each project's `implied_skills` and named them outright in 46 cases. Proposals now
+  get the facts without that field.
+- A repair step (`synth_fix.v1.md`) rewrites any proposal that uses a number not found in its
+  cited facts or the job post (commas normalised, price quotes count), and any case study or
+  README that names an implied skill. Up to 3 passes, all cached.
 
 Built-in messiness:
 - each project is described three ways: case study (one of three emphases), README (terse,
@@ -173,6 +189,26 @@ Built-in messiness:
 
 Outcome split (after noise): ai_ml 28 won / 36 replied / 86 ignored; fullstack 25 / 37 / 88;
 data_analyst 28 / 46 / 76.
+
+Quality checks (`synth/quality.py` -> `evals/results/synth_quality.json`):
+
+| check | ai_ml | fullstack | data_analyst |
+|---|---|---|---|
+| proposals with numbers not in facts or job post | 0 / 150 | 0 / 150 | 0 / 150 |
+| proposals naming an uncited client | 0 | 0 | 0 |
+| case studies / READMEs / reviews naming an implied skill | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
+| proposals naming an implied skill (allowed; 6 of the 13 echo the job post) | 1 | 10 | 2 |
+| duplicate texts | 0 | 0 | 0 |
+| same project 3 ways: mean / max word-trigram Jaccard | 0.022 / 0.035 | 0.018 / 0.034 | 0.025 / 0.048 |
+| code files: Python that parses / other files that look like code | 16/16 | 15 non-Python | 6/6 + 6 |
+| won vs ignored: generic phrase rate | 14% vs 49% | 8% vs 46% | 11% vs 54% |
+| won vs ignored: cites a project | 82% vs 58% | 96% vs 59% | 86% vs 57% |
+| won vs ignored: mean words | 178 vs 218 | 206 vs 221 | 180 vs 221 |
+
+The intended style signal is visible but not perfect, because 15% of outcomes are flipped. Code
+was read by hand for a sample (Python, TypeScript, Prisma, SQL, DAX, dbt YAML): real code with
+minor cross-file inconsistencies (for example `tasks.py` retrains a logistic regression while the
+facts say linear SVM), which we keep as realistic noise.
 
 ### Clients (`gigsim/seed/clients.jsonl`, `client_secrets.jsonl`)
 

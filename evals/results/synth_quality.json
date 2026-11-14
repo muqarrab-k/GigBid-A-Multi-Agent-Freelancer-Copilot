@@ -1,0 +1,146 @@
+{
+  "ai_ml": {
+    "grounding": {
+      "proposals": 150,
+      "with_stray_numbers": 0,
+      "naming_uncited_client": 0,
+      "examples": []
+    },
+    "three_ways": {
+      "pairs": 21,
+      "mean_trigram_jaccard": 0.022,
+      "max_trigram_jaccard": 0.035
+    },
+    "style_by_outcome": {
+      "ignored": {
+        "n": 86,
+        "generic_phrase_rate": 0.488,
+        "cites_project_rate": 0.581,
+        "mean_words": 218
+      },
+      "replied": {
+        "n": 36,
+        "generic_phrase_rate": 0.111,
+        "cites_project_rate": 0.833,
+        "mean_words": 211
+      },
+      "won": {
+        "n": 28,
+        "generic_phrase_rate": 0.143,
+        "cites_project_rate": 0.821,
+        "mean_words": 178
+      }
+    },
+    "code": {
+      "files": 16,
+      "python_parses": "16/16",
+      "fenced": 0,
+      "suspect": []
+    },
+    "implied_and_duplicates": {
+      "items_naming_implied_skill": {
+        "case_study": 0,
+        "readme": 0,
+        "review": 0,
+        "proposal": 1
+      },
+      "duplicate_texts": 0
+    }
+  },
+  "fullstack": {
+    "grounding": {
+      "proposals": 150,
+      "with_stray_numbers": 0,
+      "naming_uncited_client": 0,
+      "examples": []
+    },
+    "three_ways": {
+      "pairs": 21,
+      "mean_trigram_jaccard": 0.018,
+      "max_trigram_jaccard": 0.034
+    },
+    "style_by_outcome": {
+      "ignored": {
+        "n": 88,
+        "generic_phrase_rate": 0.455,
+        "cites_project_rate": 0.591,
+        "mean_words": 221
+      },
+      "replied": {
+        "n": 37,
+        "generic_phrase_rate": 0.135,
+        "cites_project_rate": 0.838,
+        "mean_words": 219
+      },
+      "won": {
+        "n": 25,
+        "generic_phrase_rate": 0.08,
+        "cites_project_rate": 0.96,
+        "mean_words": 206
+      }
+    },
+    "code": {
+      "files": 15,
+      "python_parses": "0/0",
+      "fenced": 0,
+      "suspect": []
+    },
+    "implied_and_duplicates": {
+      "items_naming_implied_skill": {
+        "case_study": 0,
+        "readme": 0,
+        "review": 0,
+        "proposal": 10
+      },
+      "duplicate_texts": 0
+    }
+  },
+  "data_analyst": {
+    "grounding": {
+      "proposals": 150,
+      "with_stray_numbers": 0,
+      "naming_uncited_client": 0,
+      "examples": []
+    },
+    "three_ways": {
+      "pairs": 15,
+      "mean_trigram_jaccard": 0.025,
+      "max_trigram_jaccard": 0.048
+    },
+    "style_by_outcome": {
+      "ignored": {
+        "n": 76,
+        "generic_phrase_rate": 0.539,
+        "cites_project_rate": 0.566,
+        "mean_words": 221
+      },
+      "replied": {
+        "n": 46,
+        "generic_phrase_rate": 0.065,
+        "cites_project_rate": 0.674,
+        "mean_words": 232
+      },
+      "won": {
+        "n": 28,
+        "generic_phrase_rate": 0.107,
+        "cites_project_rate": 0.857,
+        "mean_words": 180
+      }
+    },
+    "code": {
+      "files": 12,
+      "python_parses": "6/6",
+      "fenced": 0,
+      "suspect": []
+    },
+    "implied_and_duplicates": {
+      "items_naming_implied_skill": {
+        "case_study": 0,
+        "readme": 0,
+        "review": 0,
+        "proposal": 2
+      },
+      "duplicate_texts": 0
+    }
+  }
+}

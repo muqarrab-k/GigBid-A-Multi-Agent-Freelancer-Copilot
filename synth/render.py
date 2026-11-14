@@ -1,5 +1,4 @@
 import json
-import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -8,12 +7,13 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import ListFlowable, ListItem, Paragraph, SimpleDocTemplate, Spacer
 
+from synth.checks import allowed_text, implied_named, project_facts, stray_numbers
 from synth.facts import PERSONAS_DIR, Facts, load_facts
 from synth.generator import Generator, GeneratorUnavailable
 from synth.plan import Item, plan_persona
 
-NUMBER_RE = re.compile(r"\d[\d,.]*%?")
 CV_PROJECTS = 10
+MAX_FIXES = 3
 
 
 def cv_markdown(facts: Facts) -> str:
@@ -69,22 +69,11 @@ def write_pdf(markdown: str, path: Path) -> None:
     doc.build(story)
 
 
-def numbers_outside_facts(text: str, item: Item, facts: Facts) -> list[str]:
-    """Numbers in a proposal not found in the cited facts."""
-    allowed = " ".join(
-        f"{facts.project(pid).built} {' '.join(facts.project(pid).metrics)}"
-        for pid in item.extra.get("cited_projects", [])
-    )
-    allowed += f" {facts.years_experience}"
-    return [n for n in NUMBER_RE.findall(text) if n.rstrip(".,") not in allowed and len(n) > 1]
-
-
 class Renderer:
     def __init__(self, generator: Generator, root: Path = PERSONAS_DIR) -> None:
         self.generator = generator
         self.root = root
         self.stopped: str | None = None
-        self.checks: Counter[str] = Counter()
 
     def text_for(self, item: Item) -> str | None:
         if self.stopped or item.prompt is None:
@@ -95,13 +84,44 @@ class Renderer:
             self.stopped = str(err)
             return None
 
-    def check(self, item: Item, text: str, facts: Facts) -> None:
-        if item.project:
-            implied = facts.project(item.project).implied_skills
-            if item.type != "code" and any(s.lower() in text.lower() for s in implied):
-                self.checks["implied_skill_named"] += 1
-        if item.type == "proposal" and numbers_outside_facts(text, item, facts):
-            self.checks["proposal_numbers_outside_facts"] += 1
+    def problems(self, item: Item, text: str, facts: Facts) -> tuple[str, str] | None:
+        """What a repair pass must fix, with the facts it may use."""
+        if item.type == "proposal":
+            cited = item.extra["cited_projects"]
+            allowed = allowed_text(facts, cited, item.extra["job_title"], item.extra["job_text"])
+            stray = stray_numbers(text, allowed)
+            if stray:
+                known = "\n".join(project_facts(facts.project(p)) for p in cited)
+                known = known or "(no past projects; do not mention any)"
+                return (
+                    f"- It uses numbers that are not in the facts: {', '.join(stray)}. Remove them or "
+                    "use only numbers from the facts. Do not quote prices, budgets, hours or timelines.",
+                    f"{known}\n{facts.years_experience} years of experience.",
+                )
+        elif item.type in ("case_study", "readme") and item.project:
+            project = facts.project(item.project)
+            named = implied_named(text, project.implied_skills)
+            if named:
+                return (
+                    f"- It names these phrases outright, which is not allowed: {', '.join(named)}. "
+                    "Reword those sentences so a reader can infer the idea without these words.",
+                    project_facts(project),
+                )
+        return None
+
+    def repaired(self, item: Item, text: str, facts: Facts) -> str:
+        for _ in range(MAX_FIXES):
+            found = self.problems(item, text, facts)
+            if not found or self.stopped:
+                break
+            problems, known = found
+            try:
+                text = self.generator.complete(
+                    "synth_fix", f"{item.tag}/fix", problems=problems, facts=known, draft=text
+                )
+            except GeneratorUnavailable as err:
+                self.stopped = str(err)
+        return text
 
     def render_persona(self, persona: str) -> dict[str, Any]:
         facts = load_facts(persona, self.root)
@@ -122,7 +142,7 @@ class Renderer:
             rendered[item.evidence_id] = text is not None
             if text is None:
                 continue
-            self.check(item, text, facts)
+            text = self.repaired(item, text, facts)
             if item.type == "review":
                 reviews.append(review_row(item, text))
             elif item.type == "proposal":

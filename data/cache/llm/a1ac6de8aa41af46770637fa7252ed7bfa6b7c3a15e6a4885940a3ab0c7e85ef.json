@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Dental clinic expansion model\nclient: Sunrise Dental Partners\nclient_industry: healthcare\nstart: 2022-11\nend: 2022-12\nengagement: fixed\nstack:\n- Excel\n- financial modeling\nimplied_skills:\n- scenario analysis\nbuilt: A three-site expansion model with best, base and worst cases for patient volume\n  and staffing.\nmetrics:\n- 3 sites compared\n- chosen site projected to pay back in 14 months\n\nThe review is from: Sunrise Dental Partners\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"scenario analysis\".",
+ "text": "Mina built a clear expansion model for our dental clinic project and made it easy to compare three sites side by side. The best, base, and worst case views were helpful for our staffing and patient volume planning, and the chosen site showed a projected payback of 14 months. She was responsive and delivered what we needed on a fixed engagement.",
+ "input_tokens": 272,
+ "output_tokens": 73
+}

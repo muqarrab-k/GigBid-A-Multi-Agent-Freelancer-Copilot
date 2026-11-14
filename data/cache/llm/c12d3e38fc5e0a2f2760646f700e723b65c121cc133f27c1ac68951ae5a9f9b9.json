@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Monthly statement PDF generator\nclient: Alder Property Group\nclient_industry: real estate\nstart: 2022-07\nend: 2022-09\nengagement: fixed\nstack:\n- Node.js\n- BullMQ\n- Redis\n- Puppeteer\n- AWS S3\nimplied_skills:\n- background jobs\n- PDF generation\nbuilt: A queue that renders owner statements to PDF overnight and stores them in S3\n  instead of building them on request.\nmetrics:\n- 12k statements a month\n- request timeouts went from daily to none\n\nThe review is from: Alder Property Group\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"background jobs\", \"PDF generation\".",
+ "text": "Tobias took our monthly statement process from a daily headache to something we no longer have to worry about. The move to overnight rendering and storing the files in S3 eliminated the request timeouts we were seeing, and the system now handles about 12k statements a month reliably. He was straightforward to work with and delivered exactly what we needed.",
+ "input_tokens": 314,
+ "output_tokens": 73
+}

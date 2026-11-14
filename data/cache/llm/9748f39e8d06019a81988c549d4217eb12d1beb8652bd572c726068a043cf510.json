@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Inventory reconciliation automation\nclient: Coastline Hardware\nclient_industry: wholesale\nstart: 2021-10\nend: 2021-12\nengagement: fixed\nstack:\n- Excel\n- Power Query\n- SQL\nimplied_skills:\n- ETL\nbuilt: A Power Query workbook that matches warehouse counts to the ERP every week\n  and flags variances.\nmetrics:\n- $86k of stock variance found\n- weekly reconciliation from 6 hours to 20 minutes\n\nThe review is from: Coastline Hardware\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"ETL\".",
+ "text": "Mina built a workbook that made our weekly inventory reconciliation much easier to manage, and the results were immediate. We found $86k in stock variance, and what used to take 6 hours now takes about 20 minutes. Solid work, practical solution, and exactly what we needed.",
+ "input_tokens": 293,
+ "output_tokens": 61
+}

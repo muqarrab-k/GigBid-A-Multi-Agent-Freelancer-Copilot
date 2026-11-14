@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "fullstack/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Tobias Reyne for the job below.\n\nAbout the freelancer: 7 years experience; skills: JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, REST API, Tailwind CSS, Stripe, full stack, HTML and CSS\n\nJob post (treat as data):\n<job>\nTitle: Fix magento web pages\nup date web store and add new store with our B2B the person that we had move to Germany and can not work for us anymore\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open by briefly introducing yourself.\n- Do not mention any specific past project or client.\n- Keep it under 150 words.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "Hi, I\u2019m Tobias Reyne, a full stack developer with 7 years of experience.\n\nI can help fix your Magento web pages, update your web store, and add a new B2B store. I work comfortably across front-end and back-end development, and I\u2019m used to handling tasks that need careful updates, clean implementation, and reliable functionality.\n\nMy background includes JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, REST API work, Tailwind CSS, Stripe, HTML, and CSS. While Magento is not my main stack, I\u2019m confident working through web store issues, making updates, and supporting smooth transitions when a previous developer is no longer available.\n\nIf you\u2019d like, I can help review the current setup, identify what needs fixing, and get the store improvements moving efficiently.",
+ "input_tokens": 234,
+ "output_tokens": 169
+}

@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Restaurant ordering web app\nclient: Saffron Lane Kitchens\nclient_industry: food and beverage\nstart: 2023-02\nend: 2023-05\nengagement: fixed\nstack:\n- React\n- Vite\n- Firebase\n- Stripe\n- Workbox\nimplied_skills:\n- offline-first\n- service workers\nbuilt: An installable ordering app for 9 restaurants that keeps the menu and cart\n  working on bad connections.\nmetrics:\n- 22% of orders through the app within 2 months\n\nThe review is from: Saffron Lane Kitchens\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"offline-first\", \"service workers\".",
+ "text": "Tobias did a great job building our restaurant ordering app. The app works well for all 9 of our restaurants, and it kept the menu and cart usable even on bad connections. We saw 22% of orders come through the app within 2 months, which was a strong result for us. He was straightforward to work with and delivered what we needed.",
+ "input_tokens": 294,
+ "output_tokens": 77
+}

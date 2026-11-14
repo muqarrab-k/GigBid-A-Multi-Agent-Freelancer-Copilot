@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Sales KPI dashboard\nclient: Marlowe Furniture\nclient_industry: retail\nstart: 2021-02\nend: 2021-04\nengagement: fixed\nstack:\n- Power BI\n- DAX\n- SQL Server\n- Excel\nimplied_skills:\n- data modeling\nbuilt: One Power BI report on a star-schema model replacing 14 separate Excel sales\n  reports.\nmetrics:\n- 14 reports consolidated into 1\n- monthly close reporting from 3 days to 4 hours\n\nThe review is from: Marlowe Furniture\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on technical quality; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"data modeling\".",
+ "text": "Mina did excellent work on our Sales KPI dashboard. She took our scattered Excel reporting and built a solid Power BI solution with clean DAX and SQL Server work behind it, and the report structure was much easier to maintain than what we had before. The biggest win was moving our monthly close reporting from 3 days down to 4 hours. We ended up with one report replacing 14 separate Excel sales reports, and the final result was technically strong and reliable.",
+ "input_tokens": 299,
+ "output_tokens": 96
+}

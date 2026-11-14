@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Product recommendations\nclient: Tidewater Outfitters\nclient_industry: e-commerce\nstart: 2022-01\nend: 2022-04\nengagement: hourly\nstack:\n- Python\n- PyTorch\n- implicit\n- Redis\n- AWS SageMaker\nimplied_skills:\n- personalization\nbuilt: Similar items and you-may-also-like carousels trained on 1.2M interactions\n  and cached in Redis.\nmetrics:\n- click-through rate +14% in a 4-week A/B test\n\nThe review is from: Tidewater Outfitters\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"personalization\".",
+ "text": "Noor delivered exactly what we needed and did it fast. We had a tight timeline, and they kept things moving without us having to chase updates or worry about deadlines. The recommendations were up and running on schedule, and the 4-week A/B test showed a 14% lift in click-through rate. We\u2019d absolutely work with Noor again.",
+ "input_tokens": 304,
+ "output_tokens": 73
+}

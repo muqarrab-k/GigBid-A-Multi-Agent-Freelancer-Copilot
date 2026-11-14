@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Telecom churn prediction\nclient: confidential\nclient_industry: telecom\nstart: 2021-01\nend: 2021-03\nengagement: hourly\nstack:\n- Python\n- XGBoost\n- pandas\n- SHAP\n- MLflow\nimplied_skills:\n- model explainability\nbuilt: A monthly churn score for 380k subscribers with per-customer SHAP reasons the\n  retention team could read.\nmetrics:\n- AUC 0.84 on a held-out quarter\n- top-decile lift 3.1x\n\nThe review is from: a client in telecom (name withheld)\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"model explainability\".",
+ "text": "Noor moved quickly and kept the work on schedule throughout the engagement. We needed a monthly churn score delivered fast for our retention team, and he got it done with clear outputs they could actually use. The final model held up well, with AUC 0.84 on a held-out quarter and 3.1x top-decile lift. Would work with him again.",
+ "input_tokens": 313,
+ "output_tokens": 79
+}

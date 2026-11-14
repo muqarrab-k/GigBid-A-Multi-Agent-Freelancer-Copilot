@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Contract clause search assistant\nclient: confidential\nclient_industry: legal\nstart: 2023-03\nend: 2023-06\nengagement: fixed\nstack:\n- Python\n- LangChain\n- OpenAI API\n- pgvector\n- PostgreSQL\n- FastAPI\nimplied_skills:\n- semantic search\n- retrieval-augmented generation\nbuilt: An assistant that answers questions over 9,000 contracts and always quotes\n  the clause and page it used.\nmetrics:\n- faithfulness 0.91 on a 120-question lawyer-written test set\n- clause lookup from 25 minutes to 3 minutes\n\nThe review is from: a client in legal (name withheld)\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"semantic search\", \"retrieval-augmented generation\".",
+ "text": "Noor built a contract clause search assistant for our legal team that could answer questions across 9,000 contracts and always quote the clause and page it used. The result was solid: clause lookup dropped from 25 minutes to 3 minutes, and the system reached 0.91 faithfulness on our 120-question lawyer-written test set. He was reliable and easy to work with throughout the fixed project.",
+ "input_tokens": 320,
+ "output_tokens": 85
+}

@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Insurance GraphQL API\nclient: Kestrel Insurance\nclient_industry: insurance\nstart: 2022-03\nend: 2022-06\nengagement: hourly\nstack:\n- GraphQL\n- Apollo\n- Node.js\n- PostgreSQL\n- DataLoader\nimplied_skills:\n- query batching\nbuilt: A GraphQL layer over three legacy policy databases for the new broker app.\nmetrics:\n- p95 API latency from 1.2s to 240 ms\n\nThe review is from: Kestrel Insurance\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on how they handled feedback; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"query batching\".",
+ "text": "Tobias was very easy to work with on our broker app API project. He took feedback well, adjusted quickly when we asked for changes, and stayed practical throughout the engagement. The GraphQL layer he built over our legacy policy databases helped bring our p95 API latency down from 1.2s to 240 ms. Would hire again.",
+ "input_tokens": 296,
+ "output_tokens": 73
+}

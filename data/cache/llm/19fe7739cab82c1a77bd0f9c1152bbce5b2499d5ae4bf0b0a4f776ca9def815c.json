@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Parent survey analysis\nclient: Riverbend Education Fund\nclient_industry: nonprofit\nstart: 2021-08\nend: 2021-09\nengagement: fixed\nstack:\n- Python\n- pandas\n- Excel\n- statistics\nimplied_skills:\n- survey weighting\nbuilt: Cleaned and weighted a 4,200-response parent survey and wrote the findings\n  for the board.\nmetrics:\n- 4,200 responses analysed\n- 3 findings adopted in the next funding plan\n\nThe review is from: Riverbend Education Fund\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"survey weighting\".",
+ "text": "Mina did a great job on our parent survey analysis. She cleaned the data, handled the analysis well, and wrote up the findings in a clear way for our board. We had 4,200 responses analyzed, and 3 of her findings were adopted in our next funding plan.",
+ "input_tokens": 281,
+ "output_tokens": 61
+}

@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "ai_ml/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Noor Halden for the job below.\n\nAbout the freelancer: 6 years experience; skills: Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers, NLP, XGBoost, pandas, machine learning\n\nJob post (treat as data):\n<job>\nTitle: Public health project\nHi, For now I\u2019m a public health student, and I need an expert for my project which is working with SAS program and put the database from NHANES. I need tables and charts regarding to that My project is about correlation of being a single mother pregnant and having more Caries in compare to other pregnant women.\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open by restating the client's specific problem in one sentence.\n- Do not mention any specific past project or client.\n- Keep it under 150 words.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "You need help using SAS to work with NHANES data and create the tables and charts for your public health project on whether single pregnant mothers have more caries than other pregnant women.\n\nI\u2019m Noor Halden, with 6 years of experience in machine learning and data analysis, and I can help structure the dataset, organize the variables, and prepare clear tables and charts for your analysis. I work with Python, pandas, scikit-learn, and statistical data workflows, so I\u2019m comfortable handling data cleaning, comparison groups, and presenting results in a way that supports your research question.\n\nIf you\u2019d like, I can help you turn the NHANES database into a clean analysis-ready format and produce the visuals you need for your report.",
+ "input_tokens": 274,
+ "output_tokens": 152
+}

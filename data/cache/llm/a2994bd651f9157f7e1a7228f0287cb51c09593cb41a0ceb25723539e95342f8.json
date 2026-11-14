@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Invoice field extraction\nclient: Ledgerline Accounting\nclient_industry: accounting\nstart: 2021-09\nend: 2021-12\nengagement: fixed\nstack:\n- Python\n- Tesseract\n- LayoutLMv3\n- Hugging Face Transformers\n- FastAPI\n- Docker\nimplied_skills:\n- document AI\nbuilt: A service that reads scanned supplier invoices and returns vendor, dates, totals\n  and line items as JSON.\nmetrics:\n- 96.2% field-level accuracy on 1,800 test invoices\n- manual data entry cut by about 70%\n\nThe review is from: Ledgerline Accounting\nRating: 4.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"document AI\".",
+ "text": "Noor delivered a solid invoice extraction service for our scanned supplier invoices. The system returned vendor, dates, totals, and line items as JSON, and the 96.2% field-level accuracy on 1,800 test invoices was strong enough to cut our manual data entry by about 70%. There were a few points where I had to follow up on details, but overall the work was reliable and met what we needed.",
+ "input_tokens": 302,
+ "output_tokens": 89
+}

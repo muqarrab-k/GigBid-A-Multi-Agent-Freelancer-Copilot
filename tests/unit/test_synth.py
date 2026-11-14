@@ -12,6 +12,7 @@ from agent.prompts.loader import load_prompt
 from data_pipeline.schema import MarketJob
 from evals.datasets.labeling_rules import assign_personas, decide, label_job, price_band
 from synth import augment
+from synth.checks import allowed_text, implied_named, stray_numbers
 from synth.clients import build_clients
 from synth.facts import PERSONAS, Facts, load_facts
 from synth.generator import Generator
@@ -199,3 +200,14 @@ def test_generator_uses_cache(tmp_path: Path) -> None:
     (tmp_path / f"{key}.json").write_text(json.dumps({"text": "print('cached')"}))
     assert gen.complete("synth_code", "t", **values) == "print('cached')"
     assert gen.stats["cache_hits"] == 1
+
+
+def test_stray_numbers_ignore_commas_and_facts(ai_facts: Facts) -> None:
+    allowed = allowed_text(ai_facts, ["p01"], "Ticket routing", "We get about 2000 tickets a week")
+    assert stray_numbers("I routed 14 queues for 2,000 tickets, macro-F1 0.88.", allowed) == []
+    assert stray_numbers("I can do it for $900 in 10 days.", allowed) == ["900", "10"]
+
+
+def test_implied_named_is_case_insensitive() -> None:
+    assert implied_named("Uses Background Jobs via Celery", ["background jobs"]) == ["background jobs"]
+    assert implied_named("Celery worker retrains nightly", ["background jobs"]) == []

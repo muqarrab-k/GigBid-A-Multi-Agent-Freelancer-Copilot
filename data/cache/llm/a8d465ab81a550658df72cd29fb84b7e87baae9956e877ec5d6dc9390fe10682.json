@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Clinical note summarisation\nclient: Brightwell Clinics\nclient_industry: healthcare\nstart: 2023-07\nend: 2023-10\nengagement: hourly\nstack:\n- Python\n- Hugging Face Transformers\n- Flan-T5\n- PEFT\n- AWS\nimplied_skills:\n- fine-tuning\n- PII redaction\nbuilt: A LoRA-tuned Flan-T5 model that drafts visit summaries after names, dates and\n  IDs are masked.\nmetrics:\n- ROUGE-L 0.41\n- clinician editing time down 38% in a 6-week trial\n\nThe review is from: Brightwell Clinics\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"fine-tuning\", \"PII redaction\".",
+ "text": "Noor helped Brightwell Clinics with clinical note summarisation over an hourly engagement from July to October 2023. They built a LoRA-tuned Flan-T5 model in Python with Hugging Face Transformers, PEFT and AWS that drafts visit summaries after names, dates and IDs are masked. In our 6-week trial, ROUGE-L reached 0.41 and clinician editing time dropped 38%. Solid work overall and easy to work with.",
+ "input_tokens": 312,
+ "output_tokens": 95
+}

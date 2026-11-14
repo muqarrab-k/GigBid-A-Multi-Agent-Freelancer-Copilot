@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Serverless image pipeline\nclient: Lumen Photo Co.\nclient_industry: media\nstart: 2024-06\nend: 2024-08\nengagement: fixed\nstack:\n- AWS Lambda\n- AWS S3\n- Sharp\n- Node.js\n- CloudFront\nimplied_skills:\n- event-driven architecture\nbuilt: Uploads trigger a Lambda that creates web sizes and watermarks, served through\n  a CDN.\nmetrics:\n- 2.3M images processed\n- hosting costs down 61%\n\nThe review is from: Lumen Photo Co.\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"event-driven architecture\".",
+ "text": "Tobias moved fast and kept the project on schedule from start to finish. He delivered the image pipeline we needed without wasting our time, and the rollout was smooth. We\u2019ve processed 2.3M images through it so far, and hosting costs are down 61%, which is exactly what we needed. Would hire again.",
+ "input_tokens": 303,
+ "output_tokens": 70
+}

@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Booking platform for fitness studios\nclient: Pulsebox Studios\nclient_industry: fitness\nstart: 2020-03\nend: 2020-08\nengagement: fixed\nstack:\n- Next.js\n- Node.js\n- PostgreSQL\n- Prisma\n- Stripe\nimplied_skills:\n- multi-tenancy\n- subscription billing\nbuilt: A white-label class booking app where each studio gets its own subdomain, timetable\n  and memberships.\nmetrics:\n- 64 studios onboarded in 6 months\n- 71% checkout conversion\n\nThe review is from: Pulsebox Studios\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"multi-tenancy\", \"subscription billing\".",
+ "text": "Tobias moved quickly and kept the project on track from start to finish. He delivered the booking platform on schedule and was responsive when we needed changes along the way. We were able to onboard 64 studios in 6 months, and checkout conversion ended up at 71%, which was a strong result for us.",
+ "input_tokens": 311,
+ "output_tokens": 67
+}

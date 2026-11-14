@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Satellite crop classification\nclient: confidential\nclient_industry: agritech\nstart: 2021-05\nend: 2021-07\nengagement: hourly\nstack:\n- Python\n- PyTorch\n- rasterio\n- U-Net\nimplied_skills:\n- geospatial analysis\nbuilt: A segmentation model that labels field parcels into 6 crop types from Sentinel-2\n  imagery.\nmetrics:\n- mean IoU 0.74 across 6 crop classes\n\nThe review is from: a client in agritech (name withheld)\nRating: 4.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on technical quality; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"geospatial analysis\".",
+ "text": "Noor did solid work on our satellite crop classification project. The segmentation model was technically sound, and the 0.74 mean IoU across 6 crop classes was a good result for our use case. They were comfortable working with Python, PyTorch, rasterio, and U-Net, and handled the Sentinel-2 data cleanly. Would hire again for similar agritech work.",
+ "input_tokens": 296,
+ "output_tokens": 81
+}

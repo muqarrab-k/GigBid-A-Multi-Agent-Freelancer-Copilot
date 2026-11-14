@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Warehouse models for a DTC brand\nclient: Fernwood Pantry\nclient_industry: e-commerce\nstart: 2022-04\nend: 2022-07\nengagement: hourly\nstack:\n- dbt\n- BigQuery\n- Fivetran\n- SQL\nimplied_skills:\n- data warehouse\n- data modeling\nbuilt: A dbt project with staging, intermediate and mart layers for orders, subscriptions\n  and marketing.\nmetrics:\n- 38 models\n- tests on 120 columns\n- dashboard refresh from daily to hourly\n\nThe review is from: Fernwood Pantry\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"data warehouse\", \"data modeling\".",
+ "text": "Mina was great to work with on our warehouse models project. She built a solid dbt project with staging, intermediate, and mart layers for orders, subscriptions, and marketing, and kept things moving smoothly in BigQuery, Fivetran, and SQL. We ended up with 38 models and tests on 120 columns, and our dashboard refresh went from daily to hourly. Would hire again.",
+ "input_tokens": 296,
+ "output_tokens": 84
+}

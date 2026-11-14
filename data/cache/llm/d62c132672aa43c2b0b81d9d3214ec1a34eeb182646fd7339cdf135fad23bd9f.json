@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Staff onboarding portal\nclient: confidential\nclient_industry: healthcare staffing\nstart: 2021-05\nend: 2021-09\nengagement: hourly\nstack:\n- React\n- NestJS\n- PostgreSQL\n- TypeORM\n- Auth0\nimplied_skills:\n- role-based access control\nbuilt: An internal portal where nurses upload credentials and managers approve them,\n  with permissions per region.\nmetrics:\n- 2,400 staff using it\n- onboarding paperwork from 5 days to 1 day\n\nThe review is from: a client in healthcare staffing (name withheld)\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"role-based access control\".",
+ "text": "Tobias delivered what we needed on a tight timeline and kept the project moving without us having to chase him. He was quick to understand our workflow and got the portal in place for our team of nurses and managers across regions. The result has been a big improvement for onboarding, with paperwork going from 5 days to 1 day, and it\u2019s now being used by 2,400 staff. Would hire again.",
+ "input_tokens": 308,
+ "output_tokens": 88
+}

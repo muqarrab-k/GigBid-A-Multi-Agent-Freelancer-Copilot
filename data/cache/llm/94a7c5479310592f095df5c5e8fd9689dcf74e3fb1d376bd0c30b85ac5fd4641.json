@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Wholesale pricing review\nclient: Coastline Hardware\nclient_industry: wholesale\nstart: 2024-07\nend: 2024-09\nengagement: hourly\nstack:\n- SQL\n- Excel\n- Python\nimplied_skills:\n- margin analysis\nbuilt: Compared cost, price and volume for 300 SKUs and proposed new price bands.\nmetrics:\n- 300 SKUs repriced\n- gross margin +2.3 points\n\nThe review is from: Coastline Hardware\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on how they handled feedback; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"margin analysis\".",
+ "text": "Mina was easy to work with and handled our feedback well throughout the wholesale pricing review. We asked for several adjustments as we compared cost, price, and volume across 300 SKUs, and Mina stayed responsive and made the changes without drama. The final pricing bands were clear, and we ended up repricing 300 SKUs with gross margin up 2.3 points.",
+ "input_tokens": 286,
+ "output_tokens": 79
+}

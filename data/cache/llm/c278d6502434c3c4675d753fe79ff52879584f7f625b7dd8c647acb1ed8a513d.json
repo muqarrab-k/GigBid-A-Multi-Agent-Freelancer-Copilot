@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Embedded customer analytics\nclient: confidential\nclient_industry: B2B SaaS\nstart: 2023-06\nend: 2023-08\nengagement: hourly\nstack:\n- React\n- TypeScript\n- Recharts\n- Node.js\n- PostgreSQL\nimplied_skills:\n- data visualization\nbuilt: Usage dashboards embedded in a SaaS product so each customer account sees its\n  own metrics.\nmetrics:\n- rolled out to 140 customer accounts\n- delivered 3 weeks early\n\nThe review is from: a client in B2B SaaS (name withheld)\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"data visualization\".",
+ "text": "Tobias did a great job on our embedded analytics work. He built usage dashboards inside our SaaS product so each customer account could see its own metrics, and it rolled out to 140 customer accounts. He also delivered 3 weeks early, which made the whole engagement very easy on our side.",
+ "input_tokens": 290,
+ "output_tokens": 64
+}

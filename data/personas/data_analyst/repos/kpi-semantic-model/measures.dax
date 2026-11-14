@@ -1,0 +1,77 @@
+Total Sales = SUM ( Sales[SalesAmount] )
+
+Total Cost = SUM ( Sales[CostAmount] )
+
+Gross Margin = [Total Sales] - [Total Cost]
+
+Gross Margin % = DIVIDE ( [Gross Margin], [Total Sales] )
+
+Sales LY =
+CALCULATE (
+    [Total Sales],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+Gross Margin LY =
+CALCULATE (
+    [Gross Margin],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+Sales YoY =
+[Total Sales] - [Sales LY]
+
+Sales YoY % =
+DIVIDE ( [Sales YoY], [Sales LY] )
+
+Gross Margin YoY =
+[Gross Margin] - [Gross Margin LY]
+
+Gross Margin YoY % =
+DIVIDE ( [Gross Margin YoY], [Gross Margin LY] )
+
+Sales Rolling 12M =
+CALCULATE (
+    [Total Sales],
+    DATESINPERIOD ( 'Date'[Date], MAX ( 'Date'[Date] ), -12, MONTH )
+)
+
+Gross Margin Rolling 12M =
+CALCULATE (
+    [Gross Margin],
+    DATESINPERIOD ( 'Date'[Date], MAX ( 'Date'[Date] ), -12, MONTH )
+)
+
+Sales Rolling 12M LY =
+CALCULATE (
+    [Total Sales],
+    DATESINPERIOD ( DATEADD ( 'Date'[Date], -12, MONTH ), MAX ( 'Date'[Date] ), -12, MONTH )
+)
+
+-- Use calendar context for prior year comparisons
+Sales YTD =
+TOTALYTD ( [Total Sales], 'Date'[Date] )
+
+Gross Margin YTD =
+TOTALYTD ( [Gross Margin], 'Date'[Date] )
+
+Sales YTD LY =
+CALCULATE (
+    [Sales YTD],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+Gross Margin YTD LY =
+CALCULATE (
+    [Gross Margin YTD],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+Sales R12M YoY =
+[Sales Rolling 12M] - CALCULATE ( [Sales Rolling 12M], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+Sales R12M YoY % =
+DIVIDE (
+    [Sales R12M YoY],
+    CALCULATE ( [Sales Rolling 12M], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+)

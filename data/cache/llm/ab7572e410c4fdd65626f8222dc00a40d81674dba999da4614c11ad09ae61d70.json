@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Subscription box billing backend\nclient: Fernwood Pantry\nclient_industry: e-commerce\nstart: 2025-07\nend: 2025-10\nengagement: hourly\nstack:\n- Node.js\n- NestJS\n- PostgreSQL\n- Stripe Billing\n- BullMQ\nimplied_skills:\n- recurring billing\n- background jobs\nbuilt: Moved subscribers off a legacy plugin onto Stripe Billing with a retry queue\n  for failed card payments.\nmetrics:\n- 6.5k subscribers migrated\n- 31% of failed payments recovered\n\nThe review is from: Fernwood Pantry\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on communication; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"recurring billing\", \"background jobs\".",
+ "text": "Tobias was easy to work with and kept communication clear throughout the project, which made a pretty technical backend migration feel straightforward for our team. He stayed responsive, explained tradeoffs well, and kept us updated as we moved 6.5k subscribers off our legacy setup and onto Stripe Billing. The retry flow he built helped recover 31% of failed payments, and the whole engagement ran smoothly from our side.",
+ "input_tokens": 310,
+ "output_tokens": 87
+}

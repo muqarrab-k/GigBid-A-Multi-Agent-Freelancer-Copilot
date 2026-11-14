@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Private wiki question answering\nclient: Strata Engineering Group\nclient_industry: construction\nstart: 2025-05\nend: 2025-07\nengagement: fixed\nstack:\n- Python\n- LlamaIndex\n- Qdrant\n- Ollama\n- Llama 3\n- FastAPI\nimplied_skills:\n- self-hosted LLM\n- semantic search\nbuilt: An on-premise assistant over 14k pages of engineering standards; no document\n  leaves the client network.\nmetrics:\n- 82% top-3 hit rate on 60 engineer questions\n- zero external API calls\n\nThe review is from: Strata Engineering Group\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"self-hosted LLM\", \"semantic search\".",
+ "text": "Noor delivered exactly what we needed for our internal engineering team. The assistant works entirely on our network and gave us solid answers across our standards library, with an 82% top-3 hit rate on 60 engineer questions and zero external API calls. The implementation was handled cleanly from start to finish, and it fit our security requirements. We\u2019d gladly work with Noor again.",
+ "input_tokens": 330,
+ "output_tokens": 80
+}

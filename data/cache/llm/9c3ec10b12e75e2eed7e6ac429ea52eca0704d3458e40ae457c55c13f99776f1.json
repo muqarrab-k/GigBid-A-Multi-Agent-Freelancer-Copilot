@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Delivery operations dashboard\nclient: Ferrylane Freight\nclient_industry: logistics\nstart: 2023-08\nend: 2023-11\nengagement: hourly\nstack:\n- Power BI\n- PostgreSQL\n- SQL\nimplied_skills:\n- incremental refresh\nbuilt: A daily on-time delivery dashboard by depot, driver and customer.\nmetrics:\n- late deliveries down 9% over the following quarter\n\nThe review is from: Ferrylane Freight\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"incremental refresh\".",
+ "text": "Mina Castellan delivered a solid dashboard for our logistics team that made daily delivery performance much easier to track. The report gave us the visibility we needed across depots, drivers, and customers, and we saw late deliveries drop 9% over the following quarter. Work was handled well throughout the engagement, and the final result has been useful for operations.",
+ "input_tokens": 281,
+ "output_tokens": 74
+}

@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Support ticket triage model\nclient: Kettlewell Support Co.\nclient_industry: SaaS\nstart: 2020-09\nend: 2020-12\nengagement: fixed\nstack:\n- Python\n- scikit-learn\n- FastAPI\n- Celery\n- Redis\n- PostgreSQL\nimplied_skills:\n- background jobs\nbuilt: A classifier that routes incoming helpdesk tickets to 14 queues, served by\n  FastAPI, with nightly retraining run through a Celery worker on Redis.\nmetrics:\n- macro-F1 0.88 vs 0.62 for the old keyword rules\n- median routing time from 6 hours to 4 minutes\n\nThe review is from: Kettlewell Support Co.\nRating: 4.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on communication; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"background jobs\".",
+ "text": "Noor was solid to work with and kept the project moving without a lot of hand-holding. Communication was generally clear, though we did have to ask for a bit more detail on a few updates than we expected. The ticket routing model did what we needed, and the jump in median routing time from 6 hours to 4 minutes was a big improvement. Overall, a dependable freelancer for this kind of work.",
+ "input_tokens": 336,
+ "output_tokens": 87
+}

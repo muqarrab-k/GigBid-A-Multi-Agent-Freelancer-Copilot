@@ -14,6 +14,8 @@ from synth.facts import PERSONAS, PERSONAS_DIR, Facts, Project, load_facts
 from synth.matching import job_text, ranked_projects
 
 EMPHASIS = ["business impact", "the technical approach", "how the client's team works now"]
+REVIEW_FOCUS = ["the end result", "communication", "speed and deadlines", "how they handled feedback",
+                "technical quality"]
 OUTCOME_SHARES = {"won": 0.15, "replied": 0.25}
 LAST_DATE = date(2025, 10, 31)
 
@@ -52,8 +54,9 @@ def month_after(ym: str, months: int = 1) -> str:
     return f"{year}-{(month - 1) % 12 + 1:02d}"
 
 
-def project_block(project: Project) -> str:
-    data = project.model_dump(exclude={"id", "repo"})
+def project_block(project: Project, implied: bool = True) -> str:
+    hidden = {"id", "repo"} if implied else {"id", "repo", "implied_skills"}
+    data = project.model_dump(exclude=hidden)
     return yaml.safe_dump(data, sort_keys=False, allow_unicode=True).strip()
 
 
@@ -145,8 +148,15 @@ def review_items(facts: Facts, count: int) -> list[Item]:
     while len(order) < count:
         order.append(named[len(order) % len(named)])
     items = []
+    seen: set[tuple[str, float, str]] = set()
     for n, project in enumerate(order[:count], start=1):
         rating = float(rng.choice([5.0, 4.8, 4.5, 4.0, 3.5], p=[0.62, 0.16, 0.1, 0.08, 0.04]))
+        # no identical prompts
+        shift = n
+        while (project.id, rating, REVIEW_FOCUS[shift % len(REVIEW_FOCUS)]) in seen:
+            shift += 1
+        focus = REVIEW_FOCUS[shift % len(REVIEW_FOCUS)]
+        seen.add((project.id, rating, focus))
         items.append(
             Item(
                 evidence_id=f"{p}:review:{n:02d}",
@@ -161,7 +171,7 @@ def review_items(facts: Facts, count: int) -> list[Item]:
                 tag=f"{p}/review",
                 values={"name": facts.name, "project": project_block(project),
                         "client_label": client_label(project), "rating": rating,
-                        "banned": banned(project)},
+                        "focus": focus, "banned": banned(project)},
                 extra={"rating": rating, "client": project.client},
             )
         )
@@ -243,7 +253,7 @@ def proposal_items(facts: Facts, history: list[dict[str, Any]], count: int) -> l
         year, month = map(int, month_after(after).split("-"))
         start = date(year, month, 1)
         day = start.toordinal() + int(rng.integers(max(1, LAST_DATE.toordinal() - start.toordinal())))
-        projects_text = "\n\n".join(project_block(c) for c in cited) or "(none)"
+        projects_text = "\n\n".join(project_block(c, implied=False) for c in cited) or "(none)"
         profile = (
             f"{facts.years_experience} years experience; skills: "
             + ", ".join(s.name for s in facts.skills if s.level == "expert")

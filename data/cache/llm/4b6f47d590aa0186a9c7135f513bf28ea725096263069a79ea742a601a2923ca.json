@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Card fraud scoring API\nclient: confidential\nclient_industry: fintech\nstart: 2022-09\nend: 2022-12\nengagement: hourly\nstack:\n- Python\n- LightGBM\n- FastAPI\n- Kafka\n- Docker\nimplied_skills:\n- real-time inference\nbuilt: A scoring service that reads card events from Kafka and returns a fraud score\n  before authorisation.\nmetrics:\n- p95 latency 38 ms\n- fraud losses down 22% during the pilot\n\nThe review is from: a client in fintech (name withheld)\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"real-time inference\".",
+ "text": "Noor did a solid job on our card fraud scoring API. They built a scoring service that reads card events from Kafka and returns a fraud score before authorisation, and it performed well for us. We saw p95 latency of 38 ms and fraud losses down 22% during the pilot. Easy to work with and delivered what we needed.",
+ "input_tokens": 288,
+ "output_tokens": 73
+}

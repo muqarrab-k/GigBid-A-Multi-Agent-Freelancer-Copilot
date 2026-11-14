@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Ceramic tile defect detection\nclient: Halvorsen Ceramics\nclient_industry: manufacturing\nstart: 2022-05\nend: 2022-08\nengagement: fixed\nstack:\n- Python\n- PyTorch\n- YOLOv8\n- OpenCV\n- ONNX\nimplied_skills:\n- model quantization\nbuilt: A camera-based crack and chip detector exported to ONNX and running on an industrial\n  PC beside the kiln line.\nmetrics:\n- 97.4% recall on cracks\n- false rejects from 8% to 2.1%\n\nThe review is from: Halvorsen Ceramics\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"model quantization\".",
+ "text": "Noor did solid work for us on the ceramic tile defect detection project. They built a camera-based crack and chip detector that runs on an industrial PC beside our kiln line, and the ONNX export fit our setup well. We saw 97.4% recall on cracks and reduced false rejects from 8% to 2.1%. Would hire again.",
+ "input_tokens": 301,
+ "output_tokens": 76
+}

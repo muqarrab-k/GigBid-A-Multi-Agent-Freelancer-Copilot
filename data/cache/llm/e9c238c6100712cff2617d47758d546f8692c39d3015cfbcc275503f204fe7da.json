@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Weekly executive KPI pack\nclient: Alder Property Group\nclient_industry: real estate\nstart: 2024-10\nend: 2025-01\nengagement: hourly\nstack:\n- Google Sheets\n- BigQuery\n- Looker Studio\nimplied_skills:\n- report automation\nbuilt: A scheduled KPI pack on occupancy, arrears and maintenance that used to be\n  built by hand every Monday.\nmetrics:\n- 22 KPIs\n- about 5 hours a week saved\n\nThe review is from: Alder Property Group\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"report automation\".",
+ "text": "Mina made our weekly executive KPI pack much easier to manage. What used to be built by hand every Monday is now scheduled and covers 22 KPIs, which has saved us about 5 hours a week. She worked smoothly with Google Sheets, BigQuery, and Looker Studio and kept things straightforward throughout the project.",
+ "input_tokens": 279,
+ "output_tokens": 68
+}

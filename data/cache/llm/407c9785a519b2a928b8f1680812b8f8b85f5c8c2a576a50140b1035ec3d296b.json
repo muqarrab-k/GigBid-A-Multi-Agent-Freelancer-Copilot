@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_code",
+ "tag": "data_analyst/code",
+ "prompt": "Write the file `model.sql` for the repository \"kpi-semantic-model\".\n\nStack: Power BI, DAX, SQL Server, Excel\nPurpose of this file: SQL views that build the fact and dimension tables\nProject context: One Power BI report on a star-schema model replacing 14 separate Excel sales reports.\n\nRequirements:\n- 25 to 70 lines of realistic, plausible code in the right language for the file extension.\n- A few short comments, no long docstrings, no secrets or real credentials.\n- Output only the file contents, without Markdown fences.",
+ "text": "CREATE VIEW dbo.dim_date AS\nSELECT\n    d.[DateKey],\n    d.[Date],\n    d.[Year],\n    d.[Quarter],\n    d.[MonthNumber],\n    d.[MonthName],\n    d.[DayOfMonth]\nFROM dbo.DateDimension d;\nGO\n\nCREATE VIEW dbo.dim_product AS\nSELECT\n    p.ProductKey,\n    p.ProductCode,\n    p.ProductName,\n    p.ProductCategory,\n    p.ProductSubcategory\nFROM dbo.ProductDimension p;\nGO\n\nCREATE VIEW dbo.dim_customer AS\nSELECT\n    c.CustomerKey,\n    c.CustomerCode,\n    c.CustomerName,\n    c.Region,\n    c.Country\nFROM dbo.CustomerDimension c;\nGO\n\nCREATE VIEW dbo.dim_salesperson AS\nSELECT\n    s.SalespersonKey,\n    s.SalespersonName,\n    s.TeamName,\n    s.ManagerName\nFROM dbo.SalespersonDimension s;\nGO\n\nCREATE VIEW dbo.fact_sales AS\nSELECT\n    f.SalesKey,\n    f.DateKey,\n    f.ProductKey,\n    f.CustomerKey,\n    f.SalespersonKey,\n    f.OrderNumber,\n    f.Quantity,\n    f.UnitPrice,\n    f.DiscountAmount,\n    f.NetSalesAmount\nFROM dbo.SalesFact f;\nGO",
+ "input_tokens": 181,
+ "output_tokens": 258
+}

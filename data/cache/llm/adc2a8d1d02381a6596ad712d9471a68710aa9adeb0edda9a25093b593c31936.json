@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Clinic patient portal\nclient: confidential\nclient_industry: healthcare\nstart: 2024-09\nend: 2025-01\nengagement: hourly\nstack:\n- Next.js\n- NestJS\n- PostgreSQL\n- Prisma\n- Twilio\nimplied_skills:\n- audit logging\nbuilt: A portal for booking, lab results and SMS reminders, with every record view\n  written to an audit trail.\nmetrics:\n- 11k patients registered\n- no-shows down 18% after reminders\n\nThe review is from: a client in healthcare (name withheld)\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"audit logging\".",
+ "text": "Tobias did solid work on our clinic patient portal. He built the booking, lab results, and SMS reminder flows, and made sure every record view was written to an audit trail. We now have 11k patients registered, and the reminders helped reduce no-shows by 18%. Straightforward to work with and delivered what we needed.",
+ "input_tokens": 288,
+ "output_tokens": 73
+}

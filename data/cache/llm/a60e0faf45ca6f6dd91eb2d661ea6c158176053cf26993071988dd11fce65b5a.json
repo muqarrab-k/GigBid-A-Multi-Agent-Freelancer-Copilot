@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Support ticket analytics\nclient: Clipboardly\nclient_industry: productivity software\nstart: 2025-02\nend: 2025-04\nengagement: fixed\nstack:\n- SQL\n- Power BI\n- Zendesk\nimplied_skills:\n- ticket taxonomy\nbuilt: A support dashboard with a cleaned-up tag taxonomy, response times and backlog\n  by product area.\nmetrics:\n- first response time down 27% after staffing changes the dashboard suggested\n\nThe review is from: Clipboardly\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"ticket taxonomy\".",
+ "text": "Mina did a great job on our support ticket analytics project. She built a useful dashboard in Power BI from our Zendesk data and cleaned up the tagging structure so we could see response times and backlog by product area. The dashboard helped us spot staffing changes, and our first response time dropped 27% after we acted on it. Solid work, easy to work with, and exactly what we needed.",
+ "input_tokens": 271,
+ "output_tokens": 84
+}

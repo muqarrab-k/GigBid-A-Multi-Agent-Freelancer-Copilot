@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Live fleet dashboard\nclient: Ferrylane Freight\nclient_industry: logistics\nstart: 2020-09\nend: 2020-12\nengagement: hourly\nstack:\n- React\n- Socket.IO\n- Node.js\n- Redis\n- Mapbox\nimplied_skills:\n- pub/sub messaging\nbuilt: A dispatcher map showing every truck's position and ETA, pushed to the browser\n  as GPS pings arrive.\nmetrics:\n- 1,800 trucks tracked live\n- under 2 seconds from ping to screen\n\nThe review is from: Ferrylane Freight\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on how they handled feedback; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"pub/sub messaging\".",
+ "text": "Tobias was easy to work with throughout the project and handled feedback well, which mattered a lot to us as requirements evolved. He was responsive when we asked for changes and kept the work moving without making things feel heavy. The live fleet dashboard performed as needed, with 1,800 trucks tracked live and updates getting from ping to screen in under 2 seconds. Would hire again.",
+ "input_tokens": 307,
+ "output_tokens": 81
+}

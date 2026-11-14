@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: LLM evaluation harness\nclient: Quillstack\nclient_industry: edtech\nstart: 2025-08\nend: 2025-10\nengagement: hourly\nstack:\n- Python\n- pytest\n- OpenAI API\n- vLLM\nimplied_skills:\n- LLM-as-judge\nbuilt: A regression suite that grades tutor-bot answers against a 400-item rubric\n  before each release.\nmetrics:\n- judge-human agreement kappa 0.71\n- caught 2 regressions before release\n\nThe review is from: Quillstack\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on how they handled feedback; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"LLM-as-judge\".",
+ "text": "Noor was easy to work with on this project and handled feedback well throughout. When we asked for changes to the evaluation harness, they adapted quickly and kept the implementation moving without making it a back-and-forth. The regression suite they built helped us catch 2 regressions before release, and the judge-human agreement held at kappa 0.71. I'd work with them again.",
+ "input_tokens": 308,
+ "output_tokens": 81
+}

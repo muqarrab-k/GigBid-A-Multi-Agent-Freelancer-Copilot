@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Marketing attribution analysis\nclient: Verdant Skincare\nclient_industry: e-commerce\nstart: 2021-05\nend: 2021-07\nengagement: hourly\nstack:\n- Google Analytics\n- BigQuery\n- Looker Studio\n- SQL\nimplied_skills:\n- multi-touch attribution\nbuilt: Joined ad platform spend with GA4 sessions in BigQuery to compare first-click,\n  last-click and position-based credit.\nmetrics:\n- 18% of ad budget reallocated\n- customer acquisition cost down 12% the next quarter\n\nThe review is from: Verdant Skincare\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"multi-touch attribution\".",
+ "text": "Mina was fast, organized, and kept the project moving without me having to chase updates. She delivered on our timeline and made it easy to review the work in short, clear check-ins. We were able to reallocate 18% of our ad budget, and our customer acquisition cost was down 12% the next quarter. Would hire again.",
+ "input_tokens": 309,
+ "output_tokens": 74
+}

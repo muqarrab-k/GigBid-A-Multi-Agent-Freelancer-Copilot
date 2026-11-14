@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Price elasticity study\nclient: Marrow & Pine Grocers\nclient_industry: retail\nstart: 2025-02\nend: 2025-04\nengagement: fixed\nstack:\n- Python\n- PyMC\n- statsmodels\n- pandas\nimplied_skills:\n- Bayesian modeling\nbuilt: A hierarchical model of how 80 SKUs respond to price changes, used to set promo\n  depth.\nmetrics:\n- gross margin +0.6 points on the 80 test SKUs over one quarter\n\nThe review is from: Marrow & Pine Grocers\nRating: 4.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"Bayesian modeling\".",
+ "text": "Noor did solid work on our price elasticity study for the 80 test SKUs. The hierarchical model helped us set promo depth, and we saw gross margin up 0.6 points over one quarter. Clear enough to work with and delivered what we needed for the project.",
+ "input_tokens": 288,
+ "output_tokens": 59
+}

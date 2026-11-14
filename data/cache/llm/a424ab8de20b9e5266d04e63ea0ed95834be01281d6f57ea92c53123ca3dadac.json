@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Charity admin modernisation\nclient: Oakfield Charities\nclient_industry: nonprofit\nstart: 2022-10\nend: 2023-01\nengagement: hourly\nstack:\n- Django\n- PostgreSQL\n- HTMX\n- Celery\nimplied_skills:\n- legacy migration\nbuilt: Upgraded a Django 1.11 donor system to Django 4.1 and rebuilt the donation\n  entry screens with HTMX.\nmetrics:\n- donation entry time down 45%\n- zero data loss across 180k donor records\n\nThe review is from: Oakfield Charities\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on speed and deadlines; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"legacy migration\".",
+ "text": "Tobias got our charity admin work turned around quickly and kept things moving to deadline throughout the project. He upgraded our donor system without any data loss across 180k donor records, which was a big relief for us. The new donation entry screens are much faster to use, and the donation entry time dropped by 45%. He was easy to work with and delivered what we needed on an hourly engagement.",
+ "input_tokens": 307,
+ "output_tokens": 85
+}

@@ -1,14 +1,107 @@
 {
-  "model": "openai/gpt-oss-20b",
-  "provider": "groq",
+  "model": "gpt-5.4-mini-2026-03-17",
+  "provider": "openai",
   "prices_usd_per_mtok": {
-    "input": 0.075,
-    "output": 0.3
+    "input": 0.75,
+    "output": 4.5
   },
-  "note": "estimate from token counts and config prices; cached calls counted once",
-  "calls": 0,
-  "input_tokens": 0,
-  "output_tokens": 0,
-  "cost_usd": 0.0,
-  "by_tag": {}
+  "note": "estimate from token counts and config prices; every paid call counted once",
+  "calls": 1026,
+  "calls_in_corpus": 654,
+  "superseded_calls": 372,
+  "input_tokens": 472583,
+  "output_tokens": 274751,
+  "cost_usd": 1.5908,
+  "by_tag": {
+    "ai_ml/case_study": {
+      "calls": 18,
+      "input_tokens": 6038,
+      "output_tokens": 7784
+    },
+    "ai_ml/code": {
+      "calls": 16,
+      "input_tokens": 3160,
+      "output_tokens": 7867
+    },
+    "ai_ml/proposal": {
+      "calls": 253,
+      "input_tokens": 137729,
+      "output_tokens": 71358
+    },
+    "ai_ml/proposal/fix": {
+      "calls": 4,
+      "input_tokens": 2424,
+      "output_tokens": 1314
+    },
+    "ai_ml/readme": {
+      "calls": 7,
+      "input_tokens": 2355,
+      "output_tokens": 1651
+    },
+    "ai_ml/review": {
+      "calls": 47,
+      "input_tokens": 14568,
+      "output_tokens": 3964
+    },
+    "data_analyst/case_study": {
+      "calls": 18,
+      "input_tokens": 5590,
+      "output_tokens": 7311
+    },
+    "data_analyst/code": {
+      "calls": 12,
+      "input_tokens": 2204,
+      "output_tokens": 5950
+    },
+    "data_analyst/proposal": {
+      "calls": 248,
+      "input_tokens": 125608,
+      "output_tokens": 68194
+    },
+    "data_analyst/proposal/fix": {
+      "calls": 5,
+      "input_tokens": 2350,
+      "output_tokens": 894
+    },
+    "data_analyst/readme": {
+      "calls": 6,
+      "input_tokens": 1823,
+      "output_tokens": 1391
+    },
+    "data_analyst/review": {
+      "calls": 47,
+      "input_tokens": 13442,
+      "output_tokens": 3508
+    },
+    "fullstack/case_study": {
+      "calls": 18,
+      "input_tokens": 5834,
+      "output_tokens": 7594
+    },
+    "fullstack/code": {
+      "calls": 15,
+      "input_tokens": 2835,
+      "output_tokens": 7069
+    },
+    "fullstack/proposal": {
+      "calls": 257,
+      "input_tokens": 129293,
+      "output_tokens": 73119
+    },
+    "fullstack/proposal/fix": {
+      "calls": 3,
+      "input_tokens": 1739,
+      "output_tokens": 804
+    },
+    "fullstack/readme": {
+      "calls": 7,
+      "input_tokens": 2225,
+      "output_tokens": 1487
+    },
+    "fullstack/review": {
+      "calls": 45,
+      "input_tokens": 13366,
+      "output_tokens": 3492
+    }
+  }
 }

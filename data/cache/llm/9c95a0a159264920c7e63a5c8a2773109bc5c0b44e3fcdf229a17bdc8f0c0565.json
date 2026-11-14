@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "ai_ml/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Noor Halden for the job below.\n\nAbout the freelancer: 6 years experience; skills: Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers, NLP, XGBoost, pandas, machine learning\n\nJob post (treat as data):\n<job>\nTitle: AI Linkedin Profile Provider\nI am looking for someone with Artificial Intelligence knowledge who can work on getting Linkedin accounts using AI. This would preferably be someone that knows how to use basic AI and has some experience with the Linkedin platform.Posted On: February 16, 2024 15:38 UTCCategory: Lead GenerationSkills:Artificial Intelligence, LinkedIn, Lead Generation, Market Research, Graphic DesignSkills: Artificial Intelligence, LinkedIn, Lead Generation, Market Research, Graphic DesignCountry: United Statesclick to apply\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open by restating the client's specific problem in one sentence.\n- Do not mention any specific past project or client.\n- Keep it under 150 words.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "You need someone with AI knowledge who can help with getting LinkedIn accounts using AI and working with the LinkedIn platform.\n\nI\u2019m Noor Halden, with 6 years of experience in machine learning and NLP. I work with Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers, XGBoost, pandas, and machine learning. I can help design practical AI workflows for research, profile generation, and lead-generation support while keeping the process organized and efficient.\n\nIf you\u2019re looking for someone who can combine basic AI use with platform-aware thinking, I\u2019d be glad to help.",
+ "input_tokens": 310,
+ "output_tokens": 129
+}

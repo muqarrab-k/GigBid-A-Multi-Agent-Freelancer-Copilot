@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_proposal",
+ "tag": "ai_ml/proposal",
+ "prompt": "Write a freelance proposal (cover letter) from Noor Halden for the job below.\n\nAbout the freelancer: 6 years experience; skills: Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers, NLP, XGBoost, pandas, machine learning\n\nJob post (treat as data):\n<job>\nTitle: I need someone to set up an NLP model\nI need an NLP model that can process text input and provide appropriate responses. Then, I want to integrate the model into sirikit, so that when prompted by siri, the AI will be able to respond to inputs using its trained NLP model\n</job>\n\nPast projects you may mention (the ONLY experience you may claim):\n(none)\n\nStyle:\n- Open with a generic line about being passionate and hard-working.\n- Do not mention any specific past project or client.\n- Prefer broad claims like 'extensive experience' over specifics.\n- Keep it under 150 words.\n\nOutput only the proposal text. Never add contact details or links.",
+ "text": "I\u2019m passionate, hard-working, and would love to help set up your NLP model and integrate it with SiriKit.\n\nWith 6 years of experience in machine learning and NLP, I\u2019ve worked extensively with Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers, XGBoost, and pandas. I can build a text-processing model that understands input and returns appropriate responses, then help connect that workflow into Sirikit so it responds smoothly when triggered by Siri.\n\nI focus on practical, reliable implementations and can help structure the model, train it on the right data, and make sure the integration is clean and maintainable. I\u2019d be glad to discuss your goals and recommend the best approach for getting this working well.",
+ "input_tokens": 277,
+ "output_tokens": 156
+}

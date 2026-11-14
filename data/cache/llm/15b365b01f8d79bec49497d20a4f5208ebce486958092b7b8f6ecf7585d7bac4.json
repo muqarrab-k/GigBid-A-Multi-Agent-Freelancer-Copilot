@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: A/B test readouts\nclient: Hearthstone Games\nclient_industry: gaming\nstart: 2022-08\nend: 2022-10\nengagement: hourly\nstack:\n- SQL\n- Python\n- statsmodels\nimplied_skills:\n- experiment design\nbuilt: A repeatable readout template for in-app store experiments with power checks\n  before launch.\nmetrics:\n- 11 experiments analysed\n- 2 underpowered tests stopped early\n\nThe review is from: Hearthstone Games\nRating: 4.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on communication; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"experiment design\".",
+ "text": "Mina was solid to work with on our A/B test readouts and kept things moving without a lot of back-and-forth. Communication was generally clear and she was responsive when we needed updates, which helped us stay on track across the engagement. She analyzed 11 experiments and flagged 2 underpowered tests early, which was useful. My only complaint is that communication could occasionally be a bit more proactive when timelines shifted.",
+ "input_tokens": 286,
+ "output_tokens": 88
+}

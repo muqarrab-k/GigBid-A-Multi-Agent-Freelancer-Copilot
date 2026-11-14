@@ -16,6 +16,9 @@ models:
       api_key_env: OPENROUTER_API_KEY
     together:
       api_key_env: TOGETHER_API_KEY
+    # synth generator only
+    openai:
+      api_key_env: OPENAI_API_KEY
 
   # shared open models
   embeddings:
@@ -26,10 +29,20 @@ models:
     provider: huggingface
     model: BAAI/bge-reranker-v2-m3
 
-  # synthetic corpus renderer
+  # synthetic corpus renderer, never an agent
   active_generator: default
   generators:
     default:
+      provider: openai
+      model: gpt-5.4-mini-2026-03-17
+      base_url: https://api.openai.com/v1
+      temperature: 0.8
+      max_tokens: 2000
+      reasoning_effort: none
+      # openai pricing page, 2026-11-14
+      usd_per_mtok_in: 0.75
+      usd_per_mtok_out: 4.50
+    groq:
       provider: groq
       model: openai/gpt-oss-20b
       base_url: https://api.groq.com/openai/v1
@@ -39,7 +52,7 @@ models:
       # check groq pricing
       usd_per_mtok_in: 0.075
       usd_per_mtok_out: 0.30
-    large:
+    groq_large:
       provider: groq
       model: openai/gpt-oss-120b
       base_url: https://api.groq.com/openai/v1

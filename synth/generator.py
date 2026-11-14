@@ -30,6 +30,7 @@ class Generator:
         self.cache_dir = cache_dir
         self.chat: Any = None
         self.stats: Counter[str] = Counter()
+        self.used: set[str] = set()
 
     def prompt(self, name: str, /, **values: object) -> str:
         return Template(load_prompt(name)).substitute({k: str(v) for k, v in values.items()})
@@ -43,7 +44,9 @@ class Generator:
 
     def complete(self, name: str, tag: str, /, **values: object) -> str:
         system, prompt = load_prompt("synth_system"), self.prompt(name, **values)
-        path = self.cache_dir / f"{self.key(system, prompt)}.json"
+        key = self.key(system, prompt)
+        self.used.add(key)
+        path = self.cache_dir / f"{key}.json"
         if path.exists():
             self.stats["cache_hits"] += 1
             return str(json.loads(path.read_text())["text"])
@@ -70,7 +73,7 @@ class Generator:
                 chat = build_chat(self.spec, self.settings)
             except ConfigError as err:
                 raise GeneratorUnavailable(str(err)) from err
-            kwargs: dict[str, Any] = {"max_tokens": self.spec.max_tokens}
+            kwargs: dict[str, Any] = {"max_completion_tokens": self.spec.max_tokens}
             if self.spec.reasoning_effort:
                 kwargs["reasoning_effort"] = self.spec.reasoning_effort
             self.chat = chat.bind(**kwargs)
@@ -86,12 +89,14 @@ class Generator:
         raise GeneratorUnavailable("rate limit retries exhausted")
 
 
-def write_cost_report(cache_dir: Path = CACHE_DIR, path: Path = COST_PATH) -> dict[str, Any]:
+def write_cost_report(used: set[str], cache_dir: Path = CACHE_DIR, path: Path = COST_PATH) -> dict[str, Any]:
     """Totals over every cached call, priced from config."""
     spec = get_config().models.generator
     by_tag: dict[str, Counter[str]] = {}
+    superseded = 0
     for file in sorted(cache_dir.glob("*.json")):
         record = json.loads(file.read_text())
+        superseded += file.stem not in used
         tag = record["tag"]
         counts = by_tag.setdefault(tag, Counter())
         counts["calls"] += 1
@@ -108,8 +113,10 @@ def write_cost_report(cache_dir: Path = CACHE_DIR, path: Path = COST_PATH) -> di
         "model": spec.model,
         "provider": spec.provider,
         "prices_usd_per_mtok": {"input": spec.usd_per_mtok_in, "output": spec.usd_per_mtok_out},
-        "note": "estimate from token counts and config prices; cached calls counted once",
+        "note": "estimate from token counts and config prices; every paid call counted once",
         "calls": total["calls"],
+        "calls_in_corpus": total["calls"] - superseded,
+        "superseded_calls": superseded,
         "input_tokens": total["input_tokens"],
         "output_tokens": total["output_tokens"],
         "cost_usd": round(cost, 4),

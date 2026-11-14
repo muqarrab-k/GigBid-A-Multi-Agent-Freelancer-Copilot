@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Resume to job matching\nclient: Hireloop\nclient_industry: HR tech\nstart: 2024-03\nend: 2024-05\nengagement: fixed\nstack:\n- Python\n- sentence-transformers\n- Qdrant\n- FastAPI\n- Celery\nimplied_skills:\n- semantic search\n- background jobs\nbuilt: An embedding index of 210k resumes that recruiters query with a job description,\n  re-embedded by Celery workers when profiles change.\nmetrics:\n- recall@10 from 0.72 to 0.86 on 300 labelled searches\n\nThe review is from: Hireloop\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"semantic search\", \"background jobs\".",
+ "text": "Noor did a great job on our resume-to-job matching project. He delivered an embedding-based system for our 210k-resume database that gave recruiters much better matches from a job description, and our recall@10 improved from 0.72 to 0.86 on 300 labelled searches. The solution was reliable and handled profile updates cleanly. Would work with him again.",
+ "input_tokens": 319,
+ "output_tokens": 81
+}

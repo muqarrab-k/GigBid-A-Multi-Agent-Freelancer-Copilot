@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Grocery demand forecasting\nclient: Marrow & Pine Grocers\nclient_industry: retail\nstart: 2021-04\nend: 2021-08\nengagement: hourly\nstack:\n- Python\n- LightGBM\n- Prophet\n- Airflow\n- BigQuery\nimplied_skills:\n- hierarchical forecasting\nbuilt: Weekly store-by-SKU forecasts for 420 SKUs across 31 stores, scheduled in Airflow\n  and written back to BigQuery.\nmetrics:\n- WAPE from 31% to 19%\n- spoilage write-offs down 11% in the pilot stores\n\nThe review is from: Marrow & Pine Grocers\nRating: 3.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on the end result; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"hierarchical forecasting\".",
+ "text": "Noor helped us get weekly store-by-SKU forecasts in place for our grocery business, and the main outcome was solid: WAPE improved from 31% to 19%, and spoilage write-offs were down 11% in the pilot stores. The work was set up to run in Airflow and write back to BigQuery, which made it usable for our team. We did have some communication gaps and a few follow-ups were needed to keep scope aligned, but the end result was worthwhile for us.",
+ "input_tokens": 322,
+ "output_tokens": 106
+}

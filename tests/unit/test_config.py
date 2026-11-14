@@ -114,3 +114,11 @@ def test_policy_change_is_config_only(tmp_path: Path) -> None:
     raw["bidding_rules"]["extra"] = {"connects_surcharge_pct": 20}
     cfg = load_config(write_config(tmp_path, raw))
     assert cfg.bidding_rules.extra["connects_surcharge_pct"] == 20
+
+
+def test_paid_generator_never_used_by_agents() -> None:
+    cfg = load_config()
+    gen_providers = {g.provider for g in cfg.models.generators.values()}
+    assert "openai" in gen_providers
+    for profile in cfg.models.profiles.values():
+        assert all(spec.provider != "openai" for spec in profile.specs())

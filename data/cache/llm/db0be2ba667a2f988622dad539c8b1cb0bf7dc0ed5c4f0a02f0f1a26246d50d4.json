@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: Shopify customer segments\nclient: Juniper & Ash Home\nclient_industry: e-commerce\nstart: 2023-01\nend: 2023-02\nengagement: fixed\nstack:\n- Google Sheets\n- Looker Studio\n- Shopify\nimplied_skills:\n- RFM segmentation\nbuilt: Customer segments from Shopify order exports by recency, frequency and spend,\n  fed to the email tool.\nmetrics:\n- top segment is 9% of customers and 41% of revenue\n- email revenue +19%\n\nThe review is from: Juniper & Ash Home\nRating: 3.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"RFM segmentation\".",
+ "text": "Mina Castellan helped us build customer segments from our Shopify order exports and get them fed into our email tool. The work was useful and we did see email revenue go up 19%, with the top segment making up 9% of customers and 41% of revenue. There were a few communication gaps along the way, so I\u2019d call it a solid but not perfect engagement.",
+ "input_tokens": 288,
+ "output_tokens": 81
+}

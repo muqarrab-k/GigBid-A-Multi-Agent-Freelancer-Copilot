@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Home goods storefront rebuild\nclient: Juniper & Ash Home\nclient_industry: e-commerce\nstart: 2021-01\nend: 2021-04\nengagement: fixed\nstack:\n- Next.js\n- Tailwind CSS\n- Stripe\n- Sanity\n- Vercel\nimplied_skills:\n- SEO\n- server-side rendering\nbuilt: Replaced a slow theme-based shop with a headless storefront and CMS the marketing\n  team edits themselves.\nmetrics:\n- largest contentful paint from 4.1s to 1.3s\n- organic traffic +38% in 3 months\n\nThe review is from: Juniper & Ash Home\nRating: 4.8 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"SEO\", \"server-side rendering\".",
+ "text": "Tobias rebuilt our home goods storefront into a faster headless shop that our marketing team can actually update themselves. The new site is much quicker, with largest contentful paint going from 4.1s to 1.3s, and we also saw organic traffic increase by 38% in 3 months. He was straightforward to work with and delivered what we needed on the fixed project.",
+ "input_tokens": 312,
+ "output_tokens": 84
+}

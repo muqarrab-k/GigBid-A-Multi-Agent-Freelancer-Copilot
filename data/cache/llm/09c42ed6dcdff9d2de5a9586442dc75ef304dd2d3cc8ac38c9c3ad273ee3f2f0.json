@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Call centre speech analytics\nclient: Vantor Call Centers\nclient_industry: customer service\nstart: 2024-10\nend: 2025-01\nengagement: fixed\nstack:\n- Python\n- Whisper\n- pyannote\n- OpenAI API\n- PostgreSQL\nimplied_skills:\n- speaker diarization\nbuilt: A pipeline that transcribes calls, separates agent and customer, and writes\n  a QA summary for every call.\nmetrics:\n- word error rate 11.8%\n- 2,300 hours processed\n- QA coverage from 3% to 100% of calls\n\nThe review is from: Vantor Call Centers\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on how they handled feedback; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"speaker diarization\".",
+ "text": "Noor was easy to work with and very responsive when we had feedback during the project. We asked for changes to the call review flow and the QA summaries, and he handled them quickly without making things complicated. The pipeline ended up processing 2,300 hours of calls and brought our QA coverage from 3% to 100% of calls, with a word error rate of 11.8%. Would work with him again.",
+ "input_tokens": 325,
+ "output_tokens": 90
+}

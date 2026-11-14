@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Studio {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  subdomain   String         @unique
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  classSessions ClassSession[]
+  bookings    Booking[]
+  memberships Membership[]
+}
+
+model ClassSession {
+  id          String    @id @default(cuid())
+  studioId    String
+  studio      Studio    @relation(fields: [studioId], references: [id], onDelete: Cascade)
+  title       String
+  startsAt    DateTime
+  endsAt      DateTime
+  capacity    Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  bookings    Booking[]
+
+  @@index([studioId, startsAt])
+}
+
+model Booking {
+  id            String      @id @default(cuid())
+  studioId      String
+  studio        Studio      @relation(fields: [studioId], references: [id], onDelete: Cascade)
+  classSessionId String
+  classSession  ClassSession @relation(fields: [classSessionId], references: [id], onDelete: Cascade)
+  customerEmail String
+  status        String      @default("confirmed")
+  stripePaymentIntentId String? @unique
+  createdAt     DateTime    @default(now())
+
+  @@index([studioId, classSessionId])
+}
+
+model Membership {
+  id            String   @id @default(cuid())
+  studioId      String
+  studio        Studio   @relation(fields: [studioId], references: [id], onDelete: Cascade)
+  name          String
+  stripePriceId String   @unique
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([studioId, isActive])
+}

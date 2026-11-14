@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Delivery support chatbot\nclient: Parcelwise Logistics\nclient_industry: logistics\nstart: 2023-11\nend: 2024-02\nengagement: hourly\nstack:\n- Python\n- OpenAI API\n- LangGraph\n- FastAPI\n- Redis\n- Twilio\nimplied_skills:\n- agent orchestration\n- tool calling\nbuilt: A WhatsApp and SMS assistant that tracks parcels, reschedules deliveries and\n  hands off to a human with the full context.\nmetrics:\n- 43% of conversations resolved without an agent\n- CSAT 4.4 out of 5\n\nThe review is from: Parcelwise Logistics\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on technical quality; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"agent orchestration\", \"tool calling\".",
+ "text": "Noor did solid technical work for us on the delivery support chatbot. The WhatsApp and SMS flows were reliable, and the handoff to a human kept full context, which mattered a lot for our team. We saw 43% of conversations resolved without an agent and CSAT came in at 4.4 out of 5. Would hire again.",
+ "input_tokens": 323,
+ "output_tokens": 75
+}

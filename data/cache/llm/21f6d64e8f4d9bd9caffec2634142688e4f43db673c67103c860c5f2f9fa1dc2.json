@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Tutor marketplace MVP\nclient: Brightpath Tutors\nclient_industry: edtech\nstart: 2021-10\nend: 2022-02\nengagement: fixed\nstack:\n- Next.js\n- Node.js\n- MongoDB\n- Stripe Connect\n- Twilio Video\nimplied_skills:\n- marketplace payouts\nbuilt: A two-sided marketplace with tutor profiles, booking, video lessons and automatic\n  tutor payouts.\nmetrics:\n- live in 11 weeks\n- 300 tutors\n- $48k gross bookings in the first quarter\n\nThe review is from: Brightpath Tutors\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"marketplace payouts\".",
+ "text": "Tobias did a great job building our tutor marketplace MVP. He delivered the two-sided platform with tutor profiles, booking, video lessons, and automatic tutor payouts, and it went live in 11 weeks. We had 300 tutors on the platform and $48k in gross bookings in the first quarter. Easy to work with and kept the project moving.",
+ "input_tokens": 291,
+ "output_tokens": 75
+}

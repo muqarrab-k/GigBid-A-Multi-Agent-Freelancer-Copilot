@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: End-to-end test suite\nclient: Kestrel Insurance\nclient_industry: insurance\nstart: 2024-04\nend: 2024-05\nengagement: hourly\nstack:\n- Playwright\n- GitHub Actions\n- Docker\n- TypeScript\nimplied_skills:\n- CI/CD\nbuilt: Browser tests for the broker quoting flow that run on every pull request.\nmetrics:\n- 160 tests\n- release regressions from 6 a quarter to 1\n\nThe review is from: Kestrel Insurance\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"CI/CD\".",
+ "text": "Tobias did a great job on our end-to-end test suite. He built browser tests for our broker quoting flow that run on every pull request, and the 160 tests have helped bring release regressions down from 6 a quarter to 1. He was straightforward to work with and got the job done without a lot of back-and-forth.",
+ "input_tokens": 278,
+ "output_tokens": 75
+}

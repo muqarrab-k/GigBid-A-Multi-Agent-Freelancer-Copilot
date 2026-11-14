@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "data_analyst/review",
+ "prompt": "Write a client review left on a freelance platform for Mina Castellan after this project.\n\nProject facts (the only truth you may use):\ntitle: GA4 migration and tracking plan\nclient: Verdant Skincare\nclient_industry: e-commerce\nstart: 2023-04\nend: 2023-05\nengagement: fixed\nstack:\n- Google Analytics\n- Google Tag Manager\n- BigQuery\nimplied_skills:\n- event tracking\nbuilt: A tracking plan and GTM setup moving the shop from Universal Analytics to GA4\n  before the cut-off.\nmetrics:\n- 46 events mapped\n- no gap in year-on-year reporting\n\nThe review is from: Verdant Skincare\nRating: 4.5 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"event tracking\".",
+ "text": "Mina helped us move our shop from Universal Analytics to GA4 before the cut-off and handled the tracking plan and GTM setup smoothly. She mapped 46 events and kept our year-on-year reporting continuous, which was exactly what we needed. Easy to work with and got the job done.",
+ "input_tokens": 283,
+ "output_tokens": 62
+}

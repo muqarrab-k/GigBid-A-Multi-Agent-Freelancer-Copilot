@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "fullstack/review",
+ "prompt": "Write a client review left on a freelance platform for Tobias Reyne after this project.\n\nProject facts (the only truth you may use):\ntitle: Clipboard sync browser extension\nclient: Clipboardly\nclient_industry: productivity software\nstart: 2024-01\nend: 2024-03\nengagement: fixed\nstack:\n- TypeScript\n- Chrome Extensions API\n- Express\n- MongoDB\nimplied_skills:\n- browser extension\nbuilt: A Chrome extension that syncs saved snippets across devices through a small\n  Express API.\nmetrics:\n- 9k weekly active users\n- 4.7 store rating\n\nThe review is from: Clipboardly\nRating: 5.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on communication; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"browser extension\".",
+ "text": "Tobias was easy to work with from start to finish. He communicated clearly, kept us updated without us having to chase him, and was quick to respond when we had questions. The final product shipped smoothly and has been a solid fit for our users, with 9k weekly active users and a 4.7 store rating. Would hire again.",
+ "input_tokens": 290,
+ "output_tokens": 75
+}

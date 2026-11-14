@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_code",
+ "tag": "fullstack/code",
+ "prompt": "Write the file `playwright.config.ts` for the repository \"e2e-kit\".\n\nStack: Playwright, GitHub Actions, Docker, TypeScript\nPurpose of this file: config with retries, traces on failure and a CI project\nProject context: Browser tests for the broker quoting flow that run on every pull request.\n\nRequirements:\n- 25 to 70 lines of realistic, plausible code in the right language for the file extension.\n- A few short comments, no long docstrings, no secrets or real credentials.\n- Output only the file contents, without Markdown fences.",
+ "text": "import { defineConfig, devices } from '@playwright/test';\n\nconst isCI = !!process.env.CI;\n\nexport default defineConfig({\n  testDir: './tests',\n  fullyParallel: true,\n  forbidOnly: isCI,\n  retries: isCI ? 2 : 0,\n  workers: isCI ? 1 : undefined,\n  reporter: [['list'], ['html', { open: 'never' }]],\n  use: {\n    baseURL: process.env.BASE_URL ?? 'http://127.0.0.1:3000',\n    trace: 'on-first-retry',\n    screenshot: 'only-on-failure',\n    video: 'retain-on-failure',\n    actionTimeout: 10_000,\n    navigationTimeout: 30_000,\n  },\n  expect: {\n    timeout: 10_000,\n  },\n  projects: [\n    {\n      name: 'chromium',\n      use: { ...devices['Desktop Chrome'] },\n    },\n    {\n      name: 'firefox',\n      use: { ...devices['Desktop Firefox'] },\n    },\n    {\n      name: 'webkit',\n      use: { ...devices['Desktop Safari'] },\n    },\n    {\n      name: 'ci',\n      testMatch: /.*\\.spec\\.ts/,\n      use: {\n        ...devices['Desktop Chrome'],\n      },\n      grepInvert: /@local/,\n    },\n  ],\n  webServer: {\n    command: 'npm run start',\n    url: 'http://127.0.0.1:3000',\n    reuseExistingServer: !isCI,\n    timeout: 120_000,\n  },\n});",
+ "input_tokens": 182,
+ "output_tokens": 342
+}

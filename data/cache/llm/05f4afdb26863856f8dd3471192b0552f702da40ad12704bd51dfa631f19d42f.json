@@ -1,0 +1,9 @@
+{
+ "model": "gpt-5.4-mini-2026-03-17",
+ "prompt_name": "synth_review",
+ "tag": "ai_ml/review",
+ "prompt": "Write a client review left on a freelance platform for Noor Halden after this project.\n\nProject facts (the only truth you may use):\ntitle: Coffee review themes\nclient: Cobalt Coffee Roasters\nclient_industry: food and beverage\nstart: 2020-05\nend: 2020-07\nengagement: fixed\nstack:\n- Python\n- BERTopic\n- Hugging Face Transformers\n- Streamlit\n- pandas\nimplied_skills:\n- topic modeling\nbuilt: A small Streamlit app that groups 38k marketplace reviews into themes and tracks\n  sentiment per theme each week.\nmetrics:\n- 12 stable themes\n- replaced about 2 days a month of manual tagging\n\nThe review is from: Cobalt Coffee Roasters\nRating: 4.0 out of 5\n\nRequirements:\n- 2 to 5 sentences in the voice of a busy client, not a marketer.\n- Focus mostly on technical quality; do not just repeat the project summary.\n- If the rating is below 4.5, include one honest complaint (communication, delays or scope).\n- Only mention results that appear in the facts. Never use: \"topic modeling\".",
+ "text": "Noor built a solid Streamlit app for us that organized 38k marketplace reviews into 12 stable themes and let us track sentiment by week. The Python work was clean, and the combination of BERTopic, Hugging Face Transformers, and pandas was a good fit for what we needed. It ended up replacing about 2 days a month of manual tagging, which was a real win for our team. My only complaint is that communication could have been a bit tighter at times, but the technical result was strong.",
+ "input_tokens": 309,
+ "output_tokens": 107
+}
