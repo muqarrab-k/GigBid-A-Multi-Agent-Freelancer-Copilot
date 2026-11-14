@@ -1,0 +1,360 @@
+# SYNTHETIC persona, hand-written ground truth
+synthetic: true
+persona: fullstack
+name: Tobias Reyne
+fictional: true
+headline: Full-stack developer - React, Next.js, Node.js and Postgres
+location: Porto, Portugal
+timezone: Europe/Lisbon
+years_experience: 7
+languages: [English, Portuguese, German]
+# from pricing_stats fullstack cells
+rate:
+  hourly_floor: 30
+  hourly_target: 45
+  fixed_min: 200
+weekly_connects_budget: 100
+education: MSc Software Engineering, 2018
+
+skills:
+  - {name: JavaScript, level: expert}
+  - {name: TypeScript, level: expert}
+  - {name: React, level: expert, aliases: [react.js, reactjs]}
+  - {name: Next.js, level: expert, aliases: [nextjs]}
+  - {name: Node.js, level: expert, aliases: [nodejs, node]}
+  - {name: PostgreSQL, level: expert, aliases: [postgres]}
+  - {name: REST API, level: expert, aliases: [api development, rest, api, api integration]}
+  - {name: Tailwind CSS, level: expert, aliases: [tailwind]}
+  - {name: Stripe, level: expert, aliases: [payments]}
+  - {name: full stack, level: expert, aliases: [full-stack, web app, web application, web development, website development]}
+  - {name: HTML and CSS, level: expert, aliases: [html, html5, css, css3, css 3, sass, responsive design]}
+  - {name: database design, level: proficient, aliases: [database development, database, sql]}
+  - {name: Express, level: proficient, aliases: [express.js]}
+  - {name: NestJS, level: proficient}
+  - {name: Prisma, level: proficient}
+  - {name: GraphQL, level: proficient, aliases: [apollo]}
+  - {name: MongoDB, level: proficient}
+  - {name: Django, level: proficient}
+  - {name: Python, level: proficient}
+  - {name: AWS, level: proficient, aliases: [lambda, s3]}
+  - {name: Docker, level: proficient}
+  - {name: Redis, level: proficient}
+  - {name: WebSockets, level: proficient, aliases: [socket.io]}
+  - {name: Playwright, level: proficient, aliases: [e2e testing]}
+  - {name: Jest, level: proficient}
+  - {name: Vue, level: familiar, aliases: [vue.js]}
+  - {name: Firebase, level: familiar}
+
+# skills they do NOT have
+gaps:
+  - Angular
+  - .NET
+  - C#
+  - Flutter
+  - Swift
+  - Kotlin
+  - Shopify Liquid
+  - WordPress
+  - PHP
+  - Laravel
+  - Solidity
+  - Unity
+  - Salesforce
+  - React Native
+
+projects:
+  - id: p01
+    title: Booking platform for fitness studios
+    client: Pulsebox Studios
+    client_industry: fitness
+    start: 2020-03
+    end: 2020-08
+    engagement: fixed
+    stack: [Next.js, Node.js, PostgreSQL, Prisma, Stripe]
+    implied_skills: [multi-tenancy, subscription billing]
+    built: A white-label class booking app where each studio gets its own subdomain, timetable and memberships.
+    metrics:
+      - "64 studios onboarded in 6 months"
+      - "71% checkout conversion"
+    repo: booking-saas
+
+  - id: p02
+    title: Live fleet dashboard
+    client: Ferrylane Freight
+    client_industry: logistics
+    start: 2020-09
+    end: 2020-12
+    engagement: hourly
+    stack: [React, Socket.IO, Node.js, Redis, Mapbox]
+    implied_skills: [pub/sub messaging]
+    built: A dispatcher map showing every truck's position and ETA, pushed to the browser as GPS pings arrive.
+    metrics:
+      - "1,800 trucks tracked live"
+      - "under 2 seconds from ping to screen"
+    repo: live-fleet
+
+  - id: p03
+    title: Home goods storefront rebuild
+    client: Juniper & Ash Home
+    client_industry: e-commerce
+    start: 2021-01
+    end: 2021-04
+    engagement: fixed
+    stack: [Next.js, Tailwind CSS, Stripe, Sanity, Vercel]
+    implied_skills: [SEO, server-side rendering]
+    built: Replaced a slow theme-based shop with a headless storefront and CMS the marketing team edits themselves.
+    metrics:
+      - "largest contentful paint from 4.1s to 1.3s"
+      - "organic traffic +38% in 3 months"
+
+  - id: p04
+    title: Staff onboarding portal
+    client: confidential
+    client_industry: healthcare staffing
+    start: 2021-05
+    end: 2021-09
+    engagement: hourly
+    stack: [React, NestJS, PostgreSQL, TypeORM, Auth0]
+    implied_skills: [role-based access control]
+    built: An internal portal where nurses upload credentials and managers approve them, with permissions per region.
+    metrics:
+      - "2,400 staff using it"
+      - "onboarding paperwork from 5 days to 1 day"
+
+  - id: p05
+    title: Tutor marketplace MVP
+    client: Brightpath Tutors
+    client_industry: edtech
+    start: 2021-10
+    end: 2022-02
+    engagement: fixed
+    stack: [Next.js, Node.js, MongoDB, Stripe Connect, Twilio Video]
+    implied_skills: [marketplace payouts]
+    built: A two-sided marketplace with tutor profiles, booking, video lessons and automatic tutor payouts.
+    metrics:
+      - "live in 11 weeks"
+      - "300 tutors"
+      - "$48k gross bookings in the first quarter"
+
+  - id: p06
+    title: Insurance GraphQL API
+    client: Kestrel Insurance
+    client_industry: insurance
+    start: 2022-03
+    end: 2022-06
+    engagement: hourly
+    stack: [GraphQL, Apollo, Node.js, PostgreSQL, DataLoader]
+    implied_skills: [query batching]
+    built: A GraphQL layer over three legacy policy databases for the new broker app.
+    metrics:
+      - "p95 API latency from 1.2s to 240 ms"
+
+  - id: p07
+    title: Monthly statement PDF generator
+    client: Alder Property Group
+    client_industry: real estate
+    start: 2022-07
+    end: 2022-09
+    engagement: fixed
+    stack: [Node.js, BullMQ, Redis, Puppeteer, AWS S3]
+    implied_skills: [background jobs, PDF generation]
+    built: A queue that renders owner statements to PDF overnight and stores them in S3 instead of building them on request.
+    metrics:
+      - "12k statements a month"
+      - "request timeouts went from daily to none"
+    repo: report-worker
+
+  - id: p08
+    title: Charity admin modernisation
+    client: Oakfield Charities
+    client_industry: nonprofit
+    start: 2022-10
+    end: 2023-01
+    engagement: hourly
+    stack: [Django, PostgreSQL, HTMX, Celery]
+    implied_skills: [legacy migration]
+    built: Upgraded a Django 1.11 donor system to Django 4.1 and rebuilt the donation entry screens with HTMX.
+    metrics:
+      - "donation entry time down 45%"
+      - "zero data loss across 180k donor records"
+
+  - id: p09
+    title: Restaurant ordering web app
+    client: Saffron Lane Kitchens
+    client_industry: food and beverage
+    start: 2023-02
+    end: 2023-05
+    engagement: fixed
+    stack: [React, Vite, Firebase, Stripe, Workbox]
+    implied_skills: [offline-first, service workers]
+    built: An installable ordering app for 9 restaurants that keeps the menu and cart working on bad connections.
+    metrics:
+      - "22% of orders through the app within 2 months"
+
+  - id: p10
+    title: Embedded customer analytics
+    client: confidential
+    client_industry: B2B SaaS
+    start: 2023-06
+    end: 2023-08
+    engagement: hourly
+    stack: [React, TypeScript, Recharts, Node.js, PostgreSQL]
+    implied_skills: [data visualization]
+    built: Usage dashboards embedded in a SaaS product so each customer account sees its own metrics.
+    metrics:
+      - "rolled out to 140 customer accounts"
+      - "delivered 3 weeks early"
+
+  - id: p11
+    title: Event ticketing with seat maps
+    client: Northlight Events
+    client_industry: events
+    start: 2023-09
+    end: 2023-12
+    engagement: fixed
+    stack: [Next.js, Node.js, PostgreSQL, Redis, Stripe]
+    implied_skills: [concurrency control]
+    built: A ticket shop with interactive seat maps that holds a seat for 8 minutes while the buyer pays.
+    metrics:
+      - "18k tickets sold on opening night"
+      - "zero double-booked seats"
+    repo: seatlock
+
+  - id: p12
+    title: Clipboard sync browser extension
+    client: Clipboardly
+    client_industry: productivity software
+    start: 2024-01
+    end: 2024-03
+    engagement: fixed
+    stack: [TypeScript, Chrome Extensions API, Express, MongoDB]
+    implied_skills: [browser extension]
+    built: A Chrome extension that syncs saved snippets across devices through a small Express API.
+    metrics:
+      - "9k weekly active users"
+      - "4.7 store rating"
+
+  - id: p13
+    title: End-to-end test suite
+    client: Kestrel Insurance
+    client_industry: insurance
+    start: 2024-04
+    end: 2024-05
+    engagement: hourly
+    stack: [Playwright, GitHub Actions, Docker, TypeScript]
+    implied_skills: [CI/CD]
+    built: Browser tests for the broker quoting flow that run on every pull request.
+    metrics:
+      - "160 tests"
+      - "release regressions from 6 a quarter to 1"
+    repo: e2e-kit
+
+  - id: p14
+    title: Serverless image pipeline
+    client: Lumen Photo Co.
+    client_industry: media
+    start: 2024-06
+    end: 2024-08
+    engagement: fixed
+    stack: [AWS Lambda, AWS S3, Sharp, Node.js, CloudFront]
+    implied_skills: [event-driven architecture]
+    built: Uploads trigger a Lambda that creates web sizes and watermarks, served through a CDN.
+    metrics:
+      - "2.3M images processed"
+      - "hosting costs down 61%"
+    repo: img-pipeline
+
+  - id: p15
+    title: Clinic patient portal
+    client: confidential
+    client_industry: healthcare
+    start: 2024-09
+    end: 2025-01
+    engagement: hourly
+    stack: [Next.js, NestJS, PostgreSQL, Prisma, Twilio]
+    implied_skills: [audit logging]
+    built: A portal for booking, lab results and SMS reminders, with every record view written to an audit trail.
+    metrics:
+      - "11k patients registered"
+      - "no-shows down 18% after reminders"
+
+  - id: p16
+    title: Streaming chat widget
+    client: Quillstack
+    client_industry: edtech
+    start: 2025-02
+    end: 2025-04
+    engagement: hourly
+    stack: [React, TypeScript, Server-Sent Events, Node.js, OpenAI API]
+    implied_skills: [streaming responses]
+    built: The front end and Node proxy for a tutoring chat that streams answers token by token.
+    metrics:
+      - "first token on screen in about 600 ms"
+      - "30k chats a month"
+
+  - id: p17
+    title: Multilingual documentation site
+    client: Gridbeam Robotics
+    client_industry: robotics
+    start: 2025-05
+    end: 2025-06
+    engagement: fixed
+    stack: [Next.js, MDX, Algolia]
+    implied_skills: [internationalization]
+    built: A docs site in 4 languages with instant search, written in MDX by the engineers.
+    metrics:
+      - "4 languages at launch"
+      - "support tickets down 27%"
+
+  - id: p18
+    title: Subscription box billing backend
+    client: Fernwood Pantry
+    client_industry: e-commerce
+    start: 2025-07
+    end: 2025-10
+    engagement: hourly
+    stack: [Node.js, NestJS, PostgreSQL, Stripe Billing, BullMQ]
+    implied_skills: [recurring billing, background jobs]
+    built: Moved subscribers off a legacy plugin onto Stripe Billing with a retry queue for failed card payments.
+    metrics:
+      - "6.5k subscribers migrated"
+      - "31% of failed payments recovered"
+    repo: pantry-billing
+
+repos:
+  - name: booking-saas
+    project: p01
+    files:
+      - {path: prisma/schema.prisma, purpose: "models for Studio, ClassSession, Booking and Membership with a studioId on each"}
+      - {path: src/lib/stripe.ts, purpose: "create a checkout session for a membership and handle the webhook"}
+      - {path: src/pages/api/bookings.ts, purpose: "API route that books a class if there is space, scoped to the studio"}
+  - name: live-fleet
+    project: p02
+    files:
+      - {path: server/socket.ts, purpose: "Socket.IO server that subscribes to Redis GPS channel and emits truck updates per region"}
+      - {path: client/useFleet.ts, purpose: "React hook that keeps a map of truck positions from socket events"}
+  - name: report-worker
+    project: p07
+    files:
+      - {path: worker.ts, purpose: "BullMQ worker that renders a statement and uploads it to S3 with retries"}
+      - {path: render.ts, purpose: "Puppeteer helper that turns an HTML template into a PDF buffer"}
+  - name: seatlock
+    project: p11
+    files:
+      - {path: src/seats.ts, purpose: "hold and release a seat with Redis SET NX and an 8 minute expiry"}
+      - {path: src/routes/checkout.ts, purpose: "Express route that confirms held seats after Stripe payment succeeds"}
+  - name: img-pipeline
+    project: p14
+    files:
+      - {path: handler.ts, purpose: "Lambda handler for S3 upload events"}
+      - {path: resize.ts, purpose: "Sharp resize and watermark into three web sizes"}
+  - name: pantry-billing
+    project: p18
+    files:
+      - {path: src/billing/billing.service.ts, purpose: "NestJS service that maps old plans to Stripe prices and creates subscriptions"}
+      - {path: src/jobs/dunning.processor.ts, purpose: "BullMQ processor that retries failed invoices on a schedule and emails the customer"}
+  - name: e2e-kit
+    project: p13
+    files:
+      - {path: tests/quote.spec.ts, purpose: "Playwright test for the broker quote flow"}
+      - {path: playwright.config.ts, purpose: "config with retries, traces on failure and a CI project"}

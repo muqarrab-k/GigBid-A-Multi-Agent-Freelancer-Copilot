@@ -1,0 +1,354 @@
+# SYNTHETIC persona, hand-written ground truth
+synthetic: true
+persona: ai_ml
+name: Noor Halden
+fictional: true
+headline: AI/ML engineer - LLM apps, NLP and production ML
+location: Lahore, Pakistan
+timezone: Asia/Karachi
+years_experience: 6
+languages: [English, Urdu]
+# from pricing_stats ai_ml cells
+rate:
+  hourly_floor: 35
+  hourly_target: 55
+  fixed_min: 200
+weekly_connects_budget: 80
+education: BSc Computer Science, 2019
+
+skills:
+  - {name: Python, level: expert}
+  - {name: PyTorch, level: expert}
+  - {name: scikit-learn, level: expert}
+  - {name: LangChain, level: expert}
+  - {name: OpenAI API, level: expert, aliases: [gpt, chatgpt, chat gpt, openai, llm, large language model, gpt-4]}
+  - {name: Hugging Face Transformers, level: expert, aliases: [hugging face, transformers]}
+  - {name: NLP, level: expert, aliases: [natural language processing, text classification, chatbot, chatbot development]}
+  - {name: XGBoost, level: expert, aliases: [lightgbm, gradient boosting]}
+  - {name: pandas, level: expert}
+  - {name: machine learning, level: expert, aliases: [ml, predictive modeling, artificial intelligence, ai, deep learning, neural network, data science]}
+  - {name: FastAPI, level: proficient}
+  - {name: computer vision, level: proficient, aliases: [opencv, yolo, image classification, image processing, object detection]}
+  - {name: vector databases, level: proficient, aliases: [pinecone, qdrant, pgvector, chroma]}
+  - {name: LlamaIndex, level: proficient}
+  - {name: Docker, level: proficient}
+  - {name: AWS, level: proficient, aliases: [sagemaker, lambda]}
+  - {name: MLflow, level: proficient}
+  - {name: SQL, level: proficient, aliases: [postgresql]}
+  - {name: Celery, level: proficient, aliases: [redis]}
+  - {name: time series forecasting, level: proficient, aliases: [forecasting, prophet]}
+  - {name: LangGraph, level: proficient, aliases: [ai agent, ai agents]}
+  - {name: data analysis, level: proficient, aliases: [data analytics, statistics]}
+  - {name: Streamlit, level: familiar}
+  - {name: Airflow, level: familiar}
+
+# skills they do NOT have
+gaps:
+  - Swift
+  - iOS
+  - Unity
+  - Solidity
+  - blockchain
+  - Salesforce
+  - Shopify
+  - WordPress
+  - video editing
+  - R Shiny
+  - embedded C++
+  - Flutter
+
+projects:
+  - id: p01
+    title: Support ticket triage model
+    client: Kettlewell Support Co.
+    client_industry: SaaS
+    start: 2020-09
+    end: 2020-12
+    engagement: fixed
+    stack: [Python, scikit-learn, FastAPI, Celery, Redis, PostgreSQL]
+    implied_skills: [background jobs]
+    built: A classifier that routes incoming helpdesk tickets to 14 queues, served by FastAPI, with nightly retraining run through a Celery worker on Redis.
+    metrics:
+      - "macro-F1 0.88 vs 0.62 for the old keyword rules"
+      - "median routing time from 6 hours to 4 minutes"
+    repo: ticket-router
+
+  - id: p02
+    title: Telecom churn prediction
+    client: confidential
+    client_industry: telecom
+    start: 2021-01
+    end: 2021-03
+    engagement: hourly
+    stack: [Python, XGBoost, pandas, SHAP, MLflow]
+    implied_skills: [model explainability]
+    built: A monthly churn score for 380k subscribers with per-customer SHAP reasons the retention team could read.
+    metrics:
+      - "AUC 0.84 on a held-out quarter"
+      - "top-decile lift 3.1x"
+
+  - id: p03
+    title: Grocery demand forecasting
+    client: Marrow & Pine Grocers
+    client_industry: retail
+    start: 2021-04
+    end: 2021-08
+    engagement: hourly
+    stack: [Python, LightGBM, Prophet, Airflow, BigQuery]
+    implied_skills: [hierarchical forecasting]
+    built: Weekly store-by-SKU forecasts for 420 SKUs across 31 stores, scheduled in Airflow and written back to BigQuery.
+    metrics:
+      - "WAPE from 31% to 19%"
+      - "spoilage write-offs down 11% in the pilot stores"
+    repo: shelf-forecast
+
+  - id: p04
+    title: Invoice field extraction
+    client: Ledgerline Accounting
+    client_industry: accounting
+    start: 2021-09
+    end: 2021-12
+    engagement: fixed
+    stack: [Python, Tesseract, LayoutLMv3, Hugging Face Transformers, FastAPI, Docker]
+    implied_skills: [document AI]
+    built: A service that reads scanned supplier invoices and returns vendor, dates, totals and line items as JSON.
+    metrics:
+      - "96.2% field-level accuracy on 1,800 test invoices"
+      - "manual data entry cut by about 70%"
+    repo: invoice-extract
+
+  - id: p05
+    title: Contract clause search assistant
+    client: confidential
+    client_industry: legal
+    start: 2023-03
+    end: 2023-06
+    engagement: fixed
+    stack: [Python, LangChain, OpenAI API, pgvector, PostgreSQL, FastAPI]
+    implied_skills: [semantic search, retrieval-augmented generation]
+    built: An assistant that answers questions over 9,000 contracts and always quotes the clause and page it used.
+    metrics:
+      - "faithfulness 0.91 on a 120-question lawyer-written test set"
+      - "clause lookup from 25 minutes to 3 minutes"
+    repo: clause-search
+
+  - id: p06
+    title: Product recommendations
+    client: Tidewater Outfitters
+    client_industry: e-commerce
+    start: 2022-01
+    end: 2022-04
+    engagement: hourly
+    stack: [Python, PyTorch, implicit, Redis, AWS SageMaker]
+    implied_skills: [personalization]
+    built: 'Similar items and you-may-also-like carousels trained on 1.2M interactions and cached in Redis.'
+    metrics:
+      - "click-through rate +14% in a 4-week A/B test"
+
+  - id: p07
+    title: Ceramic tile defect detection
+    client: Halvorsen Ceramics
+    client_industry: manufacturing
+    start: 2022-05
+    end: 2022-08
+    engagement: fixed
+    stack: [Python, PyTorch, YOLOv8, OpenCV, ONNX]
+    implied_skills: [model quantization]
+    built: A camera-based crack and chip detector exported to ONNX and running on an industrial PC beside the kiln line.
+    metrics:
+      - "97.4% recall on cracks"
+      - "false rejects from 8% to 2.1%"
+    repo: defect-yolo
+
+  - id: p08
+    title: Clinical note summarisation
+    client: Brightwell Clinics
+    client_industry: healthcare
+    start: 2023-07
+    end: 2023-10
+    engagement: hourly
+    stack: [Python, Hugging Face Transformers, Flan-T5, PEFT, AWS]
+    implied_skills: [fine-tuning, PII redaction]
+    built: A LoRA-tuned Flan-T5 model that drafts visit summaries after names, dates and IDs are masked.
+    metrics:
+      - "ROUGE-L 0.41"
+      - "clinician editing time down 38% in a 6-week trial"
+
+  - id: p09
+    title: Delivery support chatbot
+    client: Parcelwise Logistics
+    client_industry: logistics
+    start: 2023-11
+    end: 2024-02
+    engagement: hourly
+    stack: [Python, OpenAI API, LangGraph, FastAPI, Redis, Twilio]
+    implied_skills: [agent orchestration, tool calling]
+    built: A WhatsApp and SMS assistant that tracks parcels, reschedules deliveries and hands off to a human with the full context.
+    metrics:
+      - "43% of conversations resolved without an agent"
+      - "CSAT 4.4 out of 5"
+
+  - id: p10
+    title: Card fraud scoring API
+    client: confidential
+    client_industry: fintech
+    start: 2022-09
+    end: 2022-12
+    engagement: hourly
+    stack: [Python, LightGBM, FastAPI, Kafka, Docker]
+    implied_skills: [real-time inference]
+    built: A scoring service that reads card events from Kafka and returns a fraud score before authorisation.
+    metrics:
+      - "p95 latency 38 ms"
+      - "fraud losses down 22% during the pilot"
+
+  - id: p11
+    title: Resume to job matching
+    client: Hireloop
+    client_industry: HR tech
+    start: 2024-03
+    end: 2024-05
+    engagement: fixed
+    stack: [Python, sentence-transformers, Qdrant, FastAPI, Celery]
+    implied_skills: [semantic search, background jobs]
+    built: An embedding index of 210k resumes that recruiters query with a job description, re-embedded by Celery workers when profiles change.
+    metrics:
+      - "recall@10 from 0.72 to 0.86 on 300 labelled searches"
+    repo: resume-match
+
+  - id: p12
+    title: Coffee review themes
+    client: Cobalt Coffee Roasters
+    client_industry: food and beverage
+    start: 2020-05
+    end: 2020-07
+    engagement: fixed
+    stack: [Python, BERTopic, Hugging Face Transformers, Streamlit, pandas]
+    implied_skills: [topic modeling]
+    built: A small Streamlit app that groups 38k marketplace reviews into themes and tracks sentiment per theme each week.
+    metrics:
+      - "12 stable themes"
+      - "replaced about 2 days a month of manual tagging"
+
+  - id: p13
+    title: Model deployment pipeline migration
+    client: confidential
+    client_industry: insurance
+    start: 2024-06
+    end: 2024-09
+    engagement: hourly
+    stack: [MLflow, Docker, GitHub Actions, AWS SageMaker, Python]
+    implied_skills: [CI/CD for models]
+    built: Moved 9 pricing models from hand-copied pickles to an MLflow registry with automated tests and SageMaker endpoints.
+    metrics:
+      - "deploy time from 2 days to 35 minutes"
+      - "9 models migrated with no downtime"
+
+  - id: p14
+    title: Call centre speech analytics
+    client: Vantor Call Centers
+    client_industry: customer service
+    start: 2024-10
+    end: 2025-01
+    engagement: fixed
+    stack: [Python, Whisper, pyannote, OpenAI API, PostgreSQL]
+    implied_skills: [speaker diarization]
+    built: A pipeline that transcribes calls, separates agent and customer, and writes a QA summary for every call.
+    metrics:
+      - "word error rate 11.8%"
+      - "2,300 hours processed"
+      - "QA coverage from 3% to 100% of calls"
+
+  - id: p15
+    title: Price elasticity study
+    client: Marrow & Pine Grocers
+    client_industry: retail
+    start: 2025-02
+    end: 2025-04
+    engagement: fixed
+    stack: [Python, PyMC, statsmodels, pandas]
+    implied_skills: [Bayesian modeling]
+    built: A hierarchical model of how 80 SKUs respond to price changes, used to set promo depth.
+    metrics:
+      - "gross margin +0.6 points on the 80 test SKUs over one quarter"
+
+  - id: p16
+    title: Private wiki question answering
+    client: Strata Engineering Group
+    client_industry: construction
+    start: 2025-05
+    end: 2025-07
+    engagement: fixed
+    stack: [Python, LlamaIndex, Qdrant, Ollama, Llama 3, FastAPI]
+    implied_skills: [self-hosted LLM, semantic search]
+    built: An on-premise assistant over 14k pages of engineering standards; no document leaves the client network.
+    metrics:
+      - "82% top-3 hit rate on 60 engineer questions"
+      - "zero external API calls"
+
+  - id: p17
+    title: Satellite crop classification
+    client: confidential
+    client_industry: agritech
+    start: 2021-05
+    end: 2021-07
+    engagement: hourly
+    stack: [Python, PyTorch, rasterio, U-Net]
+    implied_skills: [geospatial analysis]
+    built: A segmentation model that labels field parcels into 6 crop types from Sentinel-2 imagery.
+    metrics:
+      - "mean IoU 0.74 across 6 crop classes"
+
+  - id: p18
+    title: LLM evaluation harness
+    client: Quillstack
+    client_industry: edtech
+    start: 2025-08
+    end: 2025-10
+    engagement: hourly
+    stack: [Python, pytest, OpenAI API, vLLM]
+    implied_skills: [LLM-as-judge]
+    built: A regression suite that grades tutor-bot answers against a 400-item rubric before each release.
+    metrics:
+      - "judge-human agreement kappa 0.71"
+      - "caught 2 regressions before release"
+    repo: llm-evals
+
+repos:
+  - name: ticket-router
+    project: p01
+    files:
+      - {path: app/model.py, purpose: "scikit-learn TF-IDF plus linear SVM pipeline with a predict function"}
+      - {path: app/tasks.py, purpose: "Celery task that retrains the model from new labelled tickets and swaps it in"}
+      - {path: app/api.py, purpose: "FastAPI route that returns the queue and confidence for a ticket"}
+  - name: invoice-extract
+    project: p04
+    files:
+      - {path: extract/layout.py, purpose: "LayoutLMv3 token classification over OCR words and boxes"}
+      - {path: extract/postprocess.py, purpose: "normalise dates and money amounts and check totals add up"}
+  - name: clause-search
+    project: p05
+    files:
+      - {path: ingest.py, purpose: "split contracts into clause chunks with page numbers and embed them into pgvector"}
+      - {path: query.py, purpose: "retrieve top clauses and ask the model to answer only from them with citations"}
+  - name: shelf-forecast
+    project: p03
+    files:
+      - {path: features.py, purpose: "lag, rolling mean and holiday features per store and SKU"}
+      - {path: train.py, purpose: "LightGBM training with a time-based split and WAPE metric"}
+      - {path: dags/forecast_dag.py, purpose: "weekly Airflow DAG that trains, predicts and writes to BigQuery"}
+  - name: defect-yolo
+    project: p07
+    files:
+      - {path: train.py, purpose: "fine-tune YOLOv8 on tile images with crack and chip labels"}
+      - {path: export_onnx.py, purpose: "export the model to ONNX with int8 quantisation and a quick accuracy check"}
+  - name: resume-match
+    project: p11
+    files:
+      - {path: embed_worker.py, purpose: "Celery worker that embeds changed resumes and upserts them into Qdrant"}
+      - {path: search.py, purpose: "query Qdrant with a job description and apply simple filters"}
+  - name: llm-evals
+    project: p18
+    files:
+      - {path: judge.py, purpose: "rubric-based grader that asks a model for a score and a short reason"}
+      - {path: test_regressions.py, purpose: "pytest file that fails when the average rubric score drops"}

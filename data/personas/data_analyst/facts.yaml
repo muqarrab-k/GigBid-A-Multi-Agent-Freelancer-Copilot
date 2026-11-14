@@ -1,0 +1,340 @@
+# SYNTHETIC persona, hand-written ground truth
+synthetic: true
+persona: data_analyst
+name: Mina Castellan
+fictional: true
+headline: Data analyst - SQL, Power BI, dashboards and reporting automation
+location: Bogota, Colombia
+timezone: America/Bogota
+years_experience: 5
+languages: [English, Spanish]
+# from pricing_stats data_analyst cells
+rate:
+  hourly_floor: 25
+  hourly_target: 40
+  fixed_min: 100
+weekly_connects_budget: 60
+education: BSc Industrial Engineering, 2020
+
+skills:
+  - {name: SQL, level: expert, aliases: [mysql, sql server, postgresql]}
+  - {name: Excel, level: expert, aliases: [microsoft excel, pivot tables, power query, spreadsheets, spreadsheet]}
+  - {name: Power BI, level: expert, aliases: [microsoft power bi, dax, powerbi]}
+  - {name: Google Sheets, level: expert}
+  - {name: data analysis, level: expert, aliases: [data analytics, data analyst, data interpretation, data mining, analytics]}
+  - {name: dashboard, level: expert, aliases: [dashboards, reporting, kpi]}
+  - {name: data cleaning, level: expert, aliases: [data cleansing]}
+  - {name: data visualization, level: expert}
+  - {name: Looker Studio, level: proficient, aliases: [google data studio, data studio]}
+  - {name: BigQuery, level: proficient}
+  - {name: dbt, level: proficient}
+  - {name: Python, level: proficient, aliases: [pandas]}
+  - {name: Google Analytics, level: proficient, aliases: [ga4, google tag manager]}
+  - {name: statistics, level: proficient, aliases: [statistical analysis, a/b testing]}
+  - {name: financial modeling, level: proficient}
+  - {name: Airtable, level: proficient}
+  - {name: business intelligence, level: proficient, aliases: [bi]}
+  - {name: Snowflake, level: familiar}
+  - {name: Tableau, level: familiar}
+  - {name: ETL, level: familiar, aliases: [fivetran]}
+
+# skills they do NOT have
+gaps:
+  - SAS
+  - SPSS
+  - Stata
+  - VBA
+  - deep learning
+  - machine learning deployment
+  - Salesforce administration
+  - SAP
+  - R Shiny
+  - Alteryx
+  - web scraping
+
+projects:
+  - id: p01
+    title: Sales KPI dashboard
+    client: Marlowe Furniture
+    client_industry: retail
+    start: 2021-02
+    end: 2021-04
+    engagement: fixed
+    stack: [Power BI, DAX, SQL Server, Excel]
+    implied_skills: [data modeling]
+    built: One Power BI report on a star-schema model replacing 14 separate Excel sales reports.
+    metrics:
+      - "14 reports consolidated into 1"
+      - "monthly close reporting from 3 days to 4 hours"
+    repo: kpi-semantic-model
+
+  - id: p02
+    title: Marketing attribution analysis
+    client: Verdant Skincare
+    client_industry: e-commerce
+    start: 2021-05
+    end: 2021-07
+    engagement: hourly
+    stack: [Google Analytics, BigQuery, Looker Studio, SQL]
+    implied_skills: [multi-touch attribution]
+    built: Joined ad platform spend with GA4 sessions in BigQuery to compare first-click, last-click and position-based credit.
+    metrics:
+      - "18% of ad budget reallocated"
+      - "customer acquisition cost down 12% the next quarter"
+    repo: ga4-attribution
+
+  - id: p03
+    title: Parent survey analysis
+    client: Riverbend Education Fund
+    client_industry: nonprofit
+    start: 2021-08
+    end: 2021-09
+    engagement: fixed
+    stack: [Python, pandas, Excel, statistics]
+    implied_skills: [survey weighting]
+    built: Cleaned and weighted a 4,200-response parent survey and wrote the findings for the board.
+    metrics:
+      - "4,200 responses analysed"
+      - "3 findings adopted in the next funding plan"
+
+  - id: p04
+    title: Inventory reconciliation automation
+    client: Coastline Hardware
+    client_industry: wholesale
+    start: 2021-10
+    end: 2021-12
+    engagement: fixed
+    stack: [Excel, Power Query, SQL]
+    implied_skills: [ETL]
+    built: A Power Query workbook that matches warehouse counts to the ERP every week and flags variances.
+    metrics:
+      - "$86k of stock variance found"
+      - "weekly reconciliation from 6 hours to 20 minutes"
+
+  - id: p05
+    title: Subscription churn cohorts
+    client: confidential
+    client_industry: SaaS
+    start: 2022-01
+    end: 2022-03
+    engagement: hourly
+    stack: [SQL, PostgreSQL, Python, pandas, Looker Studio]
+    implied_skills: [cohort analysis]
+    built: Monthly retention curves by signup cohort and plan, plus a funnel of onboarding steps.
+    metrics:
+      - "one onboarding step linked to 40% of first-month churn"
+    repo: churn-cohorts
+
+  - id: p06
+    title: Warehouse models for a DTC brand
+    client: Fernwood Pantry
+    client_industry: e-commerce
+    start: 2022-04
+    end: 2022-07
+    engagement: hourly
+    stack: [dbt, BigQuery, Fivetran, SQL]
+    implied_skills: [data warehouse, data modeling]
+    built: A dbt project with staging, intermediate and mart layers for orders, subscriptions and marketing.
+    metrics:
+      - "38 models"
+      - "tests on 120 columns"
+      - "dashboard refresh from daily to hourly"
+    repo: pantry-dbt
+
+  - id: p07
+    title: A/B test readouts
+    client: Hearthstone Games
+    client_industry: gaming
+    start: 2022-08
+    end: 2022-10
+    engagement: hourly
+    stack: [SQL, Python, statsmodels]
+    implied_skills: [experiment design]
+    built: A repeatable readout template for in-app store experiments with power checks before launch.
+    metrics:
+      - "11 experiments analysed"
+      - "2 underpowered tests stopped early"
+    repo: ab-readouts
+
+  - id: p08
+    title: Dental clinic expansion model
+    client: Sunrise Dental Partners
+    client_industry: healthcare
+    start: 2022-11
+    end: 2022-12
+    engagement: fixed
+    stack: [Excel, financial modeling]
+    implied_skills: [scenario analysis]
+    built: A three-site expansion model with best, base and worst cases for patient volume and staffing.
+    metrics:
+      - "3 sites compared"
+      - "chosen site projected to pay back in 14 months"
+
+  - id: p09
+    title: Shopify customer segments
+    client: Juniper & Ash Home
+    client_industry: e-commerce
+    start: 2023-01
+    end: 2023-02
+    engagement: fixed
+    stack: [Google Sheets, Looker Studio, Shopify]
+    implied_skills: [RFM segmentation]
+    built: Customer segments from Shopify order exports by recency, frequency and spend, fed to the email tool.
+    metrics:
+      - "top segment is 9% of customers and 41% of revenue"
+      - "email revenue +19%"
+
+  - id: p10
+    title: HR attrition dashboard
+    client: confidential
+    client_industry: manufacturing
+    start: 2023-03
+    end: 2023-05
+    engagement: hourly
+    stack: [Power BI, Excel, SQL]
+    implied_skills: [row-level security]
+    built: An attrition and absence dashboard where each plant manager only sees their own plant.
+    metrics:
+      - "1,900 employees covered"
+      - "attrition hotspots found in 2 plants"
+
+  - id: p11
+    title: Event CRM cleanup
+    client: Northlight Events
+    client_industry: events
+    start: 2023-06
+    end: 2023-07
+    engagement: fixed
+    stack: [Python, pandas, Airtable, rapidfuzz]
+    implied_skills: [record linkage]
+    built: Merged duplicate contacts from five ticketing exports into one Airtable base.
+    metrics:
+      - "62k contacts reduced to 41k unique"
+      - "email bounce rate from 14% to 3%"
+    repo: crm-dedupe
+
+  - id: p12
+    title: Delivery operations dashboard
+    client: Ferrylane Freight
+    client_industry: logistics
+    start: 2023-08
+    end: 2023-11
+    engagement: hourly
+    stack: [Power BI, PostgreSQL, SQL]
+    implied_skills: [incremental refresh]
+    built: A daily on-time delivery dashboard by depot, driver and customer.
+    metrics:
+      - "late deliveries down 9% over the following quarter"
+
+  - id: p13
+    title: Snowflake cost audit
+    client: confidential
+    client_industry: fintech
+    start: 2024-01
+    end: 2024-02
+    engagement: fixed
+    stack: [Snowflake, SQL]
+    implied_skills: [query optimization]
+    built: Found the most expensive scheduled queries and warehouses and rewrote or resized them.
+    metrics:
+      - "monthly credits down 34%"
+
+  - id: p14
+    title: Grant impact report
+    client: Riverbend Education Fund
+    client_industry: nonprofit
+    start: 2024-03
+    end: 2024-04
+    engagement: fixed
+    stack: [Excel, Tableau, statistics]
+    implied_skills: [data storytelling]
+    built: A short impact report with charts on attendance and test-score changes for a grant renewal.
+    metrics:
+      - "supported a $1.2M grant renewal that was approved"
+
+  - id: p15
+    title: GA4 migration and tracking plan
+    client: Verdant Skincare
+    client_industry: e-commerce
+    start: 2023-04
+    end: 2023-05
+    engagement: fixed
+    stack: [Google Analytics, Google Tag Manager, BigQuery]
+    implied_skills: [event tracking]
+    built: A tracking plan and GTM setup moving the shop from Universal Analytics to GA4 before the cut-off.
+    metrics:
+      - "46 events mapped"
+      - "no gap in year-on-year reporting"
+
+  - id: p16
+    title: Wholesale pricing review
+    client: Coastline Hardware
+    client_industry: wholesale
+    start: 2024-07
+    end: 2024-09
+    engagement: hourly
+    stack: [SQL, Excel, Python]
+    implied_skills: [margin analysis]
+    built: Compared cost, price and volume for 300 SKUs and proposed new price bands.
+    metrics:
+      - "300 SKUs repriced"
+      - "gross margin +2.3 points"
+
+  - id: p17
+    title: Weekly executive KPI pack
+    client: Alder Property Group
+    client_industry: real estate
+    start: 2024-10
+    end: 2025-01
+    engagement: hourly
+    stack: [Google Sheets, BigQuery, Looker Studio]
+    implied_skills: [report automation]
+    built: A scheduled KPI pack on occupancy, arrears and maintenance that used to be built by hand every Monday.
+    metrics:
+      - "22 KPIs"
+      - "about 5 hours a week saved"
+
+  - id: p18
+    title: Support ticket analytics
+    client: Clipboardly
+    client_industry: productivity software
+    start: 2025-02
+    end: 2025-04
+    engagement: fixed
+    stack: [SQL, Power BI, Zendesk]
+    implied_skills: [ticket taxonomy]
+    built: A support dashboard with a cleaned-up tag taxonomy, response times and backlog by product area.
+    metrics:
+      - "first response time down 27% after staffing changes the dashboard suggested"
+
+repos:
+  - name: kpi-semantic-model
+    project: p01
+    files:
+      - {path: measures.dax, purpose: "DAX measures for sales, margin, year-over-year and rolling 12 months"}
+      - {path: model.sql, purpose: "SQL views that build the fact and dimension tables"}
+  - name: ga4-attribution
+    project: p02
+    files:
+      - {path: attribution.sql, purpose: "BigQuery SQL that builds user paths from GA4 events and assigns position-based credit"}
+      - {path: channel_weights.py, purpose: "small Python script comparing the three attribution models"}
+  - name: churn-cohorts
+    project: p05
+    files:
+      - {path: cohorts.sql, purpose: "Postgres query for monthly retention by signup cohort and plan"}
+      - {path: cohort_plot.py, purpose: "pandas pivot and retention heatmap"}
+  - name: pantry-dbt
+    project: p06
+    files:
+      - {path: models/marts/fct_orders.sql, purpose: "dbt model joining orders, refunds and subscriptions"}
+      - {path: models/marts/schema.yml, purpose: "dbt tests and column descriptions for the orders mart"}
+  - name: crm-dedupe
+    project: p11
+    files:
+      - {path: normalize.py, purpose: "clean names, emails and phone numbers before matching"}
+      - {path: dedupe.py, purpose: "block on email domain and fuzzy match names with rapidfuzz"}
+  - name: ab-readouts
+    project: p07
+    files:
+      - {path: power.py, purpose: "sample size and minimum detectable effect helper"}
+      - {path: readout.py, purpose: "compute conversion lift with confidence intervals for an experiment"}
