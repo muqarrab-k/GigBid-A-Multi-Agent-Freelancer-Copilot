@@ -292,3 +292,63 @@ rag:
   reranker:
     provider: huggingface
     model: BAAI/bge-reranker-v2-m3
+  # ingested through the github mcp server
+  github_repos: []
+
+# how agents reach MCP servers
+mcp_client:
+  # acts as this mcp user unless told otherwise
+  user: noor
+  timeout_s: 30
+  max_retries: 2
+  backoff_s: 0.5
+  servers:
+    marketplace:
+      transport: streamable_http
+      url_env: MCP_MARKETPLACE_URL
+      url_default: http://localhost:8101/mcp
+    portfolio:
+      transport: streamable_http
+      url_env: MCP_PORTFOLIO_URL
+      url_default: http://localhost:8103/mcp
+    workspace:
+      transport: streamable_http
+      url_env: MCP_WORKSPACE_URL
+      url_default: http://localhost:8102/mcp
+    # official github server, read-only
+    github:
+      transport: stdio
+      command: docker
+      args: [run, -i, --rm, -e, GITHUB_PERSONAL_ACCESS_TOKEN, -e, GITHUB_TOOLSETS, -e, GITHUB_READ_ONLY,
+             "ghcr.io/github/github-mcp-server:v2.0.3"]
+      env: {GITHUB_TOOLSETS: repos, GITHUB_READ_ONLY: "1"}
+      token_env: GITHUB_TOKEN
+      token_as: GITHUB_PERSONAL_ACCESS_TOKEN
+      optional: true
+  # args an agent cannot change
+  forced_args:
+    single_react:
+      create_proposal_draft: {dry_run: true}
+  # agent-facing default for search_evidence; proposals need an explicit filter
+  defaults:
+    search_evidence:
+      types: [case_study, readme, code, review, cv]
+  # tool names per agent
+  allowlists:
+    scout: &marketplace_read [search_jobs, get_job, get_client_history, get_connects_balance, list_proposals,
+                              list_threads, list_messages, get_events, get_policy]
+    analyst: []
+    risk_assessor: *marketplace_read
+    fit_matcher: &portfolio_read [search_evidence, get_case_study, list_skills]
+    pricing: *marketplace_read
+    writer: *portfolio_read
+    verifier: *portfolio_read
+    critic: *portfolio_read
+    compliance: []
+    # writes only after approval, enforced by the graph
+    client_liaison: [search_jobs, get_job, get_client_history, get_connects_balance, list_proposals,
+                     list_threads, list_messages, get_events, get_policy, create_proposal_draft,
+                     submit_proposal, send_message, free_slots, create_tentative_hold, create_email_draft]
+    # rq-c baseline: drafts only, never submit or send
+    single_react: [search_jobs, get_job, get_client_history, get_connects_balance, get_policy,
+                   create_proposal_draft, search_evidence, get_case_study, list_skills]

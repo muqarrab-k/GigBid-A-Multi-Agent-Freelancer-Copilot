@@ -387,6 +387,13 @@ class RerankerSpec(Strict):
     model: str
 
 
+class GithubRepo(Strict):
+    owner: str = Field(pattern=r"^[A-Za-z0-9-]+$")
+    repo: str = Field(pattern=r"^[A-Za-z0-9._-]+$")
+    persona: str
+    ref: str | None = None
+
+
 class RagConfig(Strict):
     variant: str = "v0"
     default_k: int = Field(default=5, gt=0)
@@ -395,6 +402,42 @@ class RagConfig(Strict):
     chunking: ChunkingConfig
     store: StoreConfig
     reranker: RerankerSpec
+    # read through the github mcp server
+    github_repos: list[GithubRepo] = Field(default_factory=list)
+
+
+class McpServerConn(Strict):
+    transport: Literal["streamable_http", "stdio"]
+    url_env: str | None = None
+    url_default: str | None = None
+    command: str | None = None
+    args: list[str] = Field(default_factory=list)
+    env: dict[str, str] = Field(default_factory=dict)
+    token_env: str | None = None
+    token_as: str | None = None
+    optional: bool = False
+
+    @property
+    def url(self) -> str | None:
+        return (os.getenv(self.url_env) if self.url_env else None) or self.url_default
+
+
+class McpClientConfig(Strict):
+    user: str
+    timeout_s: float = Field(gt=0)
+    max_retries: int = Field(ge=0, le=10)
+    backoff_s: float = Field(ge=0)
+    servers: dict[str, McpServerConn]
+    defaults: dict[str, dict[str, Any]] = Field(default_factory=dict)
+    forced_args: dict[str, dict[str, dict[str, Any]]] = Field(default_factory=dict)
+    allowlists: dict[str, list[str]]
+
+    @model_validator(mode="after")
+    def check_agents(self) -> "McpClientConfig":
+        missing = set(NODE_NAMES) - set(self.allowlists)
+        if missing:
+            raise ValueError(f"mcp_client.allowlists missing agents: {sorted(missing)}")
+        return self
 
 
 class Settings(Strict):
@@ -408,6 +451,7 @@ class Settings(Strict):
     synth: SynthConfig
     mcp: McpConfig
     rag: RagConfig
+    mcp_client: McpClientConfig
 
     @property
     def profile(self) -> Profile:
