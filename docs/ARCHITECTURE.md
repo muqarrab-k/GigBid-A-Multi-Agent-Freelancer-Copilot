@@ -104,18 +104,29 @@ Kaggle jobs and contracts) and labels the source in every answer.
 
 ## Measured so far (decision eval, 90-job stratified dev sample)
 
-`make decision-eval` and `make decision-eval MODEL=qwen3:8b`, commit `0442e4d`; files
-`evals/results/decisions_qwen3_4b.json` and `evals/results/decisions_qwen3_8b.json`. Fallback
-model: Groq `openai/gpt-oss-20b`.
+`make decision-eval` and `make decision-eval MODEL=qwen3:8b`. Fallback model: Groq
+`openai/gpt-oss-20b`. Latency and tokens are from the live runs (commit `0442e4d`); the second
+pair of runs replays the cached model replies under the new rule, so only `decide` changed.
 
-| cheap nodes | bid F1 | scam P / R | injection detected / false pos. | price in band | latency p50 / p95 | tokens / job | USD / job |
-|---|---|---|---|---|---|---|---|
-| qwen3:4b | 0.692 | 0.69 / 1.00 | 100% / 0% | 18 / 18 | 25.9 s / 54.5 s | 2,388 | ~0.00001 |
-| qwen3:8b | 0.278 | 0.28 / 1.00 | 100% / 0% | 5 / 5 | 44.4 s / 73.2 s | 2,394 | ~0.000002 |
+| cheap nodes | rule set | bid F1 | scam P / R | injection detected / false pos. | price in band | latency p50 / p95 | tokens / job | file |
+|---|---|---|---|---|---|---|---|---|
+| qwen3:4b | model flags skip | 0.692 | 0.69 / 1.00 | 100% / 0% | 18 / 18 | 25.9 s / 54.5 s | 2,388 | `decisions_qwen3_4b_model_flags_skip.json` |
+| qwen3:8b | model flags skip | 0.278 | 0.28 / 1.00 | 100% / 0% | 5 / 5 | 44.4 s / 73.2 s | 2,394 | `decisions_qwen3_8b_model_flags_skip.json` |
+| **qwen3:4b** | **flags need a rule** | **0.750** | **1.00 / 1.00** | 100% / 0% | 21 / 21 | same as above | same | `decisions_qwen3_4b.json` |
+| qwen3:8b | flags need a rule | 0.571 | 0.90 / 1.00 | 100% / 0% | 14 / 14 | same as above | same | `decisions_qwen3_8b.json` |
 
-The 8B model over-flags: on the 72 non-scam jobs it added `vague_scope` 71 times,
-`low_budget` 70 times and `off_platform` 42 times (4B: 28, 15 and 3), so 47 clean jobs were
-skipped as scams. Model-only flags are the weak point in both configs; the rule patterns found
-every planted scam, but they were written with our scam templates in view, so that recall is
-partly circular. Next step to test: model flags should only skip a job when a rule corroborates
-them. Latency is local Ollama on a laptop, with the three parallel branches sharing one model.
+Cost per job is effectively zero (local models; the paid fallback ran a handful of times).
+
+**What changed.** The small models over-flag: on the 72 non-scam jobs the 8B model added
+`vague_scope` 71 times, `low_budget` 70 times and `off_platform` 42 times (4B: 28, 15 and 3).
+With `decision.model_flags_need_rule: true`, a skip flag that only the model raised counts only
+when a rule signal backs it (a scam, unpaid-work or off-platform pattern, or a client red flag
+from `decision.corroborating_signals`). Injection detection is deliberately not a corroborating
+signal, so injected text cannot push a job to skip by itself.
+
+**Caveats.** The rule was designed after looking at these errors on this same sample, so the
+gain needs confirming on the full dev set (`FULL=1`) before it counts. Scam recall of 1.0 is
+partly circular: the rule patterns were written with our scam templates in view. The remaining
+4B errors are mostly real bids with fit 0.50 to 0.58 in the watch band; fullstack is the weakest
+persona (F1 0.57 vs ai_ml 0.88). qwen3:4b stays the cheap-node model: better on every metric
+and about 40% faster than 8B.
