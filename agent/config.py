@@ -40,6 +40,9 @@ class ModelSpec(Strict):
     model: str
     base_url: str
     temperature: float = Field(default=0.0, ge=0.0, le=2.0)
+    reasoning_effort: Literal["none", "low", "medium", "high"] | None = None
+    usd_per_mtok_in: float = Field(default=0.0, ge=0)
+    usd_per_mtok_out: float = Field(default=0.0, ge=0)
 
 
 class NodeModel(ModelSpec):
@@ -81,9 +84,6 @@ class Provider(Strict):
 
 class GeneratorSpec(ModelSpec):
     max_tokens: int = Field(default=2000, gt=0)
-    reasoning_effort: Literal["none", "low", "medium", "high"] | None = None
-    usd_per_mtok_in: float = Field(ge=0)
-    usd_per_mtok_out: float = Field(ge=0)
 
 
 class ModelsConfig(Strict):
@@ -135,11 +135,17 @@ class MarketplaceConfig(Strict):
     gigsim_base_url_env: str = "GIGSIM_BASE_URL"
     gigsim_base_url_default: str = "http://localhost:8081"
     upwork_mcp_url: str
+    market_stats_path: Path = Path("data/processed/pricing_stats.json")
     timeout_s: float = Field(default=15, gt=0)
     max_retries: int = Field(default=3, ge=0, le=10)
     backoff_s: float = Field(default=0.5, ge=0)
     backoff_max_s: float = Field(default=8, ge=0)
     rate_limits: RateLimits
+
+    @field_validator("market_stats_path")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
 
     @property
     def gigsim_base_url(self) -> str:
@@ -440,6 +446,73 @@ class McpClientConfig(Strict):
         return self
 
 
+class NodesConfig(Strict):
+    cache_dir: Path
+    retries: int = Field(default=1, ge=0, le=3)
+
+    @field_validator("cache_dir")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+
+class RiskPattern(Strict):
+    flag: str
+    weight: float = Field(gt=0, le=1)
+    regex: str
+
+
+class ClientRules(Strict):
+    new_account_days: int = Field(gt=0)
+    poor_history_min_posted: int = Field(gt=0)
+    odd_spend_usd: float = Field(gt=0)
+
+
+class RiskConfig(Strict):
+    scam_signals_path: Path
+    scam_signal_weight: float = Field(ge=0)
+    scam_signal_cap: float = Field(ge=0, le=1)
+    llm_weight: float = Field(ge=0, le=1)
+    patterns: list[RiskPattern]
+    injection_patterns: list[str]
+    client: ClientRules
+
+    @field_validator("scam_signals_path")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+
+class FitConfig(Strict):
+    max_requirements: int = Field(gt=0)
+    k_per_requirement: int = Field(gt=0)
+    strong_score: float
+    partial_score: float
+    gap_penalty: float = Field(ge=0, le=1)
+
+
+class DecisionConfig(Strict):
+    skip_flags: list[str]
+    skip_on_gap: bool = True
+    injection_action: Literal["flag", "watch", "skip"] = "flag"
+    require_budget_over_floor: bool = True
+
+
+class PricingConfig(Strict):
+    connects_reserve_share: float = Field(ge=0, lt=1)
+    round_to: int = Field(gt=0)
+
+
+class ScoutConfig(Strict):
+    seen_store: Path
+    saved_searches: dict[str, list[dict[str, Any]]]
+
+    @field_validator("seen_store")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -452,6 +525,12 @@ class Settings(Strict):
     mcp: McpConfig
     rag: RagConfig
     mcp_client: McpClientConfig
+    nodes: NodesConfig
+    risk: RiskConfig
+    fit: FitConfig
+    decision: DecisionConfig
+    pricing: PricingConfig
+    scout: ScoutConfig
 
     @property
     def profile(self) -> Profile:

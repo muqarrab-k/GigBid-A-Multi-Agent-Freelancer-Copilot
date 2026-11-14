@@ -16,3 +16,5 @@ gigsim/data/
 data/audit/
 data/workspace/
 data/cache/embeddings.sqlite
+data/cache/nodes/
+data/scout/

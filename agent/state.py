@@ -28,6 +28,7 @@ BidStatus = Literal[
     "approved",
     "rejected",
     "submitted",
+    "ready_for_writer",
     "needs_attention",
     "dead_letter",
 ]
@@ -71,6 +72,8 @@ def merge_messages(left: list[ThreadMessage], right: list[ThreadMessage]) -> lis
 
 class BidState(TypedDict, total=False):
     thread_id: str
+    # simulated date the job is judged on
+    today: str
     job: dict[str, Any]
     job_spec: JobSpec
     risk_report: RiskReport
@@ -89,6 +92,8 @@ class BidState(TypedDict, total=False):
     step_count: Annotated[int, add]
     token_count: Annotated[int, add]
     errors: Annotated[list[str], add]
+    # hand-offs that could not be produced
+    failed: Annotated[list[str], add]
     trace: Annotated[list[TraceEvent], add]
 
 

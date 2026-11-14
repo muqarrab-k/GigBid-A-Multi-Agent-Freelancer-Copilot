@@ -29,6 +29,7 @@ def build_chat(spec: ModelSpec, settings: Settings) -> ChatOpenAI:
         if not api_key:
             raise ConfigError(f"{provider.api_key_env} is not set (provider '{spec.provider}')")
 
+    extra = {"reasoning_effort": spec.reasoning_effort} if spec.reasoning_effort else {}
     return ChatOpenAI(
         model=spec.model,
         base_url=base_url,
@@ -36,6 +37,7 @@ def build_chat(spec: ModelSpec, settings: Settings) -> ChatOpenAI:
         temperature=spec.temperature,
         timeout=settings.models.request_timeout_s,
         max_retries=settings.models.max_retries,
+        **extra,
     )
 
 

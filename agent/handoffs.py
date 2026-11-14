@@ -51,6 +51,8 @@ class RiskReport(Handoff):
     flags: list[RiskFlag] = Field(default_factory=list)
     injection_detected: bool = False
     explanation: str = Field(min_length=1)
+    # rules and model signals that fired
+    signals: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def sync_flags(self) -> "RiskReport":

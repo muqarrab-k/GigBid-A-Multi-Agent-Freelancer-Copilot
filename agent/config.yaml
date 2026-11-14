@@ -60,11 +60,16 @@ models:
         model: qwen3:4b
         base_url: http://localhost:11434/v1
         temperature: 0.0
+        # qwen3 thinking off for json nodes
+        reasoning_effort: none
         fallback:
           provider: groq
           model: openai/gpt-oss-20b
           base_url: https://api.groq.com/openai/v1
           temperature: 0.0
+          reasoning_effort: low
+          usd_per_mtok_in: 0.075
+          usd_per_mtok_out: 0.30
       analyst: *open_small
       risk_assessor: *open_small
       fit_matcher: *open_small
@@ -76,6 +81,8 @@ models:
         model: openai/gpt-oss-120b
         base_url: https://api.groq.com/openai/v1
         temperature: 0.4
+        usd_per_mtok_in: 0.15
+        usd_per_mtok_out: 0.60
       critic:
         <<: *open_strong
         temperature: 0.0
@@ -105,6 +112,8 @@ models:
 
 marketplace:
   mode: gigsim
+  # gigsim has no stats endpoint, served from make data output
+  market_stats_path: data/processed/pricing_stats.json
   gigsim_base_url_env: GIGSIM_BASE_URL
   gigsim_base_url_default: http://localhost:8081
   upwork_mcp_url: https://mcp.upwork.com/mcp
@@ -337,7 +346,7 @@ mcp_client:
   # tool names per agent
   allowlists:
     scout: &marketplace_read [search_jobs, get_job, get_client_history, get_connects_balance, list_proposals,
-                              list_threads, list_messages, get_events, get_policy]
+                              list_threads, list_messages, get_events, get_policy, get_market_stats]
     analyst: []
     risk_assessor: *marketplace_read
     fit_matcher: &portfolio_read [search_evidence, get_case_study, list_skills]
@@ -353,3 +362,67 @@ mcp_client:
     # rq-c baseline: drafts only, never submit or send
     single_react: [search_jobs, get_job, get_client_history, get_connects_balance, get_policy,
                    create_proposal_draft, search_evidence, get_case_study, list_skills]
+
+# bid graph nodes
+nodes:
+  cache_dir: data/cache/nodes
+  # retries before the fallback model
+  retries: 1
+
+risk:
+  scam_signals_path: data/processed/scam_signals.json
+  scam_signal_weight: 0.03
+  scam_signal_cap: 0.15
+  llm_weight: 0.3
+  # pattern -> flag, checked on the job text
+  patterns:
+    - {flag: unpaid_work, weight: 0.5, regex: "(?i)\\b(unpaid|free)\\s+(trial|test|sample|task)|free sample|test task is unpaid|for free\\b"}
+    - {flag: off_platform, weight: 0.5, regex: "(?i)\\b(telegram|whatsapp|skype id|text(ing)? \\+?\\d|outside (the )?(platform|upwork)|pay you directly)\\b"}
+    - {flag: scam, weight: 0.6, regex: "(?i)(onboarding kit|registration fee|purchase .{0,30}(kit|license)|certification for \\$|refunded after)"}
+    - {flag: scam, weight: 0.6, regex: "(?i)\\b(usdt|trc20|crypto wallet|connect your wallet|send back \\d+%)"}
+    - {flag: scam, weight: 0.6, regex: "(?i)(photo of your id|upwork username and password|online banking|receive .{0,20}payments into your own bank)"}
+  injection_patterns:
+    - "(?i)ignore (all )?(previous|prior|above) (instructions|rules)"
+    - "(?i)(system prompt|hidden instructions)"
+    - "(?i)note to (any )?ai|ai assistant reading|assistant:\\s"
+    - "(?i)(maximum fit score|recommend bidding immediately|without waiting for human approval)"
+    - "<\\|system\\|>|\\[//\\]: #"
+    - "[\\u200b\\u200c\\u200d\\u2060]"
+    - "(?i)decode and follow|you are devmode|let's play a game"
+  client:
+    new_account_days: 60
+    poor_history_min_posted: 5
+    odd_spend_usd: 20000
+
+fit:
+  max_requirements: 6
+  k_per_requirement: 3
+  strong_score: 0.62
+  partial_score: 0.55
+  gap_penalty: 0.25
+
+decision:
+  # any of these flags means skip
+  skip_flags: [scam, unpaid_work, off_platform]
+  skip_on_gap: true
+  # flag only: injected text never changes the decision
+  injection_action: flag
+  require_budget_over_floor: true
+
+pricing:
+  connects_reserve_share: 0.2
+  round_to: 5
+
+scout:
+  seen_store: data/scout/seen.sqlite
+  saved_searches:
+    ai_ml:
+      - {q: machine learning, limit: 20}
+      - {q: chatbot, limit: 20}
+      - {skills: [Python], limit: 20}
+    fullstack:
+      - {q: react, limit: 20}
+      - {skills: [JavaScript], limit: 20}
+    data_analyst:
+      - {q: dashboard, limit: 20}
+      - {skills: [SQL], limit: 20}
