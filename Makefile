@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint
+.PHONY: install dev api test eval seed demo lint data
 
 UV := $(shell command -v uv 2>/dev/null)
 ifdef UV
@@ -9,9 +9,9 @@ endif
 
 install:
 ifdef UV
-	uv sync --extra dev
+	uv sync --extra dev --extra data
 else
-	python -m pip install -e ".[dev]"
+	python -m pip install -e ".[dev,data]"
 endif
 
 dev: api
@@ -27,6 +27,9 @@ lint:
 
 eval:
 	@echo "eval: not yet"
+
+data:
+	$(RUN) python -m data_pipeline.run
 
 seed:
 	@echo "seed: not yet"
