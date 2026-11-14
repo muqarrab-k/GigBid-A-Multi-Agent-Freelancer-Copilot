@@ -18,7 +18,8 @@ TREE = {
          {"name": "node_modules", "path": "node_modules", "type": "dir"},
          {"name": "logo.png", "path": "logo.png", "type": "file"}],
     "src": [{"name": "app.py", "path": "src/app.py", "type": "file"},
-            {"name": "util.ts", "path": "src/util.ts", "type": "file"}],
+            {"name": "util.ts", "path": "src/util.ts", "type": "file"},
+            {"name": "__init__.py", "path": "src/__init__.py", "type": "file", "size": 0}],
 }
 FILES = {"README.md": "# Demo\nA queue worker built with `Celery` and `Redis`.",
          "src/app.py": "def handler(event):\n    return {'ok': True}\n",
@@ -60,6 +61,8 @@ async def test_loader_reads_readme_and_code_through_mcp() -> None:
     assert readme.source_path == "github://me/demo/README.md" and readme.persona == "ai_ml"
     assert docs["ai_ml:github:me/demo:src/util.ts"].skills == ["TypeScript"]
     assert "node_modules" not in fake.paths and "logo.png" not in fake.paths
+    # empty files break the server's resource format
+    assert "src/__init__.py" not in fake.paths
 
 
 async def test_github_docs_index_incrementally() -> None:

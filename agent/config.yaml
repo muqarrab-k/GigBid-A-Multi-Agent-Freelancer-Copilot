@@ -292,8 +292,9 @@ rag:
   reranker:
     provider: huggingface
     model: BAAI/bge-reranker-v2-m3
-  # ingested through the github mcp server
-  github_repos: []
+  # ingested through the github mcp server; real repos get their own tenant
+  github_repos:
+    - {owner: muqarrab-k, repo: Automated-Invoice-Processing, persona: muqarrab}
 
 # how agents reach MCP servers
 mcp_client:

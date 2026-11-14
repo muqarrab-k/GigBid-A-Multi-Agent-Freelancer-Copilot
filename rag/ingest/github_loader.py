@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import logging
 import re
 from collections.abc import Callable
 from contextlib import AbstractAsyncContextManager
@@ -15,6 +16,7 @@ from agent.config import GithubRepo, get_config
 from rag.ingest.documents import Document
 from rag.ingest.loaders import CODE_SUFFIXES, LANGUAGES
 
+log = logging.getLogger(__name__)
 SKIP_DIRS = {"node_modules", "dist", "build", ".github", "vendor", "__pycache__", ".venv", "venv"}
 SessionFactory = Callable[[], AbstractAsyncContextManager[ClientSession]]
 
@@ -71,11 +73,17 @@ class GitHubMcpLoader:
                     full = str(entry.get("path") or entry.get("name"))
                     if entry.get("type") == "dir" and depth < self.max_depth and PurePosixPath(full).name not in SKIP_DIRS:
                         queue.append((full, depth + 1))
-                    elif entry.get("type") == "file" and wanted(full) and len(files) < self.max_files:
+                    elif (entry.get("type") == "file" and wanted(full) and entry.get("size", 1) != 0
+                          and len(files) < self.max_files):
                         files.append(full)
             docs = []
             for path in files:
-                text = file_text(await self.get(session, path))
+                try:
+                    text = file_text(await self.get(session, path))
+                except Exception as err:  # noqa: BLE001
+                    # one bad file never stops the repo
+                    log.warning("skipping %s: %s", path, type(err).__name__)
+                    continue
                 if text.strip():
                     docs.append(self.document(path, text))
         return docs
