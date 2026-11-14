@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace snapshot-update
 
 UV := $(shell command -v uv 2>/dev/null)
 ifdef UV
@@ -39,6 +39,15 @@ gigsim:
 
 gigsim-reset:
 	$(RUN) python -m gigsim.reset --scenario live
+
+mcp-marketplace:
+	$(RUN) python -m mcp_servers.marketplace.server --http
+
+mcp-workspace:
+	$(RUN) python -m mcp_servers.workspace.server --http
+
+snapshot-update:
+	UPDATE_SNAPSHOTS=1 $(RUN) pytest -q tests/contract
 
 seed:
 	@echo "seed: not yet"
