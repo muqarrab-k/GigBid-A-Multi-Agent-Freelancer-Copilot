@@ -194,3 +194,28 @@ make demo-single JOB=<job_id>
 
 The run (tool calls, args, results, tokens, latency, final draft, dry-run preview and an
 injection check for planted jobs) is saved to `evals/results/single_agent_demo.json`.
+
+## Bid graph (analysis half)
+
+Needs `make db-up` (portfolio index) and Ollama with `qwen3:4b` (`ollama pull qwen3:4b`); the
+fallback model uses `GROQ_API_KEY`.
+
+```bash
+make scout PERSONA=ai_ml
+```
+
+Runs the saved searches from `scout.saved_searches` against an in-process GigSim (live scenario,
+after a 72-hour tick) and prints jobs not seen before (`data/scout/seen.sqlite`).
+
+```bash
+make decision-eval
+```
+
+```bash
+make decision-eval MODEL=qwen3:8b
+```
+
+Runs the bid graph on a stratified 90-job dev sample (30 per persona: 6 scams, 4 injections,
+10 bid, 10 skip) and writes `evals/results/decisions_<model>.json`; add `FULL=1` for all 600 jobs.
+LLM replies are cached in `data/cache/nodes/`, so reruns cost nothing. `make graph-render`
+rewrites the diagram.
