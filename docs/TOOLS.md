@@ -70,5 +70,22 @@ Resources: `portfolio://case/{case_id}`, `portfolio://proposal/{proposal_id}`,
 
 | server | owner | used for | trust rationale |
 |---|---|---|---|
-| Upwork MCP (`https://mcp.upwork.com/mcp`) | Upwork | live mode (later task) | |
-| GitHub MCP | GitHub | repo ingestion (later task) | |
+| GitHub MCP (`ghcr.io/github/github-mcp-server:v2.0.3`, stdio via Docker) | GitHub | reading README and code for portfolio ingestion (`rag/ingest/github_loader.py`, only `get_file_contents`) | Official server from GitHub, pinned image tag, `GITHUB_READ_ONLY=1` with only the `repos` toolset, and a fine-grained token scoped to read-only contents of the chosen repos. |
+| Upwork MCP (`https://mcp.upwork.com/mcp`) | Upwork | live mode (next task) | |
+
+## Agent tool allowlists (`mcp_client.allowlists` in `agent/config.yaml`)
+
+`agent/mcp_client.py` discovers tools on every server once and gives each agent only the tool
+names on its list; an unknown name fails at startup. Every call carries a `trace_id` in the MCP
+request meta (it lands in the server audit logs), has a timeout and bounded retries, and wraps
+`untrusted_text` in `<untrusted>` tags before a model sees it. If the marketplace is unreachable,
+calls return a typed `MarketplaceDown` result. `search_evidence` defaults to portfolio types
+(case study, README, code, review, CV); past proposals need an explicit `types` filter.
+
+| agent | tools |
+|---|---|
+| scout, risk_assessor, pricing | marketplace read: search_jobs, get_job, get_client_history, get_connects_balance, list_proposals, list_threads, list_messages, get_events, get_policy |
+| analyst, compliance | none |
+| fit_matcher, writer, verifier, critic | portfolio read: search_evidence, get_case_study, list_skills |
+| client_liaison | marketplace read + create_proposal_draft, submit_proposal, send_message (writes only after approval, enforced by the graph) + workspace: free_slots, create_tentative_hold, create_email_draft |
+| single_react (RQ-C baseline) | marketplace read (search_jobs, get_job, get_client_history, get_connects_balance, get_policy), create_proposal_draft forced to dry_run, portfolio read; never submit_proposal or send_message |

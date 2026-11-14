@@ -167,3 +167,30 @@ npx @modelcontextprotocol/inspector .venv/bin/python -m mcp_servers.portfolio.se
 ```
 
 Set `PORTFOLIO_DIR=/path/to/folder` to serve any folder of md, pdf and code instead of the personas.
+
+## MCP client, GitHub ingest and the single-agent demo
+
+Agents connect through `agent/mcp_client.py`. Server URLs come from `MCP_MARKETPLACE_URL`,
+`MCP_PORTFOLIO_URL` and `MCP_WORKSPACE_URL` (defaults: local ports 8101, 8103, 8102) and the
+bearer token of `mcp_client.user`.
+
+GitHub ingest needs Docker and a fine-grained, read-only `GITHUB_TOKEN` in `.env`; list repos
+under `rag.github_repos` (owner, repo, persona), then:
+
+```bash
+make index-github
+```
+
+It reads README and code through the official GitHub MCP server (read-only `repos` toolset),
+indexes them with the same metadata and hashing as the personas, and writes
+`evals/results/rag_github_index.json`. A later `make index` never deletes these items.
+
+Single ReAct baseline (needs `GROQ_API_KEY` for the open-profile writer model and `make db-up`
+with an index). It runs GigSim (dev scenario) and the MCP servers in-process:
+
+```bash
+make demo-single JOB=<job_id>
+```
+
+The run (tool calls, args, results, tokens, latency, final draft, dry-run preview and an
+injection check for planted jobs) is saved to `evals/results/single_agent_demo.json`.
