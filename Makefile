@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -60,6 +60,12 @@ db-down:
 
 index:
 	$(RUN) python -m rag.ingest.run
+
+index-github:
+	$(RUN) python -m rag.ingest.run --github
+
+demo-single:
+	$(RUN) python -m agent.baselines.demo $(JOB)
 
 rag-eval:
 	$(RUN) python -m evals.runners.rag_eval --variant $(VARIANT)
