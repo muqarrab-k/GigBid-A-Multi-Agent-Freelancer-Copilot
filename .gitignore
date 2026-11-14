@@ -10,7 +10,5 @@ node_modules/
 dist/
 build/
 data/processed/
-evals/results/*
-!evals/results/.gitkeep
 *.egg-info/
 data/raw/

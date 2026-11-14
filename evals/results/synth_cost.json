@@ -1,0 +1,14 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "provider": "groq",
+  "prices_usd_per_mtok": {
+    "input": 0.075,
+    "output": 0.3
+  },
+  "note": "estimate from token counts and config prices; cached calls counted once",
+  "calls": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cost_usd": 0.0,
+  "by_tag": {}
+}

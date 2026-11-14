@@ -89,6 +89,13 @@ class RerankerSpec(Strict):
     model: str
 
 
+class GeneratorSpec(ModelSpec):
+    max_tokens: int = Field(default=2000, gt=0)
+    reasoning_effort: Literal["low", "medium", "high"] | None = None
+    usd_per_mtok_in: float = Field(ge=0)
+    usd_per_mtok_out: float = Field(ge=0)
+
+
 class ModelsConfig(Strict):
     active_profile: str = "open"
     request_timeout_s: float = Field(default=60, gt=0)
@@ -96,7 +103,15 @@ class ModelsConfig(Strict):
     providers: dict[str, Provider]
     embeddings: EmbeddingSpec
     reranker: RerankerSpec
+    active_generator: str = "default"
+    generators: dict[str, GeneratorSpec] = Field(default_factory=dict)
     profiles: dict[str, Profile]
+
+    @property
+    def generator(self) -> GeneratorSpec:
+        if self.active_generator not in self.generators:
+            raise ConfigError(f"generator '{self.active_generator}' not in {sorted(self.generators)}")
+        return self.generators[self.active_generator]
 
     @model_validator(mode="after")
     def check_profiles(self) -> "ModelsConfig":
@@ -110,6 +125,9 @@ class ModelsConfig(Strict):
             for spec in profile.specs():
                 if spec.provider not in self.providers:
                     raise ValueError(f"profile '{name}' uses unknown provider '{spec.provider}'")
+        for name, gen in self.generators.items():
+            if gen.provider not in self.providers:
+                raise ValueError(f"generator '{name}' uses unknown provider '{gen.provider}'")
         return self
 
 
@@ -238,6 +256,21 @@ class DataConfig(Strict):
     contract_date_max: date
 
 
+class SynthConfig(Strict):
+    proposals_per_persona: int = Field(gt=0)
+    reviews_per_persona: int = Field(gt=0)
+    label_noise: float = Field(ge=0, lt=0.5)
+    clients: int = Field(gt=0)
+    scammer_share: float = Field(ge=0, lt=1)
+    scam_share: float = Field(ge=0, lt=1)
+    injection_share: float = Field(ge=0, lt=1)
+    holdout_size: int = Field(ge=0)
+    dev_jobs_per_persona: int = Field(gt=0)
+    relevant_evidence_k: int = Field(gt=0)
+    bid_min_skill_hits: int = Field(ge=1)
+    bid_min_coverage: float = Field(ge=0, le=1)
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -246,6 +279,7 @@ class Settings(Strict):
     bidding_rules: BiddingRules
     paths: Paths
     data: DataConfig
+    synth: SynthConfig
 
     @property
     def profile(self) -> Profile:

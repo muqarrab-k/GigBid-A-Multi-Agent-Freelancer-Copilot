@@ -39,16 +39,18 @@ data = [
   "pyarrow==26.0.1",
   "kaggle==2.2.5",
   "openpyxl==3.1.5",
+  "reportlab==5.1.0",
   # kaggle needs it
   "six==1.17.0",
 ]
 
 [tool.setuptools.packages.find]
-include = ["agent*", "apps*", "rag*", "mcp_servers*", "evals*", "worker*", "data_pipeline*"]
+include = ["agent*", "apps*", "rag*", "mcp_servers*", "evals*", "worker*", "data_pipeline*", "synth*"]
 
 [tool.setuptools.package-data]
 agent = ["config.yaml", "prompts/*.md"]
 data_pipeline = ["*.yaml"]
+synth = ["*.yaml"]
 
 [tool.ruff]
 line-length = 100

@@ -26,6 +26,29 @@ models:
     provider: huggingface
     model: BAAI/bge-reranker-v2-m3
 
+  # synthetic corpus renderer
+  active_generator: default
+  generators:
+    default:
+      provider: groq
+      model: openai/gpt-oss-20b
+      base_url: https://api.groq.com/openai/v1
+      temperature: 0.8
+      max_tokens: 2000
+      reasoning_effort: low
+      # check groq pricing
+      usd_per_mtok_in: 0.075
+      usd_per_mtok_out: 0.30
+    large:
+      provider: groq
+      model: openai/gpt-oss-120b
+      base_url: https://api.groq.com/openai/v1
+      temperature: 0.8
+      max_tokens: 2000
+      reasoning_effort: low
+      usd_per_mtok_in: 0.15
+      usd_per_mtok_out: 0.60
+
   profiles:
     open:
       scout: &open_small
@@ -150,3 +173,18 @@ data:
   max_hourly_rate: 500
   contract_date_min: 2000-01-01
   contract_date_max: 2024-12-31
+
+synth:
+  proposals_per_persona: 150
+  reviews_per_persona: 25
+  label_noise: 0.15
+  clients: 400
+  scammer_share: 0.06
+  scam_share: 0.08
+  injection_share: 0.06
+  holdout_size: 40
+  dev_jobs_per_persona: 200
+  relevant_evidence_k: 5
+  # bid rule thresholds
+  bid_min_skill_hits: 2
+  bid_min_coverage: 0.3
