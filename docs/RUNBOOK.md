@@ -131,3 +131,39 @@ result with GigSim stopped.
 If GigSim is down, marketplace tools return `isError: true` with
 `{"ok": false, "error": {"code": "marketplace_unavailable", "retry_after": 30}}` after the
 adapter's bounded retries (3 retries, exponential backoff with jitter, `Retry-After` honoured).
+
+## RAG index and Portfolio server
+
+```bash
+make db-up
+```
+
+Starts Postgres with pgvector (`infra/docker-compose.yml`, schemas `rag` and `langgraph` created
+by `infra/postgres/init.sql`). `make db-down` stops it; data stays in the `pgdata` volume.
+
+```bash
+make index
+```
+
+Chunks and embeds every persona into `rag.chunks_<model>`. The first run downloads
+nomic-embed-text v1.5 (about 550 MB) and takes about 1.5 minutes on CPU; later runs only embed
+new or changed items (content hash). Install the embedder first with `uv sync --extra embed`.
+
+```bash
+make rag-eval VARIANT=v0
+```
+
+Writes `evals/results/rag_v0.json` (Recall@5, MRR, nDCG@10 per persona, latency, commit hash).
+
+```bash
+make mcp-portfolio
+```
+
+Serves `http://localhost:8103/mcp` (bearer token as for the other servers). In MCP Inspector use
+Streamable HTTP with that URL and `Authorization: Bearer dev-mcp-ai_ml`, or over stdio:
+
+```bash
+npx @modelcontextprotocol/inspector .venv/bin/python -m mcp_servers.portfolio.server
+```
+
+Set `PORTFOLIO_DIR=/path/to/folder` to serve any folder of md, pdf and code instead of the personas.

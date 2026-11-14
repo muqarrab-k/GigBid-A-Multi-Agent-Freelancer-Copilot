@@ -287,12 +287,25 @@ reasons for hand verification (and later judge calibration).
 - Scam and injection templates are ours, so a detector can overfit to their wording. The holdout
   styles test generalisation for injections only.
 
+## Processed chunks (RAG index)
+
+`make index` chunks every rendered persona item (fixed windows of 200 words, 40 overlap) and
+stores chunk text, metadata and a 768-d nomic-embed-text v1.5 embedding in Postgres
+(`rag.chunks_nomic_ai_nomic_embed_text_v1_5`). Counts from `evals/results/rag_index.json`:
+ai_ml 307, data_analyst 310, fullstack 320 chunks (937 in total). Proposals are about 70% of
+chunks (218 of 307 for ai_ml) because there are 150 per persona. Chunks are SYNTHETIC like
+their source items, live only in the local database volume and are not committed; an
+embedding cache sits in `data/cache/embeddings.sqlite` (git-ignored). Re-indexing compares
+content hashes, so unchanged items are never re-embedded.
+
 ## Reproduce
 
 ```bash
 make install
 make data
 make synth
+make db-up
+make index
 ```
 
 Kaggle credentials (`~/.kaggle/kaggle.json`, `~/.kaggle/access_token`, or

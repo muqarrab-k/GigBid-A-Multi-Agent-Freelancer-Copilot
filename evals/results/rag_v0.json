@@ -8,8 +8,9 @@
     "overlap_words": 40
   },
   "k": 10,
-  "commit": "e834de2",
-  "date": "2026-11-14T13:48:40+00:00",
+  "type_filter": null,
+  "commit": "c4bbe0e",
+  "date": "2026-11-14T16:52:16+00:00",
   "dataset": "dev bid jobs with gold relevant_evidence_ids (evals/datasets/dev/labels.jsonl)",
   "overall": {
     "jobs": 95,
@@ -38,8 +39,8 @@
     }
   },
   "latency_ms": {
-    "p50": 66.7,
-    "p95": 131.7
+    "p50": 66.0,
+    "p95": 125.2
   },
   "per_job": [
     {

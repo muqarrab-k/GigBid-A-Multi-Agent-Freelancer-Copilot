@@ -50,6 +50,22 @@ names and schemas.
 | `create_tentative_hold` | write | no | no | yes | no | bearer (HTTP) | idempotency_key, dry_run; rejects taken or out-of-hours slots |
 | `create_email_draft` | write | no | no | yes | no | bearer (HTTP) | idempotency_key, dry_run; draft only, never sent |
 
+## Portfolio server (`mcp_servers/portfolio/server.py`, read-only)
+
+Search over one freelancer's own portfolio, scoped by token: each user sees only their tenant's
+evidence (`mcp.users[].tenant`). Retrieval uses the configured RAG variant (`rag.variant`, V0 now)
+over pgvector. With `PORTFOLIO_DIR` set it indexes any folder of md, pdf and code into memory instead.
+
+| tool | read/write | R | D | I | O | auth | notes |
+|---|---|---|---|---|---|---|---|
+| `search_evidence` | read | yes | no | yes | no | bearer (HTTP) | requirement, k (1 to 20), filters: types, project, outcomes; returns evidence_id, type, source, date, outcome, score, snippet |
+| `get_case_study` | read | yes | no | yes | no | bearer (HTTP) | project id (`p05`) or evidence id; full text |
+| `list_skills` | read | yes | no | yes | no | bearer (HTTP) | skills with evidence counts and projects; `implied` when only the fact sheet's implied tags show it |
+
+Resources: `portfolio://case/{case_id}`, `portfolio://proposal/{proposal_id}`,
+`portfolio://repo/{name}`, `portfolio://cv`. Prompts: `answer_screening_question`, `find_proof`,
+`pick_best_projects` (text in `agent/prompts/portfolio_*.v1.md`).
+
 ## Third-party servers + trust rationale
 
 | server | owner | used for | trust rationale |

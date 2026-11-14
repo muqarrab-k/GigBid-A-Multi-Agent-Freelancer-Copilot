@@ -15,8 +15,8 @@
     "code",
     "cv"
   ],
-  "commit": "e834de2",
-  "date": "2026-11-14T13:49:32+00:00",
+  "commit": "c4bbe0e",
+  "date": "2026-11-14T16:51:41+00:00",
   "dataset": "dev bid jobs with gold relevant_evidence_ids (evals/datasets/dev/labels.jsonl)",
   "overall": {
     "jobs": 95,
@@ -45,8 +45,8 @@
     }
   },
   "latency_ms": {
-    "p50": 65.2,
-    "p95": 138.2
+    "p50": 64.0,
+    "p95": 125.1
   },
   "per_job": [
     {
