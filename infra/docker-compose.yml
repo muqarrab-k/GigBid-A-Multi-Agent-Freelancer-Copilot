@@ -1,11 +1,77 @@
-# TODO: web, api, worker, MCP servers, redis, ollama
+# Local full stack: `docker compose -f infra/docker-compose.yml up`
+# app (API + web) on :8000, gigsim, three MCP servers over HTTP, postgres with pgvector, ollama.
+# Secrets come from the environment (.env next to this file or exported); see .env.example.
+
+x-app: &app
+  build:
+    context: ..
+    dockerfile: infra/docker/Dockerfile.space
+  image: gigbid-app:local
+  environment: &app-env
+    DATABASE_URL: postgresql://${POSTGRES_USER:-gigbid}:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/${POSTGRES_DB:-gigbid}
+    GIGSIM_BASE_URL: http://gigsim:8081
+    GIGSIM_TOKEN_AI_ML: ${GIGSIM_TOKEN_AI_ML:-}
+    GIGSIM_TOKEN_FULLSTACK: ${GIGSIM_TOKEN_FULLSTACK:-}
+    GIGSIM_TOKEN_DATA_ANALYST: ${GIGSIM_TOKEN_DATA_ANALYST:-}
+    MCP_TOKEN_AI_ML: ${MCP_TOKEN_AI_ML:-}
+    MCP_TOKEN_FULLSTACK: ${MCP_TOKEN_FULLSTACK:-}
+    MCP_TOKEN_DATA_ANALYST: ${MCP_TOKEN_DATA_ANALYST:-}
+    MODEL_PROFILE: ${MODEL_PROFILE:-open}
+    OLLAMA_BASE_URL: http://ollama:11434/v1
+    GROQ_API_KEY: ${GROQ_API_KEY:-}
+    # mcp servers listen on all interfaces inside the network
+    FASTMCP_HOST: 0.0.0.0
+  depends_on:
+    postgres: {condition: service_healthy}
+
 services:
+  app:
+    <<: *app
+    environment:
+      <<: *app-env
+      PORT: "8000"
+      GIGBID_MCP: remote
+      MCP_MARKETPLACE_URL: http://marketplace:8101/mcp
+      MCP_WORKSPACE_URL: http://workspace:8102/mcp
+      MCP_PORTFOLIO_URL: http://portfolio:8103/mcp
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-}
+      REVIEWER_PASSWORD: ${REVIEWER_PASSWORD:-}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING:-false}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT:-gigbid}
+    ports: ["8000:8000"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      marketplace: {condition: service_started}
+      workspace: {condition: service_started}
+      portfolio: {condition: service_started}
+
+  marketplace:
+    <<: *app
+    command: python -m mcp_servers.marketplace.server --http
+    depends_on:
+      gigsim: {condition: service_healthy}
+
+  workspace:
+    <<: *app
+    command: python -m mcp_servers.workspace.server --http
+
+  portfolio:
+    <<: *app
+    command: python -m mcp_servers.portfolio.server --http
+    depends_on:
+      index: {condition: service_completed_successfully}
+
+  # one-shot: portfolio index into postgres
+  index:
+    <<: *app
+    command: python -m rag.ingest.run
+
   gigsim:
     build:
       context: ..
       dockerfile: gigsim/Dockerfile
-    ports:
-      - "8081:8081"
+    ports: ["8081:8081"]
     environment:
       GIGSIM_ADMIN_TOKEN: ${GIGSIM_ADMIN_TOKEN:-}
       GIGSIM_TOKEN_AI_ML: ${GIGSIM_TOKEN_AI_ML:-}
@@ -24,8 +90,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-gigbid}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gigbid}
       POSTGRES_DB: ${POSTGRES_DB:-gigbid}
-    ports:
-      - "5432:5432"
+    ports: ["5432:5432"]
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -34,6 +99,21 @@ services:
       interval: 5s
       retries: 10
 
+  # models for the local open profile
+  ollama:
+    image: ollama/ollama:0.12.3
+    volumes:
+      - ollama:/root/.ollama
+    ports: ["11434:11434"]
+
+  ollama-pull:
+    image: ollama/ollama:0.12.3
+    environment:
+      OLLAMA_HOST: ollama:11434
+    entrypoint: ["sh", "-c", "sleep 5 && ollama pull qwen3:4b && ollama pull qwen3:8b"]
+    depends_on: [ollama]
+
 volumes:
   gigsim-data:
   pgdata:
+  ollama:

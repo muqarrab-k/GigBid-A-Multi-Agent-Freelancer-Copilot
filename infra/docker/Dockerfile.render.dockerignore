@@ -1,0 +1,17 @@
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+apps/web/dist
+apps/web/playwright-report
+apps/web/test-results
+gigsim/data
+data/raw
+data/cache
+data/api
+data/audit
+data/workspace
+data/scout
+.env*
+.venv
+.git
+.neon

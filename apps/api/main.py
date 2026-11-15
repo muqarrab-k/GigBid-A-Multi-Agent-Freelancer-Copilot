@@ -55,7 +55,7 @@ def create_app(state: AppState | None = None) -> FastAPI:
                 cfg = get_config()
                 saver = await stack.enter_async_context(open_saver(cfg))
                 store = await stack.enter_async_context(open_store(cfg))
-                current = AppState(settings=cfg, saver=saver, store=store, layer_factory=layer_factory(cfg.api.mcp))
+                current = AppState(settings=cfg, saver=saver, store=store, layer_factory=layer_factory(os.getenv("GIGBID_MCP") or cfg.api.mcp))
             await ensure_reviewer(current.store, current.settings)
             app.state.gigbid = current
             worker = asyncio.create_task(loop(current)) if current.settings.api.scheduler.enabled else None

@@ -343,7 +343,7 @@ class McpConfig(Strict):
 
 
 class EmbedderSpec(Strict):
-    provider: Literal["sentence_transformers", "ollama", "fake"]
+    provider: Literal["sentence_transformers", "ollama", "fake", "nomic_api"]
     model: str
     dim: int = Field(gt=0)
     batch_size: int = Field(default=32, gt=0)
@@ -351,11 +351,14 @@ class EmbedderSpec(Strict):
     query_prefix: str = ""
     document_prefix: str = ""
     base_url: str | None = None
+    api_key_env: str | None = None
 
 
 class EmbeddingsConfig(EmbedderSpec):
     fallback: EmbedderSpec | None = None
     ollama: EmbedderSpec | None = None
+    # same model served over http, for small hosts
+    hosted: EmbedderSpec | None = None
     cache_path: Path
 
     @field_validator("cache_path")

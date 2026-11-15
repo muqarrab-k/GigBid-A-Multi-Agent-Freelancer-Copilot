@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import os
 import sqlite3
 import time
 from pathlib import Path
@@ -65,6 +66,34 @@ class OllamaEmbedder:
         return self.encode([self.spec.query_prefix + text])[0]
 
 
+class NomicApiEmbedder:
+    """nomic-embed-text over the Nomic API; task_type adds the search prefixes server side."""
+
+    def __init__(self, spec: EmbedderSpec) -> None:
+        key = os.getenv(spec.api_key_env or "")
+        if not key:
+            raise RuntimeError(f"{spec.api_key_env} is not set")
+        self.spec, self.model, self.dim = spec, spec.model, spec.dim
+        self.client = httpx.Client(base_url=spec.base_url or "https://api-atlas.nomic.ai", timeout=60,
+                                   headers={"Authorization": f"Bearer {key}"})
+
+    def encode(self, texts: list[str], task: str) -> np.ndarray:
+        out = []
+        for i in range(0, len(texts), self.spec.batch_size):
+            resp = self.client.post("/v1/embedding/text", json={
+                "model": self.model.split("/")[-1], "texts": texts[i : i + self.spec.batch_size],
+                "task_type": task, "dimensionality": self.dim})
+            resp.raise_for_status()
+            out.extend(resp.json()["embeddings"])
+        return normalize(np.array(out, dtype=np.float32))
+
+    def embed_documents(self, texts: list[str]) -> np.ndarray:
+        return self.encode(texts, "search_document") if texts else np.zeros((0, self.dim), np.float32)
+
+    def embed_query(self, text: str) -> np.ndarray:
+        return self.encode([text], "search_query")[0]
+
+
 class FakeEmbedder:
     """Deterministic hashed bag of words, for tests only."""
 
@@ -128,13 +157,18 @@ def build(spec: EmbedderSpec) -> Embedder:
         return OllamaEmbedder(spec)
     if spec.provider == "fake":
         return FakeEmbedder(spec.dim)
+    if spec.provider == "nomic_api":
+        return NomicApiEmbedder(spec)
     return SentenceTransformerEmbedder(spec)
 
 
 def get_embedder(cfg: EmbeddingsConfig, provider: str | None = None) -> Embedder:
     """Configured embedder, falling back to the small model if it cannot load."""
     spec: EmbedderSpec = cfg
-    if provider == "ollama" and cfg.ollama:
+    provider = provider or os.getenv("EMBEDDINGS_PROVIDER")
+    if provider == "hosted" and cfg.hosted:
+        spec = cfg.hosted
+    elif provider == "ollama" and cfg.ollama:
         spec = cfg.ollama
     elif provider == "fallback" and cfg.fallback:
         spec = cfg.fallback

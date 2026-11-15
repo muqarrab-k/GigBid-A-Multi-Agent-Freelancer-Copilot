@@ -342,6 +342,14 @@ rag:
       base_url: http://localhost:11434
       query_prefix: "search_query: "
       document_prefix: "search_document: "
+    # same open model via the nomic api; EMBEDDINGS_PROVIDER=hosted (deployment, no torch)
+    hosted:
+      provider: nomic_api
+      model: nomic-ai/nomic-embed-text-v1.5
+      dim: 768
+      batch_size: 64
+      base_url: https://api-atlas.nomic.ai
+      api_key_env: NOMIC_API_KEY
     cache_path: data/cache/embeddings.sqlite
   chunking:
     strategy: fixed
