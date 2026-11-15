@@ -18,6 +18,7 @@ from agent.nodes.common import BidContext, NodeCache
 from agent.nodes.decide import skip_flags_fired
 from evals.metrics import percentile, precision_recall_f1
 from evals.runners.rag_eval import commit_hash
+from rag.variants.base import Variant
 
 DEV = ROOT / "evals" / "datasets" / "dev" / "labels.jsonl"
 JOBS = ROOT / "gigsim" / "seed" / "jobs_dev_pool.jsonl"
@@ -80,11 +81,12 @@ def score(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-async def run(labels: list[dict[str, Any]], settings: Settings, folder: Path) -> list[dict[str, Any]]:
+async def run(labels: list[dict[str, Any]], settings: Settings, folder: Path,
+              retriever: Variant | None = None, cache: NodeCache | None = None) -> list[dict[str, Any]]:
     jobs = {j["job_id"]: j for j in read_jsonl(JOBS)}
     # decisions only: stop before the writer
-    stack, graph = LocalStack(folder), build_bid_graph(stop_before=["writer"])
-    cache = NodeCache(settings.nodes.cache_dir)
+    stack, graph = LocalStack(folder, retriever=retriever), build_bid_graph(stop_before=["writer"])
+    cache = cache or NodeCache(settings.nodes.cache_dir)
     contexts: dict[str, BidContext] = {}
     rows = []
     for i, label in enumerate(labels, start=1):
@@ -113,6 +115,7 @@ async def run(labels: list[dict[str, Any]], settings: Settings, folder: Path) ->
             "tokens": state.get("token_count", 0),
             "usd": round(sum(e["data"].get("usd", 0) for e in state.get("trace", []) if e["kind"] == "llm"), 6),
             "latency_s": round(time.perf_counter() - start, 2), "failed": state.get("failed", []),
+            "llm_calls_not_cached": sum(1 for e in state.get("trace", []) if e["kind"] == "llm" and not e["data"].get("cached")),
         })
         print(f"  {i:>3}/{len(labels)} {persona:<12} gold {label['decision']:<4} -> {rows[-1]['predicted']} "
               f"({rows[-1]['latency_s']}s)")

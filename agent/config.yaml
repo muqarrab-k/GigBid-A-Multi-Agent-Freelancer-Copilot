@@ -565,3 +565,13 @@ api:
     enabled: false
     interval_minutes: 30
     analyse_new: true
+
+# ci smoke eval gates (make eval)
+eval:
+  smoke_jobs: 30
+  # baseline 0.2333, smoke_eval.json
+  min_recall_at_5: 0.20
+  # baseline 0.8182
+  min_bid_f1: 0.75
+  # committed proposal eval
+  max_unsupported_per_proposal: 0.5

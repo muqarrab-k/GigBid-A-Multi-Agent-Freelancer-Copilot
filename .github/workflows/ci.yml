@@ -15,5 +15,7 @@ jobs:
         run: |
           git fetch --tags --force
           git diff --exit-code --stat gigsim-v1 HEAD -- gigsim ':(exclude)gigsim/policies' ':(exclude)gigsim/data'
+      - name: No secrets, no inline prompts
+        run: python -m scripts.check_repo
       - run: ruff check .
       - run: pytest -q

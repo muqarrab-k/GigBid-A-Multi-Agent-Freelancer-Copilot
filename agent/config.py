@@ -611,6 +611,13 @@ class ApiConfig(Strict):
     scheduler: SchedulerConfig
 
 
+class EvalConfig(Strict):
+    smoke_jobs: int = Field(gt=0)
+    min_recall_at_5: float = Field(ge=0, le=1)
+    min_bid_f1: float = Field(ge=0, le=1)
+    max_unsupported_per_proposal: float = Field(ge=0)
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -637,6 +644,7 @@ class Settings(Strict):
     checkpointer: CheckpointConfig
     memory: MemoryConfig
     api: ApiConfig
+    eval: EvalConfig
 
     @property
     def profile(self) -> Profile:

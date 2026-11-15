@@ -1,0 +1,27 @@
+name: Eval
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      FASTEMBED_CACHE_PATH: /home/runner/.cache/fastembed
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -e ".[dev,data,lite]"
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/.cache/fastembed
+          key: fastembed-bge-small-en-v1.5
+      # 30 jobs, no api keys: cpu embedder + cached model replies
+      - run: make eval
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-eval
+          path: evals/results/smoke_eval.json

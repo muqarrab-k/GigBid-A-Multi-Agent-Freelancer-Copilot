@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi web web-build web-client e2e api-fake
+.PHONY: install dev api test eval eval-record check-repo seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi web web-build web-client e2e api-fake
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -28,8 +28,15 @@ test:
 lint:
 	$(RUN) ruff check .
 
+# keyless smoke eval, writes evals/results/smoke_eval.json
 eval:
-	@echo "eval: not yet"
+	$(RUN) python -m evals.runners.smoke_eval
+
+eval-record:
+	$(RUN) python -m evals.runners.smoke_eval --record
+
+check-repo:
+	$(RUN) python -m scripts.check_repo
 
 data:
 	$(RUN) python -m data_pipeline.run
