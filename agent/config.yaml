@@ -127,12 +127,15 @@ models:
         reasoning_effort: low
         usd_per_mtok_in: 0.075
         usd_per_mtok_out: 0.30
+        # separate daily cap; qwen's 1k output tokens a minute is too small for our replies
         fallback:
           provider: groq
-          model: qwen/qwen3.8-27b
+          model: openai/gpt-oss-120b
           base_url: https://api.groq.com/openai/v1
           temperature: 0.0
-          reasoning_effort: none
+          reasoning_effort: low
+          usd_per_mtok_in: 0.15
+          usd_per_mtok_out: 0.60
       analyst: *hosted_small
       risk_assessor: *hosted_small
       fit_matcher: *hosted_small

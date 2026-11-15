@@ -31,12 +31,11 @@ OUT = ROOT / "docs" / "TRACES.md"
 
 def share(client: langsmith.Client, trace_id: str) -> str:
     """Public link to the root run tagged with our trace id."""
-    query = f'and(eq(metadata_key, "trace_id"), eq(metadata_value, "{trace_id}"))'
     for _ in range(20):
-        runs = list(client.list_runs(project_name="gigbid", filter=query, is_root=True))
+        runs = [r for r in client.list_runs(project_name="gigbid", is_root=True, limit=100)
+                if (r.extra or {}).get("metadata", {}).get("trace_id") == trace_id]
         if runs:
-            oldest = min(runs, key=lambda r: r.start_time)
-            return str(client.share_run(oldest.id))
+            return str(client.share_run(min(runs, key=lambda r: r.start_time).id))
         time.sleep(3)
     raise RuntimeError(f"no root run for trace {trace_id}")
 

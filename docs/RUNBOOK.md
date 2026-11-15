@@ -292,7 +292,7 @@ runs GigSim and the three MCP servers in-process, and uses Neon Postgres for eve
 Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a PRO subscription.
 
 - **Models:** `MODEL_PROFILE=open_hosted`, open-weight models on Groq (gpt-oss-20b with
-  qwen3.8-27b as fallback for the small nodes; gpt-oss-120b with gpt-oss-20b as fallback for writer,
+  gpt-oss-120b as fallback for the small nodes; gpt-oss-120b with gpt-oss-20b as fallback for writer,
   critic and liaison). No Ollama in the deployment.
 - **Embeddings:** the free tier has 512 MB, too little for torch. `EMBEDDINGS_PROVIDER=hosted` embeds
   queries through the Nomic API with the same open model the index was built with
