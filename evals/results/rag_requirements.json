@@ -1,0 +1,1123 @@
+{
+ "031cbf7ac05d13a6": {
+  "requirements": [
+   "Must have experience in bot development",
+   "Must be proficient in Python",
+   "Must understand Social Media Marketing",
+   "Must have knowledge of Automation",
+   "Must be familiar with JavaScript",
+   "Must know TikTok API",
+   "Must know Instagram API",
+   "Must have experience with Node.js"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "03fdb39475cfadc3": {
+  "requirements": [
+   "Experience with Meta Conversion API",
+   "Experience with other platforms (e.g., Google pixels)",
+   "Ability to build custom tracking solutions",
+   "Experience with database storage and data pulling"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "098fe071ad19efb2": {
+  "requirements": [
+   "Must be proficient in Microsoft Power Automate",
+   "Must have experience with Microsoft Forms",
+   "Must be able to create dashboards in Microsoft Power Automate or Microsoft Lists",
+   "Must be able to integrate Microsoft Forms with Microsoft Lists",
+   "Must be able to handle form data for inventory audits with photo uploads",
+   "Must be able to generate and email spreadsheets with item details for ordering"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "0cd6b5727da68d65": {
+  "requirements": [
+   "Must have experience with Google Sheets",
+   "Must be proficient in Data Cleansing",
+   "Must have skills in Data Visualization",
+   "Must be skilled in Data Analysis",
+   "Must have experience with Data Analytics",
+   "Must be able to work with Microsoft Excel"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "11c7cbfaf9ea5e52": {
+  "requirements": [
+   "Proven experience in Shopify store setup and customization",
+   "Strong understanding of e-commerce best practices including SEO, responsive design, and UX",
+   "Proficiency in HTML, CSS, JavaScript, and Shopify's Liquid programming language",
+   "Experience with Shopify's API for custom integrations (a plus)",
+   "Excellent communication skills and collaborative teamwork",
+   "Portfolio of previous Shopify projects"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "12174c242a839d3a": {
+  "requirements": [
+   "2 to 3 years of experience setting up dashboards on Google Data Studio for marketing campaigns",
+   "Expert knowledge in setting up beautiful dashboards for easy client interpretation",
+   "Fluent in spoken and written English",
+   "Prior experience setting up dashboards for marketing agencies (a plus)",
+   "Knowledge and experience of using SQL to query data (a huge plus)"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "16e6b1dc6d5fc66f": {
+  "requirements": [
+   "Trained in React",
+   "Trained in Node.js",
+   "Familiar with AWS"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "1833a6cfc4712f55": {
+  "requirements": [
+   "Proficient English",
+   "Willing to go the extra mile",
+   "Honest and transparent",
+   "Open minded and willing to learn"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "1b5635c72d10554f": {
+  "requirements": [
+   "At least 3 years professionally designing and deploying AWS-based architecture",
+   "At least 6 months experience building with OpenAI's API",
+   "Ability to share 2-3 relevant projects on GitHub or personal site"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "1c0b990bb7dbe947": {
+  "requirements": [
+   "A degree in a relevant field, such as Computer Science or Artificial Intelligence",
+   "3+ years of experience in chatbot development",
+   "Strong understanding of NLP techniques, including language generation and conversation flow management",
+   "Experience with AI platforms such as OpenAI GPT, Dialogflow, or similar (and open source alternative like gpt-neox)",
+   "Knowledge of deep learning frameworks such as TensorFlow or PyTorch",
+   "Strong coding skills in Python or other relevant programming languages",
+   "Excellent problem-solving, analytical, and communication skills",
+   "Familiarity with model deployment on cloud computing platforms such as AWS, Heroku, or Google Cloud"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "1cf39846f7f6a348": {
+  "requirements": [
+   "Mid to Advanced Excel skills",
+   "Knowledge of formulas and functions",
+   "Data analysis and visualization experience",
+   "Problem-solving skills",
+   "Template creation ability",
+   "Detail-oriented approach",
+   "Experience in creating user-friendly templates",
+   "Ability to create robust templates"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "1dba1efce38655c6": {
+  "requirements": [
+   "Node Red experience",
+   "Your location (as we will need to ship our sensors to you)",
+   "Modbus / SNMP knowledge",
+   "Smart Home integration knowledge (Matter / Google Home / Apple HomeKit)",
+   "Availability to work longer term on this",
+   "Price per hour (considering potential longer term)"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "1f37715fe5cbe033": {
+  "requirements": [
+   "Strong expertise in using ParseHub and Google Sheets for data extraction and automation",
+   "Proven experience in creating custom ParseHub projects that efficiently extract data based on an ever-changing list of keywords",
+   "Expertise in designing automated workflows that update the keyword list and run ParseHub projects without manual intervention",
+   "Ability to format Google Sheets to present data in a clear and concise manner"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "1f3e80398a6e52bb": {
+  "requirements": [
+   "Good grasp of probability distributions",
+   "Experience with MongoDB",
+   "Experience with Node.js",
+   "Ability to produce expected results from the current code"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "2298deadbfaf9fad": {
+  "requirements": [
+   "Must use AI algorithms for chart and text recognition",
+   "Must achieve ~90% recognition accuracy for fed signals",
+   "Must handle cases where text data differs from chart data (prioritize text data)",
+   "Must output results in .html format as specified"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "22da285bce53b433": {
+  "requirements": [
+   "3-4 years of experience in coding data pipelines with Python and SQL",
+   "1 year of experience in cloud platforms and serverless computing (Lambda, S3)",
+   "Good experience with database modelling and deploying database schema changes",
+   "Solid experience in complex SQL query logic, analysis and tuning",
+   "Ability to manage large sets of data and organise it effectively",
+   "Experience of close collaboration with data science and Machine Learning engineers",
+   "Experience using AWS tools and ability to set up structure and services from scratch",
+   "Strong experience with REST APIs and data validation/cleansing"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "2729bf5b4e904863": {
+  "requirements": [
+   "Proficiency in BigQuery and SQL for data processing",
+   "Ability to write Python scripts for automation and integration",
+   "Experience with handling large datasets efficiently",
+   "Knowledge of zip code geospatial matching and radius calculations"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "27b105c5ef0056c4": {
+  "requirements": [
+   "Proven experience in data integration and automation",
+   "Strong knowledge of data ingestion, ETL, and data pipelines",
+   "Experience with data visualization (dashboards)",
+   "Excellent problem-solving skills",
+   "Strong communication and collaboration skills",
+   "Ability to work independently and as part of a team",
+   "Experience with data warehousing and data management"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "27d97376f2ac1781": {
+  "requirements": [
+   "Expertise in Chatbot development",
+   "Proficiency in Webflow",
+   "Experience with API integrations",
+   "Ability to provide a maintenance-free solution"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "291e4ff84d9094f0": {
+  "requirements": [
+   "Must create a TradingView dashboard with three specific views",
+   "Must allow input of transaction parameters (currency, amount, closing date, etc.)",
+   "Must track gains/losses and update in real-time based on current market rates",
+   "Must export transaction data to CSV/Excel with specified fields",
+   "Must support importing multiple transactions from Excel",
+   "Must calculate stoploss rate (10 cents lower than capture rate) and update chart",
+   "Must include a multi-transaction view for open trades",
+   "Must handle real-time updates for current spot rate and bank rate"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "29e9a5963c9ff0b8": {
+  "requirements": [
+   "Ability to customize ChatGPT code for Binance API",
+   "Capacity for video conference discussions",
+   "Ability to test and ensure API meets requirements",
+   "Provision of post-delivery support"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "2ecc025bacaefa60": {
+  "requirements": [
+   "Must have experience with website scraping",
+   "Must be proficient in Python and Scrapy",
+   "Must be able to handle data extraction from multiple websites",
+   "Must be able to organize scraped text into a structured document"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "2fdb4c1c6b9ff263": {
+  "requirements": [
+   "Must have experience with Microsoft Excel",
+   "Must be proficient in Data Visualization",
+   "Must understand Spreadsheet Software",
+   "Must be familiar with Google Sheets",
+   "Must know Visual Basic for Applications",
+   "Must have skills in Sales analysis",
+   "Must be able to create Dashboards",
+   "Must have experience with Visualization tools"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "3479148151b3575b": {
+  "requirements": [
+   "Must have expertise in Chatbot development",
+   "Must possess knowledge in Machine Learning",
+   "Must be proficient in Machine Learning Model creation",
+   "Must understand Artificial Neural Networks",
+   "Must have experience with Deep Neural Networks",
+   "Must be skilled in Deep Learning",
+   "Must have knowledge of Artificial Intelligence"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "3952ba73b0f463f4": {
+  "requirements": [
+   "Proficient in Python",
+   "Proficient in artificial intelligence",
+   "Proficient in machine learning",
+   "Familiar with chess concepts"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "3d361cc509257c79": {
+  "requirements": [
+   "Experience in PowerBI data modeling for large datasets",
+   "Ability to create custom DAX for advanced filtering",
+   "Proficiency in SQL for data extraction from Azure SQL database"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "3d65d6766d52951a": {
+  "requirements": [
+   "Must be able to build a spreadsheet that pulls data from Facebook Ads Manager",
+   "Must be able to present comparison of last 30 days and last 3 days data",
+   "Must create a log that records each new set of data on a new row",
+   "Must ensure spreadsheet is populated twice a week (Monday and Thursday mornings)"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "3d6d5b3871e5941d": {
+  "requirements": [
+   "Must have experience with at-grid",
+   "Must be able to implement responsive design for mobile views",
+   "Must understand how datatables handles column collapse",
+   "Must ensure that extra buttons on the page are hidden when the grid is collapsed"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "4019ff422e6fd347": {
+  "requirements": [
+   "Urgent opening for Data Engineer",
+   "India remote and UAE",
+   "Share CV at jchaubey@delphime.com"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "415b827d69fc3d75": {
+  "requirements": [
+   "Experience with ELK stack (Elasticsearch, Logstash, Kibana)",
+   "Proficiency in Data Visualization and Dashboard creation",
+   "Familiarity with NGINX and Linux System Administration"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "43041e09d015bbe3": {
+  "requirements": [
+   "Expertise in GPT-3 model optimization for domain-specific questions",
+   "Experience in handling complex questions from large text corpora",
+   "Ability to identify and fix issues in AI models that produce incorrect answers",
+   "Consultation skills to collaborate with the client on solutions"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "49ed08306cdb07ac": {
+  "requirements": [
+   "Must use Computer Vision",
+   "Must use PyTorch or TensorFlow",
+   "Must process sequence of jpegs as video frames",
+   "Must retain only the closest sign image to camera"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "4aef74680a0b67c6": {
+  "requirements": [
+   "Understand natural language queries and return the appropriate results",
+   "Pull data from an API and present it as natural data",
+   "Generate a report from the data",
+   "User-friendly and intuitive for users",
+   "Must be able to integrate with existing systems",
+   "Document the development for future application development teams"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "4dadabbb85d38c21": {
+  "requirements": [
+   "Expertise in OpenAI APIs for complex workflows",
+   "Ability to build Flask applications",
+   "Experience with API integration for web applications",
+   "Proficiency in Python for web development"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "4dee09a2d6d42d7e": {
+  "requirements": [
+   "Must have experience in Firefox Plugin Development",
+   "Must have experience in Google Chrome Extension development",
+   "Must be proficient in JavaScript",
+   "Must be proficient in HTML5",
+   "Must be proficient in CSS",
+   "Must have knowledge of Automation",
+   "Must have knowledge of jQuery",
+   "Must have knowledge of Vue.js"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "56358d7125aa3a10": {
+  "requirements": [
+   "Experience in developing Power BI dashboards and reports using SharePoint lists and Dataverse as data sources",
+   "Knowledge of Power Query, DAX, and Power BI Desktop",
+   "Ability to work with complex data models and relationships",
+   "Attention to detail and quality",
+   "Good communication skills and responsiveness"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "567a7ac00e2cde54": {
+  "requirements": [
+   "Experienced ChatGPT Web Application Integrator",
+   "Ability to integrate OpenAI's ChatGPT model",
+   "Experience optimizing AI models for web applications"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "59b879ccaad1e5b8": {
+  "requirements": [
+   "Must have experience in developing AI virtual agents",
+   "Must be proficient in NLP and ML for the virtual agent",
+   "Must be able to build a self-managing system for case handling",
+   "Must be able to implement discount and negotiation features"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "5c646c26ed90dd10": {
+  "requirements": [
+   "Comfortable with data visualization",
+   "Proficient in Microsoft Excel",
+   "Proficient in Google Sheets",
+   "Willing to make a few edits"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "5f704884779b10b1": {
+  "requirements": [
+   "Must have experience in Python",
+   "Must be able to develop user interfaces",
+   "Must be able to create bots that run weekly for $10"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "63abe2aa41dcfde2": {
+  "requirements": [
+   "Extensive experience with Zoho Analytics",
+   "Ability to build interactive reporting",
+   "Knowledge about sports or organizations (helpful)"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "63ca974255c51c1f": {
+  "requirements": [
+   "Proven experience as a Full Stack Software Developer",
+   "Proficient in RedwoodJS",
+   "Strong understanding of web development technologies (HTML, CSS, JavaScript)",
+   "Familiarity with Maps, APIs, TwitchAPI, push notifications, real-time databases, and Message Queue Systems",
+   "Ability to work efficiently in a scrum environment",
+   "Excellent problem-solving skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "647b3367d8be7bf1": {
+  "requirements": [
+   "3 years of clojure development experience in a commercial environment"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "6545894e3e96967a": {
+  "requirements": [
+   "MSc in Computer Applications/Computer Science, Data Science, Software Development, or equivalent",
+   "1 year experience in web application, product development, React.js, Redux, Flux",
+   "Proficient understanding of web markup (HTML5, CSS3)",
+   "Basic understanding of CSS pre-processing platforms (LESS and SASS)",
+   "Proficient understanding of client-side scripting (JavaScript, jQuery)",
+   "Understanding of asynchronous request handling, partial page updates, and AJAX",
+   "Understanding of cross-browser compatibility issues",
+   "Understanding of API creation and implementation"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "69914c09667e85ac": {
+  "requirements": [
+   "Proven experience as a full stack developer with expertise in front-end and back-end development",
+   "Extensive knowledge of OpenAI's API implementation and fintuning",
+   "Strong proficiency in programming languages such as Python, JavaScript, and Node.js",
+   "Familiarity with cloud platforms such as AWS, Azure, or Google Cloud",
+   "Strong problem-solving and debugging skills",
+   "Excellent verbal and written communication skills, able to effectively collaborate with the project team"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "6ceb8ee70270045f": {
+  "requirements": [
+   "Must be able to guide the client through correspondence analysis using Excel or R",
+   "Must have experience with survey data analysis",
+   "Must be available for a tutoring session via Zoom within the next few days"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "70881bd2e40660c0": {
+  "requirements": [
+   "Knows ien8 for multi-language support",
+   "Familiar with Keycloak for user authentication and permissions",
+   "Experience with API integrations",
+   "Full-time freelancer who respects time commitments"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "7319fc0e82ba7220": {
+  "requirements": [
+   "Experience in connecting Salesforce with Google Data Studio",
+   "Ability to set up API integrations for data visualization",
+   "Knowledge of Salesforce CRM data structures"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "73a27af6b67537f6": {
+  "requirements": [
+   "Ability to code qualitative study responses",
+   "Experience with creating frequency tables",
+   "Experience in generating charts",
+   "Experience identifying trends or patterns",
+   "Experience calculating averages",
+   "Experience ranking answers",
+   "Experience creating Excel sheets with formulas",
+   "Experience providing insights"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "7950fc26780d81ba": {
+  "requirements": [
+   "Deep knowledge of Excel and/or Sheets",
+   "Ability to complete within 1-2 hours",
+   "Proficiency in Google Sheets, Google Docs, Microsoft Excel"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "7bb6a885d0b342cb": {
+  "requirements": [
+   "Proficiency in Google Sheets pivot tables",
+   "Experience with Google Charts for data visualization",
+   "Ability to create dynamic dashboards that update with date range changes",
+   "Strong understanding of data manipulation using splicers"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "7ff880ae60619352": {
+  "requirements": [
+   "Experience with MySQL Workbench",
+   "Experience with Google BigQuery",
+   "Experience with Google Cloud Platform tools",
+   "Ability to write, test, and document Python scripts for automation",
+   "Experience with database design",
+   "Experience with JSON/API endpoints"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "852020c8a2558233": {
+  "requirements": [
+   "Senior data scientist",
+   "Ability to test incorporation of generative AI in a health information system",
+   "Experience with NLP and matching content to codes"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "854ef457df0fb795": {
+  "requirements": [
+   "Experience with ChatGPT integration",
+   "Ability to provide links to previously created sites",
+   "Proficiency in Python",
+   "Knowledge of API integration"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "859dfcdaf7f199c7": {
+  "requirements": [
+   "Must have experience with Unicode-supported foreign-language linguistic corpora",
+   "Must be proficient in Python for data analysis",
+   "Must understand Natural Language Processing techniques",
+   "Must be able to produce NLTK statistics",
+   "Must have skills in Microsoft Excel for data visualization",
+   "Must be familiar with statistics and data mining"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "88a1248f902cd2c0": {
+  "requirements": [
+   "Must have skills in Machine Learning, Computer Vision, PDF, Review, Python, API, Django",
+   "Must be able to develop the example shared (with NDA)",
+   "Must be willing to be part of Silimind team in the long-term",
+   "Must be able to work directly with the client in communication"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "8e8d20340b7f3246": {
+  "requirements": [
+   "Experience in survey design",
+   "Data analysis skills",
+   "Data visualization skills",
+   "Data collection experience",
+   "Knowledge of science & medicine",
+   "Proficiency in Microsoft Excel",
+   "Program management experience",
+   "Program evaluation experience"
+  ],
+  "model": "openai/gpt-oss-20b",
+  "cached": true,
+  "error": null
+ },
+ "90dbc9cd3c88e9d6": {
+  "requirements": [
+   "Collaborate with the team to understand client objectives and KPIs",
+   "Analyze data from various sources, primarily Google Analytics",
+   "Provide data-driven recommendations for paid media campaigns"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "93643079d545fe36": {
+  "requirements": [
+   "Good experience in API development",
+   "Experience in developing APIs for device communication",
+   "Ability to work with Google Cloud Platform or Amazon Web Services"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "94b70e570211692a": {
+  "requirements": [
+   "Ability to fix data flow issues from data sources",
+   "Experience with Microsoft Power BI",
+   "Knowledge of Google Analytics, Excel, and Salesforce data integration"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "96d7317638a77f9c": {
+  "requirements": [
+   "Must have experience with AWS services",
+   "Must be proficient in Python for data processing",
+   "Must understand Data Modeling and Data Visualization",
+   "Must have experience building ETL pipelines with Glue and RDS",
+   "Must be able to create BI dashboards using QuickSight",
+   "Must have experience with data aggregation projects",
+   "Must be familiar with Apache Spark for data processing",
+   "Must have experience with S3 data storage"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "97a2f07fcb80fb8a": {
+  "requirements": [
+   "Must have experience with Python for generating PowerPoint presentations",
+   "Must be able to use ChatGPT API for content generation",
+   "Must understand PowerPoint slide master templates",
+   "Must be able to create a logical flow of slides based on input prompts",
+   "Must be able to integrate with ChatGPT API to generate content",
+   "Must have skills in LLM Prompt Engineering for AI content creation",
+   "Must be able to work under tight deadlines (by 21st Feb 2024)"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "9a91a63f86de9993": {
+  "requirements": [
+   "Experience in Google Ads",
+   "Experience in Google Analytics",
+   "Experience in Pay Per Click Advertising",
+   "Ability to suggest good ad text for conversions",
+   "Ability to conduct quality keyword research",
+   "Ability to modify ads within 3 weeks"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "9b69fe5c806d1895": {
+  "requirements": [
+   "Must have experience in Web Development",
+   "Must have experience in Ecommerce Platform Development",
+   "Must have experience in Ecommerce Website development",
+   "Must be proficient in API integration"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "9e15569ba4ca5f8f": {
+  "requirements": [
+   "Master\u2019s degree in computer science, Data Science, or related field",
+   "Expertise in NLP techniques such as tokenization, stemming, lemmatization, sentiment analysis",
+   "Knowledge of dialogue state tracking, act classification, and context management",
+   "Strong expertise in predictive analytics and recommendation systems",
+   "Proficiency in data engineering, ETL processes, and data automation",
+   "Programming skills in Python or Java",
+   "Experience with cloud platforms (AWS, Azure) for AI solutions",
+   "Understanding of data security and compliance regulations (e.g., GDPR)"
+  ],
+  "model": "openai/gpt-oss-20b",
+  "cached": false,
+  "error": null
+ },
+ "a5079e8e3cee5511": {
+  "requirements": [
+   "Must have experience in Data Science",
+   "Must have expertise in Natural Language Processing",
+   "Must have knowledge of Machine Learning",
+   "Must be proficient in Machine Learning Model development"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "a66537eff71d62b9": {
+  "requirements": [
+   "Strong background in website development",
+   "Experience in UI/UX design",
+   "AI/ML integration experience",
+   "Proficiency in HTML, CSS, JavaScript, and Python",
+   "Ability to create a seamless user experience",
+   "Passion for creating high-quality software"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "a95a45269fa17e93": {
+  "requirements": [
+   "Proficiency in Data Science Consultation",
+   "Experience in Data Science",
+   "Knowledge of Data Analysis",
+   "Expertise in Anomaly Detection",
+   "Proficiency in Python",
+   "Familiarity with Machine Learning",
+   "Experience with Python Scikit-Learn"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "ac495c52240429ac": {
+  "requirements": [
+   "Familiar with developing scorecards based on driver risk",
+   "Experience in insurance and fleet driving risk",
+   "Ability to consult on an hourly meeting to discuss current algorithm and ways to improve it",
+   "Ability to define a new scorecard that is customer friendly"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "acfaa8dd02975dff": {
+  "requirements": [
+   "Must have experience building web applications",
+   "Must be able to integrate with Outlook",
+   "Must be able to integrate with Gmail",
+   "Must be able to handle email list uploads"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "af5d75c7ccc0bd52": {
+  "requirements": [
+   "Must have experience with Linear Regression",
+   "Must have experience with Data Analysis",
+   "Must have experience with Python",
+   "Must be able to work within 4 hours"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "b74071cdb9b441e9": {
+  "requirements": [
+   "Mandatory experience in building SDKs for websites",
+   "Very good experience in Ad-Tech"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "b83f95954045cbce": {
+  "requirements": [
+   "Must be an expert in Neural Networks",
+   "Must have experience with EKG signal classification",
+   "Must be proficient in Python"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "b8b337fb92ef1198": {
+  "requirements": [
+   "Experienced web developer",
+   "Ability to build multi-vendor or multi-tenant LMS",
+   "Integration of eComm capability",
+   "Collaboration with UI/UX partner"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "b9f02b813171cc8d": {
+  "requirements": [
+   "Expertise en IA g\u00e9n\u00e9rative sur ChatGPT4",
+   "Comp\u00e9tence en formulation de prompts pour des cas d'usage marketing",
+   "Usage intensif de GPT4"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "bafcebabb97dc048": {
+  "requirements": [
+   "Experience with Web Application development",
+   "Proficiency in JavaScript",
+   "Familiarity with Vue.js",
+   "Web Design skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "bec2b597ce9e1dfd": {
+  "requirements": [
+   "Demonstrated experience in computer vision development and design - including clear evidence of exceptional skills in this area",
+   "Significant core neural network experience / research orientated and familiar with state of the art tech in neural network architecture",
+   "Any experience in biometric authentication is a plus (but not required)"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "c3540d83daf0989d": {
+  "requirements": [
+   "Bachelor's degree in Computer Science, Artificial Intelligence, or a related field",
+   "1+ years of experience in video AI and related technologies",
+   "Strong understanding of AI algorithms, machine learning, and computer vision",
+   "Experience with video AI frameworks such as TensorFlow and PyTorch",
+   "Excellent communication and presentation skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "c3a3580b1f6a1125": {
+  "requirements": [
+   "Strong experience with data processing and analysis, algorithm development, and machine learning",
+   "Knowledge of statistics and mathematical modeling",
+   "Familiarity with data storage and management technologies such as databases, data warehouses, and big data platforms",
+   "Experience with programming languages such as Python, R, or SQL and machine learning frameworks such as TensorFlow, Keras, or scikit-learn",
+   "Experience with data processing and analysis tools such as Pandas, NumPy, or Spark",
+   "Experience with data visualization tools, such as Tableau or PowerBI",
+   "Understanding of women's health and the specific data requirements of a menstrual cycle tracking application",
+   "Excellent communication and collaboration skills"
+  ],
+  "model": "openai/gpt-oss-20b",
+  "cached": true,
+  "error": null
+ },
+ "c618b121f47962ac": {
+  "requirements": [
+   "Experience with Kobold AI",
+   "Knowledge of Pygmalion 6B model",
+   "Ability to integrate Kobold as an API",
+   "Familiarity with deployment platforms like GCP, AWS, or Vast.ai"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "ca4733c17e726fda": {
+  "requirements": [
+   "Skilled in PowerPoint deck building",
+   "Experience using Microsoft Power BI",
+   "Strong understanding of data visualization"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "cef0f28edeea5411": {
+  "requirements": [
+   "Proficiency in Data Science",
+   "Experience in Model Tuning",
+   "Knowledge of Python",
+   "Familiarity with Azure OpenAI",
+   "Experience in Machine Learning"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "d052469ba52013d7": {
+  "requirements": [
+   "Masters/PhD in Computational Linguistics, NLP, or related field with research experience or publications",
+   "Proven experience using semantic analysis, knowledge representation, or advanced NLU techniques",
+   "Demonstrated interest in complexity of language within philosophical concepts, symbolism, or non-literal text domains",
+   "Excitement for both innovative NLU theory and practical application in mission-driven projects"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "d1785e65f3ad0ca3": {
+  "requirements": [
+   "Experienced full stack Java Spring Boot developer",
+   "PostgreSQL and JavaScript skills",
+   "Ability to work remotely",
+   "Available for 40 hours per week"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "d31de97fcdfd005c": {
+  "requirements": [
+   "Experience in Google Analytics",
+   "Ability to get data from multiple sources",
+   "Experience in XMWare reporting tool",
+   "Experience in API integration",
+   "Full stack development skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "d79668efb4d1ff96": {
+  "requirements": [
+   "Proficiency in Python",
+   "Experience with Solr and MySQL",
+   "Ability to build recommendation systems",
+   "Knowledge of Natural Language Processing",
+   "Familiarity with API development",
+   "Experience in model optimization and tuning",
+   "Understanding of deep learning modeling",
+   "Natural Language Generation skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "da776ce6e398a39b": {
+  "requirements": [
+   "Quant-minded",
+   "Experience in startup environment",
+   "Ability to collaborate with infra team for production readiness"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "df797893d74adaa7": {
+  "requirements": [
+   "Must have great UI experience",
+   "MUST HAVE portfolio or screenshots of previous work to submit with proposal"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "e44985c05e3f2c1a": {
+  "requirements": [
+   "Proficiency in Visual Basic for Applications",
+   "Experience with Microsoft Excel PowerPivot",
+   "Knowledge of Operations Analytics",
+   "Ability to create Data Visualisations",
+   "Familiarity with Microsoft Excel",
+   "Macro Programming skills",
+   "Experience with Dashboard development",
+   "Data Analysis capabilities"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "e8b1b7fb76ac2428": {
+  "requirements": [
+   "Strong proficiency in Node.js",
+   "Experience with audio processing libraries",
+   "Familiarity with audio file formats and conversion techniques",
+   "Experience with Firebase Functions and cloud storage (preferably Google Cloud Storage)"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "ed50962b41822b67": {
+  "requirements": [
+   "Proven experience in developing AI-powered solutions",
+   "Strong expertise in machine learning, deep learning, and computer vision",
+   "Knowledge of Python and experience with popular AI frameworks (TensorFlow, PyTorch, etc.)",
+   "Ability to integrate AI engines with user-friendly interfaces",
+   "Strong problem-solving and critical thinking skills",
+   "Excellent communication and collaboration skills"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "f04a0db6006b9dea": {
+  "requirements": [
+   "Data Science skills",
+   "Core Java skills",
+   "Artificial Intelligence expertise",
+   "Computer Vision proficiency",
+   "PyTorch proficiency",
+   "Natural Language Processing expertise",
+   "Python proficiency",
+   "Deep Learning knowledge"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "f732e38bc5443791": {
+  "requirements": [
+   "Experience in building HubSpot dashboards",
+   "Ability to manipulate existing HubSpot data fields",
+   "Knowledge of HubSpot report-building tools"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ },
+ "f81aae9e8ed669bd": {
+  "requirements": [
+   "Must have experience in Chatbot Development",
+   "Must have experience in Bot Development",
+   "Must have expertise in Artificial Intelligence",
+   "Must have expertise in Natural Language Processing"
+  ],
+  "model": "qwen3:4b",
+  "cached": true,
+  "error": null
+ },
+ "fb0a3d7997e3700d": {
+  "requirements": [
+   "Degree in Engineering, Information Technology, Management or Economics",
+   "Minimum 5 years of experience as a Business Analyst in Information Systems Consulting and/or Software Engineering and Development projects",
+   "At least 1 year of experience in projects using agile methodologies"
+  ],
+  "model": "qwen3:4b",
+  "cached": false,
+  "error": null
+ }
+}

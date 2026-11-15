@@ -1,6 +1,8 @@
 {
   "variant": "v0",
+  "components": [],
   "embedder": "nomic-ai/nomic-embed-text-v1.5",
+  "reranker": null,
   "store": "pgvector",
   "chunking": {
     "strategy": "fixed",
@@ -9,8 +11,9 @@
   },
   "k": 10,
   "type_filter": null,
-  "commit": "c4bbe0e",
-  "date": "2026-11-14T16:52:16+00:00",
+  "requirements_source": "evals/results/rag_requirements.json",
+  "commit": "e080253",
+  "date": "2026-11-15T09:58:44+00:00",
   "dataset": "dev bid jobs with gold relevant_evidence_ids (evals/datasets/dev/labels.jsonl)",
   "overall": {
     "jobs": 95,
@@ -38,9 +41,23 @@
       "ndcg_at_10": 0.0183
     }
   },
+  "per_job_type": {
+    "4+ requirements": {
+      "jobs": 70,
+      "recall_at_5": 0.0257,
+      "mrr": 0.0458,
+      "ndcg_at_10": 0.0309
+    },
+    "<4 requirements": {
+      "jobs": 25,
+      "recall_at_5": 0.016,
+      "mrr": 0.0467,
+      "ndcg_at_10": 0.0279
+    }
+  },
   "latency_ms": {
-    "p50": 66.0,
-    "p95": 125.2
+    "p50": 90.1,
+    "p95": 198.6
   },
   "per_job": [
     {
@@ -58,6 +75,9 @@
         "fullstack:review:04",
         "fullstack:proposal:021"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.2,
       "mrr": 0.2,
       "ndcg_at_10": 0.13120507751234178
@@ -77,6 +97,9 @@
         "fullstack:proposal:067",
         "fullstack:proposal:007"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -96,6 +119,9 @@
         "data_analyst:case_study:p10",
         "data_analyst:proposal:137"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.1111111111111111,
       "ndcg_at_10": 0.10209739512291163
@@ -115,6 +141,9 @@
         "data_analyst:proposal:040",
         "data_analyst:proposal:139"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -134,6 +163,9 @@
         "fullstack:proposal:116",
         "fullstack:proposal:044"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -153,6 +185,9 @@
         "data_analyst:proposal:013",
         "data_analyst:proposal:010"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 5,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -172,6 +207,9 @@
         "fullstack:proposal:150",
         "fullstack:proposal:051"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -191,6 +229,9 @@
         "data_analyst:proposal:105",
         "data_analyst:proposal:004"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -210,6 +251,9 @@
         "ai_ml:proposal:062",
         "ai_ml:proposal:138"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -229,6 +273,9 @@
         "ai_ml:proposal:127",
         "ai_ml:proposal:018"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -248,6 +295,9 @@
         "data_analyst:proposal:116",
         "data_analyst:proposal:034"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -267,6 +317,9 @@
         "data_analyst:case_study:p16",
         "data_analyst:proposal:098"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -286,6 +339,9 @@
         "data_analyst:proposal:044",
         "data_analyst:proposal:087"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -305,6 +361,9 @@
         "fullstack:proposal:117",
         "fullstack:proposal:061"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -324,6 +383,9 @@
         "ai_ml:proposal:067",
         "ai_ml:proposal:037"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -343,6 +405,9 @@
         "ai_ml:proposal:066",
         "ai_ml:proposal:049"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -362,6 +427,9 @@
         "data_analyst:proposal:139",
         "data_analyst:proposal:035"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -381,6 +449,9 @@
         "data_analyst:proposal:117",
         "data_analyst:proposal:035"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 7,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -400,6 +471,9 @@
         "ai_ml:proposal:110",
         "ai_ml:proposal:006"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -419,6 +493,9 @@
         "data_analyst:proposal:096",
         "data_analyst:proposal:141"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.2,
       "mrr": 1.0,
       "ndcg_at_10": 0.4599715079731103
@@ -438,6 +515,9 @@
         "fullstack:proposal:027",
         "fullstack:proposal:040"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -457,6 +537,9 @@
         "data_analyst:proposal:029",
         "data_analyst:proposal:061"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -476,6 +559,9 @@
         "data_analyst:proposal:034",
         "data_analyst:proposal:012"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.2,
       "mrr": 0.2,
       "ndcg_at_10": 0.2442584792702138
@@ -495,6 +581,9 @@
         "ai_ml:proposal:046",
         "ai_ml:proposal:120"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 7,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -514,6 +603,9 @@
         "ai_ml:proposal:087",
         "ai_ml:proposal:003"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -533,6 +625,9 @@
         "data_analyst:proposal:048",
         "data_analyst:proposal:104"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -552,6 +647,9 @@
         "data_analyst:proposal:044",
         "data_analyst:proposal:035"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -571,6 +669,9 @@
         "fullstack:proposal:131",
         "fullstack:proposal:108"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -590,6 +691,9 @@
         "data_analyst:proposal:126",
         "data_analyst:proposal:072"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -609,6 +713,9 @@
         "data_analyst:proposal:141",
         "data_analyst:review:05"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.4,
       "mrr": 1.0,
       "ndcg_at_10": 0.5773584151532217
@@ -628,6 +735,9 @@
         "ai_ml:proposal:022",
         "ai_ml:proposal:038"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -647,6 +757,9 @@
         "ai_ml:readme:invoice-extract",
         "ai_ml:proposal:133"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.4,
       "mrr": 0.5,
       "ndcg_at_10": 0.4660026449463635
@@ -666,6 +779,9 @@
         "ai_ml:proposal:006",
         "ai_ml:proposal:020"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -685,6 +801,9 @@
         "ai_ml:proposal:018",
         "ai_ml:proposal:103"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -704,6 +823,9 @@
         "fullstack:proposal:092",
         "fullstack:proposal:053"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.2,
       "mrr": 0.3333333333333333,
       "ndcg_at_10": 0.16958010263680806
@@ -723,6 +845,9 @@
         "data_analyst:proposal:013",
         "data_analyst:proposal:080"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 5,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -742,6 +867,9 @@
         "ai_ml:proposal:070",
         "ai_ml:proposal:018"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -761,6 +889,9 @@
         "ai_ml:proposal:035",
         "ai_ml:proposal:138"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -780,6 +911,9 @@
         "data_analyst:proposal:112",
         "data_analyst:proposal:034"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.2,
       "mrr": 0.25,
       "ndcg_at_10": 0.14606834984270645
@@ -799,6 +933,9 @@
         "ai_ml:proposal:137",
         "ai_ml:proposal:067"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -818,6 +955,9 @@
         "data_analyst:proposal:034",
         "data_analyst:proposal:132"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -837,6 +977,9 @@
         "fullstack:proposal:125",
         "fullstack:proposal:061"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -856,6 +999,9 @@
         "fullstack:proposal:138",
         "fullstack:proposal:091"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 1,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -875,6 +1021,9 @@
         "fullstack:proposal:108",
         "fullstack:proposal:083"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -894,6 +1043,9 @@
         "ai_ml:proposal:070",
         "ai_ml:proposal:120"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -913,6 +1065,9 @@
         "data_analyst:proposal:035",
         "data_analyst:proposal:078"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -932,6 +1087,9 @@
         "fullstack:proposal:049",
         "fullstack:proposal:065"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -951,6 +1109,9 @@
         "data_analyst:proposal:018",
         "data_analyst:proposal:059"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.16666666666666666,
       "ndcg_at_10": 0.1208113026994942
@@ -970,6 +1131,9 @@
         "ai_ml:proposal:077",
         "ai_ml:proposal:113"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -989,6 +1153,9 @@
         "data_analyst:proposal:121",
         "data_analyst:proposal:087"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1008,6 +1175,9 @@
         "data_analyst:proposal:087",
         "data_analyst:proposal:139"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1027,6 +1197,9 @@
         "fullstack:proposal:008",
         "fullstack:proposal:005"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1046,6 +1219,9 @@
         "ai_ml:proposal:047",
         "ai_ml:proposal:118"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1065,6 +1241,9 @@
         "ai_ml:proposal:084",
         "ai_ml:proposal:130"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1084,6 +1263,9 @@
         "ai_ml:proposal:003",
         "ai_ml:proposal:038"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1103,6 +1285,9 @@
         "ai_ml:proposal:004",
         "ai_ml:proposal:032"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1122,6 +1307,9 @@
         "data_analyst:proposal:004",
         "data_analyst:proposal:122"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.4,
       "mrr": 0.5,
       "ndcg_at_10": 0.34519134224686937
@@ -1141,6 +1329,9 @@
         "data_analyst:proposal:013",
         "data_analyst:proposal:094"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1160,6 +1351,9 @@
         "fullstack:proposal:008",
         "fullstack:review:08"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1179,6 +1373,9 @@
         "data_analyst:proposal:013",
         "data_analyst:proposal:057"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1198,6 +1395,9 @@
         "ai_ml:proposal:092",
         "ai_ml:proposal:074"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1217,6 +1417,9 @@
         "ai_ml:proposal:038",
         "ai_ml:proposal:047"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 7,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1236,6 +1439,9 @@
         "data_analyst:proposal:056",
         "data_analyst:proposal:145"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1255,6 +1461,9 @@
         "fullstack:readme:booking-saas",
         "fullstack:proposal:122"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.1111111111111111,
       "ndcg_at_10": 0.10209739512291163
@@ -1274,6 +1483,9 @@
         "ai_ml:proposal:113",
         "ai_ml:proposal:098"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1293,6 +1505,9 @@
         "ai_ml:proposal:001",
         "ai_ml:proposal:118"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1312,6 +1527,9 @@
         "ai_ml:proposal:125",
         "ai_ml:proposal:021"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1331,6 +1549,9 @@
         "ai_ml:proposal:079",
         "ai_ml:proposal:063"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 7,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1350,6 +1571,9 @@
         "ai_ml:proposal:079",
         "ai_ml:proposal:095"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1369,6 +1593,9 @@
         "fullstack:proposal:009",
         "fullstack:proposal:136"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1388,6 +1615,9 @@
         "data_analyst:proposal:026",
         "data_analyst:proposal:125"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1407,6 +1637,9 @@
         "fullstack:proposal:006",
         "fullstack:proposal:083"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 2,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1426,6 +1659,9 @@
         "ai_ml:proposal:044",
         "ai_ml:proposal:099"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1445,6 +1681,9 @@
         "fullstack:proposal:126",
         "fullstack:proposal:014"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1464,6 +1703,9 @@
         "ai_ml:proposal:110",
         "ai_ml:proposal:061"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1483,6 +1725,9 @@
         "fullstack:proposal:137",
         "fullstack:proposal:025"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1502,6 +1747,9 @@
         "ai_ml:proposal:133",
         "ai_ml:proposal:134"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1521,6 +1769,9 @@
         "ai_ml:proposal:140",
         "ai_ml:proposal:021"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 5,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1540,6 +1791,9 @@
         "ai_ml:proposal:133",
         "ai_ml:proposal:131"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1559,6 +1813,9 @@
         "ai_ml:proposal:140",
         "ai_ml:proposal:070"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1578,6 +1835,9 @@
         "data_analyst:proposal:035",
         "data_analyst:proposal:034"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1597,6 +1857,9 @@
         "ai_ml:proposal:113",
         "ai_ml:proposal:081"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 5,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1616,6 +1879,9 @@
         "ai_ml:proposal:033",
         "ai_ml:proposal:106"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1635,6 +1901,9 @@
         "fullstack:proposal:117",
         "fullstack:proposal:037"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1654,6 +1923,9 @@
         "data_analyst:proposal:094",
         "data_analyst:proposal:017"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 5,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1673,6 +1945,9 @@
         "ai_ml:proposal:065",
         "ai_ml:proposal:079"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1692,6 +1967,9 @@
         "ai_ml:proposal:079",
         "ai_ml:proposal:118"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1711,6 +1989,9 @@
         "fullstack:proposal:125",
         "fullstack:proposal:026"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 2,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1730,6 +2011,9 @@
         "data_analyst:proposal:087",
         "data_analyst:proposal:070"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1749,6 +2033,9 @@
         "fullstack:proposal:138",
         "fullstack:proposal:091"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1768,6 +2055,9 @@
         "ai_ml:proposal:113",
         "ai_ml:proposal:093"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 6,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1787,6 +2077,9 @@
         "ai_ml:proposal:099",
         "ai_ml:proposal:102"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 8,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1806,6 +2099,9 @@
         "data_analyst:proposal:061",
         "data_analyst:proposal:110"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1825,6 +2121,9 @@
         "ai_ml:proposal:089",
         "ai_ml:proposal:120"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 4,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
@@ -1844,6 +2143,9 @@
         "data_analyst:proposal:125",
         "data_analyst:proposal:116"
       ],
+      "status": "ok",
+      "grades": [],
+      "requirements": 3,
       "recall_at_5": 0.0,
       "mrr": 0.0,
       "ndcg_at_10": 0.0
