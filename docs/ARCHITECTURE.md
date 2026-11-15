@@ -158,17 +158,24 @@ and again right after `submit_proposal` returns, then restarts; results in
 ## Measured so far (decision eval, 90-job stratified dev sample)
 
 `make decision-eval` and `make decision-eval MODEL=qwen3:8b`. Fallback model: Groq
-`openai/gpt-oss-20b`. Latency and tokens are from the live runs (commit `0442e4d`); the second
-pair of runs replays the cached model replies under the new rule, so only `decide` changed.
+`openai/gpt-oss-20b`. Live latency and tokens come from the first live runs (commit `0442e4d`,
+2,388 tokens and 25.9 s / 54.5 s p50 / p95 per job for 4B; 44.4 s / 73.2 s for 8B); the rows below
+replay the cached model replies, so only retrieval and `decide` ran again.
 
-| cheap nodes | rule set | bid F1 | scam P / R | injection detected / false pos. | price in band | latency p50 / p95 | tokens / job | file |
-|---|---|---|---|---|---|---|---|---|
-| qwen3:4b | model flags skip | 0.692 | 0.69 / 1.00 | 100% / 0% | 18 / 18 | 25.9 s / 54.5 s | 2,388 | `decisions_qwen3_4b_model_flags_skip.json` |
-| qwen3:8b | model flags skip | 0.278 | 0.28 / 1.00 | 100% / 0% | 5 / 5 | 44.4 s / 73.2 s | 2,394 | `decisions_qwen3_8b_model_flags_skip.json` |
-| **qwen3:4b** | **flags need a rule** | **0.750** | **1.00 / 1.00** | 100% / 0% | 21 / 21 | same as above | same | `decisions_qwen3_4b.json` |
-| qwen3:8b | flags need a rule | 0.571 | 0.90 / 1.00 | 100% / 0% | 14 / 14 | same as above | same | `decisions_qwen3_8b.json` |
+**Correction (2026-11-15).** Until commit `702812d`, in-process MCP sessions carried no user, so
+every persona searched the ai_ml portfolio and used the ai_ml GigSim account. Fit scores for
+data_analyst and fullstack were wrong. Those files are kept with a `_tenant_bug` suffix (and the
+older `_model_flags_skip` files have the same problem); the table uses the re-runs.
 
-Cost per job is effectively zero (local models; the paid fallback ran a handful of times).
+| cheap nodes | sample | rule set | bid F1 | scam P / R | injection detected / false pos. | price in band | file |
+|---|---|---|---|---|---|---|---|
+| **qwen3:4b** | first | flags need a rule | **0.870** | 1.00 / 1.00 | 100% / 0% | 30 / 30 | `decisions_qwen3_4b.json` |
+| qwen3:8b | first | flags need a rule | 0.794 | 0.90 / 1.00 | 100% / 0% | 25 / 25 | `decisions_qwen3_8b.json` |
+| qwen3:4b | fresh | model flags skip | 0.879 | 0.67 / 1.00 | 100% / 0% | 25 / 29 | `decisions_qwen3_4b_fresh_corroboration_off.json` |
+| qwen3:4b | fresh | flags need a rule | 0.841 | 0.86 / 1.00 | 100% / 0% | 25 / 29 | `decisions_qwen3_4b_fresh_corroboration_on.json` |
+
+Before the fix the first-sample 4B F1 was 0.750 and 8B 0.571: most of the gap was retrieval
+against the wrong portfolio, not the models.
 
 **What changed.** The small models over-flag: on the 72 non-scam jobs the 8B model added
 `vague_scope` 71 times, `low_budget` 70 times and `off_platform` 42 times (4B: 28, 15 and 3).
@@ -177,25 +184,75 @@ when a rule signal backs it (a scam, unpaid-work or off-platform pattern, or a c
 from `decision.corroborating_signals`). Injection detection is deliberately not a corroborating
 signal, so injected text cannot push a job to skip by itself.
 
-**Caveats.** The rule was designed after looking at these errors on this same sample, so the
-gain needs confirming on the full dev set (`FULL=1`) before it counts. Scam recall of 1.0 is
-partly circular: the rule patterns were written with our scam templates in view. The remaining
-4B errors are mostly real bids with fit 0.50 to 0.58 in the watch band; fullstack is the weakest
-persona (F1 0.57 vs ai_ml 0.88). qwen3:4b stays the cheap-node model: better on every metric
-and about 40% faster than 8B.
+**Caveats.** Scam recall of 1.0 is partly circular: the rule patterns were written with our
+scam templates in view. Per persona (first sample, 4B) F1 is 0.88 ai_ml, 0.86 data_analyst,
+0.87 fullstack. qwen3:4b stays the cheap-node model: better on every metric and about 40% faster
+than 8B.
 
-**Check on a fresh sample.** `make decision-eval` with `--fresh` draws a second stratified 90-job
-sample with seed 43, disjoint from the first; `--corroboration off|on` overrides the rule. The
-`on` run replays the `off` run's cached model replies (analysis inputs identical on 90/90 jobs),
-so only `decide` differs.
+**Check on a fresh sample.** `--fresh` draws a second stratified 90-job sample with seed 43,
+disjoint from the first; `--corroboration off|on` overrides the rule. Both fresh runs use the
+same cached model replies, so only `decide` differs. Four decisions changed, all on gold-skip
+jobs: one moved to watch and three to bid. On unseen jobs the rule removes false scam calls
+(precision 0.67 to 0.86, recall unchanged) but costs bid F1 (0.879 to 0.841), because the three
+jobs it let through are real skips. The +0.06 F1 on the first sample was tuning to that sample.
+We keep the rule: a wrong scam skip hides a real job from the user for good, while a wrong bid
+still stops at the human approval gate, where the risk report shows the model's flag.
 
-| qwen3:4b, fresh sample | bid F1 | scam P / R | injection detected / false pos. | price in band | latency p50 / p95 | tokens / job | file |
-|---|---|---|---|---|---|---|---|
-| model flags skip | 0.667 | 0.67 / 1.00 | 100% / 0% | 15 / 18 | 25.5 s / 63.8 s | 2,520 | `decisions_qwen3_4b_fresh_corroboration_off.json` |
-| flags need a rule | 0.643 | 0.86 / 1.00 | 100% / 0% | 15 / 18 | replay | replay | `decisions_qwen3_4b_fresh_corroboration_on.json` |
+## Measured so far (proposal eval, 15 bid jobs)
 
-Only 4 decisions changed, all on gold-skip jobs: two moved to watch and two to bid. So on unseen
-jobs the rule still removes false scam calls (precision 0.67 to 0.86, recall unchanged) but it does
-not improve bid F1; the +0.06 on the first sample was partly tuning to that sample. We keep the
-rule because a wrong scam skip hides a real job from the user, and a wrong bid still stops at the
-human approval gate.
+`make proposal-eval` on 15 gold-bid jobs the graph also bid on (5 per persona), writer
+`openai/gpt-oss-120b` on Groq with local `qwen3:8b` as fallback, verifier and compliance on
+`qwen3:4b`. Approval comes from an auto-approver that exists only in the eval runner. Approved
+drafts went to an in-process GigSim (dev scenario, rule-only clients), which then ticked 168 hours.
+File: `evals/results/proposals_openai_gpt-oss-120b.json`.
+
+| metric | value |
+|---|---|
+| drafted / submitted / blocked by compliance / writer failed | 14 / 7 / 5 / 3 |
+| claims per proposal before / after verification | 2.93 / 2.14 |
+| unsupported claims per proposal before / after verification | 0.79 / 0.00 |
+| critic rewrites per proposal (0 / 1 / 2) | 4 / 1 / 9 proposals; 7 ended `critic_unresolved` |
+| compliance violations caught | 8 in 5 drafts (guarantees 5, off-platform 2, fabrication 1) |
+| tokens / cost per proposal (writer, verifier, critic, compliance) | 7,728 / $0.0003 |
+| latency per job p50 / p95 (whole graph, cached analysis) | 72.8 s / 223.3 s |
+| first reply rate after 168 h (replied or interview / submitted) | 3 / 7 = 0.43 |
+
+**Read with care.** Groq's free tier limits tokens per minute and per day, so 13 of the 14 drafts
+were written wholly or partly by the `qwen3:8b` fallback, not the configured 120B model. The
+three writer failures are the 8B model returning the JSON schema instead of filling it in, even
+with the v3 prompt's example. Most compliance blocks are the small model
+reading "ensure" as a guarantee; that is strict but safe. The reply rate comes from GigSim's
+seeded rule-only clients on 7 proposals and says little about real clients.
+
+**Known gaps.** Claims are found by tags or past-tense verbs, so an untagged present-tense
+sentence ("I routinely train large language models on custom corpora") is not checked. Screening
+answers are not verified yet.
+
+### Example (job `1c0b990bb7dbe947`, writer `gpt-oss-120b`, submitted)
+
+> You need a prototype AI chatbot that can convincingly simulate conversations with a chosen
+> historical figure. I understand that the model must capture the figure's voice, manage context
+> across turns, and stay accurate to the source material.
+>
+> I have built a messaging-app support bot that handled multi-step dialogues, used the OpenAI API,
+> LangGraph, FastAPI and Redis for state management, and integrated entity recognition and
+> sentiment analysis. The solution resolved 43 % of interactions without a human and earned a CSAT
+> of 4.4 /5, demonstrating effective context handling and user satisfaction.
+>
+> My core competencies include Python, PyTorch, OpenAI API, LangChain and cloud deployment on AWS
+> with Docker, as documented in my CV. I routinely design conversational flows, train large
+> language models on custom corpora, and monitor performance for continuous improvement.
+>
+> My rate is $55 per hour, and I am ready to start building, training and deploying the
+> historical-figure chatbot on your preferred cloud platform.
+
+| claim | evidence | label |
+|---|---|---|
+| built a messaging-app support bot … OpenAI API, LangGraph, FastAPI, Redis … entity recognition, sentiment | `ai_ml:case_study:p09` | supported |
+| resolved 43 % without a human, CSAT 4.4/5 | `ai_ml:review:19` | supported |
+| Python, PyTorch, OpenAI API, LangChain, AWS, Docker per the CV | `ai_ml:cv` | supported |
+
+Price $55/h (market p25-p75 $27-$54, client up to $74, fit 0.90); dry run: 12 Connects,
+balance 80 → 68, platform policy check passed. The invented "historical letters and speeches
+[p08]" claim from the single-agent baseline on this job is the verifier's regression test
+(`test_verifier_catches_p08_fabrication`).
