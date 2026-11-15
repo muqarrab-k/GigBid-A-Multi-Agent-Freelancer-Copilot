@@ -82,7 +82,8 @@ def score(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 async def run(labels: list[dict[str, Any]], settings: Settings, folder: Path) -> list[dict[str, Any]]:
     jobs = {j["job_id"]: j for j in read_jsonl(JOBS)}
-    stack, graph = LocalStack(folder), build_bid_graph()
+    # decisions only: stop before the writer
+    stack, graph = LocalStack(folder), build_bid_graph(stop_before=["writer"])
     cache = NodeCache(settings.nodes.cache_dir)
     contexts: dict[str, BidContext] = {}
     rows = []

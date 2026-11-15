@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -87,3 +87,12 @@ seed:
 
 demo:
 	@echo "demo: not yet"
+
+replay:
+	$(RUN) python -m agent.graphs.replay $(THREAD) $(NODE)
+
+crash-resume:
+	$(RUN) python -m scripts.crash_resume_demo
+
+proposal-eval:
+	$(RUN) python -m evals.runners.proposal_eval

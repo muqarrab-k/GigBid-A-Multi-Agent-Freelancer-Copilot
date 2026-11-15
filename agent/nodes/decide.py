@@ -28,7 +28,7 @@ def budget_problem(job: dict[str, Any], profile: Profile) -> str | None:
 def skip_flags_fired(risk: RiskReport, rules: DecisionConfig) -> list[str]:
     """Skip flags that count: rule flags always, model flags only with a rule signal beside them."""
     corroborated = bool(set(risk.signals) & set(rules.corroborating_signals))
-    fired = []
+    fired: list[str] = []
     for flag in sorted(set(risk.flags) & set(rules.skip_flags)):
         from_rule = f"pattern:{flag}" in risk.signals or f"llm:{flag}" not in risk.signals
         if from_rule or not rules.model_flags_need_rule or corroborated:
@@ -78,4 +78,7 @@ def decide(state: BidState, settings: Settings, profile: Profile) -> BidDecision
         reasons.append(f"fit {fit.score:.2f} in the watch band [{limits.watch_fit_score}, {limits.minimum_fit_score})")
         return done("watch")
     reasons.append(f"fit {fit.score:.2f} < {limits.watch_fit_score}")
+    if not settings.autonomy.auto_skip_low_fit:
+        reasons.append("auto-skip is off for this user; a human decides")
+        return done("watch")
     return done("skip")
