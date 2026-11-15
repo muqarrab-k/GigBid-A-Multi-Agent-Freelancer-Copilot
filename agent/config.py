@@ -450,6 +450,7 @@ class NodesConfig(Strict):
     cache_dir: Path
     retries: int = Field(default=1, ge=0, le=3)
     max_attempts: int = Field(default=3, ge=1, le=10)
+    max_rate_limit_wait_s: float = 30
 
     @field_validator("cache_dir")
     @classmethod

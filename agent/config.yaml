@@ -381,6 +381,8 @@ nodes:
   retries: 1
   # whole-run failures before dead_letter
   max_attempts: 3
+  # wait this long at most on a per-minute rate limit before using the fallback
+  max_rate_limit_wait_s: 30
 
 risk:
   scam_signals_path: data/processed/scam_signals.json

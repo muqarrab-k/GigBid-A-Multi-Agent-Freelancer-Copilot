@@ -1,5 +1,6 @@
 """Plumbing shared by every bid-graph node."""
 
+import asyncio
 import hashlib
 import json
 import re
@@ -57,6 +58,10 @@ class NodeCache:
 
     def put(self, key: str, reply: dict[str, Any]) -> None:
         self.db.execute("INSERT OR REPLACE INTO replies VALUES (?, ?)", (key, json.dumps(reply)))
+        self.db.commit()
+
+    def drop(self, key: str) -> None:
+        self.db.execute("DELETE FROM replies WHERE key = ?", (key,))
         self.db.commit()
 
 
@@ -130,7 +135,7 @@ async def structured(ctx: BidContext, node: str, schema: type[T],
     base = Template(load_prompt(node)).substitute(values)
     base += "\n\n" + Template(load_prompt("json_output")).substitute(schema=json.dumps(schema.model_json_schema()))
     models = [spec] * (ctx.settings.nodes.retries + 1) + ([spec.fallback] if spec.fallback else [])
-    events, error, prompt, limited = [], None, base, False
+    events, error, prompt, limited, waited = [], None, base, False, False
     for i, model in enumerate(models):
         if limited and model is spec:
             continue
@@ -142,12 +147,22 @@ async def structured(ctx: BidContext, node: str, schema: type[T],
         except Exception as err:  # noqa: BLE001
             error = f"{model.model}: {type(err).__name__}: {err}"
             events.append(llm_event(node, model, {}, i, False, error))
-            # rate limited: go straight to the fallback
-            limited = "RateLimit" in type(err).__name__
+            if "RateLimit" in type(err).__name__:
+                wait = retry_after(str(err))
+                if wait is not None and wait <= ctx.settings.nodes.max_rate_limit_wait_s and not waited:
+                    # short per-minute limit: wait once, then try again
+                    waited = True
+                    await asyncio.sleep(wait)
+                    models.insert(i + 1, model)
+                else:
+                    # daily cap or long wait: straight to the fallback
+                    limited = True
             continue
         try:
             result = schema.model_validate(parse_json(text))
         except (ValidationError, ValueError) as err:
+            # a bad reply must not be replayed next run
+            ctx.store().drop(ctx.store().key(model.model, prompt))
             error = str(err)[:800]
             events.append(llm_event(node, model, usage, i, False, error))
             prompt = base + "\n\n" + Template(load_prompt("json_retry")).substitute(error=error)
@@ -155,6 +170,12 @@ async def structured(ctx: BidContext, node: str, schema: type[T],
         events.append(llm_event(node, model, usage, i, True, None))
         return result, events, None
     return None, events, error
+
+
+def retry_after(message: str) -> float | None:
+    """Seconds from a provider's 'try again in 1m2.5s' hint."""
+    found = re.search(r"try again in (?:(\d+)m)?([\d.]+)s", message)
+    return int(found.group(1) or 0) * 60 + float(found.group(2)) if found else None
 
 
 def llm_event(node: str, model: ModelSpec, usage: dict[str, Any], attempt: int, ok: bool,

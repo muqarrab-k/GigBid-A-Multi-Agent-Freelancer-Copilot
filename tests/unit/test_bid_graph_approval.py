@@ -205,3 +205,11 @@ async def test_platform_policy_failure_blocks_before_approval(tmp_path: Path) ->
     state = await run_job(await bid_job(ctx), ctx, "2024-08-01")
     assert state["status"] == "blocked" and not pending_approval(state)
     assert any("no_off_platform_payment" in e for e in state["errors"])
+
+
+def test_retry_after_hint() -> None:
+    from agent.nodes.common import retry_after
+
+    assert retry_after("Please try again in 12.5s. Need more") == 12.5
+    assert retry_after("Please try again in 5m17.52s.") == 317.52
+    assert retry_after("no hint") is None

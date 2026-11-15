@@ -47,10 +47,10 @@ def eval_auto_approve(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def proposal_cost(state: dict[str, Any]) -> dict[str, Any]:
-    llm = [e["data"] for e in state.get("trace", []) if e["kind"] == "llm" and e["node"] in PROPOSAL_NODES]
-    return {"tokens": sum(d["input_tokens"] + d["output_tokens"] for d in llm),
-            "usd": round(sum(d["usd"] for d in llm), 6),
-            "writer_models": dict(Counter(d["model"] for d in llm if d["node"] == "writer" and d["ok"]))}
+    llm = [e for e in state.get("trace", []) if e["kind"] == "llm" and e["node"] in PROPOSAL_NODES]
+    return {"tokens": sum(e["data"]["input_tokens"] + e["data"]["output_tokens"] for e in llm),
+            "usd": round(sum(e["data"]["usd"] for e in llm), 6),
+            "writer_models": dict(Counter(e["data"]["model"] for e in llm if e["node"] == "writer" and e["data"]["ok"]))}
 
 
 async def admin(stack: LocalStack, method: str, path: str, body: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -75,7 +75,10 @@ async def run(jobs: list[tuple[str, str]], folder: Path) -> tuple[list[dict[str,
             contexts[persona] = BidContext(layer=layer, persona=persona, settings=settings, cache=cache)
         ctx = contexts[persona]
         start = time.perf_counter()
-        state = await run_job(pool[job_id], ctx, TODAY, graph)
+        try:
+            state = await run_job(pool[job_id], ctx, TODAY, graph)
+        except Exception as err:  # noqa: BLE001
+            state = {"status": "error", "errors": [f"{type(err).__name__}: {err}"[:300]]}
         latency = round(time.perf_counter() - start, 2)
         payload = pending_approval(state)
         report = state.get("verification")
