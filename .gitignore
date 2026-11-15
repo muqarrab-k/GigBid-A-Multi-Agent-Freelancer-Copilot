@@ -29,3 +29,4 @@ apps/web/tsconfig.tsbuildinfo
 /neon.ts
 /package.json
 /package-lock.json
+docs/report/REPORT.html
