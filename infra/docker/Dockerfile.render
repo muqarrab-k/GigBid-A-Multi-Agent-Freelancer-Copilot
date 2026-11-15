@@ -1,6 +1,6 @@
-# Render free tier (512 MB): no torch; queries are embedded through the Nomic API with the same
-# nomic-embed-text-v1.5 model the Neon index was built with. API serves the web build and runs
-# GigSim and the MCP servers in-process.
+# Render free tier (512 MB): no torch; queries are embedded in the container with fastembed
+# (bge-small-en-v1.5, onnx), the same embedder that built the deployment's Neon index.
+# The API serves the web build and runs GigSim and the MCP servers in-process.
 
 # web build
 FROM node:22-slim AS web
@@ -16,7 +16,8 @@ ENV HOME=/home/user \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     MODEL_PROFILE=open_hosted \
-    EMBEDDINGS_PROVIDER=hosted \
+    EMBEDDINGS_PROVIDER=lite \
+    FASTEMBED_CACHE_PATH=/home/user/fastembed \
     PORT=10000
 WORKDIR /home/user/app
 
@@ -27,13 +28,17 @@ COPY apps/api/ apps/api/
 COPY rag/ rag/
 COPY mcp_servers/ mcp_servers/
 COPY gigsim/ gigsim/
-RUN pip install -e .
+RUN pip install -e ".[lite]"
 
 # runtime data the nodes and servers read
 COPY data/personas/ data/personas/
 COPY data/policy_pack/ data/policy_pack/
 COPY data/processed/pricing_stats.json data/processed/scam_signals.json data/processed/
 COPY --from=web /web/dist apps/web/dist
+
+# bake the embedding model, then stay offline
+RUN python -c "from agent.config import get_config; from rag.embeddings import get_embedder; get_embedder(get_config().rag.embeddings).embed_query('warm up')"
+ENV HF_HUB_OFFLINE=1
 
 RUN chown -R user:user /home/user
 USER user

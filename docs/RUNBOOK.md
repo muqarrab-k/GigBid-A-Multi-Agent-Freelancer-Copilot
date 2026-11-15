@@ -294,11 +294,11 @@ Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a
 - **Models:** `MODEL_PROFILE=open_hosted`, open-weight models on Groq (gpt-oss-20b with
   gpt-oss-120b as fallback for the small nodes; gpt-oss-120b with gpt-oss-20b as fallback for writer,
   critic and liaison). No Ollama in the deployment.
-- **Embeddings:** the free tier has 512 MB, too little for torch. `EMBEDDINGS_PROVIDER=hosted` embeds
-  queries through the Nomic API with the same open model the index was built with
-  (nomic-embed-text-v1.5), so the Neon index stays valid. `tests/integration/test_hosted_embeddings.py`
-  checks hosted and local vectors agree (cosine > 0.99). The quantized ONNX build fits in memory
-  but only reaches cosine 0.96, so it was not used.
+- **Embeddings:** the free tier has 512 MB, too little for torch. `EMBEDDINGS_PROVIDER=lite` embeds
+  in the container with fastembed (ONNX) and `BAAI/bge-small-en-v1.5`, and the deployment searches its
+  own Neon index built with that same embedder. nomic-embed-text-v1.5 (the main results) did not fit:
+  through fastembed it peaks at 934 MB, and its quantized build only reaches cosine 0.962 to 0.973 with
+  the torch vectors on 20 portfolio texts (0.99 was required). See `docs/rag_notes.md`.
 - **Database:** `DATABASE_URL` is Neon's pooled URL. It holds the pgvector index (`rag` schema),
   LangGraph checkpoints and the store (users, threads, inbox, settings, memory). The pooler rejects
   startup `search_path` options, so on a pooled URL the LangGraph tables live in `public`.
@@ -307,7 +307,7 @@ Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a
   linux/amd64, pushes it to Docker Hub, and creates or updates the `gigbid` service with secrets
   set through the Render API. It is built locally because `data/processed/` is git-ignored and the
   app needs `pricing_stats.json` and `scam_signals.json`. Needs `RENDER_API_KEY`,
-  `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` and `NOMIC_API_KEY` in `.env`.
+  `DOCKERHUB_USERNAME` in `.env` (pushes with Docker Desktop's login).
 - **Sleep and cold start:** free services sleep after 15 idle minutes. `.github/workflows/keepalive.yml`
   pings `/health` every 10 minutes once the `GIGBID_URL` repository variable is set. GitHub can
   delay scheduled runs, so a visitor may still hit a cold start of about a minute.

@@ -45,6 +45,8 @@ embed = [
   "transformers==4.57.6",
   "einops==0.8.2",
 ]
+# small hosts: onnx embeddings without torch
+lite = ["fastembed==0.7.3"]
 data = [
   "pandas==3.1.1",
   "pyarrow==26.0.1",

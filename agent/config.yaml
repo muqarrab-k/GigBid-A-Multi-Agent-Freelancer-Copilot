@@ -345,14 +345,15 @@ rag:
       base_url: http://localhost:11434
       query_prefix: "search_query: "
       document_prefix: "search_document: "
-    # same open model via the nomic api; EMBEDDINGS_PROVIDER=hosted (deployment, no torch)
-    hosted:
-      provider: nomic_api
-      model: nomic-ai/nomic-embed-text-v1.5
-      dim: 768
-      batch_size: 64
-      base_url: https://api-atlas.nomic.ai
-      api_key_env: NOMIC_API_KEY
+    # deployment (512 MB, no torch): EMBEDDINGS_PROVIDER=lite. nomic via onnx needs 934 MB and its
+    # quantized build only reaches cosine 0.965 with the torch vectors, so the deployment has its own index
+    lite:
+      provider: fastembed
+      model: BAAI/bge-small-en-v1.5
+      dim: 384
+      batch_size: 32
+      query_prefix: "Represent this sentence for searching relevant passages: "
+      document_prefix: ""
     cache_path: data/cache/embeddings.sqlite
   chunking:
     strategy: fixed

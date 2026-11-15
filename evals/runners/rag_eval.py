@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import subprocess
 import time
 from datetime import UTC, datetime
@@ -154,6 +155,9 @@ def run(name: str, store_backend: str | None = None, types: list[str] | None = N
         **result,
     }
     suffix = f"_only_{'_'.join(filters.types)}" if filters and filters.types else ""
+    if embedder.model != cfg.embeddings.model:
+        # another embedder never overwrites the main results
+        suffix += "_" + re.sub(r"[^a-z0-9]+", "_", embedder.model.lower().split("/")[-1]).strip("_")
     path = RESULTS / f"rag_{name}{suffix}.json"
     path.write_text(json.dumps(report, indent=2))
     shown = ("variant", "reranker", "overall", "per_job_type", "latency_ms", "refusal")

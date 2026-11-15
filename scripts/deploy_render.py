@@ -18,17 +18,17 @@ from agent.config import ROOT
 API = "https://api.render.com/v1"
 NAME = "gigbid"
 # render env var -> local env name
-SECRETS = {"DATABASE_URL": "NEON_DATABASE_URL", "GROQ_API_KEY": "GROQ_API_KEY", "NOMIC_API_KEY": "NOMIC_API_KEY",
+SECRETS = {"DATABASE_URL": "NEON_DATABASE_URL", "GROQ_API_KEY": "GROQ_API_KEY",
            "APP_SECRET_KEY": "APP_SECRET_KEY", "REVIEWER_PASSWORD": "REVIEWER_PASSWORD",
            "LANGSMITH_API_KEY": "LANGSMITH_API_KEY"}
-PLAIN = {"MODEL_PROFILE": "open_hosted", "EMBEDDINGS_PROVIDER": "hosted", "LANGSMITH_TRACING": "true",
+PLAIN = {"MODEL_PROFILE": "open_hosted", "EMBEDDINGS_PROVIDER": "lite", "LANGSMITH_TRACING": "true",
          "LANGSMITH_PROJECT": "gigbid"}
 
 
-def build_and_push(user: str, token: str) -> str:
+def build_and_push(user: str) -> str:
+    """Pushes with Docker Desktop's login; new repos on a free hub account are public."""
     tag = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
     image = f"docker.io/{user}/gigbid:{tag or int(time.time())}"
-    subprocess.run(["docker", "login", "-u", user, "--password-stdin"], input=token, text=True, check=True)
     subprocess.run(["docker", "buildx", "build", "--platform", "linux/amd64", "-f", "infra/docker/Dockerfile.render",
                     "-t", image, "--push", "."], cwd=ROOT, check=True)
     return image
@@ -48,7 +48,7 @@ def main() -> None:
     args = parser.parse_args()
     load_dotenv(ROOT / ".env")
     http = httpx.Client(base_url=API, timeout=60, headers={"Authorization": f"Bearer {os.environ['RENDER_API_KEY']}"})
-    image = args.image or build_and_push(os.environ["DOCKERHUB_USERNAME"], os.environ["DOCKERHUB_TOKEN"])
+    image = args.image or build_and_push(os.environ["DOCKERHUB_USERNAME"])
     owner = http.get("/owners", params={"limit": 1}).raise_for_status().json()[0]["owner"]["id"]
     found = http.get("/services", params={"name": NAME, "ownerId": owner}).raise_for_status().json()
     if found:
