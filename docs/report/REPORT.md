@@ -6,7 +6,6 @@ date: "15 November 2026"
 ---
 
 <div class="cover">
-<img src="fast_nuces_logo.png" alt="FAST NUCES logo">
 <p class="org">FAST NUCES</p>
 <p class="org">AI-4016 Agentic AI</p>
 <p class="title">GigBid: a multi agent freelancer copilot</p>
