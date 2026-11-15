@@ -20,7 +20,7 @@ async def test_each_agent_gets_only_its_allowlist(layer: McpLayer) -> None:
         assert [t.name for t in layer.get_tools(agent)] == names
     assert layer.get_tools("analyst") == [] and layer.get_tools("compliance") == []
     writer = {t.name for t in layer.get_tools("writer")}
-    assert writer == {"search_evidence", "get_case_study", "list_skills"}
+    assert writer == {"search_evidence", "get_case_study", "list_skills", "get_evidence"}
     single = {t.name for t in layer.get_tools("single_react")}
     assert not single & {"submit_proposal", "send_message"}
     assert {"free_slots", "send_message"} <= {t.name for t in layer.get_tools("client_liaison")}

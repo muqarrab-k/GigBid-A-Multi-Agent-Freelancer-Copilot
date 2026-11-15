@@ -130,8 +130,10 @@ async def structured(ctx: BidContext, node: str, schema: type[T],
     base = Template(load_prompt(node)).substitute(values)
     base += "\n\n" + Template(load_prompt("json_output")).substitute(schema=json.dumps(schema.model_json_schema()))
     models = [spec] * (ctx.settings.nodes.retries + 1) + ([spec.fallback] if spec.fallback else [])
-    events, error, prompt = [], None, base
+    events, error, prompt, limited = [], None, base, False
     for i, model in enumerate(models):
+        if limited and model is spec:
+            continue
         if model is spec.fallback:
             # fresh prompt for the fallback model
             prompt = base
@@ -140,6 +142,8 @@ async def structured(ctx: BidContext, node: str, schema: type[T],
         except Exception as err:  # noqa: BLE001
             error = f"{model.model}: {type(err).__name__}: {err}"
             events.append(llm_event(node, model, {}, i, False, error))
+            # rate limited: go straight to the fallback
+            limited = "RateLimit" in type(err).__name__
             continue
         try:
             result = schema.model_validate(parse_json(text))

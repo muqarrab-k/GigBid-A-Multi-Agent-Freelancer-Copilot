@@ -16,6 +16,7 @@ from agent.handoffs import (
     PriceQuote,
     ProposalDraft,
     RiskReport,
+    VerificationReport,
 )
 
 BidStatus = Literal[
@@ -29,6 +30,8 @@ BidStatus = Literal[
     "rejected",
     "submitted",
     "ready_for_writer",
+    "blocked",
+    "queued",
     "needs_attention",
     "dead_letter",
 ]
@@ -72,6 +75,7 @@ def merge_messages(left: list[ThreadMessage], right: list[ThreadMessage]) -> lis
 
 class BidState(TypedDict, total=False):
     thread_id: str
+    persona: str
     # simulated date the job is judged on
     today: str
     job: dict[str, Any]
@@ -95,6 +99,16 @@ class BidState(TypedDict, total=False):
     # hand-offs that could not be produced
     failed: Annotated[list[str], add]
     trace: Annotated[list[TraceEvent], add]
+    verification: VerificationReport
+    # full text of evidence the writer saw, by id
+    evidence_texts: dict[str, str]
+    best_draft: ProposalDraft
+    # visible notes such as critic_unresolved
+    notes: Annotated[list[str], add]
+    # human edits waiting for style memory
+    pending_edits: Annotated[list[dict[str, Any]], add]
+    approval_preview: dict[str, Any]
+    submission: dict[str, Any]
 
 
 class ConversationState(TypedDict, total=False):

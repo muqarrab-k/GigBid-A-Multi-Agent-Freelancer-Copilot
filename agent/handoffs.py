@@ -170,6 +170,15 @@ class ProposalDraft(Handoff):
         return self
 
 
+class VerificationReport(Handoff):
+    claims_before: int = Field(ge=0)
+    unsupported_before: int = Field(ge=0)
+    partly_before: int = Field(ge=0)
+    removed: list[str] = Field(default_factory=list)
+    claims_after: int = Field(ge=0)
+    unsupported_after: int = Field(ge=0)
+
+
 class Critique(Handoff):
     verdict: Literal["pass", "revise"]
     reasons: list[str] = Field(default_factory=list)

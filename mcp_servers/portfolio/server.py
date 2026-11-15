@@ -78,6 +78,10 @@ class CaseOut(ToolOut):
     case: CaseStudy | None = None
 
 
+class EvidenceOut(ToolOut):
+    evidence: CaseStudy | None = None
+
+
 class SkillsOut(ToolOut):
     skills: list[SkillEntry] = []
 
@@ -174,6 +178,23 @@ def build_server(retriever: Variant | None = None, folder: Path | None = None,
                                           source=doc.source_path, text=doc.text))
 
         return await runner.run(ctx, "get_case_study", {"case_id": case_id}, CaseOut, body)
+
+    @mcp.tool(annotations=READ)
+    async def get_evidence(
+        ctx: Context,  # type: ignore[type-arg]
+        evidence_id: Annotated[str, Field(min_length=3, max_length=200)],
+    ) -> Annotated[CallToolResult, EvidenceOut]:
+        """Full text of any evidence item in your portfolio, by evidence id."""
+        async def body(_: object) -> EvidenceOut:
+            doc = next((d for d in documents(tenant()) if d.evidence_id == evidence_id), None)
+            if doc is None:
+                raise ToolFailure("not_found", f"no evidence {evidence_id!r} in this portfolio")
+            return EvidenceOut(evidence=CaseStudy(evidence_id=doc.evidence_id, project=doc.project,
+                                                  title=title_of(doc.text), client_industry=doc.client_industry,
+                                                  date=doc.date, skills=doc.skills, source=doc.source_path,
+                                                  text=doc.text))
+
+        return await runner.run(ctx, "get_evidence", {"evidence_id": evidence_id}, EvidenceOut, body)
 
     @mcp.tool(annotations=READ)
     async def list_skills(ctx: Context) -> Annotated[CallToolResult, SkillsOut]:  # type: ignore[type-arg]

@@ -13,7 +13,7 @@ rules:
     severity: block
     applies_to: [proposal, message, job]
     hints:
-      keywords: [telegram, whatsapp, skype, signal, wechat, "pay outside", "outside the platform", "outside upwork", "direct payment", paypal, wire transfer, zelle]
+      keywords: [telegram, whatsapp, skype, wechat, "pay outside", "outside the platform", "outside upwork", "direct payment", paypal, wire transfer, zelle]
       patterns:
         - "(?i)\\b(contact|message|text|reach) (me|us) (on|via|at) (telegram|whatsapp|skype|signal)"
         - "(?i)\\bpay(ment)? (outside|off)[- ]?(the )?(platform|upwork)"

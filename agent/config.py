@@ -449,6 +449,7 @@ class McpClientConfig(Strict):
 class NodesConfig(Strict):
     cache_dir: Path
     retries: int = Field(default=1, ge=0, le=3)
+    max_attempts: int = Field(default=3, ge=1, le=10)
 
     @field_validator("cache_dir")
     @classmethod
@@ -515,6 +516,52 @@ class ScoutConfig(Strict):
         return value if value.is_absolute() else ROOT / value
 
 
+class WriterConfig(Strict):
+    min_words: int = Field(gt=0)
+    max_words: int = Field(gt=0)
+    max_evidence: int = Field(gt=0)
+    evidence_chars: int = Field(gt=0)
+
+
+class VerifierConfig(Strict):
+    unsupported_below: float = Field(ge=0, le=1)
+    judge_below: float = Field(ge=0, le=1)
+    use_llm: bool = True
+
+
+class CriticConfig(Strict):
+    min_job_terms: int = Field(ge=0)
+    generic_openers: list[str]
+
+
+class ComplianceConfig(Strict):
+    policy_rules_path: Path
+    clean_rules: list[str]
+    borderline_terms: list[str]
+
+    @field_validator("policy_rules_path")
+    @classmethod
+    def from_root(cls, value: Path) -> Path:
+        return value if value.is_absolute() else ROOT / value
+
+
+class CheckpointConfig(Strict):
+    backend: Literal["postgres", "memory"]
+    dsn_env: str
+    dsn_default: str
+    schema_name: str = Field(alias="schema")
+
+    @property
+    def dsn(self) -> str:
+        return (os.getenv(self.dsn_env) or self.dsn_default).replace("+psycopg", "")
+
+
+class AutonomyConfig(Strict):
+    auto_skip_low_fit: bool = True
+    # never true: sending always needs a human
+    auto_send: Literal[False] = False
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -533,6 +580,12 @@ class Settings(Strict):
     decision: DecisionConfig
     pricing: PricingConfig
     scout: ScoutConfig
+    writer: WriterConfig
+    verifier: VerifierConfig
+    critic: CriticConfig
+    compliance: ComplianceConfig
+    autonomy: AutonomyConfig
+    checkpointer: CheckpointConfig
 
     @property
     def profile(self) -> Profile:

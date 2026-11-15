@@ -83,6 +83,13 @@ models:
         temperature: 0.4
         usd_per_mtok_in: 0.15
         usd_per_mtok_out: 0.60
+        # groq has a daily token cap; local has none
+        fallback:
+          provider: ollama
+          model: qwen3:8b
+          base_url: http://localhost:11434/v1
+          temperature: 0.4
+          reasoning_effort: none
       critic:
         <<: *open_strong
         temperature: 0.0
@@ -185,7 +192,8 @@ mcp:
 budgets:
   max_graph_steps: 30
   max_revisions: 2
-  max_tokens_per_job: 12000
+  # analysis about 2.5k plus up to 3 writer passes
+  max_tokens_per_job: 30000
   # declared targets
   targets:
     p95_latency_s_per_job: 20
@@ -349,7 +357,7 @@ mcp_client:
                               list_threads, list_messages, get_events, get_policy, get_market_stats]
     analyst: []
     risk_assessor: *marketplace_read
-    fit_matcher: &portfolio_read [search_evidence, get_case_study, list_skills]
+    fit_matcher: &portfolio_read [search_evidence, get_case_study, list_skills, get_evidence]
     pricing: *marketplace_read
     writer: *portfolio_read
     verifier: *portfolio_read
@@ -360,14 +368,19 @@ mcp_client:
                      list_threads, list_messages, get_events, get_policy, create_proposal_draft,
                      submit_proposal, send_message, free_slots, create_tentative_hold, create_email_draft]
     # rq-c baseline: drafts only, never submit or send
+    # approval gate: dry runs before, writes only after a human approves
+    approval: [get_job, get_connects_balance, create_proposal_draft, submit_proposal]
     single_react: [search_jobs, get_job, get_client_history, get_connects_balance, get_policy,
                    create_proposal_draft, search_evidence, get_case_study, list_skills]
+    proposal_eval: [get_job]
 
 # bid graph nodes
 nodes:
   cache_dir: data/cache/nodes
   # retries before the fallback model
   retries: 1
+  # whole-run failures before dead_letter
+  max_attempts: 3
 
 risk:
   scam_signals_path: data/processed/scam_signals.json
@@ -431,3 +444,40 @@ scout:
     data_analyst:
       - {q: dashboard, limit: 20}
       - {skills: [SQL], limit: 20}
+
+writer:
+  min_words: 110
+  max_words: 260
+  max_evidence: 6
+  evidence_chars: 1200
+
+verifier:
+  # share of claim content words found in the cited evidence
+  unsupported_below: 0.25
+  judge_below: 0.6
+  use_llm: true
+
+critic:
+  min_job_terms: 2
+  generic_openers: [passionate, hard-working, hardworking, "dear sir", "dear hiring manager", "to whom it may concern",
+                    "i am an expert", "i have read your job", "highly skilled", "i am the best"]
+
+compliance:
+  policy_rules_path: data/policy_pack/policy_rules.yaml
+  # removed from the text; everything else blocks
+  # rules whose sentences may be cut instead of blocking; empty = every violation blocks
+  clean_rules: []
+  borderline_terms: [ensure, promise, risk-free, "100%", "will definitely", "fully satisfied"]
+
+# per user, never allows auto-send
+autonomy:
+  auto_skip_low_fit: true
+  auto_send: false
+
+
+# langgraph checkpoints; tests use memory
+checkpointer:
+  backend: postgres
+  dsn_env: DATABASE_URL
+  dsn_default: postgresql://gigbid:gigbid@localhost:5432/gigbid
+  schema: langgraph
