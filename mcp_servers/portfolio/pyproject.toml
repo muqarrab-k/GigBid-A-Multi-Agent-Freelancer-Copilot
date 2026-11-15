@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gigbid-portfolio-mcp"
+version = "0.1.0"
+description = "Read-only MCP server that searches a freelancer's portfolio folder for evidence (GigBid)"
+readme = "README.md"
+authors = [{ name = "Muqarrab" }]
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = ["mcp==1.30.0"]
+
+[project.scripts]
+gigbid-portfolio-mcp = "gigbid_portfolio_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gigbid_portfolio_mcp"]
