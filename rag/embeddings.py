@@ -73,7 +73,8 @@ class FastEmbedEmbedder:
         from fastembed import TextEmbedding
 
         self.spec, self.model, self.dim = spec, spec.model, spec.dim
-        self.onnx = TextEmbedding(spec.model)
+        # baked into the image; never download at runtime
+        self.onnx = TextEmbedding(spec.model, local_files_only=os.getenv("HF_HUB_OFFLINE") == "1")
 
     def encode(self, texts: list[str]) -> np.ndarray:
         if not texts:

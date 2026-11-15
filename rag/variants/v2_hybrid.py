@@ -29,8 +29,14 @@ class V2Hybrid:
 
     def retrieve(self, job: Job, persona: str, k: int, filters: Filters | None = None) -> list[EvidenceHit]:
         text = query_text(job)
-        dense = [c for c, _ in self.store.search(self.embedder.embed_query(text), persona, self.pool, filters)]
+        found = self.store.search(self.embedder.embed_query(text), persona, self.pool, filters)
+        dense = [c for c, _ in found]
         sparse = self.sparse(text, persona, filters)
         by_id = {c.chunk_id: c for c in dense + sparse}
         fused = rrf([[c.chunk_id for c in dense], [c.chunk_id for c in sparse]], self.rrf_k)
-        return best_per_evidence([(by_id[str(i)], s) for i, s in fused], k)
+        hits = best_per_evidence([(by_id[str(i)], s) for i, s in fused], k)
+        # rank by rrf, but report cosine: fit thresholds are on that scale
+        cosine: dict[str, float] = {}
+        for chunk, score in found:
+            cosine[chunk.evidence_id] = max(score, cosine.get(chunk.evidence_id, 0.0))
+        return [h.model_copy(update={"score": round(cosine.get(h.evidence_id, 0.0), 4)}) for h in hits]
