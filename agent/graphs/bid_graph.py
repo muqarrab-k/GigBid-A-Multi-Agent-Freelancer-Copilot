@@ -83,7 +83,7 @@ def after_verifier(state: BidState) -> str:
 
 
 def after_prepare(state: BidState) -> str:
-    return "end" if state.get("status") == "queued" else "approval_gate"
+    return "end" if state.get("status") in ("queued", "blocked") else "approval_gate"
 
 
 def build_bid_graph(checkpointer: BaseCheckpointSaver[Any] | None = None,

@@ -537,6 +537,7 @@ class CriticConfig(Strict):
 class ComplianceConfig(Strict):
     policy_rules_path: Path
     clean_rules: list[str]
+    patterns_only_rules: list[str] = Field(default_factory=list)
     borderline_terms: list[str]
 
     @field_validator("policy_rules_path")

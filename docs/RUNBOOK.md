@@ -219,3 +219,43 @@ Runs the bid graph on a stratified 90-job dev sample (30 per persona: 6 scams, 4
 10 bid, 10 skip) and writes `evals/results/decisions_<model>.json`; add `FULL=1` for all 600 jobs.
 LLM replies are cached in `data/cache/nodes/`, so reruns cost nothing. `make graph-render`
 rewrites the diagram.
+
+## Bid graph (proposal half, approval, durability)
+
+Needs `make db-up` (pgvector and the `langgraph` checkpoint schema), Ollama with `qwen3:4b` and
+`qwen3:8b`, and `GROQ_API_KEY` for the writer (`openai/gpt-oss-120b`; on a 429 it falls back to
+local `qwen3:8b` straight away, because Groq's free tier caps tokens per day).
+
+```bash
+make crash-resume
+```
+
+Starts a thread for job `1c0b990bb7dbe947`, kills the process (SIGKILL) while it waits for
+approval, restarts and approves, kills it again right after `submit_proposal` returns, restarts
+once more, and checks GigSim: one submitted proposal, Connects charged once. Writes
+`evals/results/crash_resume.json`; the GigSim database stays in `data/cache/crash_demo/<stamp>/`.
+
+```bash
+make replay THREAD=<thread_id> NODE=writer
+```
+
+Forks the thread from the checkpoint just before `NODE` and runs on against a scratch GigSim.
+
+```bash
+make proposal-eval
+```
+
+15 bid jobs (5 per persona) through writer, verifier, critic and compliance; an eval-only
+auto-approver submits to an in-process GigSim (dev scenario, rule-only clients), ticks 168 hours
+and records first replies. Writes `evals/results/proposals_<writer model>.json`.
+
+Resuming a thread by hand (Python):
+
+```python
+await resume_job(thread_id, {"action": "edit", "edited_text": "..."}, ctx, graph)
+await resume_job(thread_id, {"action": "reject", "reason": "budget too low"}, ctx, graph)
+await resume_job(thread_id, {"action": "approve"}, ctx, graph)
+```
+
+A thread that fails `nodes.max_attempts` times gets status `dead_letter` with every error in
+`errors`; a marketplace outage before approval or during submit gives status `queued`.

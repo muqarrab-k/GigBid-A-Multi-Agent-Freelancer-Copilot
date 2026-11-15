@@ -34,23 +34,25 @@ def load_rules(path: Path) -> list[dict[str, Any]]:
     return [r for r in rules if "proposal" in r.get("applies_to", []) and r["id"] not in SKIP_RULES]
 
 
-def rule_hits(text: str, rule: dict[str, Any]) -> bool:
+def rule_hits(text: str, rule: dict[str, Any], patterns_only: bool = False) -> bool:
     hints = rule.get("hints", {})
     if any(re.search(p, text) for p in hints.get("patterns", [])):
         return True
+    if patterns_only:
+        return False
     low = text.lower()
     return any(re.search(rf"(?<![a-z0-9]){re.escape(k.lower())}(?![a-z0-9])", low) for k in hints.get("keywords", []))
 
 
-def scan(texts: list[str], rules: list[dict[str, Any]]) -> list[tuple[int, str]]:
-    return [(i, r["id"]) for i, t in enumerate(texts) for r in rules if rule_hits(t, r)]
+def scan(texts: list[str], rules: list[dict[str, Any]], patterns_only: list[str]) -> list[tuple[int, str]]:
+    return [(i, r["id"]) for i, t in enumerate(texts) for r in rules if rule_hits(t, r, r["id"] in patterns_only)]
 
 
 async def compliance(state: BidState, runtime: Runtime[BidContext]) -> dict[str, Any]:
     ctx, draft, cfg = runtime.context, state["draft"], runtime.context.settings.compliance
     rules = load_rules(cfg.policy_rules_path)
     parts = [s for p in draft.paragraphs for s in sentences(p)] + list(draft.screening_answers)
-    hits = scan(parts, rules)
+    hits = scan(parts, rules, cfg.patterns_only_rules)
     events: list[dict[str, Any]] = []
     flagged = {i for i, _ in hits}
     borderline = [i for i, t in enumerate(parts) if i not in flagged

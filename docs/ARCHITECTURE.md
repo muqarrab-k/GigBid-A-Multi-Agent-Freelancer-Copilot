@@ -1,9 +1,9 @@
 # Architecture
 
 GigBid is a set of LangGraph agents that reach the outside world only through our MCP servers.
-This page covers what exists so far: the marketplace and tool layer, retrieval, and the
-analysis half of the bid graph. The writer, claim verification, Critic, Compliance, approval
-interrupts and Postgres persistence come next.
+This page covers the marketplace and tool layer, retrieval, and the full bid graph: analysis,
+writing, claim verification, Critic, Compliance, the human approval interrupt and submission,
+with Postgres checkpoints.
 
 ```
 agent node -> agent/mcp_client.py (allowlist, trace_id, retries) -> our MCP server
@@ -11,9 +11,9 @@ agent node -> agent/mcp_client.py (allowlist, trace_id, retries) -> our MCP serv
                               -> Portfolio retriever (RAG variant over pgvector)
 ```
 
-## Bid graph, analysis half (`agent/graphs/bid_graph.py`)
+## Bid graph (`agent/graphs/bid_graph.py`)
 
-Rendered from code (`make graph-render` writes `docs/images/bid_graph_analysis.mmd`):
+Rendered from code (`make graph-render` writes `docs/images/bid_graph.mmd`):
 
 ```mermaid
 graph TD;
@@ -25,9 +25,26 @@ graph TD;
 	join(join)
 	decide(decide)
 	pricing(pricing)
+	writer(writer)
+	verifier(verifier)
+	critic(critic)
+	compliance(compliance)
+	prepare_approval(prepare_approval)
+	approval_gate(approval_gate)
+	apply_edit(apply_edit)
+	reject(reject)
+	submit(submit)
 	__end__([<p>__end__</p>]):::last
 	__start__ --> intake;
 	analyst --> join;
+	apply_edit --> verifier;
+	approval_gate -.-> apply_edit;
+	approval_gate -.-> reject;
+	approval_gate -.-> submit;
+	compliance -. &nbsp;end&nbsp; .-> __end__;
+	compliance -.-> prepare_approval;
+	critic -.-> compliance;
+	critic -.-> writer;
 	decide -. &nbsp;end&nbsp; .-> __end__;
 	decide -.-> pricing;
 	fit_matcher --> join;
@@ -36,8 +53,16 @@ graph TD;
 	intake -.-> risk_assessor;
 	join -. &nbsp;stop&nbsp; .-> __end__;
 	join -.-> decide;
+	prepare_approval -. &nbsp;end&nbsp; .-> __end__;
+	prepare_approval -.-> approval_gate;
+	pricing --> writer;
 	risk_assessor --> join;
-	pricing --> __end__;
+	verifier -.-> compliance;
+	verifier -.-> critic;
+	writer -. &nbsp;end&nbsp; .-> __end__;
+	writer -.-> verifier;
+	reject --> __end__;
+	submit --> __end__;
 	classDef default fill:#f2f0ff,line-height:1.2
 	classDef first fill-opacity:0
 	classDef last fill:#bfb6fc
@@ -45,7 +70,7 @@ graph TD;
 
 One thread per job. `intake` fans out with `Send` to three nodes that run in parallel, `join`
 waits for all three and enforces the step and token budgets, `decide` applies the rules, and
-only `bid` continues to `pricing`, which ends with status `ready_for_writer`.
+only `bid` continues to `pricing` and then to the proposal half below.
 
 | node | job | model | tools (allowlist) |
 |---|---|---|---|
@@ -74,6 +99,34 @@ fit matrix only as evidence.
 **Market stats.** GigSim is frozen and has no statistics endpoint, so `get_market_stats` on the
 marketplace server serves `data/processed/pricing_stats.json` (made by `make data` from the
 Kaggle jobs and contracts) and labels the source in every answer.
+
+## Proposal half: writer to submit
+
+| node | job | model | tools |
+|---|---|---|---|
+| writer | `ProposalDraft` in short paragraphs; every factual sentence ends with evidence ids; opens with the client's problem; screening answers; price from `PriceQuote`; on a revision it gets the Critic's reasons and the claims the verifier removed | strong (`writer` in config), local fallback | portfolio read incl. `get_evidence` |
+| verifier | `rag/verify.py`: one claim per factual sentence; deterministic checks first (cited ids exist, every number and name appears in the cited evidence, key-word coverage), small-model judge only for the middle band; unsupported claims are removed before the Critic; before/after counts in `verification` | cheap | portfolio read |
+| critic | rules: claims removed by the verifier, fewer than 2 grounded claims, generic opener, first paragraph not using the job's terms, length outside `writer.min_words..max_words`, missing screening answers. Pass or revise with reasons; at most `budgets.max_revisions` (2) rewrites, then the best draft goes on with a visible `critic_unresolved` note | none (rules) | none |
+| compliance | `data/policy_pack/policy_rules.yaml` patterns and keywords for contact details, off-platform, guarantees, unpaid work, credentials; fabrication from the verifier's `unsupported_after`; the small model only for sentences with borderline words (`compliance.borderline_terms`). Any violation blocks (`compliance.clean_rules: []`); `cleaned_text` shows the draft without the flagged sentences | cheap, borderline only | none |
+| prepare_approval | dry runs of `create_proposal_draft` and the Connects balance; payload: draft (with and without tags), claim table with evidence, risk report, price rationale, cost and balance after, verifier/critic/compliance notes | none | `approval` allowlist |
+| approval_gate | `interrupt(payload)`; resume with `Command(resume={"action": "approve" \| "edit" \| "reject", ...})` | human | none |
+| apply_edit | the human's text replaces the draft, a unified diff goes to `pending_edits` (style memory later); then verifier (report only, a human's words are never rewritten) and Compliance run again and the gate interrupts again | none | none |
+| reject | records the reason in `submission` and ends with status `rejected` | none | none |
+| submit | `create_proposal_draft` then `submit_proposal`, both through the marketplace MCP server, idempotency key `thread_id:sha256(draft, answers, price)`; marketplace down means status `queued`, never a crash | none | `approval` allowlist |
+
+**Autonomy.** `autonomy.auto_skip_low_fit` lets the graph skip low-fit jobs on its own (off turns
+those into `watch`). `autonomy.auto_send` is typed `Literal[False]`: a config that sets it to true
+fails to load, and `submit` raises unless the stored approval says `approve`. The proposal eval
+uses an auto-approver that lives only in `evals/runners/proposal_eval.py`.
+
+**Durability.** Real runs use `AsyncPostgresSaver` in schema `langgraph`
+(`agent/graphs/checkpoint.py`, `checkpointer` in config); tests use the in-memory saver. Only
+our hand-off models may be deserialised from a checkpoint. `invoke` retries a failing thread
+from its last checkpoint up to `nodes.max_attempts` (3) times, then marks it `dead_letter` with
+every error. `make replay THREAD=<id> NODE=<name>` forks a thread from the checkpoint before a
+node against a scratch GigSim. `make crash-resume` kills the process while it waits for approval
+and again right after `submit_proposal` returns, then restarts; results in
+`evals/results/crash_resume.json`.
 
 ## State, execution trace and long-term memory are separate
 

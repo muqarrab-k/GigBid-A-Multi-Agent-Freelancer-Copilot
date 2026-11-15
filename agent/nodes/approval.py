@@ -59,6 +59,11 @@ async def prepare_approval(state: BidState, runtime: Runtime[BidContext]) -> dic
     if down(preview) or down(balance):
         return {"status": "queued", "errors": ["marketplace unavailable before approval; queued"],
                 "trace": tools.events, "step_count": 1}
+    check = preview.get("policy_check") or {}
+    if check and check.get("passed") is False:
+        # the platform would refuse it; never ask a human to approve that
+        return {"status": "blocked", "trace": tools.events, "step_count": 1,
+                "errors": [f"marketplace policy check failed: {check.get('rule_id')} {check.get('detail', '')}".strip()]}
     cost = preview.get("connects_cost") or state["price_quote"].connects_cost
     have = (balance.get("connects") or {}).get("balance")
     report = state.get("verification")

@@ -467,6 +467,8 @@ compliance:
   # removed from the text; everything else blocks
   # rules whose sentences may be cut instead of blocking; empty = every violation blocks
   clean_rules: []
+  # rules that match on patterns only in proposals; empty mirrors GigSim, which blocks the bare keywords
+  patterns_only_rules: []
   borderline_terms: [ensure, promise, risk-free, "100%", "will definitely", "fully satisfied"]
 
 # per user, never allows auto-send

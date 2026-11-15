@@ -3,7 +3,7 @@
 from agent.config import ROOT
 from agent.graphs.bid_graph import build_bid_graph
 
-OUT = ROOT / "docs" / "images" / "bid_graph_analysis.mmd"
+OUT = ROOT / "docs" / "images" / "bid_graph.mmd"
 
 
 def main() -> None:

@@ -188,3 +188,20 @@ async def test_postgres_resume_in_a_new_graph(tmp_path: Path) -> None:
         out = await resume_job(thread, {"action": "approve"}, ctx, build_bid_graph(saver))
     assert out["status"] == "submitted"
     assert len([p for p in await proposals(ctx) if p["status"] == "submitted"]) == 1
+
+
+
+async def test_platform_policy_failure_blocks_before_approval(tmp_path: Path) -> None:
+    ctx, _, _ = open_ctx(tmp_path)
+    real = ctx.layer.call
+
+    async def failing_check(name: str, args: dict[str, Any], forced: Any = None) -> dict[str, Any]:
+        out = await real(name, args, forced)
+        if name == "create_proposal_draft" and args.get("dry_run"):
+            out = {**out, "policy_check": {"passed": False, "rule_id": "no_off_platform_payment"}}
+        return out
+
+    ctx.layer.call = failing_check
+    state = await run_job(await bid_job(ctx), ctx, "2024-08-01")
+    assert state["status"] == "blocked" and not pending_approval(state)
+    assert any("no_off_platform_payment" in e for e in state["errors"])
