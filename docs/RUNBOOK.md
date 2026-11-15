@@ -309,7 +309,7 @@ Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a
   app needs `pricing_stats.json` and `scam_signals.json`. Needs `RENDER_API_KEY`,
   `DOCKERHUB_USERNAME` in `.env` (pushes with Docker Desktop's login).
 - **Sleep and cold start:** free services sleep after 15 idle minutes. `.github/workflows/keepalive.yml`
-  pings `/health` every 10 minutes once the `GIGBID_URL` repository variable is set. GitHub can
+  pings `/health` every 10 minutes (the `GIGBID_URL` repository variable overrides the default URL). GitHub can
   delay scheduled runs, so a visitor may still hit a cold start of about a minute.
 - **Reviewer:** user `reviewer`, persona ai_ml, password from the `REVIEWER_PASSWORD` secret.
 

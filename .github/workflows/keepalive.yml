@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: ping /health
         env:
-          URL: ${{ vars.GIGBID_URL }}
+          URL: ${{ vars.GIGBID_URL || 'https://gigbid-3g0a.onrender.com' }}
         run: |
           if [ -z "$URL" ]; then echo "set the GIGBID_URL repository variable"; exit 0; fi
           # cold start can take a minute
