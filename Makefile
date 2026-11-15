@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval eval-record check-repo seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi web web-build web-client e2e api-fake
+.PHONY: install dev api test eval eval-record check-repo demo-gif seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi web web-build web-client e2e api-fake
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -122,3 +122,8 @@ api-fake:
 
 e2e: web-build
 	cd apps/web && npx playwright install chromium && npx playwright test; echo "report: apps/web/playwright-report/index.html"
+
+# readme gif from the approve e2e test
+demo-gif: web-build
+	cd apps/web && npx playwright test -c playwright.demo.config.ts -g "approve submits once"
+	python -m scripts.make_demo_gif
