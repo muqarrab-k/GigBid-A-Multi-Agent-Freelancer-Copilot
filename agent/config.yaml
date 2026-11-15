@@ -269,7 +269,7 @@ synth:
 
 # portfolio retrieval, open models on CPU
 rag:
-  variant: v0
+  variant: v2_filter
   default_k: 5
   # chunks pulled before grouping by evidence
   candidate_multiplier: 6
