@@ -312,6 +312,12 @@ Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a
   pings `/health` every 10 minutes (the `GIGBID_URL` repository variable overrides the default URL). GitHub can
   delay scheduled runs, so a visitor may still hit a cold start of about a minute.
 - **Reviewer:** user `reviewer`, persona ai_ml, password from the `REVIEWER_PASSWORD` secret.
+- **Groq free-tier quota:** each gpt-oss model allows 200k tokens per rolling 24 hours. A full bid
+  (analysis, writer with up to two critic revisions, verifier, compliance) costs roughly 15k to 40k
+  tokens, so the free tier covers only a handful of bids a day. When both models are spent, a run
+  stops with `needs_attention` and the 429 message in its errors; nothing is sent. Start the same
+  job again after the window frees, or add a paid tier.
+- **Memory:** peak 444 MB under a 512 MB cap for scout plus one full bid (fastembed loaded).
 
 ### What resets on restart (ephemeral disk)
 
