@@ -206,29 +206,36 @@ still stops at the human approval gate, where the risk report shows the model's 
 drafts went to an in-process GigSim (dev scenario, rule-only clients), which then ticked 168 hours.
 File: `evals/results/proposals_openai_gpt-oss-120b.json`.
 
-| metric | value |
-|---|---|
-| drafted / submitted / blocked by compliance / writer failed | 14 / 7 / 5 / 3 |
-| claims per proposal before / after verification | 2.93 / 2.14 |
-| unsupported claims per proposal before / after verification | 0.79 / 0.00 |
-| critic rewrites per proposal (0 / 1 / 2) | 4 / 1 / 9 proposals; 7 ended `critic_unresolved` |
-| compliance violations caught | 8 in 5 drafts (guarantees 5, off-platform 2, fabrication 1) |
-| tokens / cost per proposal (writer, verifier, critic, compliance) | 7,728 / $0.0003 |
-| latency per job p50 / p95 (whole graph, cached analysis) | 72.8 s / 223.3 s |
-| first reply rate after 168 h (replied or interview / submitted) | 3 / 7 = 0.43 |
+Writer prompt v4 and the wider verifier (present-tense experience claims, screening answers)
+are the current run; the v3 column is the run before that change (same file at commit `e534d81`).
 
-**Read with care.** Groq's free tier limits tokens per minute and per day, so 13 of the 14 drafts
-were written wholly or partly by the `qwen3:8b` fallback, not the configured 120B model. The
-three writer failures are the 8B model returning the JSON schema instead of filling it in, even
-with the v3 prompt's example. Most compliance blocks are the small model
-reading "ensure" as a guarantee; that is strict but safe. The reply rate comes from GigSim's
-seeded rule-only clients on 7 proposals and says little about real clients.
+| metric | v4 + wider verifier | v3 (`e534d81`) |
+|---|---|---|
+| drafted / submitted / blocked by compliance / writer failed | 14 / 9 / 3 / 3 | 14 / 7 / 5 / 3 |
+| claims per proposal before / after verification | 6.14 / 2.29 | 2.93 / 2.14 |
+| unsupported claims per proposal before / after verification | 3.86 / 0.00 | 0.79 / 0.00 |
+| critic rewrites per proposal (0 / 1 / 2) | 4 / 0 / 10; 10 `critic_unresolved` | 4 / 1 / 9; 7 `critic_unresolved` |
+| compliance violations caught | 3 (off-platform 2, guarantees 1) | 8 (guarantees 5, off-platform 2, fabrication 1) |
+| tokens / cost per proposal (writer, verifier, critic, compliance) | 9,039 / $0.0002 | 7,728 / $0.0003 |
+| latency per job p50 / p95 (whole graph, cached analysis) | 87.5 s / 354.3 s | 72.8 s / 223.3 s |
+| first reply rate after 168 h (replied or interview / submitted) | 3 / 9 = 0.33 | 3 / 7 = 0.43 |
 
-**Known gaps.** Claims are found by tags or past-tense verbs, so an untagged present-tense
-sentence ("I routinely train large language models on custom corpora") is not checked. Screening
-answers are not verified yet.
+**Read with care.** Groq's free tier limits tokens per minute and per day, so 12 of 14 drafts
+(v3: 13 of 14) were written wholly or partly by the `qwen3:8b` fallback, not the configured
+120B model. The three writer failures in each run are the 8B model returning the JSON schema
+instead of filling it in. The wider verifier finds about twice as many claims, and most of the
+new ones are unsupported habits ("I routinely...") or screening-answer claims; after removal the
+grounded count barely moves (2.29 vs 2.14). Two submitted v4 drafts were left with no grounded
+claim at all (`critic_unresolved`); the Critic flags this but cannot block. In v3 most compliance
+blocks were the small model reading "ensure" as a guarantee. The reply rate comes from GigSim's
+seeded rule-only clients on 7 to 9 proposals and says little about real clients.
 
-### Example (job `1c0b990bb7dbe947`, writer `gpt-oss-120b`, submitted)
+**Gaps closed.** Present-tense and "I have experience" sentences now count as claims, and
+screening answers go through the same checks; an answer emptied by the verifier stays empty so
+the Critic asks for it again. Tests: `test_untagged_present_tense_claim_is_removed`,
+`test_screening_answers_are_verified`.
+
+### Example (job `1c0b990bb7dbe947`, writer `gpt-oss-120b`, submitted in the v3 run)
 
 > You need a prototype AI chatbot that can convincingly simulate conversations with a chosen
 > historical figure. I understand that the model must capture the figure's voice, manage context
@@ -253,6 +260,7 @@ answers are not verified yet.
 | Python, PyTorch, OpenAI API, LangChain, AWS, Docker per the CV | `ai_ml:cv` | supported |
 
 Price $55/h (market p25-p75 $27-$54, client up to $74, fit 0.90); dry run: 12 Connects,
-balance 80 → 68, platform policy check passed. The invented "historical letters and speeches
+balance 80 → 68, platform policy check passed. Under the wider verifier the untagged "I routinely
+design conversational flows, train large language models..." sentence would now be removed. The invented "historical letters and speeches
 [p08]" claim from the single-agent baseline on this job is the verifier's regression test
 (`test_verifier_catches_p08_fabrication`).

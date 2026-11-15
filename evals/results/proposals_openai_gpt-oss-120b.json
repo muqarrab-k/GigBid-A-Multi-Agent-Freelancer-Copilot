@@ -7,70 +7,69 @@
     "gigsim": "dev scenario, rule_only clients",
     "approval": "eval harness auto-approve (eval only)"
   },
-  "commit": "702812d",
-  "date": "2026-11-15T07:26:16+00:00",
+  "commit": "3a4b161",
+  "date": "2026-11-15T08:07:38+00:00",
   "metrics": {
     "jobs": 15,
     "drafted": 14,
-    "submitted": 7,
-    "blocked_by_compliance": 5,
-    "unsupported_per_proposal_before": 0.79,
+    "submitted": 9,
+    "blocked_by_compliance": 3,
+    "unsupported_per_proposal_before": 3.86,
     "unsupported_per_proposal_after": 0,
-    "claims_per_proposal_before": 2.93,
-    "claims_per_proposal_after": 2.14,
+    "claims_per_proposal_before": 6.14,
+    "claims_per_proposal_after": 2.29,
     "critic_revisions": {
-      "0": 4,
-      "2": 9,
-      "1": 1
+      "2": 10,
+      "0": 4
     },
-    "critic_unresolved": 7,
-    "compliance_violations_caught": 8,
-    "tokens_per_proposal": 7727.9,
-    "usd_per_proposal": 0.000305,
+    "critic_unresolved": 10,
+    "compliance_violations_caught": 3,
+    "tokens_per_proposal": 9039.4,
+    "usd_per_proposal": 0.000205,
     "latency_s": {
-      "p50": 72.8,
-      "p95": 223.26
+      "p50": 87.49,
+      "p95": 354.32
     },
-    "first_reply_rate": 0.4286,
+    "first_reply_rate": 0.3333,
     "gigsim_after_tick": {
       "hours": 168,
       "sim_time": "2024-08-08T00:00:00Z",
       "accounts": [
         {
           "account_id": "acct_ai_ml",
-          "submitted": 2,
-          "viewed": 1,
+          "submitted": 1,
+          "viewed": 0,
           "replied": 0,
           "interviews": 0,
           "hired": 0,
           "reply_rate": 0.0,
           "interview_rate": 0.0,
           "hire_rate": 0.0,
-          "connects_spent": 28
+          "connects_spent": 16
         },
         {
           "account_id": "acct_data_analyst",
-          "submitted": 2,
-          "viewed": 1,
+          "submitted": 4,
+          "viewed": 2,
           "replied": 1,
           "interviews": 1,
           "hired": 0,
-          "reply_rate": 0.5,
-          "interview_rate": 0.5,
+          "reply_rate": 0.25,
+          "interview_rate": 0.25,
           "hire_rate": 0.0,
-          "connects_spent": 20
+          "connects_spent": 44
         },
         {
           "account_id": "acct_fullstack",
-          "submitted": 3,
-          "viewed": 2,
+          "submitted": 4,
+          "viewed": 3,
           "replied": 1,
           "interviews": 0,
           "hired": 1,
-          "reply_rate": 0.3333,
+          "reply_rate": 0.25,
           "interview_rate": 0.0,
-          "hire_rate": 0.3333,
-          "connects_spent": 36
+          "hire_rate": 0.25,
+          "connects_spent": 44
         }
       ]
     }
@@ -79,184 +78,88 @@
     {
       "job_id": "1c0b990bb7dbe947",
       "persona": "ai_ml",
-      "status_before_approval": "awaiting_approval",
-      "decision": "bid",
-      "claims_before": 3,
-      "unsupported_before": 0,
-      "claims_after": 3,
-      "unsupported_after": 0,
-      "removed_claims": [],
-      "critic_revisions": 0,
-      "critic_unresolved": false,
-      "compliance": "allowed",
-      "compliance_violations": [],
-      "words": 153,
-      "latency_s": 23.35,
-      "tokens": 5782,
-      "usd": 0.001616,
-      "writer_models": {
-        "openai/gpt-oss-120b": 1
-      },
-      "errors": [],
-      "approval_payload": {
-        "thread_id": "1c0b990bb7dbe947",
-        "job_id": "1c0b990bb7dbe947",
-        "draft": {
-          "cover_letter": "You need a prototype AI chatbot that can convincingly simulate conversations with a chosen historical figure. I understand that the model must capture the figure\u2019s voice, manage context across turns, and stay accurate to the source material.\n\nI have built a messaging\u2011app support bot that handled multi\u2011step dialogues, used the OpenAI API, LangGraph, FastAPI and Redis for state management, and integrated entity recognition and sentiment analysis. The solution resolved 43\u202f% of interactions without a human and earned a CSAT of 4.4\u202f/5, demonstrating effective context handling and user satisfaction.\n\nMy core competencies include Python, PyTorch, OpenAI API, LangChain and cloud deployment on AWS with Docker, as documented in my CV. I routinely design conversational flows, train large language models on custom corpora, and monitor performance for continuous improvement.\n\nMy rate is $55 per hour, and I am ready to start building, training and deploying the historical\u2011figure chatbot on your preferred cloud platform.",
-          "screening_answers": [
-            "I do not hold a formal degree, but I have extensive academic training and professional experience in computer science and AI, which equips me to meet the project\u2019s technical requirements."
-          ],
-          "with_tags": "You need a prototype AI chatbot that can convincingly simulate conversations with a chosen historical figure. I understand that the model must capture the figure\u2019s voice, manage context across turns, and stay accurate to the source material.\n\nI have built a messaging\u2011app support bot that handled multi\u2011step dialogues, used the OpenAI API, LangGraph, FastAPI and Redis for state management, and integrated entity recognition and sentiment analysis [ai_ml:case_study:p09]. The solution resolved 43\u202f% of interactions without a human and earned a CSAT of 4.4\u202f/5, demonstrating effective context handling and user satisfaction [ai_ml:review:19].\n\nMy core competencies include Python, PyTorch, OpenAI API, LangChain and cloud deployment on AWS with Docker, as documented in my CV [ai_ml:cv]. I routinely design conversational flows, train large language models on custom corpora, and monitor performance for continuous improvement.\n\nMy rate is $55 per hour, and I am ready to start building, training and deploying the historical\u2011figure chatbot on your preferred cloud platform.",
-          "revision": 0
-        },
-        "claims": [
-          {
-            "claim": "I have built a messaging\u2011app support bot that handled multi\u2011step dialogues, used the OpenAI API, LangGraph, FastAPI and Redis for state management, and integrated entity recognition and sentiment analysis.",
-            "evidence_ids": [
-              "ai_ml:case_study:p09"
-            ],
-            "label": "supported",
-            "evidence": {
-              "ai_ml:case_study:p09": "# Delivery support chatbot for Parcelwise Logistics\n\nParcelwise Logistics needed a faster way to handle high-volume delivery support without forcing customers to wait for a human for every routine question. Their team wanted to reduce pressure on support staff while still preserving a smooth handoff"
-            }
-          },
-          {
-            "claim": "The solution resolved 43\u202f% of interactions without a human and earned a CSAT of 4.4\u202f/5, demonstrating effective context handling and user satisfaction.",
-            "evidence_ids": [
-              "ai_ml:review:19"
-            ],
-            "label": "supported",
-            "evidence": {
-              "ai_ml:review:19": "Noor did solid technical work for us on the delivery support chatbot. The WhatsApp and SMS flows were reliable, and the handoff to a human kept full context, which mattered a lot for our team. We saw 43% of conversations resolved without an agent and CSAT came in at 4.4 out of 5. Would hire again."
-            }
-          },
-          {
-            "claim": "My core competencies include Python, PyTorch, OpenAI API, LangChain and cloud deployment on AWS with Docker, as documented in my CV.",
-            "evidence_ids": [
-              "ai_ml:cv"
-            ],
-            "label": "supported",
-            "evidence": {
-              "ai_ml:cv": "Noor Halden\nAI/ML engineer - LLM apps, NLP and production ML\nLahore, Pakistan (Asia/Karachi) | English, Urdu\nSYNTHETIC persona for testing; not a real person.\nSkills\n\u007f\nExpert: Python, PyTorch, scikit-learn, LangChain, OpenAI API, Hugging Face Transformers,\nNLP, XGBoost, pandas, machine learning\n\u007f\nPr"
-            }
-          }
-        ],
-        "risk_report": {
-          "score": 0.15,
-          "client_quality": 0.25,
-          "flags": [],
-          "injection_detected": false,
-          "explanation": "rules only",
-          "signals": []
-        },
-        "price": {
-          "amount": 55.0,
-          "billing": "hourly",
-          "currency": "USD",
-          "rationale": "market ai_ml hourly p25-p75 $27-$54 (pricing_stats.json (jobs, Kaggle 2023-24), n=607); client posted up to $74; 12 Connects ($1.80), balance 80, keeps reserve 16: worth it at fit 0.90",
-          "connects_cost": 12,
-          "connects_worth_it": true
-        },
-        "preview": {
-          "create_proposal_draft": {
-            "dry_run": true,
-            "connects_cost": 12,
-            "policy_check": {
-              "passed": true,
-              "rule_id": null,
-              "detail": null
-            }
-          },
-          "submit_proposal": {
-            "dry_run": true,
-            "connects_cost": 12,
-            "balance_before": 80,
-            "balance_after": 68
-          }
-        },
-        "notes": {
-          "verifier": {
-            "claims_before": 3,
-            "unsupported_before": 0,
-            "partly_before": 0,
-            "removed": [],
-            "claims_after": 3,
-            "unsupported_after": 0
-          },
-          "critic": [
-            {
-              "verdict": "pass",
-              "reasons": [],
-              "revision_count": 0
-            }
-          ],
-          "compliance": {
-            "verdict": "allowed",
-            "violations": [],
-            "cleaned_text": "You need a prototype AI chatbot that can convincingly simulate conversations with a chosen historical figure. I understand that the model must capture the figure\u2019s voice, manage context across turns, and stay accurate to the source material. I have built a messaging\u2011app support bot that handled multi\u2011step dialogues, used the OpenAI API, LangGraph, FastAPI and Redis for state management, and integrated entity recognition and sentiment analysis [ai_ml:case_study:p09]. The solution resolved 43\u202f% of interactions without a human and earned a CSAT of 4.4\u202f/5, demonstrating effective context handling and user satisfaction [ai_ml:review:19]. My core competencies include Python, PyTorch, OpenAI API, LangChain and cloud deployment on AWS with Docker, as documented in my CV [ai_ml:cv]. I routinely design conversational flows, train large language models on custom corpora, and monitor performance for continuous improvement. My rate is $55 per hour, and I am ready to start building, training and deploying the historical\u2011figure chatbot on your preferred cloud platform."
-          },
-          "other": []
-        }
-      },
-      "status": "submitted",
-      "submission": {
-        "proposal_id": "pr_000001",
-        "idempotency_key": "1c0b990bb7dbe947:db4d66dd1afa9533",
-        "connects_spent": 12,
-        "balance_after": 68
-      }
-    },
-    {
-      "job_id": "2298deadbfaf9fad",
-      "persona": "ai_ml",
       "status_before_approval": "blocked",
       "decision": "bid",
       "claims_before": 4,
-      "unsupported_before": 1,
-      "claims_after": 3,
+      "unsupported_before": 2,
+      "claims_after": 2,
       "unsupported_after": 0,
       "removed_claims": [
-        "For this task I propose a desktop application built with Python, PyQt for the UI, Tesseract + LayoutLMv3 for chart OCR, and a fine\u2011tuned BERT model to parse the free\u2011form text; a rule\u2011based reconciler will prioritize text values when they differ from the visual extraction, and the final report will be generated as HTML."
+        "I have experience with OpenAI API, LangChain, and GPT models, and I routinely train models using NLP techniques like language generation and conversation flow management to ensure natural interactions.",
+        "I deployed models on cloud platforms like AWS and Google Cloud, using FastAPI and Redis to manage session state and ensure responsiveness."
       ],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "blocked",
       "compliance_violations": [
-        "no_guarantees: I will ensure the system is scalable and reliable for your trading signals."
+        "no_off_platform: I built a WhatsApp and SMS assistant that managed multi-step conversations and kept context during handoffs, ensuring re"
       ],
       "words": null,
-      "latency_s": 0.47,
-      "tokens": 10504,
-      "usd": 0.001363,
+      "latency_s": 87.49,
+      "tokens": 10450,
+      "usd": 0.0,
       "writer_models": {
-        "qwen3:8b": 2,
-        "openai/gpt-oss-120b": 1
+        "qwen3:8b": 3
       },
       "errors": [
-        "compliance blocked: ['no_guarantees']"
+        "compliance blocked: ['no_off_platform']"
       ],
       "approval_payload": null,
       "status": "blocked"
     },
     {
-      "job_id": "22da285bce53b433",
+      "job_id": "2298deadbfaf9fad",
       "persona": "ai_ml",
       "status_before_approval": "needs_attention",
       "decision": "bid",
-      "claims_before": 3,
-      "unsupported_before": 1,
-      "claims_after": 2,
+      "claims_before": 4,
+      "unsupported_before": 3,
+      "claims_after": 1,
       "unsupported_after": 0,
       "removed_claims": [
-        "I have experience with database modeling, complex SQL query logic, and data validation, as seen in my forecasting pipeline for Marrow & Pine Grocers, which used LightGBM, Prophet, and Airflow for automated weekly forecasts."
+        "I built a system that extracts structured data from invoices using OCR and NLP, achieving 96.2% field-level accuracy with LayoutLMv3 and Tesseract.",
+        "I developed a contract clause search assistant using Python, LangChain, and OpenAI API, enabling lawyers to find exact clause sources quickly.",
+        "I routinely train models on diverse data sets and have experience with similar NLP and OCR tasks."
       ],
       "critic_revisions": 0,
       "critic_unresolved": false,
       "compliance": null,
       "compliance_violations": [],
       "words": null,
-      "latency_s": 58.31,
-      "tokens": 6822,
+      "latency_s": 51.83,
+      "tokens": 5363,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [
+        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+      ],
+      "approval_payload": null,
+      "status": "needs_attention"
+    },
+    {
+      "job_id": "22da285bce53b433",
+      "persona": "ai_ml",
+      "status_before_approval": "needs_attention",
+      "decision": "bid",
+      "claims_before": 7,
+      "unsupported_before": 4,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "You need a data engineer with 3-4 years of experience in coding data pipelines using Python and SQL, and 1 year of experience with cloud platforms and serverless computing.",
+        "I have experience with data warehousing techniques, star schema design, and orchestration tools.",
+        "I routinely train models and manage large datasets, ensuring data quality and effective organization.",
+        "Yes, I have 3-4 years of experience in coding data pipelines with Python and SQL, as demonstrated by my work on the Price Elasticity Study for Marrow & Pine Grocers."
+      ],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": null,
+      "compliance_violations": [],
+      "words": null,
+      "latency_s": 50.66,
+      "tokens": 6731,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 1
@@ -282,8 +185,8 @@
       "compliance": null,
       "compliance_violations": [],
       "words": null,
-      "latency_s": 27.83,
-      "tokens": 2501,
+      "latency_s": 26.61,
+      "tokens": 2554,
       "usd": 0.0,
       "writer_models": {},
       "errors": [
@@ -297,42 +200,55 @@
       "persona": "ai_ml",
       "status_before_approval": "awaiting_approval",
       "decision": "bid",
-      "claims_before": 3,
+      "claims_before": 4,
       "unsupported_before": 0,
-      "claims_after": 3,
+      "claims_after": 4,
       "unsupported_after": 0,
       "removed_claims": [],
       "critic_revisions": 0,
       "critic_unresolved": false,
       "compliance": "allowed",
       "compliance_violations": [],
-      "words": 133,
-      "latency_s": 0.52,
-      "tokens": 3298,
-      "usd": 0.0,
+      "words": 181,
+      "latency_s": 16.46,
+      "tokens": 5425,
+      "usd": 0.001467,
       "writer_models": {
-        "qwen3:8b": 1
+        "openai/gpt-oss-120b": 1
       },
       "errors": [],
       "approval_payload": {
         "thread_id": "3479148151b3575b",
         "job_id": "3479148151b3575b",
         "draft": {
-          "cover_letter": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis.\n\nI developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing.\n\nMy experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000.",
-          "screening_answers": [
-            "I have expertise in Chatbot development, as shown by my ticket triage model built with FastAPI.",
-            "I possess knowledge in Machine Learning, demonstrated through my churn prediction model using XGBoost and SHAP.",
-            "I am proficient in Machine Learning Model creation, as evidenced by my deployment pipeline using MLflow and AWS SageMaker.",
-            "I understand Artificial Neural Networks and Deep Neural Networks, as seen in my work with XGBoost and SHAP for model interpretability.",
-            "I am skilled in Deep Learning, as shown by my use of XGBoost and MLflow for model tracking and deployment.",
-            "I have knowledge of Artificial Intelligence, demonstrated through my work on chatbots and predictive models."
-          ],
-          "with_tags": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis [ai_ml:case_study:p01].\n\nI developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team [ai_ml:case_study:p02]. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing [ai_ml:case_study:p13].\n\nMy experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000.",
+          "cover_letter": "You need an interactive chatbot that can reason like a human brain and generate actionable implementation plans from user responses. I understand that the system must combine conversational flow with intelligent data analysis to propose future steps.\n\nI have built a delivery support chatbot that handled user queries, routed them, and provided context\u2011aware handoffs, achieving a 43\u202f% resolution rate without human agents and a CSAT of 4.4/5. The bot was integrated through a messaging\u2011app support interface and leveraged a backend service to maintain conversation state.\n\nMy recent work includes creating a scalable model deployment pipeline with MLflow, Docker, GitHub Actions and AWS SageMaker, migrating nine production models and adding automated tests to ensure repeatable releases. I also designed a ticket\u2011triage classification service using scikit\u2011learn, FastAPI and a nightly retraining loop with Celery and Redis, demonstrating end\u2011to\u2011end data ingestion, model training and API serving. Additionally, I built a churn\u2011prediction pipeline for 380\u202fk customers with XGBoost, pandas and SHAP explanations, delivering interpretable scores for business action.\n\nMy fixed fee for the complete solution is $3000, covering design, implementation, testing and documentation.",
+          "screening_answers": [],
+          "with_tags": "You need an interactive chatbot that can reason like a human brain and generate actionable implementation plans from user responses. I understand that the system must combine conversational flow with intelligent data analysis to propose future steps.\n\nI have built a delivery support chatbot that handled user queries, routed them, and provided context\u2011aware handoffs, achieving a 43\u202f% resolution rate without human agents and a CSAT of 4.4/5 [ai_ml:review:19]. The bot was integrated through a messaging\u2011app support interface and leveraged a backend service to maintain conversation state.\n\nMy recent work includes creating a scalable model deployment pipeline with MLflow, Docker, GitHub Actions and AWS SageMaker, migrating nine production models and adding automated tests to ensure repeatable releases [ai_ml:case_study:p13]. I also designed a ticket\u2011triage classification service using scikit\u2011learn, FastAPI and a nightly retraining loop with Celery and Redis, demonstrating end\u2011to\u2011end data ingestion, model training and API serving [ai_ml:case_study:p01]. Additionally, I built a churn\u2011prediction pipeline for 380\u202fk customers with XGBoost, pandas and SHAP explanations, delivering interpretable scores for business action [ai_ml:case_study:p02].\n\nMy fixed fee for the complete solution is $3000, covering design, implementation, testing and documentation.",
           "revision": 0
         },
         "claims": [
           {
-            "claim": "I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis.",
+            "claim": "I have built a delivery support chatbot that handled user queries, routed them, and provided context\u2011aware handoffs, achieving a 43\u202f% resolution rate without human agents and a CSAT of 4.4/5.",
+            "evidence_ids": [
+              "ai_ml:review:19"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:review:19": "Noor did solid technical work for us on the delivery support chatbot. The WhatsApp and SMS flows were reliable, and the handoff to a human kept full context, which mattered a lot for our team. We saw 43% of conversations resolved without an agent and CSAT came in at 4.4 out of 5. Would hire again."
+            }
+          },
+          {
+            "claim": "My recent work includes creating a scalable model deployment pipeline with MLflow, Docker, GitHub Actions and AWS SageMaker, migrating nine production models and adding automated tests to ensure repeatable releases.",
+            "evidence_ids": [
+              "ai_ml:case_study:p13"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p13": "# Model deployment pipeline migration\n\nIn 2024, I worked with a client in insurance (name withheld) to modernize how their pricing models were packaged, tested, and deployed. The team had been relying on hand-copied pickle files, which made releases slow, brittle, and difficult to trust. Every deplo"
+            }
+          },
+          {
+            "claim": "I also designed a ticket\u2011triage classification service using scikit\u2011learn, FastAPI and a nightly retraining loop with Celery and Redis, demonstrating end\u2011to\u2011end data ingestion, model training and API serving.",
             "evidence_ids": [
               "ai_ml:case_study:p01"
             ],
@@ -342,23 +258,13 @@
             }
           },
           {
-            "claim": "I developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team.",
+            "claim": "Additionally, I built a churn\u2011prediction pipeline for 380\u202fk customers with XGBoost, pandas and SHAP explanations, delivering interpretable scores for business action.",
             "evidence_ids": [
               "ai_ml:case_study:p02"
             ],
             "label": "supported",
             "evidence": {
               "ai_ml:case_study:p02": "# Telecom churn prediction\n\nIn early 2021, I worked with a client in telecom (name withheld) on a churn prediction problem that needed to be useful to both data science and retention teams. The business goal was straightforward: identify which subscribers were at risk of leaving early enough for the"
-            }
-          },
-          {
-            "claim": "I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing.",
-            "evidence_ids": [
-              "ai_ml:case_study:p13"
-            ],
-            "label": "supported",
-            "evidence": {
-              "ai_ml:case_study:p13": "# Model deployment pipeline migration\n\nIn 2024, I worked with a client in insurance (name withheld) to modernize how their pricing models were packaged, tested, and deployed. The team had been relying on hand-copied pickle files, which made releases slow, brittle, and difficult to trust. Every deplo"
             }
           }
         ],
@@ -374,7 +280,7 @@
           "amount": 3000.0,
           "billing": "fixed",
           "currency": "USD",
-          "rationale": "market ai_ml fixed p25-p75 $100-$1500 (pricing_stats.json (jobs, Kaggle 2023-24), n=437); client posted up to $3000; 16 Connects ($2.40), balance 68, keeps reserve 16: worth it at fit 0.88",
+          "rationale": "market ai_ml fixed p25-p75 $100-$1500 (pricing_stats.json (jobs, Kaggle 2023-24), n=437); client posted up to $3000; 16 Connects ($2.40), balance 80, keeps reserve 16: worth it at fit 0.88",
           "connects_cost": 16,
           "connects_worth_it": true
         },
@@ -391,17 +297,17 @@
           "submit_proposal": {
             "dry_run": true,
             "connects_cost": 16,
-            "balance_before": 68,
-            "balance_after": 52
+            "balance_before": 80,
+            "balance_after": 64
           }
         },
         "notes": {
           "verifier": {
-            "claims_before": 3,
+            "claims_before": 4,
             "unsupported_before": 0,
             "partly_before": 0,
             "removed": [],
-            "claims_after": 3,
+            "claims_after": 4,
             "unsupported_after": 0
           },
           "critic": [
@@ -414,68 +320,192 @@
           "compliance": {
             "verdict": "allowed",
             "violations": [],
-            "cleaned_text": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis [ai_ml:case_study:p01]. I developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team [ai_ml:case_study:p02]. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing [ai_ml:case_study:p13]. My experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000."
+            "cleaned_text": "You need an interactive chatbot that can reason like a human brain and generate actionable implementation plans from user responses. I understand that the system must combine conversational flow with intelligent data analysis to propose future steps. I have built a delivery support chatbot that handled user queries, routed them, and provided context\u2011aware handoffs, achieving a 43\u202f% resolution rate without human agents and a CSAT of 4.4/5 [ai_ml:review:19]. The bot was integrated through a messaging\u2011app support interface and leveraged a backend service to maintain conversation state. My recent work includes creating a scalable model deployment pipeline with MLflow, Docker, GitHub Actions and AWS SageMaker, migrating nine production models and adding automated tests to ensure repeatable releases [ai_ml:case_study:p13]. I also designed a ticket\u2011triage classification service using scikit\u2011learn, FastAPI and a nightly retraining loop with Celery and Redis, demonstrating end\u2011to\u2011end data ingestion, model training and API serving [ai_ml:case_study:p01]. Additionally, I built a churn\u2011prediction pipeline for 380\u202fk customers with XGBoost, pandas and SHAP explanations, delivering interpretable scores for business action [ai_ml:case_study:p02]. My fixed fee for the complete solution is $3000, covering design, implementation, testing and documentation."
           },
           "other": []
         }
       },
       "status": "submitted",
       "submission": {
-        "proposal_id": "pr_000002",
-        "idempotency_key": "3479148151b3575b:043866fb72b33973",
+        "proposal_id": "pr_000001",
+        "idempotency_key": "3479148151b3575b:b17e1a34db9d4ed7",
         "connects_spent": 16,
-        "balance_after": 52
+        "balance_after": 64
       }
     },
     {
       "job_id": "098fe071ad19efb2",
       "persona": "data_analyst",
-      "status_before_approval": "needs_attention",
+      "status_before_approval": "awaiting_approval",
       "decision": "bid",
-      "claims_before": 2,
-      "unsupported_before": 1,
-      "claims_after": 1,
+      "claims_before": 8,
+      "unsupported_before": 5,
+      "claims_after": 3,
       "unsupported_after": 0,
       "removed_claims": [
-        "For inventory audits, I can design a form with photo uploads and automate spreadsheet generation for purchasing, as I did for Clipboardly\u2019s support ticket analytics."
+        "I can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel, and I have experience with Microsoft Power Automate and dashboard creation.",
+        "I have experience with Microsoft Power Autom, and I can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel.",
+        "I have also worked with photo uploads in forms for inventory tracking.",
+        "I have experience with Microsoft Power Automate and can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel.",
+        "I have also worked with photo uploads in forms for inventory tracking."
       ],
-      "critic_revisions": 1,
-      "critic_unresolved": false,
-      "compliance": null,
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "allowed",
       "compliance_violations": [],
-      "words": null,
-      "latency_s": 124.92,
-      "tokens": 9274,
+      "words": 137,
+      "latency_s": 135.44,
+      "tokens": 9562,
       "usd": 0.0,
       "writer_models": {
-        "qwen3:8b": 2
+        "qwen3:8b": 3
       },
-      "errors": [
-        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
-      ],
-      "approval_payload": null,
-      "status": "needs_attention"
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "098fe071ad19efb2",
+        "job_id": "098fe071ad19efb2",
+        "draft": {
+          "cover_letter": "You need to automate data collection from Microsoft Forms and integrate it with Microsoft Lists for dashboarding and inventory management. I built a Power BI dashboard for Marlowe Furniture that consolidated multiple Excel reports into a single source, using Power BI and SQL.\n\nFor the first project, I can create a Microsoft Form to collect daily data and use Power Automate to send it to a Microsoft List. I also have experience with Power BI dashboards that show aggregated data over time, such as weekly summaries.\n\nFor the second project, I can set up a Teams task to prompt inventory audits and use Power Automate to collect form data, including photo uploads. I can also generate and email spreadsheets with item details for purchasing, as demonstrated in my work with Clipboardly.\n\nMy rate is $40 per hour.",
+          "screening_answers": [
+            ""
+          ],
+          "with_tags": "You need to automate data collection from Microsoft Forms and integrate it with Microsoft Lists for dashboarding and inventory management. I built a Power BI dashboard for Marlowe Furniture that consolidated multiple Excel reports into a single source, using Power BI and SQL [data_analyst:case_study:p01].\n\nFor the first project, I can create a Microsoft Form to collect daily data and use Power Automate to send it to a Microsoft List. I also have experience with Power BI dashboards that show aggregated data over time, such as weekly summaries [data_analyst:case_study:p01].\n\nFor the second project, I can set up a Teams task to prompt inventory audits and use Power Automate to collect form data, including photo uploads. I can also generate and email spreadsheets with item details for purchasing, as demonstrated in my work with Clipboardly [data_analyst:case_study:p18].\n\nMy rate is $40 per hour.",
+          "revision": 1
+        },
+        "claims": [
+          {
+            "claim": "I built a Power BI dashboard for Marlowe Furniture that consolidated multiple Excel reports into a single source, using Power BI and SQL.",
+            "evidence_ids": [
+              "data_analyst:case_study:p01"
+            ],
+            "label": "supported",
+            "evidence": {
+              "data_analyst:case_study:p01": "# Sales KPI Dashboard for Marlowe Furniture\n\nIn early 2021, I worked with Marlowe Furniture, a retail business that was managing sales performance through 14 separate Excel reports. The reporting process was fragmented, slow to maintain, and made it difficult for the team to get a consistent view of"
+            }
+          },
+          {
+            "claim": "I also have experience with Power BI dashboards that show aggregated data over time, such as weekly summaries.",
+            "evidence_ids": [
+              "data_analyst:case_study:p01"
+            ],
+            "label": "supported",
+            "evidence": {
+              "data_analyst:case_study:p01": "# Sales KPI Dashboard for Marlowe Furniture\n\nIn early 2021, I worked with Marlowe Furniture, a retail business that was managing sales performance through 14 separate Excel reports. The reporting process was fragmented, slow to maintain, and made it difficult for the team to get a consistent view of"
+            }
+          },
+          {
+            "claim": "I can also generate and email spreadsheets with item details for purchasing, as demonstrated in my work with Clipboardly.",
+            "evidence_ids": [
+              "data_analyst:case_study:p18"
+            ],
+            "label": "supported",
+            "evidence": {
+              "data_analyst:case_study:p18": "# Support Ticket Analytics for Clipboardly\n\nIn early 2025, Clipboardly brought me in on a fixed engagement to help make their support data easier to trust and act on. As a productivity software company, they had a growing volume of Zendesk activity, but the reporting wasn\u2019t giving them a clear pictu"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.069,
+          "client_quality": 0.655,
+          "flags": [
+            "payment_unverified",
+            "injection"
+          ],
+          "injection_detected": true,
+          "explanation": "rules only",
+          "signals": [
+            "client:payment_unverified",
+            "pattern:injection"
+          ]
+        },
+        "price": {
+          "amount": 40.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market data_analyst hourly p25-p75 $6-$40 (pricing_stats.json (contracts, Kaggle 2023-24), n=23674); client posted up to $75; 12 Connects ($1.80), balance 60, keeps reserve 12: worth it at fit 1.00",
+          "connects_cost": 12,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 60,
+            "balance_after": 48
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 8,
+            "unsupported_before": 5,
+            "partly_before": 0,
+            "removed": [
+              "I can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel, and I have experience with Microsoft Power Automate and dashboard creation.",
+              "I have experience with Microsoft Power Autom, and I can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel.",
+              "I have also worked with photo uploads in forms for inventory tracking.",
+              "I have experience with Microsoft Power Automate and can create flows to collect data from Microsoft Forms and send it to Microsoft Lists or Excel.",
+              "I have also worked with photo uploads in forms for inventory tracking."
+            ],
+            "claims_after": 3,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "revise",
+              "reasons": [
+                "5 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "90 words, keep it between 110 and 260"
+              ],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need to automate data collection from Microsoft Forms and integrate it with Microsoft Lists for dashboarding and inventory management. I built a Power BI dashboard for Marlowe Furniture that consolidated multiple Excel reports into a single source, using Power BI and SQL [data_analyst:case_study:p01]. For the first project, I can create a Microsoft Form to collect daily data and use Power Automate to send it to a Microsoft List. I also have experience with Power BI dashboards that show aggregated data over time, such as weekly summaries [data_analyst:case_study:p01]. For the second project, I can set up a Teams task to prompt inventory audits and use Power Automate to collect form data, including photo uploads. I can also generate and email spreadsheets with item details for purchasing, as demonstrated in my work with Clipboardly [data_analyst:case_study:p18]. My rate is $40 per hour."
+          },
+          "other": [
+            "critic_unresolved: 5 unsupported claim(s) were removed; rebuild those points from the evidence; 90 words, keep it between 110 and 260"
+          ]
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000002",
+        "idempotency_key": "098fe071ad19efb2:95ad05c4751f25f3",
+        "connects_spent": 12,
+        "balance_after": 48
+      }
     },
     {
       "job_id": "1cf39846f7f6a348",
       "persona": "data_analyst",
       "status_before_approval": "awaiting_approval",
       "decision": "bid",
-      "claims_before": 3,
+      "claims_before": 6,
       "unsupported_before": 2,
-      "claims_after": 1,
+      "claims_after": 4,
       "unsupported_after": 0,
       "removed_claims": [
-        "I built a three-site expansion model in Excel using financial modeling methods, comparing three potential sites and testing each under best, base, and worst-case scenarios for patient volume and staffing.",
-        "I also created a Power BI semantic model for sales KPIs, using SQL views and DAX measures to replace multiple Excel reports."
+        "I have experience in building Excel models that support decision-making, as demonstrated by my work on a dental clinic expansion model where I created a three-site expansion model in Excel using financial modeling methods.",
+        "I can create user-friendly templates with interactive features, as evidenced by my Power Query workbook for inventory reconciliation that made weekly variance flags easy to trust."
       ],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "allowed",
       "compliance_violations": [],
-      "words": 124,
-      "latency_s": 112.12,
-      "tokens": 8003,
+      "words": 77,
+      "latency_s": 111.45,
+      "tokens": 8092,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 3
@@ -485,16 +515,27 @@
         "thread_id": "1cf39846f7f6a348",
         "job_id": "1cf39846f7f6a348",
         "draft": {
-          "cover_letter": "You need an automated Excel Resource Planning template to streamline your resource allocation process and improve efficiency.\n\nI have experience with Excel automation, including creating user-friendly templates with interactive features. My work on the Dental Clinic Expansion Model showed how to structure models for practical use by leadership, ensuring clarity and decision support.\n\nI also developed a Power BI semantic model for sales KPIs, using SQL views and DAX measures to create a star schema with sales as the central fact table. This approach can be adapted to your Resource Planning template to ensure robust and flexible automation.\n\nMy rate is fixed at $100, and I will deliver a template that is detail-oriented, data-driven, and designed to meet your specific needs without unnecessary complexity.",
+          "cover_letter": "You need an automated Excel template to streamline resource planning and improve efficiency.\n\nI structured the model so leadership could easily review the drivers behind each case and quickly see the implications for payback timing.\n\nI also developed a Power BI semantic model on SQL Server and Excel sources, building a Sales KPI dashboard that replaced multiple Excel reports and shortened monthly close reporting from several days to a few hours.\n\nMy rate is fixed at $100.",
           "screening_answers": [
-            "I have experience with Excel automation, including creating user-friendly templates with interactive features. My work on the Dental Clinic Expansion Model showed how to structure models for practical use by leadership, ensuring clarity and decision support."
+            "I have experience with Excel automation, having built a three-site expansion model in Excel that tested different operating assumptions.",
+            "I routinely train teams to use structured models for decision support, ensuring clarity and actionable insights."
           ],
-          "with_tags": "You need an automated Excel Resource Planning template to streamline your resource allocation process and improve efficiency.\n\nI have experience with Excel automation, including creating user-friendly templates with interactive features. My work on the Dental Clinic Expansion Model showed how to structure models for practical use by leadership, ensuring clarity and decision support [data_analyst:case_study:p08].\n\nI also developed a Power BI semantic model for sales KPIs, using SQL views and DAX measures to create a star schema with sales as the central fact table [data_analyst:readme:kpi-semantic-model]. This approach can be adapted to your Resource Planning template to ensure robust and flexible automation.\n\nMy rate is fixed at $100, and I will deliver a template that is detail-oriented, data-driven, and designed to meet your specific needs without unnecessary complexity.",
+          "with_tags": "You need an automated Excel template to streamline resource planning and improve efficiency.\n\nI structured the model so leadership could easily review the drivers behind each case and quickly see the implications for payback timing.\n\nI also developed a Power BI semantic model on SQL Server and Excel sources, building a Sales KPI dashboard that replaced multiple Excel reports and shortened monthly close reporting from several days to a few hours [data_analyst:readme:kpi-semantic-model].\n\nMy rate is fixed at $100.",
           "revision": 0
         },
         "claims": [
           {
-            "claim": "My work on the Dental Clinic Expansion Model showed how to structure models for practical use by leadership, ensuring clarity and decision support.",
+            "claim": "I also developed a Power BI semantic model on SQL Server and Excel sources, building a Sales KPI dashboard that replaced multiple Excel reports and shortened monthly close reporting from several days to a few hours.",
+            "evidence_ids": [
+              "data_analyst:readme:kpi-semantic-model"
+            ],
+            "label": "supported",
+            "evidence": {
+              "data_analyst:readme:kpi-semantic-model": "Sales KPI dashboard built as a Power BI semantic model on SQL Server and Excel sources.\n\n## Setup\n\n- Load the SQL views in `model.sql` into SQL Server.\n- Open the Power BI file that consumes the fact and dimension tables produced by those views.\n- Import or copy the measures from `measures.dax` into"
+            }
+          },
+          {
+            "claim": "I have experience with Excel automation, having built a three-site expansion model in Excel that tested different operating assumptions.",
             "evidence_ids": [
               "data_analyst:case_study:p08"
             ],
@@ -504,13 +545,13 @@
             }
           },
           {
-            "claim": "I also developed a Power BI semantic model for sales KPIs, using SQL views and DAX measures to create a star schema with sales as the central fact table.",
+            "claim": "I routinely train teams to use structured models for decision support, ensuring clarity and actionable insights.",
             "evidence_ids": [
-              "data_analyst:readme:kpi-semantic-model"
+              "data_analyst:case_study:p08"
             ],
-            "label": "unsupported",
+            "label": "supported",
             "evidence": {
-              "data_analyst:readme:kpi-semantic-model": "Sales KPI dashboard built as a Power BI semantic model on SQL Server and Excel sources.\n\n## Setup\n\n- Load the SQL views in `model.sql` into SQL Server.\n- Open the Power BI file that consumes the fact and dimension tables produced by those views.\n- Import or copy the measures from `measures.dax` into"
+              "data_analyst:case_study:p08": "# Dental Clinic Expansion Model\n\nIn late 2022, I worked with **Sunrise Dental Partners** on a fixed-scope engagement to support a growth decision for their healthcare business. They were evaluating where and how to expand, and needed a clear way to compare options before committing to a site. The go"
             }
           }
         ],
@@ -526,7 +567,7 @@
           "amount": 100.0,
           "billing": "fixed",
           "currency": "USD",
-          "rationale": "market data_analyst fixed p25-p75 $26-$200 (pricing_stats.json (contracts, Kaggle 2023-24), n=14053); client posted up to $100; 8 Connects ($1.20), balance 60, keeps reserve 12: worth it at fit 0.70",
+          "rationale": "market data_analyst fixed p25-p75 $26-$200 (pricing_stats.json (contracts, Kaggle 2023-24), n=14053); client posted up to $100; 8 Connects ($1.20), balance 48, keeps reserve 12: worth it at fit 0.70",
           "connects_cost": 8,
           "connects_worth_it": true
         },
@@ -543,20 +584,20 @@
           "submit_proposal": {
             "dry_run": true,
             "connects_cost": 8,
-            "balance_before": 60,
-            "balance_after": 52
+            "balance_before": 48,
+            "balance_after": 40
           }
         },
         "notes": {
           "verifier": {
-            "claims_before": 3,
+            "claims_before": 6,
             "unsupported_before": 2,
             "partly_before": 0,
             "removed": [
-              "I built a three-site expansion model in Excel using financial modeling methods, comparing three potential sites and testing each under best, base, and worst-case scenarios for patient volume and staffing.",
-              "I also created a Power BI semantic model for sales KPIs, using SQL views and DAX measures to replace multiple Excel reports."
+              "I have experience in building Excel models that support decision-making, as demonstrated by my work on a dental clinic expansion model where I created a three-site expansion model in Excel using financial modeling methods.",
+              "I can create user-friendly templates with interactive features, as evidenced by my Power Query workbook for inventory reconciliation that made weekly variance flags easy to trust."
             ],
-            "claims_after": 1,
+            "claims_after": 4,
             "unsupported_after": 0
           },
           "critic": [
@@ -564,8 +605,7 @@
               "verdict": "revise",
               "reasons": [
                 "2 unsupported claim(s) were removed; rebuild those points from the evidence",
-                "fewer than 2 grounded claims; cite more of the listed evidence",
-                "70 words, keep it between 110 and 260"
+                "97 words, keep it between 110 and 260"
               ],
               "revision_count": 2
             }
@@ -573,258 +613,46 @@
           "compliance": {
             "verdict": "allowed",
             "violations": [],
-            "cleaned_text": "You need an automated Excel Resource Planning template to streamline your resource allocation process and improve efficiency. I have experience with Excel automation, including creating user-friendly templates with interactive features. My work on the Dental Clinic Expansion Model showed how to structure models for practical use by leadership, ensuring clarity and decision support [data_analyst:case_study:p08]. I also developed a Power BI semantic model for sales KPIs, using SQL views and DAX measures to create a star schema with sales as the central fact table [data_analyst:readme:kpi-semantic-model]. This approach can be adapted to your Resource Planning template to ensure robust and flexible automation. My rate is fixed at $100, and I will deliver a template that is detail-oriented, data-driven, and designed to meet your specific needs without unnecessary complexity."
+            "cleaned_text": "You need an automated Excel template to streamline resource planning and improve efficiency. I structured the model so leadership could easily review the drivers behind each case and quickly see the implications for payback timing. I also developed a Power BI semantic model on SQL Server and Excel sources, building a Sales KPI dashboard that replaced multiple Excel reports and shortened monthly close reporting from several days to a few hours [data_analyst:readme:kpi-semantic-model]. My rate is fixed at $100."
           },
           "other": [
-            "critic_unresolved: 2 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; 70 words, keep it between 110 and 260"
+            "critic_unresolved: 2 unsupported claim(s) were removed; rebuild those points from the evidence; 97 words, keep it between 110 and 260"
           ]
         }
       },
       "status": "submitted",
       "submission": {
         "proposal_id": "pr_000003",
-        "idempotency_key": "1cf39846f7f6a348:1190f9bea9da11a6",
+        "idempotency_key": "1cf39846f7f6a348:1acb94c5217d945c",
         "connects_spent": 8,
-        "balance_after": 52
+        "balance_after": 40
       }
     },
     {
       "job_id": "27b105c5ef0056c4",
       "persona": "data_analyst",
-      "status_before_approval": "awaiting_approval",
-      "decision": "bid",
-      "claims_before": 5,
-      "unsupported_before": 0,
-      "claims_after": 5,
-      "unsupported_after": 0,
-      "removed_claims": [],
-      "critic_revisions": 2,
-      "critic_unresolved": false,
-      "compliance": "allowed",
-      "compliance_violations": [],
-      "words": 166,
-      "latency_s": 223.26,
-      "tokens": 9994,
-      "usd": 0.0,
-      "writer_models": {
-        "qwen3:8b": 3
-      },
-      "errors": [],
-      "approval_payload": {
-        "thread_id": "27b105c5ef0056c4",
-        "job_id": "27b105c5ef0056c4",
-        "draft": {
-          "cover_letter": "You need a freelancer who can handle a large-scale data integration project involving over 90 retailers, ensuring data quality and accuracy across multiple data sources. I built a Power BI semantic model for sales KPIs using SQL Server and Excel sources, following a star schema design with sales as the central fact table.\n\nI worked on a project to standardize support tags in SQL and map them into consistent product-area groupings, enabling reliable views for response times and ticket volume by area.\n\nI designed a Power BI report for Marlowe Furniture, consolidating 14 Excel sales reports into a single dashboard, using SQL Server as the source layer and DAX for key sales KPIs.\n\nI built warehouse models for a DTC e-commerce brand using dbt on BigQuery, organizing data into staging, intermediate, and mart layers, with tests and column descriptions in schema.yml.\n\nI automated inventory reconciliation for Coastline Hardware using Power Query and SQL, flagging variances between warehouse counts and ERP data.\n\nMy rate is hourly $40.",
-          "screening_answers": [
-            "I have experience in data integration and automation, with a proven track record in designing data pipelines and ensuring data quality across multiple sources. I have also worked on data visualization projects, including Power BI dashboards for sales KPIs and support ticket analytics. I am comfortable working both independently and as part of a team, and I have experience with data warehousing and data management. I am available to submit my resume and a brief cover letter explaining why I am the perfect fit for this role."
-          ],
-          "with_tags": "You need a freelancer who can handle a large-scale data integration project involving over 90 retailers, ensuring data quality and accuracy across multiple data sources. I built a Power BI semantic model for sales KPIs using SQL Server and Excel sources, following a star schema design with sales as the central fact table [data_analyst:readme:kpi-semantic-model].\n\nI worked on a project to standardize support tags in SQL and map them into consistent product-area groupings, enabling reliable views for response times and ticket volume by area [data_analyst:case_study:p18].\n\nI designed a Power BI report for Marlowe Furniture, consolidating 14 Excel sales reports into a single dashboard, using SQL Server as the source layer and DAX for key sales KPIs [data_analyst:case_study:p01].\n\nI built warehouse models for a DTC e-commerce brand using dbt on BigQuery, organizing data into staging, intermediate, and mart layers, with tests and column descriptions in schema.yml [data_analyst:readme:pantry-dbt].\n\nI automated inventory reconciliation for Coastline Hardware using Power Query and SQL, flagging variances between warehouse counts and ERP data [data_analyst:case_study:p04].\n\nMy rate is hourly $40.",
-          "revision": 2
-        },
-        "claims": [
-          {
-            "claim": "I built a Power BI semantic model for sales KPIs using SQL Server and Excel sources, following a star schema design with sales as the central fact table.",
-            "evidence_ids": [
-              "data_analyst:readme:kpi-semantic-model"
-            ],
-            "label": "supported",
-            "evidence": {
-              "data_analyst:readme:kpi-semantic-model": "Sales KPI dashboard built as a Power BI semantic model on SQL Server and Excel sources.\n\n## Setup\n\n- Load the SQL views in `model.sql` into SQL Server.\n- Open the Power BI file that consumes the fact and dimension tables produced by those views.\n- Import or copy the measures from `measures.dax` into"
-            }
-          },
-          {
-            "claim": "I worked on a project to standardize support tags in SQL and map them into consistent product-area groupings, enabling reliable views for response times and ticket volume by area.",
-            "evidence_ids": [
-              "data_analyst:case_study:p18"
-            ],
-            "label": "supported",
-            "evidence": {
-              "data_analyst:case_study:p18": "# Support Ticket Analytics for Clipboardly\n\nIn early 2025, Clipboardly brought me in on a fixed engagement to help make their support data easier to trust and act on. As a productivity software company, they had a growing volume of Zendesk activity, but the reporting wasn\u2019t giving them a clear pictu"
-            }
-          },
-          {
-            "claim": "I designed a Power BI report for Marlowe Furniture, consolidating 14 Excel sales reports into a single dashboard, using SQL Server as the source layer and DAX for key sales KPIs.",
-            "evidence_ids": [
-              "data_analyst:case_study:p01"
-            ],
-            "label": "supported",
-            "evidence": {
-              "data_analyst:case_study:p01": "# Sales KPI Dashboard for Marlowe Furniture\n\nIn early 2021, I worked with Marlowe Furniture, a retail business that was managing sales performance through 14 separate Excel reports. The reporting process was fragmented, slow to maintain, and made it difficult for the team to get a consistent view of"
-            }
-          },
-          {
-            "claim": "I built warehouse models for a DTC e-commerce brand using dbt on BigQuery, organizing data into staging, intermediate, and mart layers, with tests and column descriptions in schema.yml.",
-            "evidence_ids": [
-              "data_analyst:readme:pantry-dbt"
-            ],
-            "label": "supported",
-            "evidence": {
-              "data_analyst:readme:pantry-dbt": "Warehouse models for a DTC e-commerce brand, built in dbt on BigQuery with Fivetran and SQL.\n\n## Setup\n\nInstall dbt and configure a BigQuery profile for this project.\n\nClone the repo, set your environment variables or profile values, and run:\n\n```bash\ndbt deps\ndbt debug\ndbt build\n```\n\n## Usage\n\nThis"
-            }
-          },
-          {
-            "claim": "I automated inventory reconciliation for Coastline Hardware using Power Query and SQL, flagging variances between warehouse counts and ERP data.",
-            "evidence_ids": [
-              "data_analyst:case_study:p04"
-            ],
-            "label": "supported",
-            "evidence": {
-              "data_analyst:case_study:p04": "# Inventory Reconciliation Automation for Coastline Hardware\n\nAt Coastline Hardware, the weekly stock reconciliation process was slowing the team down. Warehouse counts had to be compared against the ERP by hand, and the work took hours every week. It was also difficult to spot and follow up on mism"
-            }
-          }
-        ],
-        "risk_report": {
-          "score": 0.012,
-          "client_quality": 0.938,
-          "flags": [],
-          "injection_detected": false,
-          "explanation": "rules only",
-          "signals": []
-        },
-        "price": {
-          "amount": 40.0,
-          "billing": "hourly",
-          "currency": "USD",
-          "rationale": "market data_analyst hourly p25-p75 $18-$52 (pricing_stats.json (jobs, Kaggle 2023-24), n=1089); client posted up to $70; 12 Connects ($1.80), balance 52, keeps reserve 12: worth it at fit 1.00",
-          "connects_cost": 12,
-          "connects_worth_it": true
-        },
-        "preview": {
-          "create_proposal_draft": {
-            "dry_run": true,
-            "connects_cost": 12,
-            "policy_check": {
-              "passed": true,
-              "rule_id": null,
-              "detail": null
-            }
-          },
-          "submit_proposal": {
-            "dry_run": true,
-            "connects_cost": 12,
-            "balance_before": 52,
-            "balance_after": 40
-          }
-        },
-        "notes": {
-          "verifier": {
-            "claims_before": 5,
-            "unsupported_before": 0,
-            "partly_before": 0,
-            "removed": [],
-            "claims_after": 5,
-            "unsupported_after": 0
-          },
-          "critic": [
-            {
-              "verdict": "pass",
-              "reasons": [],
-              "revision_count": 2
-            }
-          ],
-          "compliance": {
-            "verdict": "allowed",
-            "violations": [],
-            "cleaned_text": "You need a freelancer who can handle a large-scale data integration project involving over 90 retailers, ensuring data quality and accuracy across multiple data sources. I built a Power BI semantic model for sales KPIs using SQL Server and Excel sources, following a star schema design with sales as the central fact table [data_analyst:readme:kpi-semantic-model]. I worked on a project to standardize support tags in SQL and map them into consistent product-area groupings, enabling reliable views for response times and ticket volume by area [data_analyst:case_study:p18]. I designed a Power BI report for Marlowe Furniture, consolidating 14 Excel sales reports into a single dashboard, using SQL Server as the source layer and DAX for key sales KPIs [data_analyst:case_study:p01]. I built warehouse models for a DTC e-commerce brand using dbt on BigQuery, organizing data into staging, intermediate, and mart layers, with tests and column descriptions in schema.yml [data_analyst:readme:pantry-dbt]. I automated inventory reconciliation for Coastline Hardware using Power Query and SQL, flagging variances between warehouse counts and ERP data [data_analyst:case_study:p04]. My rate is hourly $40."
-          },
-          "other": []
-        }
-      },
-      "status": "submitted",
-      "submission": {
-        "proposal_id": "pr_000004",
-        "idempotency_key": "27b105c5ef0056c4:554ff1d9b9f12751",
-        "connects_spent": 12,
-        "balance_after": 40
-      }
-    },
-    {
-      "job_id": "291e4ff84d9094f0",
-      "persona": "data_analyst",
       "status_before_approval": "blocked",
       "decision": "bid",
-      "claims_before": 4,
-      "unsupported_before": 4,
-      "claims_after": 0,
+      "claims_before": 11,
+      "unsupported_before": 5,
+      "claims_after": 6,
       "unsupported_after": 0,
       "removed_claims": [
-        "I built a sales KPI dashboard with multi-view layouts using Power BI and SQL.",
-        "I developed a dashboard that tracks gains/losses, calculates stoploss rates, and exports transaction data to CSV/Excel with specified fields.",
-        "I also created a multi-transaction view for open trades using Power BI.",
-        "I have experience handling real-time market data integration and exporting transaction data to CSV/Excel."
+        "I built a Power BI semantic model using SQL Server and Excel sources, with DAX measures for sales, margin, and time-based metrics.",
+        "I have strong knowledge of data ingestion, ETL, and data pipelines, as demonstrated by my work on the Sales KPI Dashboard for Marlowe Furniture, where I structured the report around a star-schema design for efficient data refresh and analysis.",
+        "I have excellent problem-solving skills, as demonstrated by my work on the Snowflake cost audit, where I identified and reduced high-cost queries by optimizing them and adjusting warehouse sizes.",
+        "I have strong knowledge of data ingestion, ETL, and data pipelines, as demonstrated by my work on the Sales KPI Dashboard for Marlowe Furniture.",
+        "I have excellent problem-solving skills, as demonstrated by my work on the Snowflake cost audit, where I identified and reduced high-cost queries by optimizing them and adjusting warehouse sizes."
       ],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "blocked",
       "compliance_violations": [
-        "no_guarantees: I will ensure stoploss rates are calculated correctly (10 cents lower than capture rate) and integrated with TradingView"
+        "no_off_platform: You need a freelancer who can handle a large-scale data integration project with over 90 retailers and ensure data quali"
       ],
       "words": null,
-      "latency_s": 167.85,
-      "tokens": 11216,
-      "usd": 0.0,
-      "writer_models": {
-        "qwen3:8b": 3
-      },
-      "errors": [
-        "compliance blocked: ['no_guarantees']"
-      ],
-      "approval_payload": null,
-      "status": "blocked"
-    },
-    {
-      "job_id": "2ecc025bacaefa60",
-      "persona": "data_analyst",
-      "status_before_approval": "blocked",
-      "decision": "bid",
-      "claims_before": 3,
-      "unsupported_before": 0,
-      "claims_after": 3,
-      "unsupported_after": 0,
-      "removed_claims": [],
-      "critic_revisions": 2,
-      "critic_unresolved": false,
-      "compliance": "blocked",
-      "compliance_violations": [
-        "no_guarantees: My experience with Python scripts for data cleaning ensures the scraped text will be clean and ready for the final docum",
-        "no_fabrication: I have not listed a dedicated scraping project in my portfolio, but I am proficient in Python and can quickly build Scra"
-      ],
-      "words": null,
-      "latency_s": 102.32,
-      "tokens": 11305,
-      "usd": 0.001294,
-      "writer_models": {
-        "qwen3:8b": 2,
-        "openai/gpt-oss-120b": 1
-      },
-      "errors": [
-        "compliance blocked: ['no_fabrication', 'no_guarantees']"
-      ],
-      "approval_payload": null,
-      "status": "blocked"
-    },
-    {
-      "job_id": "031cbf7ac05d13a6",
-      "persona": "fullstack",
-      "status_before_approval": "blocked",
-      "decision": "bid",
-      "claims_before": 2,
-      "unsupported_before": 1,
-      "claims_after": 1,
-      "unsupported_after": 0,
-      "removed_claims": [
-        "I built a scalable system for a healthcare portal with 11k patients, handling real-time interactions and ensuring compliance with API terms of service."
-      ],
-      "critic_revisions": 2,
-      "critic_unresolved": true,
-      "compliance": "blocked",
-      "compliance_violations": [
-        "no_off_platform: I\u2019ll review the details privately to ensure the bot meets your specific requirements and complies with platform policies",
-        "no_off_platform: I\u2019ll ensure the bots comply with TikTok and Instagram API terms of service and are scalable for large user bases."
-      ],
-      "words": null,
-      "latency_s": 56.38,
-      "tokens": 6873,
+      "latency_s": 354.32,
+      "tokens": 17745,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 3
@@ -836,72 +664,89 @@
       "status": "blocked"
     },
     {
-      "job_id": "03fdb39475cfadc3",
-      "persona": "fullstack",
+      "job_id": "291e4ff84d9094f0",
+      "persona": "data_analyst",
       "status_before_approval": "awaiting_approval",
       "decision": "bid",
-      "claims_before": 2,
-      "unsupported_before": 1,
-      "claims_after": 1,
+      "claims_before": 10,
+      "unsupported_before": 10,
+      "claims_after": 0,
       "unsupported_after": 0,
       "removed_claims": [
-        "I built a live fleet dashboard that tracked 1,800 trucks with updates arriving in under 2 seconds using real-time data strategies."
+        "I built a delivery operations dashboard for Ferrylane Freight that integrated real-time data and visualized performance across multiple dimensions.",
+        "The dashboard will include a welcoming view, a data input view, and a tracking view with real-time updates for current spot rates.",
+        "I have experience with Forex trading and dashboard development, as demonstrated by my work on the sales KPI dashboard for Marlowe Furniture.",
+        "I will handle real-time updates for current spot rates by integrating live market data into the dashboard, similar to how I structured data models for Ferrylane Freight.",
+        "I also have experience with exporting transaction data to CSV/Excel, as I did for the Clipboardly support dashboard.",
+        "I can create a TradingView dashboard with three specific views by structuring the data model and visualizations as I did for Ferrylane Freight.",
+        "I have experience with Forex trading and dashboard development, as demonstrated by my work on the sales KPI dashboard for Marlowe Furniture.",
+        "I will handle real-time updates for current spot rates by integrating live market data into the dashboard, similar to how I structured data models for Ferrylane Freight.",
+        "I can integrate stoploss rates with TradingView charts by calculating the stoploss rate as 10 cents lower than the capture rate and updating the chart accordingly, as I did for the sales KPI dashboard.",
+        "I have experience with exporting transaction data to CSV/Excel, as I did for the Clipboardly support dashboard."
       ],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "allowed",
       "compliance_violations": [],
-      "words": 131,
-      "latency_s": 66.29,
-      "tokens": 6279,
+      "words": 105,
+      "latency_s": 138.26,
+      "tokens": 11262,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 3
       },
       "errors": [],
       "approval_payload": {
-        "thread_id": "03fdb39475cfadc3",
-        "job_id": "03fdb39475cfadc3",
+        "thread_id": "291e4ff84d9094f0",
+        "job_id": "291e4ff84d9094f0",
         "draft": {
-          "cover_letter": "You need a secure, scalable tracking platform that integrates with Meta, Google, and other platforms via their APIs, while handling real-time data processing and storage.\n\nI also developed embedded analytics dashboards rolled out to 140 customer accounts, delivering results 3 weeks early. My experience with API integrations, database design, and real-time processing aligns with your needs.\n\nMy rate is $45 per hour. I use JavaScript, Node.js, PostgreSQL, and REST APIs to build custom tracking solutions that are secure, scalable, and efficient. I have worked with Stripe, GraphQL, and WebSockets, which are relevant to your project.\n\nI have experience with Meta Conversion API and Google pixels through my work with tracking platforms and analytics systems. If needed, I can implement these integrations using the tools and strategies I\u2019ve used in past projects.",
+          "cover_letter": "You need a TradingView dashboard that allows you to track multiple forex trades with real-time updates, export data to CSV/Excel, and calculate gains/losses based on market rates. I built a sales KPI dashboard for Marlowe Furniture using Power BI and SQL, consolidating 14 Excel reports into a single, reliable report. I also worked on a delivery operations dashboard for Ferrylane Freight, where I structured data models and visualizations for daily performance tracking. My approach to this project would involve creating a structured dashboard with three views, integrating real-time market data, and ensuring accurate stoploss calculations based on the capture rate. My rate is hourly $25.",
           "screening_answers": [
-            "In my application, I showed experience with tracking platforms, API integrations, and real-time data processing through projects like the live fleet dashboard and embedded analytics dashboards."
+            "",
+            "",
+            "",
+            "",
+            ""
           ],
-          "with_tags": "You need a secure, scalable tracking platform that integrates with Meta, Google, and other platforms via their APIs, while handling real-time data processing and storage.\n\nI also developed embedded analytics dashboards rolled out to 140 customer accounts, delivering results 3 weeks early [fullstack:review:05]. My experience with API integrations, database design, and real-time processing aligns with your needs.\n\nMy rate is $45 per hour. I use JavaScript, Node.js, PostgreSQL, and REST APIs to build custom tracking solutions that are secure, scalable, and efficient. I have worked with Stripe, GraphQL, and WebSockets, which are relevant to your project.\n\nI have experience with Meta Conversion API and Google pixels through my work with tracking platforms and analytics systems. If needed, I can implement these integrations using the tools and strategies I\u2019ve used in past projects.",
+          "with_tags": "You need a TradingView dashboard that allows you to track multiple forex trades with real-time updates, export data to CSV/Excel, and calculate gains/losses based on market rates. I built a sales KPI dashboard for Marlowe Furniture using Power BI and SQL, consolidating 14 Excel reports into a single, reliable report [data_analyst:case_study:p01]. I also worked on a delivery operations dashboard for Ferrylane Freight, where I structured data models and visualizations for daily performance tracking [data_analyst:case_study:p12]. My approach to this project would involve creating a structured dashboard with three views, integrating real-time market data, and ensuring accurate stoploss calculations based on the capture rate. My rate is hourly $25.",
           "revision": 0
         },
         "claims": [
           {
-            "claim": "I also developed embedded analytics dashboards rolled out to 140 customer accounts, delivering results 3 weeks early.",
+            "claim": "I built a sales KPI dashboard for Marlowe Furniture using Power BI and SQL, consolidating 14 Excel reports into a single, reliable report.",
             "evidence_ids": [
-              "fullstack:review:05"
+              "data_analyst:case_study:p01"
             ],
-            "label": "supported",
+            "label": "unsupported",
             "evidence": {
-              "fullstack:review:05": "Tobias did a solid job on our embedded analytics work. He helped us get the customer usage dashboards into the product and we were able to roll them out to 140 customer accounts. Everything came in 3 weeks early, which made a real difference for our timeline."
+              "data_analyst:case_study:p01": "# Sales KPI Dashboard for Marlowe Furniture\n\nIn early 2021, I worked with Marlowe Furniture, a retail business that was managing sales performance through 14 separate Excel reports. The reporting process was fragmented, slow to maintain, and made it difficult for the team to get a consistent view of"
+            }
+          },
+          {
+            "claim": "I also worked on a delivery operations dashboard for Ferrylane Freight, where I structured data models and visualizations for daily performance tracking.",
+            "evidence_ids": [
+              "data_analyst:case_study:p12"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "data_analyst:case_study:p12": "# Delivery operations dashboard for Ferrylane Freight\n\nFerrylane Freight needed a clearer way to track delivery performance across its logistics operations. The team was working with operational data, but it was difficult to get a daily view that could quickly show where delays were happening and wh"
             }
           }
         ],
         "risk_report": {
-          "score": 0.079,
-          "client_quality": 0.756,
-          "flags": [
-            "low_budget",
-            "payment_unverified"
-          ],
+          "score": 0.015,
+          "client_quality": 0.925,
+          "flags": [],
           "injection_detected": false,
-          "explanation": "The client has a strong history with good ratings and verified payments, but the job description mentions a high hourly rate which may indicate low budget. The client's country is listed as Canada, which is unusual for a Singapore-based client, suggesting potential inconsistency.",
-          "signals": [
-            "llm:low_budget",
-            "llm:payment_unverified"
-          ]
+          "explanation": "rules only",
+          "signals": []
         },
         "price": {
-          "amount": 45.0,
+          "amount": 25.0,
           "billing": "hourly",
           "currency": "USD",
-          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $175; 12 Connects ($1.80), balance 100, keeps reserve 20: worth it at fit 0.75",
-          "connects_cost": 12,
+          "rationale": "market data_analyst hourly p25-p75 $10-$32 (pricing_stats.json (jobs, Kaggle 2023-24), n=1455); client posted up to $25; 2 Connects ($0.30), balance 40, keeps reserve 12: worth it at fit 1.00",
+          "connects_cost": 2,
           "connects_worth_it": true
         },
         "preview": {
@@ -917,28 +762,37 @@
           "submit_proposal": {
             "dry_run": true,
             "connects_cost": 12,
-            "balance_before": 100,
-            "balance_after": 88
+            "balance_before": 40,
+            "balance_after": 28
           }
         },
         "notes": {
           "verifier": {
-            "claims_before": 2,
-            "unsupported_before": 1,
+            "claims_before": 10,
+            "unsupported_before": 10,
             "partly_before": 0,
             "removed": [
-              "I built a live fleet dashboard that tracked 1,800 trucks with updates arriving in under 2 seconds using real-time data strategies."
+              "I built a delivery operations dashboard for Ferrylane Freight that integrated real-time data and visualized performance across multiple dimensions.",
+              "The dashboard will include a welcoming view, a data input view, and a tracking view with real-time updates for current spot rates.",
+              "I have experience with Forex trading and dashboard development, as demonstrated by my work on the sales KPI dashboard for Marlowe Furniture.",
+              "I will handle real-time updates for current spot rates by integrating live market data into the dashboard, similar to how I structured data models for Ferrylane Freight.",
+              "I also have experience with exporting transaction data to CSV/Excel, as I did for the Clipboardly support dashboard.",
+              "I can create a TradingView dashboard with three specific views by structuring the data model and visualizations as I did for Ferrylane Freight.",
+              "I have experience with Forex trading and dashboard development, as demonstrated by my work on the sales KPI dashboard for Marlowe Furniture.",
+              "I will handle real-time updates for current spot rates by integrating live market data into the dashboard, similar to how I structured data models for Ferrylane Freight.",
+              "I can integrate stoploss rates with TradingView charts by calculating the stoploss rate as 10 cents lower than the capture rate and updating the chart accordingly, as I did for the sales KPI dashboard.",
+              "I have experience with exporting transaction data to CSV/Excel, as I did for the Clipboardly support dashboard."
             ],
-            "claims_after": 1,
+            "claims_after": 0,
             "unsupported_after": 0
           },
           "critic": [
             {
               "verdict": "revise",
               "reasons": [
-                "1 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "10 unsupported claim(s) were removed; rebuild those points from the evidence",
                 "fewer than 2 grounded claims; cite more of the listed evidence",
-                "83 words, keep it between 110 and 260"
+                "24 words, keep it between 110 and 260"
               ],
               "revision_count": 2
             }
@@ -946,121 +800,105 @@
           "compliance": {
             "verdict": "allowed",
             "violations": [],
-            "cleaned_text": "You need a secure, scalable tracking platform that integrates with Meta, Google, and other platforms via their APIs, while handling real-time data processing and storage. I also developed embedded analytics dashboards rolled out to 140 customer accounts, delivering results 3 weeks early [fullstack:review:05]. My experience with API integrations, database design, and real-time processing aligns with your needs. My rate is $45 per hour. I use JavaScript, Node.js, PostgreSQL, and REST APIs to build custom tracking solutions that are secure, scalable, and efficient. I have worked with Stripe, GraphQL, and WebSockets, which are relevant to your project. I have experience with Meta Conversion API and Google pixels through my work with tracking platforms and analytics systems. If needed, I can implement these integrations using the tools and strategies I\u2019ve used in past projects."
+            "cleaned_text": "You need a TradingView dashboard that allows you to track multiple forex trades with real-time updates, export data to CSV/Excel, and calculate gains/losses based on market rates. I built a sales KPI dashboard for Marlowe Furniture using Power BI and SQL, consolidating 14 Excel reports into a single, reliable report [data_analyst:case_study:p01]. I also worked on a delivery operations dashboard for Ferrylane Freight, where I structured data models and visualizations for daily performance tracking [data_analyst:case_study:p12]. My approach to this project would involve creating a structured dashboard with three views, integrating real-time market data, and ensuring accurate stoploss calculations based on the capture rate. My rate is hourly $25."
           },
           "other": [
-            "critic_unresolved: 1 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; 83 words, keep it between 110 and 260"
+            "critic_unresolved: 10 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; 24 words, keep it between 110 and 260"
           ]
         }
       },
       "status": "submitted",
       "submission": {
-        "proposal_id": "pr_000005",
-        "idempotency_key": "03fdb39475cfadc3:8571a94451545f7a",
+        "proposal_id": "pr_000004",
+        "idempotency_key": "291e4ff84d9094f0:ff8c05e292cba55c",
         "connects_spent": 12,
-        "balance_after": 88
+        "balance_after": 28
       }
     },
     {
-      "job_id": "11c7cbfaf9ea5e52",
-      "persona": "fullstack",
-      "status_before_approval": "blocked",
+      "job_id": "2ecc025bacaefa60",
+      "persona": "data_analyst",
+      "status_before_approval": "awaiting_approval",
       "decision": "bid",
       "claims_before": 3,
       "unsupported_before": 0,
       "claims_after": 3,
       "unsupported_after": 0,
       "removed_claims": [],
-      "critic_revisions": 0,
-      "critic_unresolved": false,
-      "compliance": "blocked",
-      "compliance_violations": [
-        "no_guarantees: My work with Stripe Connect for a tutoring marketplace ensured seamless payment routing and a clean user flow [fullstack",
-        "no_guarantees: I can ensure the store is optimized for the Belgian market by focusing on responsive design and payment integration, as"
-      ],
-      "words": null,
-      "latency_s": 72.8,
-      "tokens": 3994,
-      "usd": 0.0,
-      "writer_models": {
-        "qwen3:8b": 1
-      },
-      "errors": [
-        "compliance blocked: ['no_guarantees']"
-      ],
-      "approval_payload": null,
-      "status": "blocked"
-    },
-    {
-      "job_id": "16e6b1dc6d5fc66f",
-      "persona": "fullstack",
-      "status_before_approval": "awaiting_approval",
-      "decision": "bid",
-      "claims_before": 2,
-      "unsupported_before": 0,
-      "claims_after": 2,
-      "unsupported_after": 0,
-      "removed_claims": [],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "allowed",
       "compliance_violations": [],
-      "words": 78,
-      "latency_s": 81.68,
-      "tokens": 6979,
+      "words": 104,
+      "latency_s": 145.14,
+      "tokens": 11696,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 3
       },
       "errors": [],
       "approval_payload": {
-        "thread_id": "16e6b1dc6d5fc66f",
-        "job_id": "16e6b1dc6d5fc66f",
+        "thread_id": "2ecc025bacaefa60",
+        "job_id": "2ecc025bacaefa60",
         "draft": {
-          "cover_letter": "You need a full-stack developer who can work independently on your self-maintained website and has experience with AWS integration.\n\nI built a headless storefront for Juniper & Ash Home using Next.js, Tailwind CSS, Sanity, Stripe, and Vercel, with a focus on performance and content flexibility. I also developed a serverless image pipeline for a healthcare client using Lambda, S3, Sharp, Node.js, and CloudFront, processing 2.3M images and reducing hosting costs by 61%.\n\nMy rate is $35 per hour.",
+          "cover_letter": "You need a reliable way to extract all text from 30 websites and organize it into a structured document without formatting.\n\nI have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis. I also built a dbt project in BigQuery for structured data modeling.\n\nMy approach includes using Python and Scrapy for scraping, as well as organizing the extracted text into a structured format. I will ensure the text is grouped by pages and formatted into a single document as requested.\n\nMy rate is $30 per hour.",
           "screening_answers": [
-            "I have experience with AWS services like Lambda, S3, and CloudFront, as well as Node.js and React.",
-            "I can work independently on your self-maintained website and handle full-stack development.",
-            "I have a clear understanding of project scope and can adapt to your specific needs."
+            "I have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis."
           ],
-          "with_tags": "You need a full-stack developer who can work independently on your self-maintained website and has experience with AWS integration.\n\nI built a headless storefront for Juniper & Ash Home using Next.js, Tailwind CSS, Sanity, Stripe, and Vercel, with a focus on performance and content flexibility [fullstack:case_study:p03]. I also developed a serverless image pipeline for a healthcare client using Lambda, S3, Sharp, Node.js, and CloudFront, processing 2.3M images and reducing hosting costs by 61% [fullstack:review:24].\n\nMy rate is $35 per hour.",
-          "revision": 1
+          "with_tags": "You need a reliable way to extract all text from 30 websites and organize it into a structured document without formatting.\n\nI have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis [data_analyst:case_study:p05]. I also built a dbt project in BigQuery for structured data modeling [data_analyst:case_study:p06].\n\nMy approach includes using Python and Scrapy for scraping, as well as organizing the extracted text into a structured format. I will ensure the text is grouped by pages and formatted into a single document as requested.\n\nMy rate is $30 per hour.",
+          "revision": 2
         },
         "claims": [
           {
-            "claim": "I built a headless storefront for Juniper & Ash Home using Next.js, Tailwind CSS, Sanity, Stripe, and Vercel, with a focus on performance and content flexibility.",
+            "claim": "I have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis.",
             "evidence_ids": [
-              "fullstack:case_study:p03"
+              "data_analyst:case_study:p05"
             ],
             "label": "supported",
             "evidence": {
-              "fullstack:case_study:p03": "# Home goods storefront rebuild\n\nIn early 2021, I worked with **Juniper & Ash Home** on a fixed-scope rebuild of their storefront. Their existing theme-based shop had become slow and rigid, and the marketing team had to depend on developers for routine content updates. The goal was to replace that s"
+              "data_analyst:case_study:p05": "# Subscription churn cohorts\n\nI worked with a client in SaaS (name withheld) on an hourly engagement from 2022-01 to 2022-03 to help them understand where subscribers were dropping off and how retention varied across signup groups. The main challenge was to turn raw product and subscription data int"
             }
           },
           {
-            "claim": "I also developed a serverless image pipeline for a healthcare client using Lambda, S3, Sharp, Node.js, and CloudFront, processing 2.3M images and reducing hosting costs by 61%.",
+            "claim": "I also built a dbt project in BigQuery for structured data modeling.",
             "evidence_ids": [
-              "fullstack:review:24"
+              "data_analyst:case_study:p06"
             ],
             "label": "supported",
             "evidence": {
-              "fullstack:review:24": "Tobias did solid work on our serverless image pipeline and handled the technical details cleanly. He built a reliable flow with Lambda, S3, Sharp, Node.js, and CloudFront that processed our uploads into web sizes and watermarked versions without drama. We\u2019ve processed 2.3M images through it, and hos"
+              "data_analyst:case_study:p06": "# Warehouse models for Fernwood Pantry\n\nIn 2022, I worked hourly with Fernwood Pantry, an e-commerce brand that needed a more reliable and scalable analytics foundation for orders, subscriptions, and marketing. Their reporting was being limited by scattered source data and a refresh cadence that cou"
+            }
+          },
+          {
+            "claim": "I have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis.",
+            "evidence_ids": [
+              "data_analyst:case_study:p05"
+            ],
+            "label": "supported",
+            "evidence": {
+              "data_analyst:case_study:p05": "# Subscription churn cohorts\n\nI worked with a client in SaaS (name withheld) on an hourly engagement from 2022-01 to 2022-03 to help them understand where subscribers were dropping off and how retention varied across signup groups. The main challenge was to turn raw product and subscription data int"
             }
           }
         ],
         "risk_report": {
-          "score": 0.002,
-          "client_quality": 0.988,
-          "flags": [],
+          "score": 0.045,
+          "client_quality": 0.925,
+          "flags": [
+            "low_budget",
+            "vague_scope"
+          ],
           "injection_detected": false,
-          "explanation": "Client has strong history with verified payments, high spending, and good rating. Job description is clear and standard for full-stack development without red flags.",
-          "signals": []
+          "explanation": "The client has a strong history with verified payments and high ratings, but the job scope is vague and the number of websites is low, indicating potential for low-budget work.",
+          "signals": [
+            "llm:low_budget",
+            "llm:vague_scope"
+          ]
         },
         "price": {
-          "amount": 35.0,
+          "amount": 30.0,
           "billing": "hourly",
           "currency": "USD",
-          "rationale": "market fullstack hourly p25-p75 $18-$35 (pricing_stats.json (jobs, Kaggle 2023-24), n=3450); no posted budget; market p75 (client spent $10k+); 4 Connects ($0.60), balance 88, keeps reserve 20: worth it at fit 1.00",
+          "rationale": "market data_analyst hourly p25-p75 $10-$32 (pricing_stats.json (jobs, Kaggle 2023-24), n=1455); no posted budget; market p75 (client spent $10k+); 4 Connects ($0.60), balance 28, keeps reserve 12: worth it at fit 0.67",
           "connects_cost": 4,
           "connects_worth_it": true
         },
@@ -1077,25 +915,24 @@
           "submit_proposal": {
             "dry_run": true,
             "connects_cost": 12,
-            "balance_before": 88,
-            "balance_after": 76
+            "balance_before": 28,
+            "balance_after": 16
           }
         },
         "notes": {
           "verifier": {
-            "claims_before": 2,
+            "claims_before": 3,
             "unsupported_before": 0,
             "partly_before": 0,
             "removed": [],
-            "claims_after": 2,
+            "claims_after": 3,
             "unsupported_after": 0
           },
           "critic": [
             {
               "verdict": "revise",
               "reasons": [
-                "first paragraph does not use the job's specifics",
-                "74 words, keep it between 110 and 260"
+                "104 words, keep it between 110 and 260"
               ],
               "revision_count": 2
             }
@@ -1103,89 +940,296 @@
           "compliance": {
             "verdict": "allowed",
             "violations": [],
-            "cleaned_text": "You need a full-stack developer who can work independently on your self-maintained website and has experience with AWS integration. I built a headless storefront for Juniper & Ash Home using Next.js, Tailwind CSS, Sanity, Stripe, and Vercel, with a focus on performance and content flexibility [fullstack:case_study:p03]. I also developed a serverless image pipeline for a healthcare client using Lambda, S3, Sharp, Node.js, and CloudFront, processing 2.3M images and reducing hosting costs by 61% [fullstack:review:24]. My rate is $35 per hour."
+            "cleaned_text": "You need a reliable way to extract all text from 30 websites and organize it into a structured document without formatting. I have experience with website scraping and data extraction, as demonstrated in my work with a SaaS client where I used Python to shape data for retention analysis [data_analyst:case_study:p05]. I also built a dbt project in BigQuery for structured data modeling [data_analyst:case_study:p06]. My approach includes using Python and Scrapy for scraping, as well as organizing the extracted text into a structured format. I will ensure the text is grouped by pages and formatted into a single document as requested. My rate is $30 per hour."
           },
           "other": [
-            "critic_unresolved: first paragraph does not use the job's specifics; 74 words, keep it between 110 and 260"
+            "critic_unresolved: 104 words, keep it between 110 and 260"
           ]
         }
       },
       "status": "submitted",
       "submission": {
-        "proposal_id": "pr_000006",
-        "idempotency_key": "16e6b1dc6d5fc66f:65922406295db6aa",
+        "proposal_id": "pr_000005",
+        "idempotency_key": "2ecc025bacaefa60:79d23364459766a4",
         "connects_spent": 12,
-        "balance_after": 76
+        "balance_after": 16
       }
     },
     {
-      "job_id": "1f3e80398a6e52bb",
+      "job_id": "031cbf7ac05d13a6",
       "persona": "fullstack",
       "status_before_approval": "awaiting_approval",
       "decision": "bid",
-      "claims_before": 2,
-      "unsupported_before": 0,
-      "claims_after": 2,
+      "claims_before": 6,
+      "unsupported_before": 6,
+      "claims_after": 0,
       "unsupported_after": 0,
-      "removed_claims": [],
+      "removed_claims": [
+        "I built a scalable bot system for a healthcare client with 11k patients, handling real-time interactions and compliance with API terms of service.",
+        "My experience with Node.js and automation tools makes me suited for this task.",
+        "I can ensure the bot is scalable and compliant with TikTok and Instagram API rules using my experience with automation and Node.js.",
+        "I'll give more info in private.",
+        "I have experience building bots that handle real-time interactions and comply with API terms of service.",
+        "I can ensure the bot is scalable and compliant with TikTok and Instagram API rules using my experience with automation and Node.js."
+      ],
       "critic_revisions": 2,
       "critic_unresolved": true,
       "compliance": "allowed",
       "compliance_violations": [],
-      "words": 65,
-      "latency_s": 89.27,
-      "tokens": 7867,
+      "words": 31,
+      "latency_s": 77.36,
+      "tokens": 7111,
       "usd": 0.0,
       "writer_models": {
         "qwen3:8b": 3
       },
       "errors": [],
       "approval_payload": {
-        "thread_id": "1f3e80398a6e52bb",
-        "job_id": "1f3e80398a6e52bb",
+        "thread_id": "031cbf7ac05d13a6",
+        "job_id": "031cbf7ac05d13a6",
         "draft": {
-          "cover_letter": "You need a data scientist to debug a Node.js application that isn't producing expected results from a MongoDB dataset, with a strong grasp of probability distributions.\n\nI built a live fleet dashboard for Ferrylane Freight using Node.js, Socket.IO, and Redis to stream real-time GPS updates. I also worked with MongoDB in a full-stack context, handling data flows and synchronization.\n\nMy rate is $30 per hour.",
+          "cover_letter": "You need a bot that can follow/unfollow, like, comment, and send DMs on TikTok and Instagram, targeting specific user groups like followers of Cristiano Ronaldo.\n\nMy rate is fixed at $300.",
           "screening_answers": [
-            "I have experience with MongoDB and Node.js, having used them in full-stack projects including real-time data streaming and synchronization."
+            "I\u2019ll provide the details in private as requested.",
+            "",
+            "I can design the bot to target specific user groups and handle likes, comments, and DMs as required.",
+            ""
           ],
-          "with_tags": "You need a data scientist to debug a Node.js application that isn't producing expected results from a MongoDB dataset, with a strong grasp of probability distributions.\n\nI built a live fleet dashboard for Ferrylane Freight using Node.js, Socket.IO, and Redis to stream real-time GPS updates [fullstack:case_study:p02]. I also worked with MongoDB in a full-stack context, handling data flows and synchronization [fullstack:cv].\n\nMy rate is $30 per hour.",
-          "revision": 1
+          "with_tags": "You need a bot that can follow/unfollow, like, comment, and send DMs on TikTok and Instagram, targeting specific user groups like followers of Cristiano Ronaldo.\n\nMy rate is fixed at $300.",
+          "revision": 0
+        },
+        "claims": [],
+        "risk_report": {
+          "score": 0.173,
+          "client_quality": 0.584,
+          "flags": [
+            "vague_scope",
+            "low_budget"
+          ],
+          "injection_detected": false,
+          "explanation": "The client has a good history with a 4.05 rating and verified payments, but the job description lacks specific technical details and mentions 'more info in private', which could indicate a scam attempt to avoid transparency.",
+          "signals": [
+            "llm:vague_scope",
+            "llm:low_budget"
+          ]
+        },
+        "price": {
+          "amount": 300.0,
+          "billing": "fixed",
+          "currency": "USD",
+          "rationale": "market fullstack fixed p25-p75 $50-$700 (pricing_stats.json (jobs, Kaggle 2023-24), n=3149); client posted up to $300; 8 Connects ($1.20), balance 100, keeps reserve 20: worth it at fit 0.88",
+          "connects_cost": 8,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 8,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 8,
+            "balance_before": 100,
+            "balance_after": 92
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 6,
+            "unsupported_before": 6,
+            "partly_before": 0,
+            "removed": [
+              "I built a scalable bot system for a healthcare client with 11k patients, handling real-time interactions and compliance with API terms of service.",
+              "My experience with Node.js and automation tools makes me suited for this task.",
+              "I can ensure the bot is scalable and compliant with TikTok and Instagram API rules using my experience with automation and Node.js.",
+              "I'll give more info in private.",
+              "I have experience building bots that handle real-time interactions and comply with API terms of service.",
+              "I can ensure the bot is scalable and compliant with TikTok and Instagram API rules using my experience with automation and Node.js."
+            ],
+            "claims_after": 0,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "revise",
+              "reasons": [
+                "6 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "fewer than 2 grounded claims; cite more of the listed evidence",
+                "31 words, keep it between 110 and 260"
+              ],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a bot that can follow/unfollow, like, comment, and send DMs on TikTok and Instagram, targeting specific user groups like followers of Cristiano Ronaldo. My rate is fixed at $300."
+          },
+          "other": [
+            "critic_unresolved: 6 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; 31 words, keep it between 110 and 260"
+          ]
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000006",
+        "idempotency_key": "031cbf7ac05d13a6:02ede15b4fc386c5",
+        "connects_spent": 8,
+        "balance_after": 92
+      }
+    },
+    {
+      "job_id": "03fdb39475cfadc3",
+      "persona": "fullstack",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 6,
+      "unsupported_before": 5,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "My experience with real-time data processing and API integrations aligns with your needs.",
+        "I have expertise in JavaScript, Node.js, and PostgreSQL, and I can design a system that securely stores and retrieves tracking data while supporting multiple platforms.",
+        "I have experience with real-time data processing and API integrations, as seen in the live fleet dashboard.",
+        "I can build a secure and scalable tracking system using Node.js, PostgreSQL, and REST APIs, as demonstrated in my work with Stripe and Sanity.",
+        "I can handle real-time data processing and ensure data integrity through my experience with high-performance systems."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_guarantees: I can implement the required APIs and ensure data integrity through robust database design [fullstack:cv]."
+      ],
+      "words": null,
+      "latency_s": 130.49,
+      "tokens": 8997,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [
+        "compliance blocked: ['no_guarantees']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "11c7cbfaf9ea5e52",
+      "persona": "fullstack",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 12,
+      "unsupported_before": 10,
+      "claims_after": 2,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I have experience in Shopify store setup and customization, including payment gateway integration and SEO best practices, as demonstrated by my work on a home goods storefront and restaurant ordering app.",
+        "I routinely train teams on managing Shopify stores, including product updates, inventory management, and basic troubleshooting, based on my experience with the restaurant ordering app.",
+        "I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid programming language, with experience in custom integrations using Shopify\u2019s API, as shown by my work on the home goods storefront and restaurant ordering app.",
+        "I have a portfolio of previous Shopify projects, including a home goods storefront rebuild and a restaurant ordering app.",
+        "I have excellent communication skills and can work collaboratively with your team, as evidenced by positive feedback from past clients.",
+        "I have experience in Shopify store setup and customization, including payment gateway integration and SEO best practices, as demonstrated by my work on a home goods storefront and restaurant ordering app.",
+        "I routinely train teams on managing Shopify stores, including product updates, inventory management, and basic troubleshooting, based on my experience with the restaurant ordering app.",
+        "I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid programming language, with experience in custom integrations using Shopify\u2019s API, as shown by my work on the home goods storefront and restaurant ordering app.",
+        "I have a portfolio of previous Shopify projects, including a home goods storefront rebuild and a restaurant ordering app.",
+        "I have excellent communication skills and can work collaboratively with your team, as evidenced by positive feedback from past clients."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 211,
+      "latency_s": 191.9,
+      "tokens": 10901,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "11c7cbfaf9ea5e52",
+        "job_id": "11c7cbfaf9ea5e52",
+        "draft": {
+          "cover_letter": "You need a Shopify developer to set up a store for high-quality, direct supplier goods with seamless payment and shipping integration, SEO, email marketing, and social media sharing. I built a restaurant ordering app with React, Firebase, and Stripe that kept the menu and cart usable even on poor connections. I also rebuilt a home goods storefront with Next.js, Sanity, and Stripe, focusing on fast performance and content flexibility. My rate is hourly $45.\n\nFor Saffron Lane Kitchens, I created an installable ordering app that supported offline functionality and seamless payment processing with Stripe. I also worked on a subscription box billing backend that migrated legacy subscribers to Stripe Billing and handled failed payment retries.\n\nI understand the importance of a user-friendly, responsive design that aligns with your brand identity. My work on the Tutor marketplace MVP included creating a seamless booking and payment flow using Stripe Connect and Twilio Video. I also have experience with Shopify\u2019s Liquid and API for custom integrations, which is essential for your store\u2019s scalability and future growth.\n\nI can ensure your store is optimized for the Belgian market by focusing on local SEO and user experience tailored to your target audience. I have a portfolio of previous Shopify projects and am ready to start work.",
+          "screening_answers": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "with_tags": "You need a Shopify developer to set up a store for high-quality, direct supplier goods with seamless payment and shipping integration, SEO, email marketing, and social media sharing. I built a restaurant ordering app with React, Firebase, and Stripe that kept the menu and cart usable even on poor connections [fullstack:case_study:p09]. I also rebuilt a home goods storefront with Next.js, Sanity, and Stripe, focusing on fast performance and content flexibility [fullstack:case_study:p03]. My rate is hourly $45.\n\nFor Saffron Lane Kitchens, I created an installable ordering app that supported offline functionality and seamless payment processing with Stripe [fullstack:case_study:p09]. I also worked on a subscription box billing backend that migrated legacy subscribers to Stripe Billing and handled failed payment retries [fullstack:readme:pantry-billing].\n\nI understand the importance of a user-friendly, responsive design that aligns with your brand identity. My work on the Tutor marketplace MVP included creating a seamless booking and payment flow using Stripe Connect and Twilio Video [fullstack:case_study:p05]. I also have experience with Shopify\u2019s Liquid and API for custom integrations, which is essential for your store\u2019s scalability and future growth.\n\nI can ensure your store is optimized for the Belgian market by focusing on local SEO and user experience tailored to your target audience. I have a portfolio of previous Shopify projects and am ready to start work.",
+          "revision": 0
         },
         "claims": [
           {
-            "claim": "I built a live fleet dashboard for Ferrylane Freight using Node.js, Socket.IO, and Redis to stream real-time GPS updates.",
+            "claim": "I built a restaurant ordering app with React, Firebase, and Stripe that kept the menu and cart usable even on poor connections.",
             "evidence_ids": [
-              "fullstack:case_study:p02"
+              "fullstack:case_study:p09"
             ],
             "label": "supported",
             "evidence": {
-              "fullstack:case_study:p02": "# Live fleet dashboard for Ferrylane Freight\n\nI worked with **Ferrylane Freight** on an hourly engagement from **2020-09 to 2020-12** to help their operations team get a real-time view of their fleet.\n\nBefore this project, the dispatch process depended on fragmented updates coming in from the field."
+              "fullstack:case_study:p09": "# Restaurant ordering web app for Saffron Lane Kitchens\n\nIn early 2023, I worked with **Saffron Lane Kitchens**, a food and beverage business running **9 restaurants**, on a fixed engagement to improve how customers could place orders online. Their existing ordering flow needed to stay usable even w"
             }
           },
           {
-            "claim": "I also worked with MongoDB in a full-stack context, handling data flows and synchronization.",
+            "claim": "I also rebuilt a home goods storefront with Next.js, Sanity, and Stripe, focusing on fast performance and content flexibility.",
             "evidence_ids": [
-              "fullstack:cv"
+              "fullstack:case_study:p03"
             ],
             "label": "supported",
             "evidence": {
-              "fullstack:cv": "Tobias Reyne\nFull-stack developer - React, Next.js, Node.js and Postgres\nPorto, Portugal (Europe/Lisbon) | English, Portuguese, German\nSYNTHETIC persona for testing; not a real person.\nSkills\n\u007f\nExpert: JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, REST API, Tailwind CSS,\nStripe, full "
+              "fullstack:case_study:p03": "# Home goods storefront rebuild\n\nIn early 2021, I worked with **Juniper & Ash Home** on a fixed-scope rebuild of their storefront. Their existing theme-based shop had become slow and rigid, and the marketing team had to depend on developers for routine content updates. The goal was to replace that s"
+            }
+          },
+          {
+            "claim": "For Saffron Lane Kitchens, I created an installable ordering app that supported offline functionality and seamless payment processing with Stripe.",
+            "evidence_ids": [
+              "fullstack:case_study:p09"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "fullstack:case_study:p09": "# Restaurant ordering web app for Saffron Lane Kitchens\n\nIn early 2023, I worked with **Saffron Lane Kitchens**, a food and beverage business running **9 restaurants**, on a fixed engagement to improve how customers could place orders online. Their existing ordering flow needed to stay usable even w"
+            }
+          },
+          {
+            "claim": "I also worked on a subscription box billing backend that migrated legacy subscribers to Stripe Billing and handled failed payment retries.",
+            "evidence_ids": [
+              "fullstack:readme:pantry-billing"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "fullstack:readme:pantry-billing": "Subscription box billing backend for migrating legacy subscribers to Stripe Billing and handling failed payment retries.\n\n## Setup\nInstall dependencies and configure PostgreSQL and Stripe Billing credentials in your environment.\n\n```bash\nnpm install\nnpm run start:dev\n```\n\n## Usage\nThe NestJS service"
+            }
+          },
+          {
+            "claim": "My work on the Tutor marketplace MVP included creating a seamless booking and payment flow using Stripe Connect and Twilio Video.",
+            "evidence_ids": [
+              "fullstack:case_study:p05"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "fullstack:case_study:p05": "# Tutor marketplace MVP for Brightpath Tutors\n\nBrightpath Tutors needed a fast way to launch an edtech marketplace that could connect students with tutors, support online lessons, and handle payments cleanly from day one. I joined on a fixed engagement in October 2021 and helped build the MVP throug"
             }
           }
         ],
         "risk_report": {
-          "score": 0.048,
-          "client_quality": 0.758,
+          "score": 0.054,
+          "client_quality": 0.728,
           "flags": [],
           "injection_detected": false,
           "explanation": "rules only",
           "signals": []
         },
         "price": {
-          "amount": 30.0,
+          "amount": 45.0,
           "billing": "hourly",
           "currency": "USD",
-          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $30; 12 Connects ($1.80), balance 76, keeps reserve 20: worth it at fit 0.88",
+          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $45; 12 Connects ($1.80), balance 92, keeps reserve 20: worth it at fit 0.92",
           "connects_cost": 12,
           "connects_worth_it": true
         },
@@ -1202,16 +1246,27 @@
           "submit_proposal": {
             "dry_run": true,
             "connects_cost": 12,
-            "balance_before": 76,
-            "balance_after": 64
+            "balance_before": 92,
+            "balance_after": 80
           }
         },
         "notes": {
           "verifier": {
-            "claims_before": 2,
-            "unsupported_before": 0,
+            "claims_before": 12,
+            "unsupported_before": 10,
             "partly_before": 0,
-            "removed": [],
+            "removed": [
+              "I have experience in Shopify store setup and customization, including payment gateway integration and SEO best practices, as demonstrated by my work on a home goods storefront and restaurant ordering app.",
+              "I routinely train teams on managing Shopify stores, including product updates, inventory management, and basic troubleshooting, based on my experience with the restaurant ordering app.",
+              "I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid programming language, with experience in custom integrations using Shopify\u2019s API, as shown by my work on the home goods storefront and restaurant ordering app.",
+              "I have a portfolio of previous Shopify projects, including a home goods storefront rebuild and a restaurant ordering app.",
+              "I have excellent communication skills and can work collaboratively with your team, as evidenced by positive feedback from past clients.",
+              "I have experience in Shopify store setup and customization, including payment gateway integration and SEO best practices, as demonstrated by my work on a home goods storefront and restaurant ordering app.",
+              "I routinely train teams on managing Shopify stores, including product updates, inventory management, and basic troubleshooting, based on my experience with the restaurant ordering app.",
+              "I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid programming language, with experience in custom integrations using Shopify\u2019s API, as shown by my work on the home goods storefront and restaurant ordering app.",
+              "I have a portfolio of previous Shopify projects, including a home goods storefront rebuild and a restaurant ordering app.",
+              "I have excellent communication skills and can work collaboratively with your team, as evidenced by positive feedback from past clients."
+            ],
             "claims_after": 2,
             "unsupported_after": 0
           },
@@ -1219,7 +1274,8 @@
             {
               "verdict": "revise",
               "reasons": [
-                "78 words, keep it between 110 and 260"
+                "10 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "105 words, keep it between 110 and 260"
               ],
               "revision_count": 2
             }
@@ -1227,19 +1283,273 @@
           "compliance": {
             "verdict": "allowed",
             "violations": [],
-            "cleaned_text": "You need a data scientist to debug a Node.js application that isn't producing expected results from a MongoDB dataset, with a strong grasp of probability distributions. I built a live fleet dashboard for Ferrylane Freight using Node.js, Socket.IO, and Redis to stream real-time GPS updates [fullstack:case_study:p02]. I also worked with MongoDB in a full-stack context, handling data flows and synchronization [fullstack:cv]. My rate is $30 per hour."
+            "cleaned_text": "You need a Shopify developer to set up a store for high-quality, direct supplier goods with seamless payment and shipping integration, SEO, email marketing, and social media sharing. I built a restaurant ordering app with React, Firebase, and Stripe that kept the menu and cart usable even on poor connections [fullstack:case_study:p09]. I also rebuilt a home goods storefront with Next.js, Sanity, and Stripe, focusing on fast performance and content flexibility [fullstack:case_study:p03]. My rate is hourly $45. For Saffron Lane Kitchens, I created an installable ordering app that supported offline functionality and seamless payment processing with Stripe [fullstack:case_study:p09]. I also worked on a subscription box billing backend that migrated legacy subscribers to Stripe Billing and handled failed payment retries [fullstack:readme:pantry-billing]. I understand the importance of a user-friendly, responsive design that aligns with your brand identity. My work on the Tutor marketplace MVP included creating a seamless booking and payment flow using Stripe Connect and Twilio Video [fullstack:case_study:p05]. I also have experience with Shopify\u2019s Liquid and API for custom integrations, which is essential for your store\u2019s scalability and future growth. I can ensure your store is optimized for the Belgian market by focusing on local SEO and user experience tailored to your target audience. I have a portfolio of previous Shopify projects and am ready to start work."
           },
           "other": [
-            "critic_unresolved: 78 words, keep it between 110 and 260"
+            "critic_unresolved: 10 unsupported claim(s) were removed; rebuild those points from the evidence; 105 words, keep it between 110 and 260"
           ]
         }
       },
       "status": "submitted",
       "submission": {
         "proposal_id": "pr_000007",
-        "idempotency_key": "1f3e80398a6e52bb:4444c2edcb54623e",
+        "idempotency_key": "11c7cbfaf9ea5e52:f9c8dadc5bf55c8b",
         "connects_spent": 12,
-        "balance_after": 64
+        "balance_after": 80
+      }
+    },
+    {
+      "job_id": "16e6b1dc6d5fc66f",
+      "persona": "fullstack",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 0,
+      "claims_after": 2,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 127,
+      "latency_s": 16.4,
+      "tokens": 5840,
+      "usd": 0.001407,
+      "writer_models": {
+        "openai/gpt-oss-120b": 1
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "16e6b1dc6d5fc66f",
+        "job_id": "16e6b1dc6d5fc66f",
+        "draft": {
+          "cover_letter": "You need a full\u2011stack developer trained in React, Node.js and AWS to build and maintain your website. I have professional experience with React, Node.js and AWS, as shown in my full\u2011stack CV.\n\nI recently delivered a React front end and a Node proxy for a tutoring chat platform, achieving sub\u2011second token streaming. I also built a live fleet dashboard that streams GPS data from a Node.js server to a React client in real time, using Socket.IO and Redis. My recent AWS\u2011focused review shows I can design serverless image pipelines with Lambda, S3 and Node.js, cutting hosting costs by 61%.\n\nI will set up a clear project scope, use CI/CD on AWS, and keep the codebase maintainable with TypeScript and Tailwind CSS. My rate is $35 per hour.",
+          "screening_answers": [],
+          "with_tags": "You need a full\u2011stack developer trained in React, Node.js and AWS to build and maintain your website. I have professional experience with React, Node.js and AWS, as shown in my full\u2011stack CV. [fullstack:cv]\n\nI recently delivered a React front end and a Node proxy for a tutoring chat platform, achieving sub\u2011second token streaming. [fullstack:case_study:p03] I also built a live fleet dashboard that streams GPS data from a Node.js server to a React client in real time, using Socket.IO and Redis. [fullstack:case_study:p02] My recent AWS\u2011focused review shows I can design serverless image pipelines with Lambda, S3 and Node.js, cutting hosting costs by 61%. [fullstack:review:24]\n\nI will set up a clear project scope, use CI/CD on AWS, and keep the codebase maintainable with TypeScript and Tailwind CSS. My rate is $35 per hour.",
+          "revision": 0
+        },
+        "claims": [
+          {
+            "claim": "I have professional experience with React, Node.js and AWS, as shown in my full\u2011stack CV.",
+            "evidence_ids": [
+              "fullstack:cv"
+            ],
+            "label": "supported",
+            "evidence": {
+              "fullstack:cv": "Tobias Reyne\nFull-stack developer - React, Next.js, Node.js and Postgres\nPorto, Portugal (Europe/Lisbon) | English, Portuguese, German\nSYNTHETIC persona for testing; not a real person.\nSkills\n\u007f\nExpert: JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, REST API, Tailwind CSS,\nStripe, full "
+            }
+          },
+          {
+            "claim": "I recently delivered a React front end and a Node proxy for a tutoring chat platform, achieving sub\u2011second token streaming. I also built a live fleet dashboard that streams GPS data from a Node.js server to a React client in real time, using Socket.IO and Redis. My recent AWS\u2011focused review shows I can design serverless image pipelines with Lambda, S3 and Node.js, cutting hosting costs by 61%.",
+            "evidence_ids": [
+              "fullstack:case_study:p03",
+              "fullstack:case_study:p02",
+              "fullstack:review:24"
+            ],
+            "label": "partly",
+            "evidence": {
+              "fullstack:case_study:p03": "# Home goods storefront rebuild\n\nIn early 2021, I worked with **Juniper & Ash Home** on a fixed-scope rebuild of their storefront. Their existing theme-based shop had become slow and rigid, and the marketing team had to depend on developers for routine content updates. The goal was to replace that s",
+              "fullstack:case_study:p02": "# Live fleet dashboard for Ferrylane Freight\n\nI worked with **Ferrylane Freight** on an hourly engagement from **2020-09 to 2020-12** to help their operations team get a real-time view of their fleet.\n\nBefore this project, the dispatch process depended on fragmented updates coming in from the field.",
+              "fullstack:review:24": "Tobias did solid work on our serverless image pipeline and handled the technical details cleanly. He built a reliable flow with Lambda, S3, Sharp, Node.js, and CloudFront that processed our uploads into web sizes and watermarked versions without drama. We\u2019ve processed 2.3M images through it, and hos"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.002,
+          "client_quality": 0.988,
+          "flags": [],
+          "injection_detected": false,
+          "explanation": "Client has strong history with verified payments, high spending, and good rating. Job description is clear and standard for full-stack development without red flags.",
+          "signals": []
+        },
+        "price": {
+          "amount": 35.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market fullstack hourly p25-p75 $18-$35 (pricing_stats.json (jobs, Kaggle 2023-24), n=3450); no posted budget; market p75 (client spent $10k+); 4 Connects ($0.60), balance 80, keeps reserve 20: worth it at fit 1.00",
+          "connects_cost": 4,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 80,
+            "balance_after": 68
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 2,
+            "unsupported_before": 0,
+            "partly_before": 1,
+            "removed": [],
+            "claims_after": 2,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "pass",
+              "reasons": [],
+              "revision_count": 0
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a full\u2011stack developer trained in React, Node.js and AWS to build and maintain your website. I have professional experience with React, Node.js and AWS, as shown in my full\u2011stack CV. [fullstack:cv] I recently delivered a React front end and a Node proxy for a tutoring chat platform, achieving sub\u2011second token streaming. [fullstack:case_study:p03] I also built a live fleet dashboard that streams GPS data from a Node.js server to a React client in real time, using Socket.IO and Redis. [fullstack:case_study:p02] My recent AWS\u2011focused review shows I can design serverless image pipelines with Lambda, S3 and Node.js, cutting hosting costs by 61%. [fullstack:review:24] I will set up a clear project scope, use CI/CD on AWS, and keep the codebase maintainable with TypeScript and Tailwind CSS. My rate is $35 per hour."
+          },
+          "other": []
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000008",
+        "idempotency_key": "16e6b1dc6d5fc66f:bc73335c92ab24d6",
+        "connects_spent": 12,
+        "balance_after": 68
+      }
+    },
+    {
+      "job_id": "1f3e80398a6e52bb",
+      "persona": "fullstack",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 2,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I built a live fleet dashboard using Node.js, MongoDB, and Socket.IO to stream real-time GPS updates, ensuring reliable and fast data flow.",
+        "I have experience with MongoDB and Node.js, having used them in projects like the live fleet dashboard and overnight statement pipeline."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 83,
+      "latency_s": 65.64,
+      "tokens": 7377,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "1f3e80398a6e52bb",
+        "job_id": "1f3e80398a6e52bb",
+        "draft": {
+          "cover_letter": "You need a data scientist to analyze a large MongoDB table and refine Node.js code to produce expected results, with a strong understanding of probability distributions.\n\nI built a live fleet dashboard for Ferrylane Freight using Node.js, Redis, and Socket.IO to stream real-time GPS data to dispatchers, ensuring fast and reliable updates.\n\nIn another project, I developed an overnight statement rendering pipeline for Alder Property Group using Node.js, BullMQ, and AWS S3, which improved system resilience and performance.\n\nMy rate is hourly $30.",
+          "screening_answers": [
+            ""
+          ],
+          "with_tags": "You need a data scientist to analyze a large MongoDB table and refine Node.js code to produce expected results, with a strong understanding of probability distributions.\n\nI built a live fleet dashboard for Ferrylane Freight using Node.js, Redis, and Socket.IO to stream real-time GPS data to dispatchers, ensuring fast and reliable updates [fullstack:case_study:p02].\n\nIn another project, I developed an overnight statement rendering pipeline for Alder Property Group using Node.js, BullMQ, and AWS S3, which improved system resilience and performance [fullstack:case_study:p07].\n\nMy rate is hourly $30.",
+          "revision": 1
+        },
+        "claims": [
+          {
+            "claim": "I built a live fleet dashboard for Ferrylane Freight using Node.js, Redis, and Socket.IO to stream real-time GPS data to dispatchers, ensuring fast and reliable updates.",
+            "evidence_ids": [
+              "fullstack:case_study:p02"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "fullstack:case_study:p02": "# Live fleet dashboard for Ferrylane Freight\n\nI worked with **Ferrylane Freight** on an hourly engagement from **2020-09 to 2020-12** to help their operations team get a real-time view of their fleet.\n\nBefore this project, the dispatch process depended on fragmented updates coming in from the field."
+            }
+          },
+          {
+            "claim": "In another project, I developed an overnight statement rendering pipeline for Alder Property Group using Node.js, BullMQ, and AWS S3, which improved system resilience and performance.",
+            "evidence_ids": [
+              "fullstack:case_study:p07"
+            ],
+            "label": "supported",
+            "evidence": {
+              "fullstack:case_study:p07": "# Overnight statement rendering pipeline\n\nIn 2022, I worked with **Alder Property Group** on a fixed-scope project to improve how owner statements were produced and delivered. Their existing flow was generating documents at request time, which made the experience fragile under load. As volume grew, "
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.048,
+          "client_quality": 0.758,
+          "flags": [],
+          "injection_detected": false,
+          "explanation": "rules only",
+          "signals": []
+        },
+        "price": {
+          "amount": 30.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $30; 12 Connects ($1.80), balance 68, keeps reserve 20: worth it at fit 0.88",
+          "connects_cost": 12,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 68,
+            "balance_after": 56
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 3,
+            "unsupported_before": 2,
+            "partly_before": 0,
+            "removed": [
+              "I built a live fleet dashboard using Node.js, MongoDB, and Socket.IO to stream real-time GPS updates, ensuring reliable and fast data flow.",
+              "I have experience with MongoDB and Node.js, having used them in projects like the live fleet dashboard and overnight statement pipeline."
+            ],
+            "claims_after": 1,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "revise",
+              "reasons": [
+                "2 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "fewer than 2 grounded claims; cite more of the listed evidence",
+                "52 words, keep it between 110 and 260"
+              ],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a data scientist to analyze a large MongoDB table and refine Node.js code to produce expected results, with a strong understanding of probability distributions. I built a live fleet dashboard for Ferrylane Freight using Node.js, Redis, and Socket.IO to stream real-time GPS data to dispatchers, ensuring fast and reliable updates [fullstack:case_study:p02]. In another project, I developed an overnight statement rendering pipeline for Alder Property Group using Node.js, BullMQ, and AWS S3, which improved system resilience and performance [fullstack:case_study:p07]. My rate is hourly $30."
+          },
+          "other": [
+            "critic_unresolved: 2 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; 52 words, keep it between 110 and 260"
+          ]
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000009",
+        "idempotency_key": "1f3e80398a6e52bb:1f50b26549adaa59",
+        "connects_spent": 12,
+        "balance_after": 56
       }
     }
   ]
