@@ -16,8 +16,6 @@ models:
       api_key_env: OPENROUTER_API_KEY
     together:
       api_key_env: TOGETHER_API_KEY
-    cerebras:
-      api_key_env: CEREBRAS_API_KEY
     # synth generator only
     openai:
       api_key_env: OPENAI_API_KEY
@@ -129,15 +127,12 @@ models:
         reasoning_effort: low
         usd_per_mtok_in: 0.075
         usd_per_mtok_out: 0.30
-        # groq's free tier caps each model at 200k tokens a day; cerebras has its own quota
-        fallback:
-          provider: cerebras
-          model: gpt-oss-120b
-          base_url: https://api.cerebras.ai/v1
+        # groq's free tier caps each model at 200k tokens a day; openrouter's free pool is separate
+        fallback: &hosted_free
+          provider: openrouter
+          model: nvidia/nemotron-3-ultra-550b-a55b:free
+          base_url: https://openrouter.ai/api/v1
           temperature: 0.0
-          reasoning_effort: low
-          usd_per_mtok_in: 0.25
-          usd_per_mtok_out: 0.69
       analyst: *hosted_small
       risk_assessor: *hosted_small
       fit_matcher: *hosted_small
@@ -154,13 +149,8 @@ models:
         usd_per_mtok_out: 0.60
         # daily cap on the free tier
         fallback:
-          provider: cerebras
-          model: gpt-oss-120b
-          base_url: https://api.cerebras.ai/v1
+          <<: *hosted_free
           temperature: 0.4
-          reasoning_effort: low
-          usd_per_mtok_in: 0.25
-          usd_per_mtok_out: 0.69
       critic:
         <<: *hosted_strong
         temperature: 0.0

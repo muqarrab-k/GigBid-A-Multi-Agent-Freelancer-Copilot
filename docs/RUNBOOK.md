@@ -292,8 +292,9 @@ runs GigSim and the three MCP servers in-process, and uses Neon Postgres for eve
 Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a PRO subscription.
 
 - **Models:** `MODEL_PROFILE=open_hosted`, open-weight models only: Groq gpt-oss-20b for the small
-  nodes and gpt-oss-120b for writer, critic and liaison, each falling back to gpt-oss-120b on Cerebras
-  (separate free quota). No Ollama in the deployment.
+  nodes and gpt-oss-120b for writer, critic and liaison, each falling back to NVIDIA Nemotron 3 Ultra
+  (open weights) on OpenRouter's free pool, which has its own quota. No free gpt-oss or Qwen variant
+  was listed on OpenRouter, and the free Gemma 4 was rate-limited upstream when tested. No Ollama in the deployment.
 - **Embeddings:** the free tier has 512 MB, too little for torch. `EMBEDDINGS_PROVIDER=lite` embeds
   in the container with fastembed (ONNX) and `BAAI/bge-small-en-v1.5`, and the deployment searches its
   own Neon index built with that same embedder. nomic-embed-text-v1.5 (the main results) did not fit:
