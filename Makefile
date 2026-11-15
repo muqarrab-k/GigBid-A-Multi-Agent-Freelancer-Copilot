@@ -1,4 +1,4 @@
-.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi
+.PHONY: install dev api test eval seed demo lint data synth gigsim gigsim-reset mcp-marketplace mcp-workspace mcp-portfolio snapshot-update db-up db-down index rag-eval index-github demo-single scout decision-eval graph-render replay crash-resume proposal-eval openapi web web-build web-client e2e api-fake
 
 VARIANT ?= v0
 COMPOSE := docker compose -f infra/docker-compose.yml
@@ -99,3 +99,19 @@ proposal-eval:
 
 openapi:
 	$(RUN) python -m apps.api.export_openapi
+
+web-client: openapi
+	cd apps/web && npm run client
+
+web:
+	cd apps/web && npm run dev
+
+web-build:
+	cd apps/web && npm install && npm run build
+
+# api with the fake model, in-process gigsim; no keys
+api-fake:
+	GIGBID_FAKE_LLM=1 $(RUN) uvicorn apps.api.main:app --port 8000
+
+e2e: web-build
+	cd apps/web && npx playwright install chromium && npx playwright test; echo "report: apps/web/playwright-report/index.html"
