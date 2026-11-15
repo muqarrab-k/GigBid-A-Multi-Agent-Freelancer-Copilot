@@ -149,7 +149,35 @@ catches, tokens and latency.
 
 # 6. The change request
 
-*To be filled after the measured change request (section added last).*
+The brief's 2 November GigSim policy update was never released to us, so I defined one
+(`gigsim/policies/v2.yaml`). Fixed-price jobs above $1,000 cost double in Connects ($1,000–2,000:
+12 → 24; above $2,000: 16 → 32), and cover letters are capped at 220 words (was 500). I did not pick
+"proposals must answer every screening question", because the frozen v1 policy engine has no such
+rule type and adding one would mean editing code under `gigsim/`, which the `gigsim-v1` freeze
+forbids. [`change_request.json`]
+
+**What I had to change** (commit `1a6d627`): two files, 45 lines added and 2 removed, **no
+Python**. Of those, 41 lines are the new policy file. On the agent side, two config values in
+`agent/config.yaml`: `writer.max_words` 260 → 210 (the Critic enforces it, and it must stay under
+the cap) and `bidding_rules.max_connects_per_job` 16 → 32 (otherwise every job above $1,000 would
+go to "watch" on price alone; this one is a business choice, not a requirement).
+
+**What changed by itself:** Connects costs, because nodes read `job.connects_cost` and the dry-run
+preview, which GigSim prices with its active policy; and the length check before sending, because
+`precheck` reads `max_words` from `get_policy`.
+
+**Proof:** five tests in `tests/unit/test_change_request.py` show that v2 doubles only above
+$1,000, that the admin switch works, that GigSim v2 rejects a 250-word letter with
+`proposal_too_long` and charges 32 Connects on a $2,000+ job, that the agent's precheck reads the
+live cap, and that the agent config fits every shipped policy. Full suite: 288 passed; the smoke
+eval is unchanged (bid F1 0.818, Recall@5 0.233).
+
+**Time:** 1.9 minutes from the first edit to green tests. The timer started after I had read
+`gigsim/policy.py` and the agent code that uses Connects and length. **What it says about the
+design:** rules that live as data on both sides (the platform's policy file and the agent's
+config) absorb a platform change as a config edit. The weak spot is duplication: `writer.max_words`
+copies a platform limit by hand. The guard test catches drift, but reading the cap from
+`get_policy` at run time would remove the copy.
 
 # 7. Signature extension
 

@@ -1,6 +1,6 @@
 {
-  "commit": "dceeda9",
-  "date": "2026-11-15T15:08:44+00:00",
+  "commit": "d03d44e",
+  "date": "2026-11-15T15:17:49+00:00",
   "setup": {
     "embedder": "lite (fastembed BAAI/bge-small-en-v1.5, CPU)",
     "store": "memory",
@@ -33,7 +33,7 @@
     "price_in_band_jobs": 9,
     "latency_s": {
       "p50": 0.08,
-      "p95": 2.61
+      "p95": 2.83
     },
     "tokens_per_job": 2417.5,
     "usd_per_job": 1e-05,

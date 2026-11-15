@@ -1,0 +1,72 @@
+{
+  "commit": "1a6d627",
+  "context": "The brief's 2 Nov GigSim policy update was never released to us, so I defined one (v2) and absorbed it.",
+  "policy_update": {
+    "file": "gigsim/policies/v2.yaml",
+    "connects": "fixed-price jobs above $1,000 cost double: $1,000-2,000 12 -> 24, above $2,000 16 -> 32; hourly and smaller jobs unchanged",
+    "proposals": "cover letters capped at 220 words (v1: 500)",
+    "activation": "POST /admin/policy {version: v2} or GigSim setting policy: v2; no GigSim code change"
+  },
+  "not_chosen": "A 'must answer every screening question' rule: the frozen v1 policy engine (gigsim/policy.py) has no such rule type, so it would need a code change under gigsim/, which the gigsim-v1 freeze forbids.",
+  "diff": [
+    {
+      "file": "agent/config.yaml",
+      "added": 4,
+      "removed": 2
+    },
+    {
+      "file": "gigsim/policies/v2.yaml",
+      "added": 41,
+      "removed": 0
+    },
+    {
+      "file": "tests/unit/test_change_request.py",
+      "added": 97,
+      "removed": 0
+    }
+  ],
+  "absorbing_change": {
+    "files": 2,
+    "lines_added": 45,
+    "lines_removed": 2,
+    "python_files_changed": 0,
+    "agent_config_edits": {
+      "writer.max_words": {
+        "before": 260,
+        "after": 210,
+        "why": "drafts must stay under the 220-word cap; the critic enforces writer.max_words"
+      },
+      "bidding_rules.max_connects_per_job": {
+        "before": 16,
+        "after": 32,
+        "why": "otherwise every job above $1,000 goes to watch on price alone"
+      }
+    },
+    "absorbed_without_edits": [
+      "Connects cost: nodes read job.connects_cost and the dry-run preview, which GigSim prices with its active policy",
+      "Length: marketplace_port.precheck reads max_words from get_policy before anything is sent"
+    ]
+  },
+  "proof": {
+    "file": "tests/unit/test_change_request.py",
+    "tests": [
+      "test_v2_doubles_connects_only_above_1000",
+      "test_admin_switches_policy",
+      "test_gigsim_v2_blocks_long_letters_and_charges_double",
+      "test_agent_precheck_reads_the_live_policy",
+      "test_agent_config_fits_every_shipped_policy"
+    ],
+    "result": "5 passed; full suite 288 passed; ruff clean; gigsim frozen files unchanged since gigsim-v1",
+    "smoke_eval_after": {
+      "bid_f1": 0.8182,
+      "recall_at_5": 0.2333,
+      "failures": []
+    }
+  },
+  "time": {
+    "start": "2026-11-15T15:16:14Z",
+    "end": "2026-11-15T15:18:09Z",
+    "minutes": 1.9,
+    "note": "from the first edit to green tests; the timer started after I had read gigsim/policy.py and the agent's Connects and length code"
+  }
+}
