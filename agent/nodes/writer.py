@@ -30,6 +30,12 @@ async def gather_evidence(ctx: BidContext, state: BidState, node: str) -> dict[s
     return texts
 
 
+def style_note(ctx: BidContext) -> str:
+    if not ctx.style_rules:
+        return ""
+    return "- Style this freelancer asked for:\n" + "\n".join(f"  - {r}" for r in ctx.style_rules) + "\n"
+
+
 def revision_note(state: BidState) -> str:
     critiques = state.get("critiques", [])
     report = state.get("verification")
@@ -52,7 +58,7 @@ async def writer(state: BidState, runtime: Runtime[BidContext]) -> dict[str, Any
     out, events, error = await structured(
         ctx, "writer", WriterOut, name=profile.name, job=untrusted(job_text(job)), spec=spec_text,
         evidence=evidence, price=price, min_words=ctx.settings.writer.min_words,
-        max_words=ctx.settings.writer.max_words, revision=revision_note(state))
+        max_words=ctx.settings.writer.max_words, style=style_note(ctx), revision=revision_note(state))
     update: dict[str, Any] = {"trace": events, "token_count": tokens_used(events), "step_count": 1,
                               "evidence_texts": texts}
     if out is None:

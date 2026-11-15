@@ -486,3 +486,32 @@ checkpointer:
   dsn_env: DATABASE_URL
   dsn_default: postgresql://gigbid:gigbid@localhost:5432/gigbid
   schema: langgraph
+# long-term memory (langgraph store); tests use memory
+memory:
+  backend: postgres
+  # style rules promoted from approval edits
+  style:
+    min_repeats: 3
+    # share of the recent window that must agree
+    min_share: 0.6
+    window: 6
+    shorter_ratio: 0.8
+    watch_terms: [passionate, excited, thrilled, "hard-working", "highly skilled", expert, "dear sir",
+                  "i hope this", "look forward", "rest assured", "kindly"]
+  # what wins or gets replies, per job category
+  outcome:
+    min_submitted: 5
+    min_reply_rate: 0.3
+
+# web api
+api:
+  secret_env: APP_SECRET_KEY
+  token_minutes: 720
+  # local: gigsim and the mcp servers in-process; remote: the mcp servers over http
+  mcp: local
+  # preloaded account for the reviewer; dev default like the mcp tokens
+  reviewer: {username: reviewer, persona: ai_ml, password_env: REVIEWER_PASSWORD, password_default: reviewer-dev}
+  scheduler:
+    enabled: false
+    interval_minutes: 30
+    analyse_new: true

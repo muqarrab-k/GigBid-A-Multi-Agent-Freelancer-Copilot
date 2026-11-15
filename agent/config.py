@@ -565,6 +565,50 @@ class AutonomyConfig(Strict):
     auto_send: Literal[False] = False
 
 
+class StyleMemory(Strict):
+    min_repeats: int = Field(ge=2)
+    min_share: float = Field(gt=0, le=1)
+    window: int = Field(ge=2)
+    shorter_ratio: float = Field(gt=0, lt=1)
+    watch_terms: list[str]
+
+
+class OutcomeMemory(Strict):
+    min_submitted: int = Field(ge=1)
+    min_reply_rate: float = Field(ge=0, le=1)
+
+
+class MemoryConfig(Strict):
+    backend: Literal["postgres", "memory"]
+    style: StyleMemory
+    outcome: OutcomeMemory
+
+
+class ReviewerAccount(Strict):
+    username: str
+    persona: str
+    password_env: str
+    password_default: str
+
+    @property
+    def password(self) -> str:
+        return os.getenv(self.password_env) or self.password_default
+
+
+class SchedulerConfig(Strict):
+    enabled: bool = False
+    interval_minutes: int = Field(ge=1)
+    analyse_new: bool = True
+
+
+class ApiConfig(Strict):
+    secret_env: str
+    token_minutes: int = Field(ge=1)
+    mcp: Literal["local", "remote"] = "local"
+    reviewer: ReviewerAccount
+    scheduler: SchedulerConfig
+
+
 class Settings(Strict):
     models: ModelsConfig
     marketplace: MarketplaceConfig
@@ -589,6 +633,8 @@ class Settings(Strict):
     compliance: ComplianceConfig
     autonomy: AutonomyConfig
     checkpointer: CheckpointConfig
+    memory: MemoryConfig
+    api: ApiConfig
 
     @property
     def profile(self) -> Profile:

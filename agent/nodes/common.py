@@ -74,6 +74,8 @@ class BidContext:
     settings: Settings = field(default_factory=get_config)
     cache: NodeCache | None = None
     llm: Callable[[ModelSpec], Chat] | None = None
+    # promoted style memory for this user
+    style_rules: list[str] = field(default_factory=list)
 
     def chat(self, spec: ModelSpec) -> Chat:
         return self.llm(spec) if self.llm else build_chat(spec, self.settings)
