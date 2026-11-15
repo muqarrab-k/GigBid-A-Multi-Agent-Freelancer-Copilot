@@ -227,3 +227,27 @@ async def test_local_stack_acts_as_each_persona(tmp_path: Path) -> None:
         hits = await layer.call("search_evidence", {"requirement": "web app", "k": 3})
         seen[persona] = {h["evidence_id"].split(":")[0] for h in hits["items"]}
     assert seen == {"ai_ml": {"ai_ml"}, "fullstack": {"fullstack"}}
+
+
+async def test_untagged_present_tense_claim_is_removed() -> None:
+    habit = "I routinely design conversational flows, train large language models on custom corpora."
+    draft = ProposalDraft(job_id="j1", paragraphs=["You need a historical chatbot.", habit,
+                                                   "I would start with a short call."])
+    cleaned, checks, report = await verify_draft(draft, {}, get_config().verifier)
+    assert [c.label for c in checks] == ["unsupported"] and report.claims_before == 1
+    assert habit not in cleaned.cover_letter and "I would start" in cleaned.cover_letter
+
+
+async def test_screening_answers_are_verified() -> None:
+    docs = {d.evidence_id: d.text for d in PersonaLoader("ai_ml").load()}
+    cv = "ai_ml:cv"
+    grounded = f"I work in Python and PyTorch [{cv}]."
+    invented = "I have extensive academic training in computer science."
+    draft = ProposalDraft(job_id="j1", paragraphs=["You need a chatbot."],
+                          screening_answers=[f"{grounded} {invented}", invented], evidence_ids=[cv])
+    cleaned, checks, report = await verify_draft(draft, {cv: docs[cv]}, get_config().verifier)
+    labels = {c.claim_id: c.label for c in checks}
+    assert labels["a2"] == labels["a3"] == "unsupported" and report.unsupported_before == 2
+    assert cleaned.screening_answers[0].startswith("I work in Python") and invented not in cleaned.screening_answers[0]
+    # an emptied answer stays, so the Critic asks for it again
+    assert cleaned.screening_answers[1] == ""

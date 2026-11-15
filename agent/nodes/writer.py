@@ -58,7 +58,8 @@ async def writer(state: BidState, runtime: Runtime[BidContext]) -> dict[str, Any
     if out is None:
         return {**update, "status": "needs_attention", "errors": [f"writer: {error}"]}
     previous = state.get("draft")
-    ids = sorted({i.strip() for p in out.paragraphs for m in TAG_RE.finditer(p) for i in m.group(1).split(",")})
+    ids = sorted({i.strip() for p in [*out.paragraphs, *out.screening_answers]
+                  for m in TAG_RE.finditer(p) for i in m.group(1).split(",")})
     draft = ProposalDraft(job_id=job["job_id"], paragraphs=[p.strip() for p in out.paragraphs if p.strip()],
                           screening_answers=out.screening_answers, evidence_ids=ids,
                           revision=previous.revision + 1 if previous else 0)

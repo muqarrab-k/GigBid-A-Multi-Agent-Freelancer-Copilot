@@ -12,7 +12,13 @@ NUMBER_RE = re.compile(r"\d[\d,.]*%?x?")
 NAME_RE = re.compile(r"(?<!^)(?<![.!?]\s)\b([A-Z][A-Za-z0-9]*(?:[.+-][A-Za-z0-9]+)*|[a-z]+[A-Z][A-Za-z0-9]*|[a-z0-9]+[.-][a-z0-9.]+)\b")
 FACTUAL_RE = re.compile(r"(?i)\b(i|i've|i have|we)\b.{0,40}\b(built|created|delivered|developed|designed|deployed|"
                         r"migrated|trained|fine-tuned|led|cut|reduced|improved|increased|shipped|wrote|ran|automated)\b"
-                        r"|\b\d+(\.\d+)?\s?(%|x|ms|k|hours|minutes|days|users|customers)\b")
+                        r"|\b\d+(\.\d+)?\s?(%|x|ms|k|hours|minutes|days|users|customers)\b"
+                        # present-tense habits and experience statements
+                        r"|\b(i|we)\s+(\w+ly\s+)?(build|create|deliver|develop|design|deploy|train|fine-tune|lead|ship|"
+                        r"write|automate|specialise|specialize|maintain|integrate|optimise|optimize)\b"
+                        r"|\bi\s+(have|'ve)\s+(\w+\s+){0,2}(experience|expertise|background|training|knowledge)\b"
+                        r"|\bmy\s+(experience|expertise|background|track record|core competencies)\b"
+                        r"|\byears? of experience\b")
 STOP = {"which", "their", "there", "these", "those", "about", "would", "could", "should", "using", "with", "from",
         "into", "your", "that", "this", "have", "been", "were", "also", "where", "while", "after", "before", "every",
         "client", "project", "built", "delivered", "created", "worked", "experience", "including"}
@@ -25,14 +31,17 @@ def sentences(text: str) -> list[str]:
 
 
 def split_claims(draft: ProposalDraft) -> list[Claim]:
-    """One claim per factual sentence; tags give its evidence ids."""
+    """One claim per factual sentence, body (c1..) then screening answers (a1..)."""
     claims: list[Claim] = []
-    for paragraph in draft.paragraphs:
-        for sentence in sentences(paragraph):
-            ids = [i.strip() for m in TAG_RE.finditer(sentence) for i in m.group(1).split(",")]
-            text = TAG_RE.sub("", sentence).strip()
-            if ids or FACTUAL_RE.search(text):
-                claims.append(Claim(claim_id=f"c{len(claims) + 1}", text=text, evidence_ids=list(dict.fromkeys(ids))))
+    for prefix, parts in (("c", draft.paragraphs), ("a", draft.screening_answers)):
+        n = 0
+        for part in parts:
+            for sentence in sentences(part):
+                ids = [i.strip() for m in TAG_RE.finditer(sentence) for i in m.group(1).split(",")]
+                text = TAG_RE.sub("", sentence).strip()
+                if ids or FACTUAL_RE.search(text):
+                    n += 1
+                    claims.append(Claim(claim_id=f"{prefix}{n}", text=text, evidence_ids=list(dict.fromkeys(ids))))
     return claims
 
 
@@ -93,18 +102,24 @@ async def check_claims(claims: list[Claim], evidence: dict[str, str], cfg: Verif
     return checks
 
 
+def keep_supported(parts: list[str], bad: set[str], drop_empty: bool) -> list[str]:
+    kept = []
+    for part in parts:
+        left = " ".join(x for x in sentences(part) if TAG_RE.sub("", x).strip() not in bad)
+        if left or not drop_empty:
+            kept.append(left)
+    return kept
+
+
 def remove_unsupported(draft: ProposalDraft, claims: list[Claim], checks: list[ClaimCheck]) -> ProposalDraft:
-    """Drop sentences whose claim is unsupported; keep tags on the rest."""
+    """Drop sentences whose claim is unsupported; an emptied answer stays empty for the Critic."""
     bad = {c.text for c, k in zip(claims, checks, strict=True) if k.label == "unsupported"}
-    paragraphs = []
-    for paragraph in draft.paragraphs:
-        kept = [s for s in sentences(paragraph) if TAG_RE.sub("", s).strip() not in bad]
-        if kept:
-            paragraphs.append(" ".join(kept))
+    paragraphs = keep_supported(draft.paragraphs, bad, drop_empty=True)
+    answers = keep_supported(draft.screening_answers, bad, drop_empty=False)
     good = [c for c, k in zip(claims, checks, strict=True) if k.label != "unsupported"]
     ids = sorted({i for c in good for i in c.evidence_ids})
     return draft.model_copy(update={"paragraphs": paragraphs, "cover_letter": "\n\n".join(paragraphs),
-                                    "claims": good, "evidence_ids": ids})
+                                    "screening_answers": answers, "claims": good, "evidence_ids": ids})
 
 
 async def verify_draft(draft: ProposalDraft, evidence: dict[str, str], cfg: VerifierConfig,
