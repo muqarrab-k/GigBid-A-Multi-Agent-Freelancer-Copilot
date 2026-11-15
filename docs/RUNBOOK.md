@@ -284,3 +284,59 @@ curl -s -X POST localhost:8000/approvals/1c0b990bb7dbe947:reviewer -H "Authoriza
 Client replies: `GET /messages`, then `POST /messages/{thread_id}/draft`; the draft appears in
 `/approvals` with kind `conversation`. Style memory fills in from approval edits;
 `GET /settings/memory` shows what was promoted and why, and `DELETE /settings/memory/style/<key>` forgets it.
+
+## Deployment (Render free tier + Neon)
+
+The public app is one container on Render's free web service: FastAPI serves the built web UI,
+runs GigSim and the three MCP servers in-process, and uses Neon Postgres for everything durable.
+Hugging Face Spaces was the first plan, but Docker Spaces on free CPU now need a PRO subscription.
+
+- **Models:** `MODEL_PROFILE=open_hosted`, open-weight models on Groq (gpt-oss-20b with
+  qwen3.8-27b as fallback for the small nodes; gpt-oss-120b with gpt-oss-20b as fallback for writer,
+  critic and liaison). No Ollama in the deployment.
+- **Embeddings:** the free tier has 512 MB, too little for torch. `EMBEDDINGS_PROVIDER=hosted` embeds
+  queries through the Nomic API with the same open model the index was built with
+  (nomic-embed-text-v1.5), so the Neon index stays valid. `tests/integration/test_hosted_embeddings.py`
+  checks hosted and local vectors agree (cosine > 0.99). The quantized ONNX build fits in memory
+  but only reaches cosine 0.96, so it was not used.
+- **Database:** `DATABASE_URL` is Neon's pooled URL. It holds the pgvector index (`rag` schema),
+  LangGraph checkpoints and the store (users, threads, inbox, settings, memory). The pooler rejects
+  startup `search_path` options, so on a pooled URL the LangGraph tables live in `public`.
+  Index from a laptop: `DATABASE_URL=$NEON_DATABASE_URL make index`.
+- **Deploy:** `python -m scripts.deploy_render` builds `infra/docker/Dockerfile.render` for
+  linux/amd64, pushes it to Docker Hub, and creates or updates the `gigbid` service with secrets
+  set through the Render API. It is built locally because `data/processed/` is git-ignored and the
+  app needs `pricing_stats.json` and `scam_signals.json`. Needs `RENDER_API_KEY`,
+  `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` and `NOMIC_API_KEY` in `.env`.
+- **Sleep and cold start:** free services sleep after 15 idle minutes. `.github/workflows/keepalive.yml`
+  pings `/health` every 10 minutes once the `GIGBID_URL` repository variable is set. GitHub can
+  delay scheduled runs, so a visitor may still hit a cold start of about a minute.
+- **Reviewer:** user `reviewer`, persona ai_ml, password from the `REVIEWER_PASSWORD` secret.
+
+### What resets on restart (ephemeral disk)
+
+Durable in Neon: users, sessions (signed tokens), bid and conversation threads with their pending
+approvals, the inbox, settings, style and outcome memory, and the portfolio index.
+
+Reset on every restart or redeploy, because they are files on the container disk:
+- **GigSim's state** (`data/api/stack/gigsim.db`): jobs reload from the seed, but proposals,
+  Connects balances, client replies and simulated time start over. Old threads in Neon can then
+  point at proposals the fresh GigSim no longer has. GigSim is frozen (`gigsim-v1`), so its storage
+  cannot move to Postgres.
+- **Scout seen-store** (sqlite): harmless, because the inbox in Neon already dedupes per job.
+- **MCP audit logs** (JSONL) and the **LLM reply cache** (sqlite): lost; traces in LangSmith keep
+  the same trace ids.
+
+### Tracing
+
+`LANGSMITH_TRACING=true` with `LANGSMITH_API_KEY` turns on LangSmith (project `gigbid`) through one
+client that masks emails, phone numbers, card numbers, IBANs and payment links in every traced input
+and output (`apps/api/tracing.py`). Each run and approval carries one trace id in the LangSmith
+metadata and in the MCP audit logs. Shared example traces: `docs/TRACES.md`.
+
+### Local full stack
+
+`docker compose -f infra/docker-compose.yml up` starts the app on :8000, GigSim, the three MCP
+servers over HTTP, Postgres with pgvector, a one-shot portfolio index, and Ollama (it pulls qwen3:4b
+and qwen3:8b for the `open` profile). Secrets come from the environment. Redis is not used: the
+scheduler is an in-process loop and checkpoints live in Postgres, so there is no Redis service.
