@@ -2,11 +2,13 @@
 
 import asyncio
 import uuid
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
+import langsmith
 from langchain_core.runnables import RunnableConfig
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.store.base import BaseStore
@@ -110,7 +112,7 @@ class AppState:
         """Stream node updates to the hub; failures fall back to the retrying invoke."""
         ctx = await self.context(user)
         graph = self.bid_graph
-        with trace(trace_id):
+        with traced(trace_id, thread_id, user["username"], "bid"):
             try:
                 async for chunk in graph.astream(payload, thread_config(thread_id, ctx), context=ctx,
                                                  stream_mode="updates"):
@@ -143,6 +145,14 @@ class AppState:
     async def learn(self, username: str, values: dict[str, Any]) -> list[str]:
         edits = [e for e in values.get("pending_edits", []) if e.get("kind", "proposal") == "proposal"]
         return await learn_from_edits(self.store, username, edits, self.settings) if edits else []
+
+
+@contextmanager
+def traced(trace_id: str, thread_id: str, username: str, kind: str) -> Iterator[None]:
+    """One trace id for mcp audit logs and langsmith metadata."""
+    with trace(trace_id), langsmith.tracing_context(
+            metadata={"trace_id": trace_id, "thread_id": thread_id, "user": username}, tags=[kind]):
+        yield
 
 
 def new_trace() -> str:

@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 
 from agent.graphs.conversation_graph import conversation_id, run_conversation
 from agent.nodes.common import ToolBox
-from apps.api.core import new_trace
+from apps.api.core import new_trace, traced
 from apps.api.deps import State, User
 from apps.api.schemas import DraftOut, MessageRow, ThreadDetail, ThreadRow, ThreadsOut
 
@@ -61,10 +61,11 @@ async def draft(thread_id: str, state: State, user: User, job_title: str | None 
     if await state.thread(user["username"], cid) and await state.pending("conversation", cid):
         raise HTTPException(409, "a draft is already waiting for approval")
     known = await state.thread(user["username"], cid)
-    await state.register(user["username"], cid, "conversation", marketplace_thread=thread_id,
-                         trace_id=(known or {}).get("trace_id") or new_trace())
-    result = await run_conversation(thread_id, await state.context(user), state.conv_graph, user["username"],
-                                    job_title)
+    trace_id = (known or {}).get("trace_id") or new_trace()
+    await state.register(user["username"], cid, "conversation", marketplace_thread=thread_id, trace_id=trace_id)
+    with traced(trace_id, cid, user["username"], "conversation"):
+        result = await run_conversation(thread_id, await state.context(user), state.conv_graph,
+                                        user["username"], job_title)
     intent = result.get("intent")
     return DraftOut(conversation_id=cid, status=result.get("status"), intent=intent.intent if intent else None,
                     flags=result.get("flags", []), pending=await state.pending("conversation", cid),

@@ -28,6 +28,9 @@ def memory_saver() -> MemorySaver:
 
 def postgres_dsn(settings: Settings) -> str:
     cfg = settings.checkpointer
+    if "-pooler." in cfg.dsn:
+        # neon pooler rejects startup options; tables go to public
+        return cfg.dsn
     joiner = "&" if "?" in cfg.dsn else "?"
     return f"{cfg.dsn}{joiner}options={quote(f'-csearch_path={cfg.schema_name}')}"
 

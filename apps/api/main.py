@@ -18,6 +18,7 @@ from apps.api.auth import ensure_reviewer
 from apps.api.core import AppState
 from apps.api.routers import approvals, auth, jobs, messages, portfolio, settings, tracking
 from apps.api.scheduler import loop
+from apps.api.tracing import setup_tracing
 
 ROUTERS = [auth.router, jobs.router, approvals.router, tracking.router, messages.router, settings.router,
            portfolio.router]
@@ -44,6 +45,7 @@ def create_app(state: AppState | None = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         async with AsyncExitStack() as stack:
+            setup_tracing()
             current = state
             if current is None and fake_mode():
                 from apps.api.testmode import build_test_state

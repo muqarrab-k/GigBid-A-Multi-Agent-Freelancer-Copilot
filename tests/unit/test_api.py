@@ -27,7 +27,10 @@ async def client_for(state: AppState) -> Client:
     return httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://api")
 
 
-async def login(client: Client, username: str = "reviewer", password: str = "reviewer-dev") -> dict[str, str]:
+async def login(client: Client, username: str = "reviewer", password: str | None = None) -> dict[str, str]:
+    from agent.config import get_config
+
+    password = password or get_config().api.reviewer.password
     res = await client.post("/auth/login", json={"username": username, "password": password})
     assert res.status_code == 200, res.text
     return {"Authorization": f"Bearer {res.json()['access_token']}"}

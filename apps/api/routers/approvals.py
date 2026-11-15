@@ -6,6 +6,7 @@ from pydantic import ValidationError
 
 from agent.graphs.bid_graph import invoke
 from agent.handoffs import Approval
+from apps.api.core import traced
 from apps.api.deps import State, User
 from apps.api.schemas import ApprovalIn, ApprovalItem, ApprovalResult, ApprovalsOut
 
@@ -35,7 +36,8 @@ async def answer(thread_id: str, body: ApprovalIn, state: State, user: User) -> 
     except ValidationError as err:
         raise HTTPException(422, str(err.errors()[0]["msg"])) from err
     ctx = await state.context(user)
-    result = await invoke(state.graph(known["kind"]), Command(resume=approval.model_dump()), thread_id, ctx)
+    with traced(known.get("trace_id") or thread_id, thread_id, user["username"], known["kind"]):
+        result = await invoke(state.graph(known["kind"]), Command(resume=approval.model_dump()), thread_id, ctx)
     promoted = await state.learn(user["username"], result) if known["kind"] == "bid" else []
     return ApprovalResult(thread_id=thread_id, status=result.get("status"), submission=result.get("submission"),
                           pending=await state.pending(known["kind"], thread_id), promoted_memory=promoted,
