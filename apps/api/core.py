@@ -18,6 +18,8 @@ from agent.mcp_client import McpLayer, trace
 from agent.memory.store import learn_from_edits, style_rules
 from agent.nodes.common import BidContext, Chat, NodeCache
 from apps.api.streaming import RunHub, node_event
+from rag.ingest.documents import Document
+from rag.ingest.indexer import IndexStats
 
 THREADS, INBOX, PREFS = "threads", "inbox", "prefs"
 LayerFactory = Callable[[str], Awaitable[McpLayer]]
@@ -38,6 +40,8 @@ class AppState:
     hub: RunHub = field(default_factory=RunHub)
     layers: dict[str, McpLayer] = field(default_factory=dict)
     tasks: set[asyncio.Task[None]] = field(default_factory=set)
+    # portfolio uploads; None means the real index
+    indexer: Callable[[list[Document], str], IndexStats] | None = None
 
     def __post_init__(self) -> None:
         self.bid_graph: Graph = build_bid_graph(self.saver)
@@ -118,6 +122,18 @@ class AppState:
         values = (await self.snapshot("bid", thread_id)).values
         self.hub.publish(thread_id, {"event": "done", "status": values.get("status"), "trace_id": trace_id},
                          last=True)
+
+    def index(self, docs: list[Document], persona: str) -> IndexStats:
+        if self.indexer is None:
+            from rag.embeddings import get_embedder
+            from rag.ingest.chunking import get_chunker
+            from rag.ingest.indexer import index_new_work
+            from rag.retriever import build_store
+
+            cfg = self.settings.rag
+            embedder = get_embedder(cfg.embeddings)
+            return index_new_work(docs, persona, build_store(cfg, embedder), embedder, get_chunker(cfg.chunking))
+        return self.indexer(docs, persona)
 
     def spawn(self, coro: Awaitable[None]) -> None:
         task = asyncio.ensure_future(coro)

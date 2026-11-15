@@ -27,6 +27,22 @@ class TokenOut(BaseModel):
 class UserOut(BaseModel):
     username: str
     persona: str
+    # from the persona fact sheet
+    hourly_floor: float | None = None
+    fixed_min: float | None = None
+
+
+class UploadIn(BaseModel):
+    filename: str = Field(min_length=1, max_length=200, pattern=r"^[\w .()-]+\.(md|txt)$")
+    text: str = Field(min_length=20, max_length=200_000)
+    type: Literal["case_study", "readme", "review", "cv", "document"] = "case_study"
+
+
+class UploadOut(BaseModel):
+    evidence_id: str
+    added: int
+    updated: int
+    chunks: int
 
 
 class JobRow(BaseModel):

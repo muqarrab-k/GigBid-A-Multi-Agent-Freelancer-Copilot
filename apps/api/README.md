@@ -47,6 +47,16 @@ make api          # uvicorn on :8000, docs at http://localhost:8000/docs
 | GET | `/settings/memory` | promoted style and outcome memory, each with its rule and sources |
 | DELETE | `/settings/memory/{kind}/{key}` | forget one item |
 | GET | `/status` | marketplace up or down, for the degraded banner |
+| POST | `/jobs/{job_id}/skip` | hide a job from the inbox |
+| POST | `/portfolio/upload` | `{filename, text, type}`: one .md or .txt file into the user's index (`index_new_work`, never deletes) |
+
+## Web UI and test mode
+
+`make web-build` builds `apps/web/dist`; the API then serves it at `/`. A browser page load
+(`Accept: text/html`) gets `index.html`, an API call to the same path gets JSON, so one URL and one
+container work. `GIGBID_FAKE_LLM=1` (`make api-fake`) swaps in a scripted model, fake embeddings,
+an in-process GigSim and memory checkpoints, and adds `POST /test/marketplace {down}` to simulate an
+outage; it is what the Playwright tests run against. Never set it in production.
 
 ## Scheduler
 

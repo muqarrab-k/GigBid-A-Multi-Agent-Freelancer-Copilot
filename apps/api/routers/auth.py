@@ -5,6 +5,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
+from agent.profile import load_profile
 from apps.api.auth import check_password, create_user, get_user, make_token
 from apps.api.deps import State, User
 from apps.api.schemas import LoginIn, RegisterIn, TokenOut, UserOut
@@ -41,4 +42,6 @@ async def register(body: RegisterIn, state: State) -> UserOut:
 
 @router.get("/me", response_model=UserOut)
 async def me(user: User) -> UserOut:
-    return UserOut(username=user["username"], persona=user["persona"])
+    profile = load_profile(user["persona"])
+    return UserOut(username=user["username"], persona=user["persona"], hourly_floor=profile.hourly_floor,
+                   fixed_min=profile.fixed_min)

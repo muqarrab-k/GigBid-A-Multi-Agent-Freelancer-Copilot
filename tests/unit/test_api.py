@@ -72,7 +72,7 @@ async def test_auth_required_and_wrong_password(bid_api: Any) -> None:
     bad = await client.post("/auth/login", json={"username": "reviewer", "password": "not-the-password"})
     assert bad.status_code == 401
     me = await client.get("/auth/me", headers=await login(client))
-    assert me.json() == {"username": "reviewer", "persona": "ai_ml"}
+    assert me.json()["username"] == "reviewer" and me.json()["persona"] == "ai_ml" and me.json()["hourly_floor"]
 
 
 async def test_run_streams_then_approve_submits_once(bid_api: Any) -> None:

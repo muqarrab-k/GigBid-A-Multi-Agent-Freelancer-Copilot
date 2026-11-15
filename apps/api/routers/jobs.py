@@ -6,6 +6,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
+from apps.api.core import INBOX
 from apps.api.deps import State, User
 from apps.api.scheduler import bid_thread_id, fetch_job, inbox, scout_once, start_run
 from apps.api.schemas import InboxOut, JobDetail, JobRow, RunIn, RunOut, RunState, ScoutOut
@@ -41,6 +42,8 @@ async def jobs_inbox(state: State, user: User) -> InboxOut:
                 jobs[t["job_id"]] = values["job"]
     rows = []
     for job_id, job in jobs.items():
+        if job.get("skipped"):
+            continue
         thread_id = bid_thread_id(job_id, user["username"])
         known = await state.thread(user["username"], thread_id)
         values = (await state.snapshot("bid", thread_id)).values if known else {}
@@ -53,6 +56,16 @@ async def jobs_inbox(state: State, user: User) -> InboxOut:
 async def scout_now(state: State, user: User, analyse: bool = False) -> ScoutOut:
     new, started = await scout_once(state, user, analyse)
     return ScoutOut(found=len(new), new_jobs=new, runs_started=started)
+
+
+@router.post("/jobs/{job_id}/skip", response_model=JobRow)
+async def skip(job_id: str, state: State, user: User) -> JobRow:
+    """Hide a job from the inbox; a human skip, nothing is sent."""
+    job = await fetch_job(state, user, job_id)
+    if job is None:
+        raise HTTPException(404, "no such job")
+    await state.store.aput((INBOX, user["username"]), job_id, {**job, "skipped": True})
+    return row(job, {"status": "skipped"}, None)
 
 
 @router.get("/jobs/{job_id}", response_model=JobDetail)

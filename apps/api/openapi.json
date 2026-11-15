@@ -187,6 +187,54 @@
         }
       }
     },
+    "/jobs/{job_id}/skip": {
+      "post": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Skip",
+        "description": "Hide a job from the inbox; a human skip, nothing is sent.",
+        "operationId": "skip_jobs__job_id__skip_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobRow"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/jobs/{job_id}": {
       "get": {
         "tags": [
@@ -833,6 +881,52 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StatusOut"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/portfolio/upload": {
+      "post": {
+        "tags": [
+          "portfolio"
+        ],
+        "summary": "Upload",
+        "operationId": "upload_portfolio_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -2289,6 +2383,69 @@
         ],
         "title": "TokenOut"
       },
+      "UploadIn": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[\\w .()-]+\\.(md|txt)$",
+            "title": "Filename"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 200000,
+            "minLength": 20,
+            "title": "Text"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "case_study",
+              "readme",
+              "review",
+              "cv",
+              "document"
+            ],
+            "title": "Type",
+            "default": "case_study"
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename",
+          "text"
+        ],
+        "title": "UploadIn"
+      },
+      "UploadOut": {
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "title": "Evidence Id"
+          },
+          "added": {
+            "type": "integer",
+            "title": "Added"
+          },
+          "updated": {
+            "type": "integer",
+            "title": "Updated"
+          },
+          "chunks": {
+            "type": "integer",
+            "title": "Chunks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "added",
+          "updated",
+          "chunks"
+        ],
+        "title": "UploadOut"
+      },
       "UserOut": {
         "properties": {
           "username": {
@@ -2298,6 +2455,28 @@
           "persona": {
             "type": "string",
             "title": "Persona"
+          },
+          "hourly_floor": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hourly Floor"
+          },
+          "fixed_min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fixed Min"
           }
         },
         "type": "object",
