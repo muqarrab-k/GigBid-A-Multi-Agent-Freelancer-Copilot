@@ -213,3 +213,17 @@ def test_retry_after_hint() -> None:
     assert retry_after("Please try again in 12.5s. Need more") == 12.5
     assert retry_after("Please try again in 5m17.52s.") == 317.52
     assert retry_after("no hint") is None
+
+
+async def test_local_stack_acts_as_each_persona(tmp_path: Path) -> None:
+    from agent.local_stack import LocalStack, user_for
+    from tests.unit.agent_fixtures import fake_retriever
+
+    stack = LocalStack(tmp_path, retriever=fake_retriever())
+    seen = {}
+    for persona in ("ai_ml", "fullstack"):
+        layer = stack.layer(user_for(persona))
+        await layer.discover()
+        hits = await layer.call("search_evidence", {"requirement": "web app", "k": 3})
+        seen[persona] = {h["evidence_id"].split(":")[0] for h in hits["items"]}
+    assert seen == {"ai_ml": {"ai_ml"}, "fullstack": {"fullstack"}}

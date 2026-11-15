@@ -4,6 +4,7 @@ import threading
 import time
 import uuid
 from collections.abc import Awaitable, Callable
+from contextvars import ContextVar
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal, TypeVar
@@ -102,10 +103,14 @@ def auth_settings(cfg: McpConfig, port: int) -> AuthSettings:
                         validate_token_resource=False)
 
 
+# set by in-process sessions, which carry no token
+local_user: ContextVar[str | None] = ContextVar("local_user", default=None)
+
+
 def current_user(cfg: McpConfig) -> McpUser:
-    """HTTP token user, or the default user on stdio."""
+    """HTTP token user, then the in-process user, else the default user on stdio."""
     token = get_access_token()
-    return cfg.user(token.client_id if token else cfg.default_user)
+    return cfg.user(token.client_id if token else local_user.get() or cfg.default_user)
 
 
 def trace_id(ctx: Context[Any, Any, Any] | None) -> str:

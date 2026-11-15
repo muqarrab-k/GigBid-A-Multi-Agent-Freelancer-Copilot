@@ -1,0 +1,1023 @@
+{
+  "config": {
+    "writer": "openai/gpt-oss-120b",
+    "writer_fallback": "qwen3:8b",
+    "verifier": "qwen3:4b",
+    "max_revisions": 2,
+    "gigsim": "dev scenario, rule_only clients",
+    "approval": "eval harness auto-approve (eval only)"
+  },
+  "commit": "d46d59e",
+  "date": "2026-11-15T06:43:24+00:00",
+  "metrics": {
+    "jobs": 15,
+    "drafted": 14,
+    "submitted": 5,
+    "blocked_by_compliance": 6,
+    "unsupported_per_proposal_before": 1.07,
+    "unsupported_per_proposal_after": 0,
+    "claims_per_proposal_before": 3.14,
+    "claims_per_proposal_after": 2.07,
+    "critic_revisions": {
+      "0": 6,
+      "2": 7,
+      "1": 1
+    },
+    "critic_unresolved": 6,
+    "compliance_violations_caught": 9,
+    "tokens_per_proposal": 6417.1,
+    "usd_per_proposal": 9.7e-05,
+    "latency_s": {
+      "p50": 63.79,
+      "p95": 158.48
+    },
+    "first_reply_rate": 0.0,
+    "gigsim_after_tick": {
+      "hours": 168,
+      "sim_time": "2024-08-08T00:00:00Z",
+      "accounts": [
+        {
+          "account_id": "acct_ai_ml",
+          "submitted": 5,
+          "viewed": 2,
+          "replied": 0,
+          "interviews": 0,
+          "hired": 0,
+          "reply_rate": 0.0,
+          "interview_rate": 0.0,
+          "hire_rate": 0.0,
+          "connects_spent": 64
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "job_id": "1c0b990bb7dbe947",
+      "persona": "ai_ml",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 4,
+      "unsupported_before": 0,
+      "claims_after": 4,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_off_platform: I built a WhatsApp and SMS assistant that managed multi-step conversations and preserved context for human handoff, with"
+      ],
+      "words": null,
+      "latency_s": 53.34,
+      "tokens": 4015,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [
+        "compliance blocked: ['no_off_platform']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "2298deadbfaf9fad",
+      "persona": "ai_ml",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 4,
+      "unsupported_before": 1,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "For this task I propose a desktop application built with Python, PyQt for the UI, Tesseract + LayoutLMv3 for chart OCR, and a fine\u2011tuned BERT model to parse the free\u2011form text; a rule\u2011based reconciler will prioritize text values when they differ from the visual extraction, and the final report will be generated as HTML."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_guarantees: I will ensure the system is scalable and reliable for your trading signals."
+      ],
+      "words": null,
+      "latency_s": 92.93,
+      "tokens": 10504,
+      "usd": 0.001363,
+      "writer_models": {
+        "qwen3:8b": 2,
+        "openai/gpt-oss-120b": 1
+      },
+      "errors": [
+        "compliance blocked: ['no_guarantees']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "22da285bce53b433",
+      "persona": "ai_ml",
+      "status_before_approval": "needs_attention",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 1,
+      "claims_after": 2,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I have experience with database modeling, complex SQL query logic, and data validation, as seen in my forecasting pipeline for Marrow & Pine Grocers, which used LightGBM, Prophet, and Airflow for automated weekly forecasts."
+      ],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": null,
+      "compliance_violations": [],
+      "words": null,
+      "latency_s": 50.03,
+      "tokens": 6522,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [
+        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+      ],
+      "approval_payload": null,
+      "status": "needs_attention"
+    },
+    {
+      "job_id": "27d97376f2ac1781",
+      "persona": "ai_ml",
+      "status_before_approval": "needs_attention",
+      "decision": "bid",
+      "claims_before": null,
+      "unsupported_before": null,
+      "claims_after": null,
+      "unsupported_after": null,
+      "removed_claims": [],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": null,
+      "compliance_violations": [],
+      "words": null,
+      "latency_s": 22.82,
+      "tokens": 2501,
+      "usd": 0.0,
+      "writer_models": {},
+      "errors": [
+        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+      ],
+      "approval_payload": null,
+      "status": "needs_attention"
+    },
+    {
+      "job_id": "3479148151b3575b",
+      "persona": "ai_ml",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 0,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 133,
+      "latency_s": 47.66,
+      "tokens": 3298,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "3479148151b3575b",
+        "job_id": "3479148151b3575b",
+        "draft": {
+          "cover_letter": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis.\n\nI developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing.\n\nMy experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000.",
+          "screening_answers": [
+            "I have expertise in Chatbot development, as shown by my ticket triage model built with FastAPI.",
+            "I possess knowledge in Machine Learning, demonstrated through my churn prediction model using XGBoost and SHAP.",
+            "I am proficient in Machine Learning Model creation, as evidenced by my deployment pipeline using MLflow and AWS SageMaker.",
+            "I understand Artificial Neural Networks and Deep Neural Networks, as seen in my work with XGBoost and SHAP for model interpretability.",
+            "I am skilled in Deep Learning, as shown by my use of XGBoost and MLflow for model tracking and deployment.",
+            "I have knowledge of Artificial Intelligence, demonstrated through my work on chatbots and predictive models."
+          ],
+          "with_tags": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis [ai_ml:case_study:p01].\n\nI developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team [ai_ml:case_study:p02]. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing [ai_ml:case_study:p13].\n\nMy experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000.",
+          "revision": 0
+        },
+        "claims": [
+          {
+            "claim": "I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis.",
+            "evidence_ids": [
+              "ai_ml:case_study:p01"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p01": "# Support Ticket Triage for Kettlewell Support Co.\n\nIn late 2020, I worked with **Kettlewell Support Co.**, a SaaS support organization that needed a faster, more reliable way to route incoming helpdesk tickets. Their existing keyword rules were brittle: they missed context, sent tickets to the wron"
+            }
+          },
+          {
+            "claim": "I developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team.",
+            "evidence_ids": [
+              "ai_ml:case_study:p02"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p02": "# Telecom churn prediction\n\nIn early 2021, I worked with a client in telecom (name withheld) on a churn prediction problem that needed to be useful to both data science and retention teams. The business goal was straightforward: identify which subscribers were at risk of leaving early enough for the"
+            }
+          },
+          {
+            "claim": "I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing.",
+            "evidence_ids": [
+              "ai_ml:case_study:p13"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p13": "# Model deployment pipeline migration\n\nIn 2024, I worked with a client in insurance (name withheld) to modernize how their pricing models were packaged, tested, and deployed. The team had been relying on hand-copied pickle files, which made releases slow, brittle, and difficult to trust. Every deplo"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.15,
+          "client_quality": 0.25,
+          "flags": [],
+          "injection_detected": false,
+          "explanation": "rules only",
+          "signals": []
+        },
+        "price": {
+          "amount": 3000.0,
+          "billing": "fixed",
+          "currency": "USD",
+          "rationale": "market ai_ml fixed p25-p75 $100-$1500 (pricing_stats.json (jobs, Kaggle 2023-24), n=437); client posted up to $3000; 16 Connects ($2.40), balance 80, keeps reserve 16: worth it at fit 0.88",
+          "connects_cost": 16,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 16,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 16,
+            "balance_before": 80,
+            "balance_after": 64
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 3,
+            "unsupported_before": 0,
+            "partly_before": 0,
+            "removed": [],
+            "claims_after": 3,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "pass",
+              "reasons": [],
+              "revision_count": 0
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a chatbot that can reason like the human brain and generate future implementation plans based on user responses. I built a ticket triage model in Python using scikit-learn to classify incoming requests into 14 support queues, exposed through FastAPI, and set up nightly retraining with Celery and Redis [ai_ml:case_study:p01]. I developed a churn prediction model using XGBoost and SHAP for interpretability, providing actionable insights for the retention team [ai_ml:case_study:p02]. I also created a deployment pipeline with MLflow, Docker, and AWS SageMaker to streamline model delivery and testing [ai_ml:case_study:p13]. My experience includes building interactive chatbots that adapt to user responses and generate plans, as seen in the support ticket triage system. I can also create models that reason and produce actionable plans, as demonstrated in the churn prediction project. My rate is fixed at $3000."
+          },
+          "other": []
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000001",
+        "idempotency_key": "3479148151b3575b:043866fb72b33973",
+        "connects_spent": 16,
+        "balance_after": 64
+      }
+    },
+    {
+      "job_id": "098fe071ad19efb2",
+      "persona": "data_analyst",
+      "status_before_approval": "needs_attention",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 1,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I also have the capability to handle form data with photo uploads and generate spreadsheets for inventory tracking."
+      ],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": null,
+      "compliance_violations": [],
+      "words": null,
+      "latency_s": 44.09,
+      "tokens": 4933,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [
+        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+      ],
+      "approval_payload": null,
+      "status": "needs_attention"
+    },
+    {
+      "job_id": "291e4ff84d9094f0",
+      "persona": "data_analyst",
+      "status_before_approval": "needs_attention",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 1,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I developed a ticket triage model for Kettlewell Support Co. using FastAPI and scikit-learn, handling real-time data processing and classification."
+      ],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": null,
+      "compliance_violations": [],
+      "words": null,
+      "latency_s": 63.79,
+      "tokens": 5964,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [
+        "writer: 1 validation error for WriterOut\nparagraphs\n  Field required [type=missing, input_value={'properties': {'paragrap...rOut', 'type': 'object'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+      ],
+      "approval_payload": null,
+      "status": "needs_attention"
+    },
+    {
+      "job_id": "2ecc025bacaefa60",
+      "persona": "data_analyst",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 0,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 99,
+      "latency_s": 122.59,
+      "tokens": 8937,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "2ecc025bacaefa60",
+        "job_id": "2ecc025bacaefa60",
+        "draft": {
+          "cover_letter": "You need to scrape text from 30 websites and organize it into a structured document. I built a system for contract clause search that organizes text from multiple documents into a structured format.\n\nI have experience with website scraping and data extraction using Python and Scrapy. My work on invoice extraction involved scraping and organizing text from scanned documents into structured JSON.\n\nI can handle data extraction from multiple websites and organize the text into a structured document. My contract clause search assistant organized text from 9,000 contracts into searchable and citable clauses.\n\nMy rate is $30 per hour.",
+          "screening_answers": [
+            "I have experience with website scraping and data extraction using Python and Scrapy. I built a system for contract clause search that organizes text from multiple documents into a structured format."
+          ],
+          "with_tags": "You need to scrape text from 30 websites and organize it into a structured document. I built a system for contract clause search that organizes text from multiple documents into a structured format [ai_ml:case_study:p05].\n\nI have experience with website scraping and data extraction using Python and Scrapy. My work on invoice extraction involved scraping and organizing text from scanned documents into structured JSON [ai_ml:readme:invoice-extract].\n\nI can handle data extraction from multiple websites and organize the text into a structured document. My contract clause search assistant organized text from 9,000 contracts into searchable and citable clauses [ai_ml:case_study:p05].\n\nMy rate is $30 per hour.",
+          "revision": 0
+        },
+        "claims": [
+          {
+            "claim": "I built a system for contract clause search that organizes text from multiple documents into a structured format.",
+            "evidence_ids": [
+              "ai_ml:case_study:p05"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p05": "# Contract clause search assistant\n\nIn 2023, I worked with a client in legal (name withheld) on a fixed-engagement project to make contract review faster and more reliable. Their team needed a way to answer questions across a large contract archive without forcing lawyers to open file after file and"
+            }
+          },
+          {
+            "claim": "My work on invoice extraction involved scraping and organizing text from scanned documents into structured JSON.",
+            "evidence_ids": [
+              "ai_ml:readme:invoice-extract"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:readme:invoice-extract": "Invoice field extraction service for scanned supplier invoices, returning vendor, dates, totals, and line items as JSON.\n\n## Setup\n\n- Python\n- Tesseract\n- LayoutLMv3\n- Hugging Face Transformers\n- FastAPI\n- Docker\n\nInstall the runtime dependencies, make sure Tesseract is available, and build the cont"
+            }
+          },
+          {
+            "claim": "My contract clause search assistant organized text from 9,000 contracts into searchable and citable clauses.",
+            "evidence_ids": [
+              "ai_ml:case_study:p05"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p05": "# Contract clause search assistant\n\nIn 2023, I worked with a client in legal (name withheld) on a fixed-engagement project to make contract review faster and more reliable. Their team needed a way to answer questions across a large contract archive without forcing lawyers to open file after file and"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.045,
+          "client_quality": 0.925,
+          "flags": [
+            "low_budget",
+            "vague_scope"
+          ],
+          "injection_detected": false,
+          "explanation": "The client has a strong history with verified payments and high ratings, but the job scope is vague and the number of websites is low, indicating potential for low-budget work.",
+          "signals": [
+            "llm:low_budget",
+            "llm:vague_scope"
+          ]
+        },
+        "price": {
+          "amount": 30.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market data_analyst hourly p25-p75 $10-$32 (pricing_stats.json (jobs, Kaggle 2023-24), n=1455); no posted budget; market p75 (client spent $10k+); 4 Connects ($0.60), balance 64, keeps reserve 12: worth it at fit 1.00",
+          "connects_cost": 4,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 64,
+            "balance_after": 52
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 3,
+            "unsupported_before": 0,
+            "partly_before": 0,
+            "removed": [],
+            "claims_after": 3,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "revise",
+              "reasons": [
+                "101 words, keep it between 110 and 260"
+              ],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need to scrape text from 30 websites and organize it into a structured document. I built a system for contract clause search that organizes text from multiple documents into a structured format [ai_ml:case_study:p05]. I have experience with website scraping and data extraction using Python and Scrapy. My work on invoice extraction involved scraping and organizing text from scanned documents into structured JSON [ai_ml:readme:invoice-extract]. I can handle data extraction from multiple websites and organize the text into a structured document. My contract clause search assistant organized text from 9,000 contracts into searchable and citable clauses [ai_ml:case_study:p05]. My rate is $30 per hour."
+          },
+          "other": [
+            "critic_unresolved: 101 words, keep it between 110 and 260"
+          ]
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000002",
+        "idempotency_key": "2ecc025bacaefa60:62a1562dac4791d7",
+        "connects_spent": 12,
+        "balance_after": 52
+      }
+    },
+    {
+      "job_id": "3d65d6766d52951a",
+      "persona": "data_analyst",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 6,
+      "unsupported_before": 6,
+      "claims_after": 0,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "You need a spreadsheet that pulls Facebook Ads Manager data and compares last 30 days to last 3 days, with a log tracking each pull on a new row.",
+        "I built a solution that pulls data twice a week, on Monday and Thursday mornings, and logs each pull in a structured format for easy comparison.",
+        "My rate is hourly $25.",
+        "I have experience creating automated data pipelines that pull and organize data for regular reporting.",
+        "I can ensure the spreadsheet is user-friendly and accessible for non-technical users.",
+        "I can set up the spreadsheet to run automatically and provide consistent results for weekly data pulls."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 34,
+      "latency_s": 158.48,
+      "tokens": 7946,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "3d65d6766d52951a",
+        "job_id": "3d65d6766d52951a",
+        "draft": {
+          "cover_letter": "I used automation tools to ensure the spreadsheet is populated regularly and remains user-friendly for non-technical users. The system was designed to be reliable and consistent, similar to.\n\nMy rate is $25 per hour.",
+          "screening_answers": [
+            "I can answer any questions you have about the setup or functionality of the spreadsheet.",
+            "My quote is $25 per hour, with the exact cost depending on the time required to build and test the solution.",
+            "I can complete the spreadsheet within 3 to 5 business days, depending on the complexity of the integration and data structure."
+          ],
+          "with_tags": "I used automation tools to ensure the spreadsheet is populated regularly and remains user-friendly for non-technical users. The system was designed to be reliable and consistent, similar to [ai_ml:case_study:p06].\n\nMy rate is $25 per hour.",
+          "revision": 1
+        },
+        "claims": [
+          {
+            "claim": "The system was designed to be reliable and consistent, similar to.",
+            "evidence_ids": [
+              "ai_ml:case_study:p06"
+            ],
+            "label": "unsupported",
+            "evidence": {
+              "ai_ml:case_study:p06": "# Product recommendations for Tidewater Outfitters\n\nI worked with **Tidewater Outfitters**, an e-commerce team, from **2022-01 to 2022-04** on an hourly engagement to improve how shoppers discovered products across the site.\n\nTheir team already had a strong catalog and healthy traffic, but product d"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.164,
+          "client_quality": 0.329,
+          "flags": [
+            "payment_unverified",
+            "poor_client_history"
+          ],
+          "injection_detected": false,
+          "explanation": "Client has payment_verified: false and low spending history, but job description is clear and specific with no red flags beyond standard client history concerns.",
+          "signals": [
+            "client:payment_unverified",
+            "llm:payment_unverified",
+            "llm:poor_client_history"
+          ]
+        },
+        "price": {
+          "amount": 25.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market data_analyst hourly p25-p75 $6-$25 (pricing_stats.json (jobs, Kaggle 2023-24), n=311); no posted budget; market p50; raised to the persona floor $25; 4 Connects ($0.60), balance 52, keeps reserve 12: worth it at fit 0.60",
+          "connects_cost": 4,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 52,
+            "balance_after": 40
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 6,
+            "unsupported_before": 6,
+            "partly_before": 0,
+            "removed": [
+              "You need a spreadsheet that pulls Facebook Ads Manager data and compares last 30 days to last 3 days, with a log tracking each pull on a new row.",
+              "I built a solution that pulls data twice a week, on Monday and Thursday mornings, and logs each pull in a structured format for easy comparison.",
+              "My rate is hourly $25.",
+              "I have experience creating automated data pipelines that pull and organize data for regular reporting.",
+              "I can ensure the spreadsheet is user-friendly and accessible for non-technical users.",
+              "I can set up the spreadsheet to run automatically and provide consistent results for weekly data pulls."
+            ],
+            "claims_after": 0,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "revise",
+              "reasons": [
+                "6 unsupported claim(s) were removed; rebuild those points from the evidence",
+                "fewer than 2 grounded claims; cite more of the listed evidence",
+                "first paragraph does not use the job's specifics",
+                "0 words, keep it between 110 and 260"
+              ],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "I used automation tools to ensure the spreadsheet is populated regularly and remains user-friendly for non-technical users. The system was designed to be reliable and consistent, similar to [ai_ml:case_study:p06]. My rate is $25 per hour."
+          },
+          "other": [
+            "critic_unresolved: 6 unsupported claim(s) were removed; rebuild those points from the evidence; fewer than 2 grounded claims; cite more of the listed evidence; first paragraph does not use the job's specifics; 0 words, keep it between 110 and 260"
+          ]
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000003",
+        "idempotency_key": "3d65d6766d52951a:be6f9c77f3973a56",
+        "connects_spent": 12,
+        "balance_after": 40
+      }
+    },
+    {
+      "job_id": "4019ff422e6fd347",
+      "persona": "data_analyst",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 0,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_contact_details: Hi, Hope you are doing great, we have an urgent opening for Data Engineer for India remote and UAE. If interested please",
+        "no_contact_details: I can share my CV via email at jchaubey@delphime.com if interested."
+      ],
+      "words": null,
+      "latency_s": 94.47,
+      "tokens": 7706,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [
+        "compliance blocked: ['no_contact_details']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "031cbf7ac05d13a6",
+      "persona": "fullstack",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 0,
+      "claims_after": 2,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 1,
+      "critic_unresolved": false,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_off_platform: I built a WhatsApp and SMS assistant that could handle multi-step conversations, track sentiment, and escalate to a huma"
+      ],
+      "words": null,
+      "latency_s": 50.8,
+      "tokens": 4713,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 2
+      },
+      "errors": [
+        "compliance blocked: ['no_off_platform']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "11c7cbfaf9ea5e52",
+      "persona": "fullstack",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 3,
+      "unsupported_before": 0,
+      "claims_after": 3,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 0,
+      "critic_unresolved": false,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 132,
+      "latency_s": 46.85,
+      "tokens": 2715,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 1
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "11c7cbfaf9ea5e52",
+        "job_id": "11c7cbfaf9ea5e52",
+        "draft": {
+          "cover_letter": "You need a Shopify developer to set up and customize an e-commerce store for high-quality, direct supplier goods, with a focus on user experience, SEO, and seamless integration with marketing tools.\n\nI have experience building recommendation systems and forecasting pipelines that align with e-commerce goals, such as improving product discovery and demand prediction. For example, I built a recommendation system for Tidewater Outfitters that improved shopper engagement. I also developed a demand forecasting tool for Marrow & Pine Grocers that reduced waste and improved planning accuracy.\n\nI am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid, and I have experience with Shopify\u2019s API for custom integrations. My work with a legal client involved building an assistant that extracted relevant clauses from contracts using Python and LangChain.\n\nMy rate is $45 per hour.",
+          "screening_answers": [
+            "I have proven experience in Shopify store setup and customization through previous projects involving e-commerce platforms and custom integrations.",
+            "I understand e-commerce best practices, including SEO, responsive design, and UX, as demonstrated by my work on recommendation systems and forecasting tools.",
+            "I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid, and I have experience with Shopify\u2019s API for custom integrations.",
+            "I have a portfolio of previous Shopify-related projects, including recommendation systems and forecasting tools."
+          ],
+          "with_tags": "You need a Shopify developer to set up and customize an e-commerce store for high-quality, direct supplier goods, with a focus on user experience, SEO, and seamless integration with marketing tools.\n\nI have experience building recommendation systems and forecasting pipelines that align with e-commerce goals, such as improving product discovery and demand prediction. For example, I built a recommendation system for Tidewater Outfitters that improved shopper engagement [ai_ml:case_study:p06]. I also developed a demand forecasting tool for Marrow & Pine Grocers that reduced waste and improved planning accuracy [ai_ml:case_study:p03].\n\nI am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid, and I have experience with Shopify\u2019s API for custom integrations. My work with a legal client involved building an assistant that extracted relevant clauses from contracts using Python and LangChain [ai_ml:case_study:p05].\n\nMy rate is $45 per hour.",
+          "revision": 0
+        },
+        "claims": [
+          {
+            "claim": "For example, I built a recommendation system for Tidewater Outfitters that improved shopper engagement.",
+            "evidence_ids": [
+              "ai_ml:case_study:p06"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p06": "# Product recommendations for Tidewater Outfitters\n\nI worked with **Tidewater Outfitters**, an e-commerce team, from **2022-01 to 2022-04** on an hourly engagement to improve how shoppers discovered products across the site.\n\nTheir team already had a strong catalog and healthy traffic, but product d"
+            }
+          },
+          {
+            "claim": "I also developed a demand forecasting tool for Marrow & Pine Grocers that reduced waste and improved planning accuracy.",
+            "evidence_ids": [
+              "ai_ml:case_study:p03"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p03": "# Grocery demand forecasting for Marrow & Pine Grocers\n\nI worked with **Marrow & Pine Grocers** on a retail forecasting problem that was affecting day-to-day planning. The team needed a better way to anticipate demand at the store and SKU level so they could make more reliable ordering decisions and"
+            }
+          },
+          {
+            "claim": "My work with a legal client involved building an assistant that extracted relevant clauses from contracts using Python and LangChain.",
+            "evidence_ids": [
+              "ai_ml:case_study:p05"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p05": "# Contract clause search assistant\n\nIn 2023, I worked with a client in legal (name withheld) on a fixed-engagement project to make contract review faster and more reliable. Their team needed a way to answer questions across a large contract archive without forcing lawyers to open file after file and"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.054,
+          "client_quality": 0.728,
+          "flags": [],
+          "injection_detected": false,
+          "explanation": "rules only",
+          "signals": []
+        },
+        "price": {
+          "amount": 45.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $45; 12 Connects ($1.80), balance 40, keeps reserve 20: worth it at fit 0.75",
+          "connects_cost": 12,
+          "connects_worth_it": true
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 40,
+            "balance_after": 28
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 3,
+            "unsupported_before": 0,
+            "partly_before": 0,
+            "removed": [],
+            "claims_after": 3,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "pass",
+              "reasons": [],
+              "revision_count": 0
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a Shopify developer to set up and customize an e-commerce store for high-quality, direct supplier goods, with a focus on user experience, SEO, and seamless integration with marketing tools. I have experience building recommendation systems and forecasting pipelines that align with e-commerce goals, such as improving product discovery and demand prediction. For example, I built a recommendation system for Tidewater Outfitters that improved shopper engagement [ai_ml:case_study:p06]. I also developed a demand forecasting tool for Marrow & Pine Grocers that reduced waste and improved planning accuracy [ai_ml:case_study:p03]. I am proficient in HTML, CSS, JavaScript, and Shopify\u2019s Liquid, and I have experience with Shopify\u2019s API for custom integrations. My work with a legal client involved building an assistant that extracted relevant clauses from contracts using Python and LangChain [ai_ml:case_study:p05]. My rate is $45 per hour."
+          },
+          "other": []
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000004",
+        "idempotency_key": "11c7cbfaf9ea5e52:8df108be88f5e5dd",
+        "connects_spent": 12,
+        "balance_after": 28
+      }
+    },
+    {
+      "job_id": "16e6b1dc6d5fc66f",
+      "persona": "fullstack",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 1,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I also developed a production-ready API service using FastAPI and Redis, which shows experience with AWS integration."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_guarantees: I can work independently on your project and ensure the system is self-maintained and scalable.",
+        "no_fabrication: I can work on your self-maintained website and ensure it is scalable and maintainable. I have built systems that require"
+      ],
+      "words": null,
+      "latency_s": 78.05,
+      "tokens": 6764,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [
+        "compliance blocked: ['no_fabrication', 'no_guarantees']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    },
+    {
+      "job_id": "1f3e80398a6e52bb",
+      "persona": "fullstack",
+      "status_before_approval": "awaiting_approval",
+      "decision": "bid",
+      "claims_before": 2,
+      "unsupported_before": 0,
+      "claims_after": 2,
+      "unsupported_after": 0,
+      "removed_claims": [],
+      "critic_revisions": 2,
+      "critic_unresolved": false,
+      "compliance": "allowed",
+      "compliance_violations": [],
+      "words": 121,
+      "latency_s": 78.96,
+      "tokens": 7774,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [],
+      "approval_payload": {
+        "thread_id": "1f3e80398a6e52bb",
+        "job_id": "1f3e80398a6e52bb",
+        "draft": {
+          "cover_letter": "You need a data scientist to analyse a large table in MongoDB and improve the current Node.js code to produce expected results. A good grasp of probability distributions is required.\n\nI built a fraud scoring API using LightGBM and FastAPI, handling streaming card events and returning risk signals before authorisation. I also developed a grocery demand forecasting pipeline using LightGBM and Prophet, producing weekly forecasts for 420 SKUs across 31 stores.\n\nMy rate is $30 per hour. I have experience with Node.js and MongoDB, and I can apply probability distributions to improve model performance and ensure the current code delivers reliable results.\n\nI have worked with Python, FastAPI, LightGBM, and MongoDB in production systems, ensuring models are both accurate and efficient.",
+          "screening_answers": [
+            "I have experience with MongoDB and Node.js, having used them in production systems for data processing and API development."
+          ],
+          "with_tags": "You need a data scientist to analyse a large table in MongoDB and improve the current Node.js code to produce expected results. A good grasp of probability distributions is required.\n\nI built a fraud scoring API using LightGBM and FastAPI, handling streaming card events and returning risk signals before authorisation [ai_ml:case_study:p10]. I also developed a grocery demand forecasting pipeline using LightGBM and Prophet, producing weekly forecasts for 420 SKUs across 31 stores [ai_ml:case_study:p03].\n\nMy rate is $30 per hour. I have experience with Node.js and MongoDB, and I can apply probability distributions to improve model performance and ensure the current code delivers reliable results.\n\nI have worked with Python, FastAPI, LightGBM, and MongoDB in production systems, ensuring models are both accurate and efficient.",
+          "revision": 2
+        },
+        "claims": [
+          {
+            "claim": "I built a fraud scoring API using LightGBM and FastAPI, handling streaming card events and returning risk signals before authorisation.",
+            "evidence_ids": [
+              "ai_ml:case_study:p10"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p10": "# Card Fraud Scoring API\n\nI worked with a client in fintech (name withheld) on a card fraud scoring API, engaged on an hourly basis from 2022-09 to 2022-12. The goal was clear: help the business assess card activity faster, before authorisation, so suspicious transactions could be stopped without sl"
+            }
+          },
+          {
+            "claim": "I also developed a grocery demand forecasting pipeline using LightGBM and Prophet, producing weekly forecasts for 420 SKUs across 31 stores.",
+            "evidence_ids": [
+              "ai_ml:case_study:p03"
+            ],
+            "label": "supported",
+            "evidence": {
+              "ai_ml:case_study:p03": "# Grocery demand forecasting for Marrow & Pine Grocers\n\nI worked with **Marrow & Pine Grocers** on a retail forecasting problem that was affecting day-to-day planning. The team needed a better way to anticipate demand at the store and SKU level so they could make more reliable ordering decisions and"
+            }
+          }
+        ],
+        "risk_report": {
+          "score": 0.048,
+          "client_quality": 0.758,
+          "flags": [],
+          "injection_detected": false,
+          "explanation": "rules only",
+          "signals": []
+        },
+        "price": {
+          "amount": 30.0,
+          "billing": "hourly",
+          "currency": "USD",
+          "rationale": "market fullstack hourly p25-p75 $15-$39 (pricing_stats.json (contracts, Kaggle 2023-24), n=30873); client posted up to $30; 12 Connects ($1.80), balance 28, keeps reserve 20: not worth it at fit 0.62",
+          "connects_cost": 12,
+          "connects_worth_it": false
+        },
+        "preview": {
+          "create_proposal_draft": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "policy_check": {
+              "passed": true,
+              "rule_id": null,
+              "detail": null
+            }
+          },
+          "submit_proposal": {
+            "dry_run": true,
+            "connects_cost": 12,
+            "balance_before": 28,
+            "balance_after": 16
+          }
+        },
+        "notes": {
+          "verifier": {
+            "claims_before": 2,
+            "unsupported_before": 0,
+            "partly_before": 0,
+            "removed": [],
+            "claims_after": 2,
+            "unsupported_after": 0
+          },
+          "critic": [
+            {
+              "verdict": "pass",
+              "reasons": [],
+              "revision_count": 2
+            }
+          ],
+          "compliance": {
+            "verdict": "allowed",
+            "violations": [],
+            "cleaned_text": "You need a data scientist to analyse a large table in MongoDB and improve the current Node.js code to produce expected results. A good grasp of probability distributions is required. I built a fraud scoring API using LightGBM and FastAPI, handling streaming card events and returning risk signals before authorisation [ai_ml:case_study:p10]. I also developed a grocery demand forecasting pipeline using LightGBM and Prophet, producing weekly forecasts for 420 SKUs across 31 stores [ai_ml:case_study:p03]. My rate is $30 per hour. I have experience with Node.js and MongoDB, and I can apply probability distributions to improve model performance and ensure the current code delivers reliable results. I have worked with Python, FastAPI, LightGBM, and MongoDB in production systems, ensuring models are both accurate and efficient."
+          },
+          "other": []
+        }
+      },
+      "status": "submitted",
+      "submission": {
+        "proposal_id": "pr_000005",
+        "idempotency_key": "1f3e80398a6e52bb:fac3d2cc7884a4d8",
+        "connects_spent": 12,
+        "balance_after": 16
+      }
+    },
+    {
+      "job_id": "29e9a5963c9ff0b8",
+      "persona": "fullstack",
+      "status_before_approval": "blocked",
+      "decision": "bid",
+      "claims_before": 5,
+      "unsupported_before": 4,
+      "claims_after": 1,
+      "unsupported_after": 0,
+      "removed_claims": [
+        "I built a card fraud scoring API using FastAPI and LightGBM, handling real-time data streams with Kafka and Docker, achieving fast and reliable results.",
+        "I also developed an invoice extraction service using OCR and NLP, achieving 96.2% accuracy on 1,800 test invoices, reducing manual data entry by 70%.",
+        "I have experience designing APIs that require testing and post-delivery support, as seen in the card fraud scoring API, where the service performed well in production with p95 latency at 38 ms and fraud losses down 22% during the pilot.",
+        "Post-delivery, I can provide support through a messaging-app support bot as needed."
+      ],
+      "critic_revisions": 2,
+      "critic_unresolved": true,
+      "compliance": "blocked",
+      "compliance_violations": [
+        "no_contact_details: My approach to the Binance API will involve customizing the provided ChatGPT code, discussing requirements via video con",
+        "no_off_platform: My approach to the Binance API will involve customizing the provided ChatGPT code, discussing requirements via video con"
+      ],
+      "words": null,
+      "latency_s": 105.95,
+      "tokens": 8048,
+      "usd": 0.0,
+      "writer_models": {
+        "qwen3:8b": 3
+      },
+      "errors": [
+        "compliance blocked: ['no_contact_details', 'no_off_platform']"
+      ],
+      "approval_payload": null,
+      "status": "blocked"
+    }
+  ]
+}
