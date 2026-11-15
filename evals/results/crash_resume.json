@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-15T06:08:41+00:00",
+  "thread_id": "crash-1c0b990bb7dbe947-20261115T050119",
+  "job_id": "1c0b990bb7dbe947",
+  "checkpointer": "postgres schema langgraph",
+  "exit_codes": {
+    "start (killed at approval)": -9,
+    "approve (dies right after submit)": 137,
+    "finish (restart)": 0
+  },
+  "interrupted_before_kill": true,
+  "next_node_after_crash": [
+    "submit"
+  ],
+  "final_status": "submitted",
+  "submit_calls_reaching_server": 2,
+  "submitted_proposals": 1,
+  "connects_before": 80,
+  "connects_after": 68,
+  "connects_charged": 12,
+  "connects_cost_of_job": 12,
+  "exactly_one_submission": true,
+  "charged_once": true
+}
