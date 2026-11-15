@@ -466,12 +466,13 @@ critic:
 
 compliance:
   policy_rules_path: data/policy_pack/policy_rules.yaml
-  # removed from the text; everything else blocks
   # rules whose sentences may be cut instead of blocking; empty = every violation blocks
   clean_rules: []
   # rules that match on patterns only in proposals; empty mirrors GigSim, which blocks the bare keywords
   patterns_only_rules: []
   borderline_terms: [ensure, promise, risk-free, "100%", "will definitely", "fully satisfied"]
+  # a draft must keep at least this many evidence-backed claims after verification to be sent
+  min_grounded_claims: 1
 
 # per user, never allows auto-send
 autonomy:

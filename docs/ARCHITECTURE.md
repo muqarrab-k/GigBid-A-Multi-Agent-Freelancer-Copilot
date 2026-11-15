@@ -107,7 +107,7 @@ Kaggle jobs and contracts) and labels the source in every answer.
 | writer | `ProposalDraft` in short paragraphs; every factual sentence ends with evidence ids; opens with the client's problem; screening answers; price from `PriceQuote`; on a revision it gets the Critic's reasons and the claims the verifier removed | strong (`writer` in config), local fallback | portfolio read incl. `get_evidence` |
 | verifier | `rag/verify.py`: one claim per factual sentence; deterministic checks first (cited ids exist, every number and name appears in the cited evidence, key-word coverage), small-model judge only for the middle band; unsupported claims are removed before the Critic; before/after counts in `verification` | cheap | portfolio read |
 | critic | rules: claims removed by the verifier, fewer than 2 grounded claims, generic opener, first paragraph not using the job's terms, length outside `writer.min_words..max_words`, missing screening answers. Pass or revise with reasons; at most `budgets.max_revisions` (2) rewrites, then the best draft goes on with a visible `critic_unresolved` note | none (rules) | none |
-| compliance | `data/policy_pack/policy_rules.yaml` patterns and keywords for contact details, off-platform, guarantees, unpaid work, credentials; fabrication from the verifier's `unsupported_after`; the small model only for sentences with borderline words (`compliance.borderline_terms`). Any violation blocks (`compliance.clean_rules: []`); `cleaned_text` shows the draft without the flagged sentences | cheap, borderline only | none |
+| compliance | `data/policy_pack/policy_rules.yaml` patterns and keywords for contact details, off-platform, guarantees, unpaid work, credentials; fabrication from the verifier's `unsupported_after`; fewer than `compliance.min_grounded_claims` (1) evidence-backed claims left; the small model only for sentences with borderline words (`compliance.borderline_terms`). Any violation blocks (`compliance.clean_rules: []`); `cleaned_text` shows the draft without the flagged sentences | cheap, borderline only | none |
 | prepare_approval | dry runs of `create_proposal_draft` and the Connects balance; payload: draft (with and without tags), claim table with evidence, risk report, price rationale, cost and balance after, verifier/critic/compliance notes | none | `approval` allowlist |
 | approval_gate | `interrupt(payload)`; resume with `Command(resume={"action": "approve" \| "edit" \| "reject", ...})` | human | none |
 | apply_edit | the human's text replaces the draft, a unified diff goes to `pending_edits` (style memory later); then verifier (report only, a human's words are never rewritten) and Compliance run again and the gate interrupts again | none | none |
@@ -226,7 +226,9 @@ are the current run; the v3 column is the run before that change (same file at c
 instead of filling it in. The wider verifier finds about twice as many claims, and most of the
 new ones are unsupported habits ("I routinely...") or screening-answer claims; after removal the
 grounded count barely moves (2.29 vs 2.14). Two submitted v4 drafts were left with no grounded
-claim at all (`critic_unresolved`); the Critic flags this but cannot block. In v3 most compliance
+claim at all (`291e4ff84d9094f0`, `031cbf7ac05d13a6`, both `claims_after: 0`). Compliance now
+blocks such drafts (`no_grounded_claims`), so under the current code this run would submit 7, not
+9; the eval was not re-run for this change. In v3 most compliance
 blocks were the small model reading "ensure" as a guarantee. The reply rate comes from GigSim's
 seeded rule-only clients on 7 to 9 proposals and says little about real clients.
 

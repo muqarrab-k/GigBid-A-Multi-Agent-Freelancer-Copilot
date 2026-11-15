@@ -9,7 +9,7 @@ from pydantic import ValidationError
 
 from agent.config import AutonomyConfig, get_config
 from agent.graphs.bid_graph import build_bid_graph, pending_approval, resume_job, run_job
-from agent.handoffs import FitReport, ProposalDraft, RiskReport
+from agent.handoffs import Approval, Claim, FitReport, ProposalDraft, RiskReport
 from agent.nodes.approval import PAYLOAD_KEYS, submit
 from agent.nodes.compliance import compliance
 from agent.nodes.decide import decide
@@ -251,3 +251,18 @@ async def test_screening_answers_are_verified() -> None:
     assert cleaned.screening_answers[0].startswith("I work in Python") and invented not in cleaned.screening_answers[0]
     # an emptied answer stays, so the Critic asks for it again
     assert cleaned.screening_answers[1] == ""
+
+
+async def test_draft_without_grounded_claims_is_blocked(tmp_path: Path) -> None:
+    ctx, _, _ = open_ctx(tmp_path)
+    empty = ProposalDraft(job_id="j1", paragraphs=["You need a support chatbot.", "I would start with a call."])
+    out = await compliance({"draft": empty}, SimpleNamespace(context=ctx))  # type: ignore[arg-type]
+    assert out["status"] == "blocked" and any(v.startswith("no_grounded_claims") for v in out["compliance"].violations)
+    claim = Claim(claim_id="c1", text="I built a support bot", evidence_ids=["ai_ml:case_study:p09"])
+    grounded = empty.model_copy(update={"claims": [claim], "evidence_ids": ["ai_ml:case_study:p09"]})
+    out = await compliance({"draft": grounded}, SimpleNamespace(context=ctx))  # type: ignore[arg-type]
+    assert out["compliance"].verdict == "allowed"
+    # a human's own edit is noted, not blocked
+    edited = {"draft": empty, "approval": Approval(action="edit", edited_text="x")}
+    out = await compliance(edited, SimpleNamespace(context=ctx))  # type: ignore[arg-type]
+    assert out["compliance"].verdict == "allowed" and "edited text has no evidence-backed claim" in out["notes"]

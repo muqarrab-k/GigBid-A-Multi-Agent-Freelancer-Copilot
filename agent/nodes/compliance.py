@@ -65,12 +65,21 @@ async def compliance(state: BidState, runtime: Runtime[BidContext]) -> dict[str,
                 hits.append((borderline[v.sentence - 1], v.rule))
     report = state.get("verification")
     notes = []
+    whole = {"no_fabrication": "unsupported claims remain",
+             "no_grounded_claims": f"fewer than {cfg.min_grounded_claims} evidence-backed claim(s) left"}
     if report and report.unsupported_after:
         if editing(state):
             notes.append("edited text keeps claims the evidence does not show")
         else:
             hits.append((-1, "no_fabrication"))
-    violations = [f"{rule}: {parts[i][:120] if i >= 0 else 'unsupported claims remain'}" for i, rule in hits]
+    grounded = sum(bool(c.evidence_ids) for c in draft.claims)
+    if grounded < cfg.min_grounded_claims:
+        # nothing in it is backed by the portfolio
+        if editing(state):
+            notes.append("edited text has no evidence-backed claim")
+        else:
+            hits.append((-1, "no_grounded_claims"))
+    violations = [f"{rule}: {parts[i][:120] if i >= 0 else whole[rule]}" for i, rule in hits]
     blocking = [rule for _, rule in hits if rule not in cfg.clean_rules]
     drop = {i for i, rule in hits if rule in cfg.clean_rules}
     n_body = sum(len(sentences(p)) for p in draft.paragraphs)

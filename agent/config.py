@@ -539,6 +539,7 @@ class ComplianceConfig(Strict):
     policy_rules_path: Path
     clean_rules: list[str]
     patterns_only_rules: list[str] = Field(default_factory=list)
+    min_grounded_claims: int = Field(default=1, ge=0)
     borderline_terms: list[str]
 
     @field_validator("policy_rules_path")

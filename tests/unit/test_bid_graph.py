@@ -99,7 +99,9 @@ async def test_bid_reaches_pricing(tmp_path: Path) -> None:
         update={"minimum_fit_score": 0.0, "watch_fit_score": 0.0}))
     job = await a_job(ctx, budget_type="hourly", hourly_min=40.0, hourly_max=80.0, budget_min=None, budget_max=None)
     state = await run_job(job, ctx, today="2024-08-01")
-    assert state["decision"].action == "bid" and state["status"] == "awaiting_approval"
+    assert state["decision"].action == "bid"
+    # fake embeddings find no evidence, so the draft has nothing grounded to send
+    assert state["status"] == "blocked" and any("no_grounded_claims" in v for v in state["compliance"].violations)
     quote = state["price_quote"]
     assert quote.billing == "hourly" and quote.amount >= load_profile("ai_ml").hourly_floor
     assert "market ai_ml hourly" in quote.rationale
