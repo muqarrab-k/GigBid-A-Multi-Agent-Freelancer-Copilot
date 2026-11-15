@@ -19,3 +19,4 @@ data/cache/embeddings.sqlite
 data/cache/nodes/
 data/scout/
 data/cache/crash_demo/
+data/api/

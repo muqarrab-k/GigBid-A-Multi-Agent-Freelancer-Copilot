@@ -26,6 +26,8 @@ dependencies = [
   "psycopg[binary]==3.3.9",
   "pypdf==7.1.0",
   "numpy==2.4.6",
+  # api tokens
+  "pyjwt==2.15.1",
 ]
 
 [project.optional-dependencies]
