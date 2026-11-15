@@ -5,6 +5,27 @@ author: "Muqarrab · i230511 · Section C"
 date: "15 November 2026"
 ---
 
+<div class="cover">
+<img src="fast_nuces_logo.png" alt="FAST NUCES logo">
+<p class="org">FAST NUCES</p>
+<p class="org">AI-4016 Agentic AI</p>
+<p class="title">GigBid: a multi agent freelancer copilot</p>
+<p class="who">Muqarrab</p>
+<p class="who">i230511</p>
+<p class="who">Section C</p>
+</div>
+
+<div class="info">
+<p><strong>Name:</strong> Muqarrab</p>
+<p><strong>Roll Number:</strong> i230511</p>
+<p><strong>Section:</strong> C</p>
+<p><strong>Course:</strong> AI-4016 Agentic AI</p>
+<p><strong>Instructor:</strong> Muhammad Owais Idrees</p>
+<p><strong>Assignment:</strong> R&amp;D Assignment II, GigBid</p>
+<p><strong>Live URL:</strong> https://gigbid-3g0a.onrender.com</p>
+<p><strong>Repository:</strong> https://github.com/muqarrab-k/GigBid-A-Multi-Agent-Freelancer-Copilot</p>
+</div>
+
 Every number in this report comes from a committed file under `evals/results/` (named in
 brackets) or from a commit hash. The instructor did not release GigSim, the personas or the
 evaluation sets, so I built all three: real job and contract data from Kaggle, plus clearly

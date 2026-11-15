@@ -16,12 +16,9 @@ const page = await browser.newPage();
 await page.goto(`file://${html}`);
 await page.pdf({
   path: resolve(report, "REPORT.pdf"),
-  format: "A4",
+  // page size, margins and page numbers come from report.css
+  preferCSSPageSize: true,
   printBackground: true,
-  displayHeaderFooter: true,
-  headerTemplate: "<span></span>",
-  footerTemplate: '<div style="font-size:7pt;width:100%;text-align:center;color:#666"><span class="pageNumber"></span> / <span class="totalPages"></span></div>',
-  margin: { top: "16mm", bottom: "16mm", left: "15mm", right: "15mm" },
 });
 await browser.close();
 console.log("wrote docs/report/REPORT.pdf");

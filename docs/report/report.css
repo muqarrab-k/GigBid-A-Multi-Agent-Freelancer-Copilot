@@ -1,14 +1,22 @@
-@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
-body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.6pt; line-height: 1.38; color: #111; }
-header#title-block-header { margin-bottom: 10px; }
-h1.title { font-size: 17pt; margin: 0 0 2px; }
-p.subtitle { font-size: 10.5pt; margin: 0; color: #444; }
-p.author, p.date { margin: 0; color: #444; font-size: 9pt; }
-h1 { font-size: 12.5pt; margin: 14px 0 4px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
-p, ul { margin: 4px 0; }
-li { margin: 1px 0; }
-table { border-collapse: collapse; width: 100%; margin: 6px 0; font-size: 8.2pt; page-break-inside: auto; }
-th, td { border: 1px solid #c8c8c8; padding: 2px 4px; vertical-align: top; text-align: left; }
-th { background: #f0f0f4; }
+@page { size: Letter; margin: 1in; @bottom-center { content: counter(page); font-family: "Times New Roman", Times, serif; font-size: 11pt; } }
+@page :first { @bottom-center { content: none; } }
+body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.15; color: #000; text-align: justify; margin: 0; max-width: none; padding: 0; }
+header#title-block-header { display: none; }
+.cover { height: 9in; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; page-break-after: always; }
+.cover img { width: 1.6in; margin-bottom: 18pt; }
+.cover p { margin: 0 0 6pt; text-align: center; }
+.cover .org { font-weight: bold; font-size: 14pt; }
+.cover .title { font-weight: bold; font-style: italic; font-size: 13pt; text-transform: uppercase; margin: 18pt 0; }
+.cover .who { font-size: 12pt; margin: 0 0 2pt; }
+.info p { margin: 0 0 2pt; text-align: left; }
+.info { margin-bottom: 14pt; }
+h1 { font-size: 16pt; font-weight: bold; margin: 16pt 0 6pt; page-break-after: avoid; }
+h2 { font-size: 12pt; font-weight: bold; margin: 12pt 0 4pt; page-break-after: avoid; }
+p { margin: 0 0 8pt; }
+ul, ol { margin: 0 0 8pt; padding-left: 0.35in; }
+li { margin: 0 0 3pt; padding-left: 0.05in; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 10pt; text-align: left; page-break-inside: auto; }
+th, td { border: 0.5pt solid #000; padding: 2pt 4pt; vertical-align: top; }
+th { font-weight: bold; }
 tr { page-break-inside: avoid; }
-code { font-family: Menlo, Consolas, monospace; font-size: 8.2pt; }
+code { font-family: "Times New Roman", Times, serif; font-size: 1em; }
