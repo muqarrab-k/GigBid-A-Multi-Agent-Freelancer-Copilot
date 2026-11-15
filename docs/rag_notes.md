@@ -82,3 +82,28 @@ having done the project". A stronger text matcher widens that gap; it does not c
 5.2 points away from filter + hybrid (0.2486 → 0.1971 on the same jobs). The 4+ jobs do not gain
 more than the rest (0.2486 vs 0.2747 for filter + hybrid). Rerank subtracts rather than adds.
 H1 (proof vs phrasing separation is the main lever) holds; H2 does not.
+
+## Deployed embedder differs from the main results
+
+The public deployment (Render free tier, 512 MB) cannot load torch, so it does not use
+nomic-embed-text-v1.5, the embedder behind every number above. Through fastembed (ONNX) the full
+nomic model peaks at 934 MB, and its quantized build only reaches cosine 0.962 to 0.973 against
+the torch vectors on 20 portfolio texts, too far to reuse the nomic index. The deployment therefore
+embeds with `BAAI/bge-small-en-v1.5` through fastembed (`EMBEDDINGS_PROVIDER=lite`) and searches
+its own Neon index built with that same embedder.
+
+Same 95 dev bid jobs, shipped variant `v2_filter`, from `evals/results/rag_v2_filter.json` and
+`evals/results/rag_v2_filter_bge_small_en_v1_5.json`:
+
+| embedder | Recall@5 | MRR | nDCG@10 |
+|---|---|---|---|
+| nomic-embed-text-v1.5 (main results) | 0.2554 | 0.4748 | 0.3478 |
+| bge-small-en-v1.5 (deployment) | 0.2667 | 0.5069 | 0.3643 |
+
+bge-small is not worse on this set, likely because the type filter and BM25 carry most of the gain.
+The bge-small latency in its file (p50 9.8 s) was measured from a laptop against the remote Neon
+database while other jobs ran, so it is not comparable to the local 64.8 ms. The fit matcher's
+strong and partial thresholds (0.62 and 0.55) were tuned on nomic similarities; bge-small scores
+run higher, so fit may read more generous in the deployment. Hybrid retrieval now ranks by RRF but
+reports each item's dense cosine as its score, which is the scale those thresholds expect; the
+ranking, and so every metric above, is unchanged.
