@@ -40,9 +40,10 @@ def with_cheap_model(settings: Settings, model: str) -> Settings:
     return settings.model_copy(update={"models": settings.models.model_copy(update={"profiles": profiles})})
 
 
-def stratified(labels: list[dict[str, Any]], seed: int) -> list[dict[str, Any]]:
+def stratified(labels: list[dict[str, Any]], seed: int, exclude: set[str] | None = None) -> list[dict[str, Any]]:
     """Per persona: scams, injections, then bid and skip jobs, seeded."""
     rng = random.Random(seed)
+    labels = [lab for lab in labels if lab["job_id"] not in (exclude or set())]
     picked = []
     for persona in sorted({lab["persona"] for lab in labels}):
         mine = sorted((lab for lab in labels if lab["persona"] == persona), key=lambda x: x["job_id"])
@@ -122,8 +123,14 @@ def main() -> None:
     parser.add_argument("--full", action="store_true", help="all 600 dev jobs")
     parser.add_argument("--cheap-model", default=None, help="override the cheap nodes, e.g. qwen3:8b")
     parser.add_argument("--jobs", default=None, help="comma separated job ids instead of the sample")
+    parser.add_argument("--fresh", action="store_true", help="new seed, disjoint from the first sample")
+    parser.add_argument("--corroboration", choices=["on", "off"], default=None,
+                        help="override decision.model_flags_need_rule")
     args = parser.parse_args()
     settings = get_config()
+    if args.corroboration:
+        rules = settings.decision.model_copy(update={"model_flags_need_rule": args.corroboration == "on"})
+        settings = settings.model_copy(update={"decision": rules})
     if args.cheap_model:
         settings = with_cheap_model(settings, args.cheap_model)
     model = settings.profile.analyst.model
@@ -131,6 +138,9 @@ def main() -> None:
     if args.jobs:
         wanted = set(args.jobs.split(","))
         labels = [lab for lab in labels if lab["job_id"] in wanted]
+    elif args.fresh:
+        first = {lab["job_id"] for lab in stratified(labels, settings.data.seed)}
+        labels = stratified(labels, settings.data.seed + 1, exclude=first)
     elif not args.full:
         labels = stratified(labels, settings.data.seed)
     with tempfile.TemporaryDirectory() as tmp:
@@ -141,13 +151,18 @@ def main() -> None:
                    if settings.profile.analyst.fallback else None,
                    "embedder": settings.rag.embeddings.model, "rag_variant": settings.rag.variant,
                    "thresholds": settings.thresholds.model_dump(), "decision": settings.decision.model_dump()},
-        "sample": "full" if args.full else ("jobs" if args.jobs else f"stratified per persona {SAMPLE}"),
+        "sample": "full" if args.full else ("jobs" if args.jobs else
+                  f"stratified per persona {SAMPLE}" + (", fresh seed, disjoint from the first sample" if args.fresh else "")),
         "commit": commit_hash(), "date": datetime.now(UTC).isoformat(timespec="seconds"),
         "metrics": score(rows),
         "per_persona": {p: score([r for r in rows if r["persona"] == p]) for p in sorted({r["persona"] for r in rows})},
         "rows": rows,
     }
-    suffix = "" if not args.jobs else "_jobs"
+    suffix = "_jobs" if args.jobs else ""
+    if args.fresh:
+        suffix += "_fresh"
+    if args.corroboration:
+        suffix += f"_corroboration_{args.corroboration}"
     path = RESULTS / f"decisions_{name}{'_full' if args.full else ''}{suffix}.json"
     path.write_text(json.dumps(report, indent=2, default=str))
     print(json.dumps(report["metrics"], indent=1))

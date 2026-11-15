@@ -130,3 +130,19 @@ partly circular: the rule patterns were written with our scam templates in view.
 4B errors are mostly real bids with fit 0.50 to 0.58 in the watch band; fullstack is the weakest
 persona (F1 0.57 vs ai_ml 0.88). qwen3:4b stays the cheap-node model: better on every metric
 and about 40% faster than 8B.
+
+**Check on a fresh sample.** `make decision-eval` with `--fresh` draws a second stratified 90-job
+sample with seed 43, disjoint from the first; `--corroboration off|on` overrides the rule. The
+`on` run replays the `off` run's cached model replies (analysis inputs identical on 90/90 jobs),
+so only `decide` differs.
+
+| qwen3:4b, fresh sample | bid F1 | scam P / R | injection detected / false pos. | price in band | latency p50 / p95 | tokens / job | file |
+|---|---|---|---|---|---|---|---|
+| model flags skip | 0.667 | 0.67 / 1.00 | 100% / 0% | 15 / 18 | 25.5 s / 63.8 s | 2,520 | `decisions_qwen3_4b_fresh_corroboration_off.json` |
+| flags need a rule | 0.643 | 0.86 / 1.00 | 100% / 0% | 15 / 18 | replay | replay | `decisions_qwen3_4b_fresh_corroboration_on.json` |
+
+Only 4 decisions changed, all on gold-skip jobs: two moved to watch and two to bid. So on unseen
+jobs the rule still removes false scam calls (precision 0.67 to 0.86, recall unchanged) but it does
+not improve bid F1; the +0.06 on the first sample was partly tuning to that sample. We keep the
+rule because a wrong scam skip hides a real job from the user, and a wrong bid still stops at the
+human approval gate.
