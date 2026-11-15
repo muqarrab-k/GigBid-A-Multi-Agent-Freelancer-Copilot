@@ -23,3 +23,9 @@ data/api/
 apps/web/playwright-report/
 apps/web/test-results/
 apps/web/tsconfig.tsbuildinfo
+.neon
+.env.local
+# neon cli files, not used by the app
+/neon.ts
+/package.json
+/package-lock.json

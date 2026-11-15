@@ -117,6 +117,52 @@ models:
         <<: *paid_strong
         temperature: 0.3
 
+    # deployment: open-weight models on groq, no ollama
+    open_hosted:
+      scout: &hosted_small
+        provider: groq
+        model: openai/gpt-oss-20b
+        base_url: https://api.groq.com/openai/v1
+        temperature: 0.0
+        reasoning_effort: low
+        usd_per_mtok_in: 0.075
+        usd_per_mtok_out: 0.30
+        fallback:
+          provider: groq
+          model: qwen/qwen3.8-27b
+          base_url: https://api.groq.com/openai/v1
+          temperature: 0.0
+          reasoning_effort: none
+      analyst: *hosted_small
+      risk_assessor: *hosted_small
+      fit_matcher: *hosted_small
+      pricing: *hosted_small
+      verifier: *hosted_small
+      compliance: *hosted_small
+      writer: &hosted_strong
+        provider: groq
+        model: openai/gpt-oss-120b
+        base_url: https://api.groq.com/openai/v1
+        temperature: 0.4
+        reasoning_effort: low
+        usd_per_mtok_in: 0.15
+        usd_per_mtok_out: 0.60
+        # daily cap on the free tier
+        fallback:
+          provider: groq
+          model: openai/gpt-oss-20b
+          base_url: https://api.groq.com/openai/v1
+          temperature: 0.4
+          reasoning_effort: low
+          usd_per_mtok_in: 0.075
+          usd_per_mtok_out: 0.30
+      critic:
+        <<: *hosted_strong
+        temperature: 0.0
+      client_liaison:
+        <<: *hosted_strong
+        temperature: 0.3
+
 marketplace:
   mode: gigsim
   # gigsim has no stats endpoint, served from make data output
