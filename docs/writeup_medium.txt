@@ -1,0 +1,71 @@
+Three things my freelancer copilot taught me about better models and better search
+
+Muqarrab, AI 4016. Every number here comes from a result file in the GigBid repository, in the folder evals/results, and I name the file in brackets.
+
+For a course assignment I built GigBid. It is a team of LangGraph agents that reads freelance job posts, picks the ones worth a bid, and writes a proposal where every claim should be backed by my portfolio. Then it stops. Nothing gets sent until a person says yes.
+
+It runs against a marketplace simulator that I built from public Kaggle job and contract data. It has three made up freelancer personas and a dev set I labelled by hand.
+
+I started with the usual beliefs. A bigger model will judge better. A smarter search will find better evidence. Asking the writer to cite its sources will keep it honest. All three beliefs were wrong, and I could measure how wrong. This post is about those three surprises.
+
+The bigger model was the worse risk checker
+
+GigBid has a Risk Assessor. It looks at a job and its client and raises flags. Flags include scam, unpaid work, off platform contact, vague scope and low budget. Some come from plain rules, like a pattern that catches "contact me on Telegram". Others come from one call to a small local model.
+
+I compared two sizes of the same model family, Qwen3 4B and Qwen3 8B. I ran both on a mixed sample of 90 dev jobs.
+
+I expected the 8B model to be the safer one. Instead it was the more nervous one. The sample had 72 jobs that were not scams. On those, the 8B model raised the off platform flag 42 times and the scam flag 19 times. The 4B model raised them 3 times and 0 times [decisions_qwen3_8b.json, decisions_qwen3_4b.json]. The 8B model also called almost everything vague (71 times) and cheap (70 times).
+
+Then I let those model only flags skip a job. Scam precision was 0.277 for the 8B model and 0.692 for the 4B model [decisions_qwen3_8b_model_flags_skip.json, decisions_qwen3_4b_model_flags_skip.json]. In plain words, out of every four jobs the 8B model threw away as scams, about three were real jobs. Recall was 1.0 for both. But a model that calls everything a scam also gets perfect recall.
+
+The bigger model was not dumber. It was more careful, and careful is not free when the model decides where money goes. A job that gets skipped by mistake is invisible. Nobody ever knows it was lost. A risky job that gets through by mistake still stops at the human approval screen.
+
+So I changed the rule and kept the model. Now a skip flag that only the model raised counts only when a rule signal backs it up, such as a scam pattern or a red flag about the client. I made sure that injection detection cannot be that backup signal. That way, text planted in a job post cannot push a job into a skip all by itself.
+
+I tested the new rule on a fresh sample that did not overlap the first one. Scam precision went up from 0.67 to 0.86. Bid F1 dropped a little, from 0.879 to 0.841, because three jobs the rule let through were real skips. I kept the rule anyway. In this product a wrong skip is the worse mistake.
+
+The smaller model also stayed. It scored 0.870 bid F1 against 0.794 for the 8B model on the first sample, and it was about 40% faster [decisions_qwen3_4b.json, decisions_qwen3_8b.json].
+
+Smarter search made things worse and a simple filter did the work
+
+The second surprise came from retrieval. Before running anything I wrote down a hypothesis. Splitting a job into its requirements, mixing keyword search with dense search, and reranking with a cross encoder should each add points, most of all on jobs that ask for four or more things.
+
+The starting point was terrible, and the reason was interesting. A plain dense search over the whole portfolio, using the whole job post as the query, scored Recall@5 of 0.023 on 95 dev bid jobs [rag_v0.json]. In 448 of the 475 top five slots it returned past proposals.
+
+A proposal is written in reply to a job post, so it reads like one. Proposals were 70% of all chunks. My search was very good at finding text that sounded like the question and very bad at finding proof.
+
+One line of config fixed most of it. I told the search to look only at portfolio types, meaning case studies, READMEs, reviews, code and the CV. Recall@5 went from 0.023 to 0.235 [rag_results_table.md]. Adding BM25 keyword search next to dense search, joined with reciprocal rank fusion, took it to 0.255 with MRR 0.475. That is the version that shipped.
+
+Then the smarter parts went backwards.
+
+Splitting jobs into requirements dropped Recall@5 from 0.235 to 0.147. It got worse even on the jobs with four or more requirements, where it was supposed to help the most. Short queries like "experience with Python" matched short client reviews full of skill names. Reviews took 232 of the 475 top five slots, while only 110 gold items were reviews.
+
+Reranking dropped Recall@5 to 0.132 and made each search about 90 times slower, with a median of 5.9 s against 64 ms. The reranker loved code chunks, because code mentions every library by name. Code took 86 top five slots against just 3 gold code items.
+
+Both failures have the same root. My gold labels mark project level proof as relevant, meaning the case study and README that show I really built the thing. A stronger text matcher rewards text that just mentions the skill. Making that matcher better makes the gap wider instead of closing it. So I rejected my own hypothesis. The ablation shows that the type filter alone explains almost the whole gain over the starting point [rag_ablation.json].
+
+The live app runs on a host with only 512 MB of memory, so it uses a much smaller embedding model, BGE Small running on ONNX, instead of Nomic Embed. On the same 95 jobs it scored a little higher, 0.267 against 0.255 [rag_v2_filter_bge_small_en_v1_5.json]. Once the filter removes the proposals, what is left is a small and clean set of documents. Then the size of the embedding model barely matters.
+
+A citation on every sentence did not stop made up claims
+
+The writer prompt says that every sentence stating a fact must end with evidence ids. My first baseline was a single agent with all the tools. I gave it a job about a chatbot that talks like a historical figure. It wrote that it had fine tuned a Transformer on thousands of historical letters and speeches, and it cited case study p08 [single_agent_demo.json]. Case study p08 is about summarising clinical notes. There were no letters and no speeches. The citation was real but the claim was invented. The citation made it look checked.
+
+The full pipeline did the same thing, just more quietly. With writer prompt version 4, drafts had 6.14 claims per proposal, and 3.86 of them were not supported by the evidence they cited [the proposal eval file for GPT OSS 120B]. Many were habits rather than lies. A line like "I routinely design conversational flows" sounds harmless, but a careful client would ask about it.
+
+What worked was a separate verifier that does not trust the writer. It splits the draft into claims and checks that every cited id exists. It checks that every number and name in a claim really appears in the cited text. Only after that does it ask a small model about the borderline cases. Claims that fail are removed before the Critic ever sees the draft. After verification there were 0.00 unsupported claims per proposal.
+
+But removing claims creates a new problem. Two drafts lost every single claim and were still submitted. They were polite and had no proof at all. The fix was one more rule. Compliance now blocks a draft that has no evidence backed claim left.
+
+A citation is a promise. Without a verifier it is just decoration. And without a minimum on what survives, verification can leave you with a nicely formatted nothing.
+
+What I would do next
+
+First, I want to measure the single agent properly. I only compared it with the graph on 2 jobs. That caught one invented claim but proves little else. The next step is the same 50 jobs for a single ReAct agent, a prebuilt supervisor and my graph, all with the same writer model.
+
+Second, I want to calibrate a judge. Before I trust any LLM judge, I want 30 proposals labelled by hand and a Cohen's kappa score.
+
+Third, I want to fix fit, not risk. Most of the wrong bids that remain come from a fit score that rewards loosely related evidence. A UK lawyer job scored 0.60 just because of generic AI words. Requiring two strong requirement matches is the first thing I will try.
+
+Fourth, I want to attack my own defences. I held back six injection styles that were never in the dev set. They include base64, HTML comments and fake tool output, and I have not run them yet. That is the test I most want to see fail, so I can learn how it fails.
+
+The lesson I keep coming back to is simple. Each time, the part that sounded better made the system worse by its own measure. Only the measurement showed it.
