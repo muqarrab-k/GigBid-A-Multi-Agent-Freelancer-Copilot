@@ -1,6 +1,6 @@
 @page { size: Letter; margin: 1in; @bottom-center { content: counter(page); font-family: "Times New Roman", Times, serif; font-size: 11pt; } }
 @page :first { @bottom-center { content: none; } }
-body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.15; color: #000; text-align: justify; margin: 0; max-width: none; padding: 0; }
+body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; color: #000; text-align: justify; margin: 0; max-width: none; padding: 0; }
 header#title-block-header { display: none; }
 .cover { height: 9in; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; page-break-after: always; }
 .cover img { width: 1.6in; margin-bottom: 18pt; }

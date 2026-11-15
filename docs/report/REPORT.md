@@ -23,6 +23,7 @@ date: "15 November 2026"
 <p><strong>Assignment:</strong> R&amp;D Assignment II, GigBid</p>
 <p><strong>Live URL:</strong> https://gigbid-3g0a.onrender.com</p>
 <p><strong>Repository:</strong> https://github.com/muqarrab-k/GigBid-A-Multi-Agent-Freelancer-Copilot</p>
+<p><strong>Demo Video:</strong> https://drive.google.com/file/d/12j2BvMtTN-7vI_BqbtmasswhbHF9h4Ds/view?usp=sharing</p>
 </div>
 
 Every number in this report comes from a committed file under `evals/results/` (named in
@@ -31,14 +32,14 @@ evaluation sets, so I built all three: real job and contract data from Kaggle, p
 labelled synthetic personas, clients and gold labels (`docs/DATA_CARD.md`). The hidden test has
 not run yet.
 
-**Live app:** https://gigbid-3g0a.onrender.com (Render free tier with Neon Postgres; open-weight
-models on Groq with an OpenRouter fallback). Shared traces: `docs/TRACES.md`.
+**Live app:** https://gigbid-3g0a.onrender.com. It runs on Render's free tier with Neon Postgres, using
+open-weight models on Groq with an OpenRouter fallback. Shared traces: `docs/TRACES.md`.
 
 # 1. Problem and constraints
 
 A freelancer scans job feeds for hours, pays Connects to bid, and sends proposals that clients
-ignore or that land on scams asking for free work or off-platform payment. GigBid automates the
-reading and the drafting; the freelancer keeps the decisions.
+ignore or that land on scams asking for free work or off-platform payment. GigBid does the
+reading and the drafting, and the freelancer keeps the decisions.
 
 **What must never be automated.** Sending a proposal or a message, and spending Connects. Every
 such write goes through a LangGraph `interrupt()` and resumes only with an explicit human
@@ -72,9 +73,9 @@ verifier and compliance.
 **Conversation graph** (one thread per client conversation): read messages, classify intent,
 propose real calendar slots, guard the reply, interrupt for approval, send with an idempotency key.
 
-**Tool layer.** Agents never call GigSim directly: node → MCP client (per-node allowlist, one
-trace id, retries) → Marketplace MCP server → `MarketplacePort` → GigSim adapter (or the Upwork
-adapter in live mode). The Portfolio MCP server serves retrieval and the Workspace server serves
+**Tool layer.** Agents never call GigSim directly. A node calls the MCP client (per-node allowlist,
+one trace id, retries), the client calls the Marketplace MCP server, and the server goes through
+`MarketplacePort` to the GigSim adapter (or the Upwork adapter in live mode). The Portfolio MCP server serves retrieval and the Workspace server serves
 calendar slots and email drafts. Write tools take an idempotency key and support `dry_run`
 (`docs/TOOLS.md`).
 
@@ -82,9 +83,9 @@ calendar slots and email drafts. Write tools take an idempotency key and support
 memory, written only by promotion rules in `agent/memory/promotion_rules.py`) and pgvector
 (retrieval). The execution trace is kept apart from state and memory: nodes never read it to decide.
 
-**Durability, proven once.** I killed the process while it waited for approval, and again right
+**Durability, tested once.** I killed the process while it waited for approval, and again right
 after `submit_proposal` returned, then restarted. The job was submitted exactly once and Connects
-were charged once (80 → 68 for a 12-Connect job) although two submit calls reached the server
+were charged once (80 to 68 for a 12-Connect job) although two submit calls reached the server
 [`crash_resume.json`, commit `13c64f9`].
 
 # 3. RQ-A: tool granularity (not run)
@@ -94,7 +95,7 @@ history, balance, draft), three tool sets (many fine-grained tools, a few coarse
 current set with rewritten descriptions), one agent model, and three metrics: tool-selection
 accuracy, argument accuracy against the gold call, and tokens per task. The only evidence I have is
 anecdotal. The single ReAct baseline, offered all 9 tools, picked a sensible sequence on both demo
-jobs (`get_job`, `get_client_history`, 2–3 × `search_evidence`, `create_proposal_draft`)
+jobs (`get_job`, `get_client_history`, 2 to 3 calls to `search_evidence`, `create_proposal_draft`)
 [`single_agent_demo.json`]. That is not a measurement, so I make no claim.
 
 # 4. RQ-B: retrieval and claim verification
@@ -121,15 +122,15 @@ Recall@5 and 0.422 MRR; dropping hybrid costs 0.020 Recall@5 and 0.070 MRR [`rag
 **Per persona** (shipped): ai_ml 0.195, data_analyst 0.339, fullstack 0.239 Recall@5.
 
 **The hypothesis is rejected.** On 4+ requirement jobs the full stack does beat V0 by 17.1 points
-(0.026 → 0.197), but the type filter alone gives all of it, and decomposition then takes 5.2 points
-away (0.249 → 0.197). Rerank subtracts instead of adding. Why: in V0, 448 of the 475 top-5 hits were
+(0.026 to 0.197), but the type filter alone gives all of it, and decomposition then takes 5.2 points
+away (0.249 to 0.197). Rerank subtracts instead of adding. Why: in V0, 448 of the 475 top-5 hits were
 past **proposals** [`rag_v0.json`]. They are written in answer to job posts, so they read like the
 query, and they are 70% of all chunks. Short requirement queries ("experience with Python") favour
 short, skill-dense reviews (232 of 475 top-5 slots against 110 gold items), and the cross-encoder
 favours code chunks (86 top-5 slots against 3 gold). A stronger text matcher widens the gap between
 "text that mentions the skill" and "proof of having done the project". The corrective loop (V8)
-refused 41% of gap-skip jobs but also 35% of real bid jobs [`rag_v8_filter.json`]: too blunt to
-replace the fit matcher's gap check.
+refused 41% of gap-skip jobs but also 35% of real bid jobs [`rag_v8_filter.json`], so it is too
+blunt to replace the fit matcher's gap check.
 
 **Shipped choice:** `rag.variant: v2_filter` (portfolio-type filter + BM25/dense hybrid with RRF).
 It has the best Recall@5, MRR and nDCG@10 and is as fast as V0.
@@ -138,8 +139,8 @@ It has the best Recall@5, MRR and nDCG@10 and is as fast as V0.
 fastembed. On the same 95 jobs, that scored *slightly higher*: Recall@5 0.267, MRR 0.507, nDCG@10
 0.364 [`rag_v2_filter_bge_small_en_v1_5.json`]. One run, so I read it as "no worse", not better.
 
-**Claim verification, before and after** (15 gold-bid jobs, 14 drafted): claims per proposal 6.14 →
-2.29 and unsupported claims 3.86 → 0.00 [`proposals_openai_gpt-oss-120b.json`]. The wider verifier
+**Claim verification, before and after** (15 gold-bid jobs, 14 drafted): claims per proposal went from
+6.14 to 2.29 and unsupported claims from 3.86 to 0.00 [`proposals_openai_gpt-oss-120b.json`]. The wider verifier
 (present-tense habits like "I routinely…", screening answers; commit `3a4b161`) finds about twice
 as many claims as the first version, and most of the new ones are unsupported. Two submitted drafts
 were left with **no** grounded claim (`291e4ff84d9094f0`, `031cbf7ac05d13a6`). Compliance now blocks
@@ -173,16 +174,16 @@ catches, tokens and latency.
 # 6. The change request
 
 The brief's 2 November GigSim policy update was never released to us, so I defined one
-(`gigsim/policies/v2.yaml`). Fixed-price jobs above $1,000 cost double in Connects ($1,000–2,000:
-12 → 24; above $2,000: 16 → 32), and cover letters are capped at 220 words (was 500). I did not pick
+(`gigsim/policies/v2.yaml`). Fixed-price jobs above $1,000 cost double in Connects (from 12 to 24
+between $1,000 and $2,000, and from 16 to 32 above $2,000), and cover letters are capped at 220 words (was 500). I did not pick
 "proposals must answer every screening question", because the frozen v1 policy engine has no such
 rule type and adding one would mean editing code under `gigsim/`, which the `gigsim-v1` freeze
 forbids. [`change_request.json`]
 
 **What I had to change** (commit `1a6d627`): two files, 45 lines added and 2 removed, **no
 Python**. Of those, 41 lines are the new policy file. On the agent side, two config values in
-`agent/config.yaml`: `writer.max_words` 260 → 210 (the Critic enforces it, and it must stay under
-the cap) and `bidding_rules.max_connects_per_job` 16 → 32 (otherwise every job above $1,000 would
+`agent/config.yaml`: `writer.max_words` from 260 to 210 (the Critic enforces it, and it must stay under
+the cap) and `bidding_rules.max_connects_per_job` from 16 to 32 (otherwise every job above $1,000 would
 go to "watch" on price alone; this one is a business choice, not a requirement).
 
 **What changed by itself:** Connects costs, because nodes read `job.connects_cost` and the dry-run
@@ -223,7 +224,7 @@ Twelve failed dev jobs from the result files, grouped into the brief's taxonomy:
 | `22da285bce53b433`, `2298deadbfaf9fad`, `27d97376f2ac1781` | tool error | the fallback writer (qwen3:8b) returned the JSON schema instead of filling it | retry with the validation error, then fallback; status `needs_attention` | no (Groq quota is the root cause) |
 | `291e4ff84d9094f0`, `031cbf7ac05d13a6` | unsupported claim | every claim was unsupported and removed, and the empty-of-proof draft was submitted | `no_grounded_claims` compliance block (`6e08661`) | yes, by code; not re-run |
 | `03fdb39475cfadc3` | compliance error | "ensure data integrity" read as a guarantee and blocked | narrower borderline terms | partly |
-| `1c0b990bb7dbe947` | compliance error | "a WhatsApp and SMS assistant" (a real project) blocked as off-platform | — | open |
+| `1c0b990bb7dbe947` | compliance error | "a WhatsApp and SMS assistant" (a real project) blocked as off-platform | none yet | open |
 | `03fdb39475cfadc3`, `0cd6b5727da68d65`, `16e6b1dc6d5fc66f` | missed evidence | Recall@5 = 0 with the shipped retriever; 20 of 95 bid jobs score 0 [`rag_v2_filter.json`] | type filter + hybrid (87 jobs at 0 in V0) | partly |
 
 [`decisions_qwen3_4b.json`, `proposals_openai_gpt-oss-120b.json`, `rag_v2_filter.json`]. Not seen
@@ -276,4 +277,4 @@ Cost is far under budget because the open models are local or on free tiers. Lat
 for one main reason: Groq's free tier limits tokens per minute, so 12 of 14 drafts fell back to a
 local qwen3:8b and waited on rate limits. The optimisation that helped most was skipping early:
 `decide` stops before pricing and writing on skip/watch, and a cached analysis makes reruns cost
-nothing. **The hidden test run is pending**; I will add its numbers here without excuses.
+nothing. **The hidden test run is pending**; I will add its numbers here as they come.
