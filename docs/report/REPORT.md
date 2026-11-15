@@ -24,6 +24,7 @@ date: "15 November 2026"
 <p><strong>Live URL:</strong> https://gigbid-3g0a.onrender.com</p>
 <p><strong>Repository:</strong> https://github.com/muqarrab-k/GigBid-A-Multi-Agent-Freelancer-Copilot</p>
 <p><strong>Demo Video:</strong> https://drive.google.com/file/d/12j2BvMtTN-7vI_BqbtmasswhbHF9h4Ds/view?usp=sharing</p>
+<p><strong>Technical Write-up:</strong> https://medium.com/@muqarraboffical/what-building-an-ai-freelancer-team-taught-me-6a11503738b8</p>
 </div>
 
 Every number in this report comes from a committed file under `evals/results/` (named in

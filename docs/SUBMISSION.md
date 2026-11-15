@@ -15,5 +15,5 @@
     ```bash
     docker run -i --rm -v ~/my-portfolio:/portfolio:ro mmuq/gigbid-portfolio-mcp
     ```
-- **Technical write-up:** MEDIUM_LINK
+- **Technical write-up:** https://medium.com/@muqarraboffical/what-building-an-ai-freelancer-team-taught-me-6a11503738b8
 - **Reviewer login:** username reviewer, password in my private Classroom comment

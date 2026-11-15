@@ -11,6 +11,7 @@ the marketplace and the portfolio only through MCP servers.
 
 - **Live app:** https://gigbid-3g0a.onrender.com (free tier: the first visit after a quiet spell can take about a minute). Reviewer login: in the private comment on the Classroom submission.
 - **Demo video:** https://drive.google.com/file/d/12j2BvMtTN-7vI_BqbtmasswhbHF9h4Ds/view?usp=sharing
+- **Technical write-up:** https://medium.com/@muqarraboffical/what-building-an-ai-freelancer-team-taught-me-6a11503738b8
 - **Author:** Muqarrab · i230511 · Section C (AI-4016, Assignment II)
 
 ## What it does
