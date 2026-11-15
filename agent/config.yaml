@@ -250,7 +250,8 @@ thresholds:
 bidding_rules:
   currency: USD
   weekly_connects_budget: 80
-  max_connects_per_job: 16
+  # v2 doubles big jobs
+  max_connects_per_job: 32
   connects_unit_cost_usd: 0.15
   min_hourly_rate: 25
   min_fixed_price: 100
@@ -499,7 +500,8 @@ scout:
 
 writer:
   min_words: 110
-  max_words: 260
+  # gigsim v2 caps 220
+  max_words: 210
   max_evidence: 6
   evidence_chars: 1200
 
