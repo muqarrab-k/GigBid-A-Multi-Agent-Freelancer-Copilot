@@ -24,3 +24,10 @@ Hypotheses for later variants:
   evidence of experience.
 - H4: Code chunks rarely win with whole-post queries; multi-vector items (V5) should lift README
   and code recall for projects whose README is generic.
+
+## Hypothesis for the variant study (stated 2026-11-15, before any variant run)
+
+Portfolio-type filtering + requirement decomposition + hybrid retrieval raises Recall@5 by
+15+ points over V0 on dev bid jobs with 4+ requirements, and by less on jobs with fewer.
+A cross-encoder rerank adds a few more points on top. The corrective loop (V8) should not
+change ranking metrics much, but should refuse on most skip jobs that hit a persona gap.
