@@ -11,6 +11,9 @@ evaluation sets, so I built all three: real job and contract data from Kaggle, p
 labelled synthetic personas, clients and gold labels (`docs/DATA_CARD.md`). The hidden test has
 not run yet.
 
+**Live app:** https://gigbid-3g0a.onrender.com (Render free tier with Neon Postgres; open-weight
+models on Groq with an OpenRouter fallback). Shared traces: `docs/TRACES.md`.
+
 # 1. Problem and constraints
 
 A freelancer scans job feeds for hours, pays Connects to bid, and sends proposals that clients

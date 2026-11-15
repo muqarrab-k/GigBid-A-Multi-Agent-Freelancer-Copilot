@@ -9,7 +9,7 @@ which every claim links to real portfolio evidence, and **stops for a human to a
 anything is sent or any Connects are spent. A team of LangGraph agents does the work; they reach
 the marketplace and the portfolio only through MCP servers.
 
-- **Live app:** LIVE_URL. Reviewer login: in the private comment on the Classroom submission.
+- **Live app:** https://gigbid-3g0a.onrender.com (free tier: the first visit after a quiet spell can take about a minute). Reviewer login: in the private comment on the Classroom submission.
 - **Author:** Muqarrab · i230511 · Section C (AI-4016, Assignment II)
 
 ## What it does
@@ -94,11 +94,11 @@ regression test for the verifier.
 
 ### Traces
 
-1. TRACE_LINK_1 (skipped scam)
-2. TRACE_LINK_2 (approved proposal)
-3. TRACE_LINK_3 (critic loop / crash and resume)
+1. [Skipped scam / injection](https://smith.langchain.com/public/4df09fc0-cc0c-4fd8-bc4b-52bc9899e616/r): off-platform ask and an injected instruction, flagged and skipped.
+2. [Bid reaching approval](https://smith.langchain.com/public/655ef2ad-20d9-46b0-a53e-65c241e2a0e2/r): full graph up to the approval interrupt (approved by hand in the demo).
+3. [Critic loop](https://smith.langchain.com/public/655ef2ad-20d9-46b0-a53e-65c241e2a0e2/r): the same run as 2, with three writer passes and `critic_unresolved`.
 
-Links will be filled from `docs/TRACES.md` once the deployment is final.
+Details and trace ids: `docs/TRACES.md`.
 
 ## Portfolio MCP server (use it with your own portfolio)
 
