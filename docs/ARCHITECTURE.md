@@ -139,9 +139,84 @@ and again right after `submit_proposal` returns, then restarts; results in
   every LLM call (model, attempt, tokens, latency, USD, cache hit) and tool call (name, args, ok,
   latency), all under one `trace_id` that also reaches the audit logs through MCP request meta.
   It is for audit and debugging; nodes never read it to decide anything.
-- **Long-term memory** (next task, LangGraph store): only promoted knowledge (style and outcome
-  memory) written by an explicit rule in `agent/memory/promotion_rules.py`. Raw tool output and
-  trace events never go there.
+- **Long-term memory** (`agent/memory/store.py`, LangGraph `AsyncPostgresStore`): only promoted
+  knowledge, written by an explicit rule in `agent/memory/promotion_rules.py`. Raw tool output and
+  trace events never go there. See "Long-term memory" below.
+
+## Conversation graph (`agent/graphs/conversation_graph.py`)
+
+One thread per client conversation (`conv:<user>:<marketplace thread id>`), on the same
+Postgres checkpointer as the bid graph.
+
+```mermaid
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	read_messages(read_messages)
+	classify(classify)
+	propose_slots(propose_slots)
+	guard(guard)
+	prepare_reply(prepare_reply)
+	approval_gate(approval_gate)
+	apply_edit(apply_edit)
+	reject(reject)
+	send(send)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> read_messages;
+	apply_edit --> guard;
+	approval_gate -.-> apply_edit;
+	approval_gate -.-> reject;
+	approval_gate -.-> send;
+	classify -. &nbsp;end&nbsp; .-> __end__;
+	classify -.-> guard;
+	classify -.-> propose_slots;
+	guard -. &nbsp;end&nbsp; .-> __end__;
+	guard -.-> prepare_reply;
+	prepare_reply --> approval_gate;
+	propose_slots --> guard;
+	read_messages -. &nbsp;end&nbsp; .-> __end__;
+	read_messages -.-> classify;
+	reject --> __end__;
+	send --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
+```
+
+| node | what it does |
+|---|---|
+| `read_messages` | `list_messages` through the Marketplace MCP server; client text is kept as untrusted |
+| `classify` | rule signals first (policy rules for messages, risk patterns, injection patterns), then one `client_liaison` call (prompt `client_liaison.v1.md`, client text inside `<untrusted>` tags) for intent and a draft reply. Any rule signal forces `scam_signal`: the model cannot be talked out of it |
+| `propose_slots` | for `interview_request`: real free slots from the Workspace `free_slots` tool in the user's timezone, appended to the reply; the model never invents times |
+| `guard` | message policy rules on the outgoing reply (contact details, off-platform apps or payment, guarantees, unpaid work); breaking sentences are dropped and noted; an empty reply stops with `needs_attention` |
+| `prepare_reply` | `send_message` dry run (platform policy check); outage or failed check stops before a human is asked |
+| `approval_gate` | `interrupt()`; approve, edit (back through `guard`) or reject (status `closed`, reason kept) |
+| `send` | only after approve; idempotency key `<conversation id>:<sha256(reply)[:16]>`, so a resumed send never sends twice |
+
+Scam signals are flagged on the approval card; the drafted reply declines and stays on the platform.
+
+## Long-term memory (`agent/memory/`)
+
+Two namespaces per user in the LangGraph store, each item with its rule, why it passed and its sources:
+
+- **Style memory** (`memory/<user>/style`): every approval edit (the bid graph's `pending_edits`) is
+  reduced to named patterns (cut the first sentence, cut the sign-off, removed a watched term such as
+  "passionate", much shorter). A pattern is promoted only after `memory.style.min_repeats` (3) edits,
+  in at least `min_share` of the last `window` edits, with no edit in that window going the other way.
+  The writer (prompt `writer.v5.md`) reads promoted rules through `BidContext.style_rules`. Deleting a
+  rule also stops its old edits counting, so it must repeat again to come back.
+- **Outcome memory** (`memory/<user>/outcome`): latest GigSim status per proposal, counted per job
+  category; a category is promoted only with `min_submitted` (5) proposals and a reply rate of at
+  least `min_reply_rate` (30%).
+
+Both can be listed and deleted from the API (`/settings/memory`).
+
+## API (`apps/api/`)
+
+FastAPI with signed bearer tokens (scrypt password hashes), a preloaded `reviewer` account (ai_ml),
+and tenant scoping through a per-user thread registry in the store: every route resolves a thread
+through the signed-in user's registry, so another user's thread id gives 404. Runs stream LangGraph
+`updates` as SSE; pending approvals are read back from the checkpointer, so a refresh or restart never
+loses one. Endpoint list and how to run it: `apps/api/README.md`.
 
 ## Node plumbing (`agent/nodes/common.py`)
 

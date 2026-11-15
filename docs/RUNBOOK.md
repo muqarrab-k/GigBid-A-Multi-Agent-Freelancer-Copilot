@@ -259,3 +259,28 @@ await resume_job(thread_id, {"action": "approve"}, ctx, graph)
 
 A thread that fails `nodes.max_attempts` times gets status `dead_letter` with every error in
 `errors`; a marketplace outage before approval or during submit gives status `queued`.
+
+## API, conversation graph and memory
+
+```bash
+make db-up && make api       # http://localhost:8000/docs, log in as reviewer
+make openapi                 # apps/api/openapi.json
+```
+
+A full approval cycle with curl:
+
+```bash
+TOKEN=$(curl -s -X POST localhost:8000/auth/login -H 'content-type: application/json' \
+  -d '{"username":"reviewer","password":"reviewer-dev"}' | jq -r .access_token)
+curl -s -X POST localhost:8000/jobs/scout -H "Authorization: Bearer $TOKEN"
+curl -s -X POST localhost:8000/runs -H "Authorization: Bearer $TOKEN" -H 'content-type: application/json' \
+  -d '{"job_id":"1c0b990bb7dbe947"}'
+curl -sN localhost:8000/runs/1c0b990bb7dbe947:reviewer/events -H "Authorization: Bearer $TOKEN"
+curl -s localhost:8000/approvals -H "Authorization: Bearer $TOKEN"
+curl -s -X POST localhost:8000/approvals/1c0b990bb7dbe947:reviewer -H "Authorization: Bearer $TOKEN" \
+  -H 'content-type: application/json' -d '{"action":"approve"}'
+```
+
+Client replies: `GET /messages`, then `POST /messages/{thread_id}/draft`; the draft appears in
+`/approvals` with kind `conversation`. Style memory fills in from approval edits;
+`GET /settings/memory` shows what was promoted and why, and `DELETE /settings/memory/style/<key>` forgets it.
