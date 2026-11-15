@@ -1,25 +1,47 @@
 # AI Usage Disclosure
 
-Record the AI coding assistant/tool used, the files or tasks it helped with, and at least
-one incorrect suggestion you identified and corrected. You remain responsible for all code.
+## Tool
 
-## Log
+Claude Code (Anthropic), used as a coding assistant throughout the project. I remain responsible
+for all code and every result in this repository.
 
-| date | tool | files / task | what it got wrong (caught) |
-|---|---|---|---|
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Foundation: `agent/config.*`, `handoffs.py`, `state.py`, `llm.py`, prompt loader, unit tests | Latest `mcp` (2.3.0) conflicts with `langchain-mcp-adapters` (needs `mcp<2`); found by checking package metadata, pinned 1.30.0. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Real-data pipeline: `data_pipeline/`, `docs/DATA_CARD.md`, `docs/data_profile.md`, `gigsim/seed/` | Its first duplicate rule grouped title-only jobs by title alone, which merged 98 unrelated "Social Media Manager" posts; unpriced title-only rows are now never grouped. Its first scam-signal list was dominated by one company's reposted ads. `kaggle` 2.2.5 imports `six` without declaring it, so `six` is pinned. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Synthetic data: persona `facts.yaml`, `synth/`, `evals/datasets/labeling_rules.py`, `policy_rules.yaml`, clients, plants, dev labels | Its first fair-price band used only market percentiles, so a job posting $80-175/h got a band of $15-39; bands now follow the posted budget. Its first client assignment gave one client 179 jobs (now capped at 30). Its YAML metrics lists split "2,300 hours" into two items. Its first rate floors were above the expert medians and left only 10% of dev jobs as bids. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | GigSim simulator: `gigsim/` (store, policy engine, simulated clients, public/admin API, tests, README), Dockerfile, compose service, CI freeze | Its no-leak scan flagged the events field `payload` because the plant log uses the same key; the field was renamed to `data`. Its `ruff --fix` run also rewrote 19 generated persona code files, which were restored byte-for-byte from the LLM cache and `data/personas` is now excluded from lint. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Synthetic corpus render with OpenAI `gpt-5.4-mini` (1,026 calls, ~$1.59): generator config, `synth/checks.py`, `synth/quality.py`, repair prompt, review prompt v2 | The first full render had 11 duplicate reviews (identical prompts for repeated projects) and 46 proposals that named the hidden implied skills because the proposal prompt showed them; its first grounding check also flagged "2,000" vs "2000" as invented. All fixed and re-checked to 0 before committing. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Marketplace port, GigSim adapter, Marketplace and Workspace MCP servers, contract snapshots, TOOLS/RUNBOOK/ADR 0002 | Its first PII mask in the audit log also masked ISO dates such as the timestamp, because the phone pattern matched `2026-11-14`; phones now need 9+ digits and only args/results are masked. It first planned plain error results, but FastMCP validates error payloads against the output schema, so every result model now carries `ok` and `error`. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | RAG ingestion, embeddings, pgvector store, V0, rag_eval, Portfolio MCP server, ADR 0003 | Its first embedder pin (sentence-transformers 6 with transformers 5) could not run nomic-embed-text v1.5, whose remote code calls a method transformers 5 removed; pinned transformers 4.57.6. Its first V0 eval file recorded the commit before the RAG code existed; re-run on the right commit. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | MCP client layer and allowlists, GitHub MCP loader, single ReAct baseline, tests | langchain-mcp-adapters 0.3.2 cannot set request meta on tool calls, so its first plan would have lost the trace_id; tools are now wrapped to call the MCP session with meta. Its first allowlist check could not tell an unknown tool from a down server; it now validates only when the core servers are reachable. |
-| 2026-11-14 | Claude Code (Claude Opus 5.5) | Bid graph analysis half: node plumbing, analyst, risk assessor, fit matcher, decide, pricing, scout, get_market_stats, decision eval | qwen3 on Ollama spends about 1,500 thinking tokens per JSON reply by default (49 s vs 2 s); `reasoning_effort: none` is now set in config for the cheap nodes. Its first market-stats lookup preferred posted budgets over paid contracts when no experience level was given. |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Bid graph second half: writer, `rag/verify.py`, critic, compliance, approval interrupt, submit, Postgres checkpointer, dead-letter, replay, crash/resume demo, proposal eval, fresh-sample corroboration check | Its first critic swapped in the best earlier draft after the last revision, and the router then read that draft's lower revision number and looped back to the writer until the recursion limit; routing now uses the reviewed revision. Its first approval preview read the Connects balance from the wrong key and showed `None`. Its first fresh-sample "on" run loaded the new full graph mid-way and ran the writer too, so only its decision metrics are compared. |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Verifier gaps: present-tense experience claims, screening-answer verification, writer prompt v4, proposal eval rerun | Found while running evals: in-process MCP sessions carried no user, so every persona used the ai_ml portfolio and GigSim account; earlier decision results were re-run and the affected files kept with a `_tenant_bug` suffix. Its first doc draft of the proposal results quoted counts that no results file backed; they were checked against the file and corrected. |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Conversation graph, client liaison, style and outcome memory with promotion rules, FastAPI backend (auth, inbox, runs with SSE, approvals, messages, analytics, settings, scheduler), API tests | Its first run endpoint started the SSE hub inside the background task, so a listener that connected first saw an empty stream; the hub now starts before the task. Its first draft endpoint passed the conversation id and the marketplace thread id under the same keyword and would have failed at runtime; mypy caught it. |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Publishable Portfolio MCP server (`mcp_servers/portfolio/` pyproject, README, Dockerfile; uvx and Docker Hub `mmuq/gigbid-portfolio-mcp`) | _(to write)_ |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Keyless smoke eval and CI gates (`evals/runners/smoke_eval.py`, `evals/cache/`, `.github/workflows/eval.yml`, `scripts/check_repo.py`) | _(to write)_ |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | README for reviewers, demo GIF (`scripts/make_demo_gif.py`), R&D report draft (`docs/report/`), blog draft (`docs/writeup.md`), résumé bullet | _(to write)_ |
-| 2026-11-15 | Claude Code (Claude Opus 5.5) | Change request: GigSim policy v2 and absorbing it through config (`gigsim/policies/v2.yaml`, `evals/results/change_request.json`) | _(to write)_ |
+## My role
+
+- I wrote the requirements and the prompts for each stage of the build.
+- I made the design and trade-off decisions:
+  - the datasets: Kaggle jobs and contracts, plus labelled synthetic personas and clients;
+  - the cut list under the deadline;
+  - keeping qwen3:4b over qwen3:8b after the decision eval;
+  - rejecting my own RAG hypothesis when the ablation did not support it;
+  - choosing Render's free tier over paid hosting.
+- I set up every account and key myself: Neon, Groq, OpenRouter, LangSmith, Hugging Face, Docker
+  Hub and Render.
+- I tested the app myself in the UI and reviewed results before committing them.
+
+## What the assistant did
+
+Under my direction it generated most of the implementation code, the tests and the first drafts of
+the docs. It also ran the evals and deployments I asked for.
+
+## Files it helped with
+
+| folder | what |
+|---|---|
+| `agent/` | config, hand-offs, bid and conversation graphs, nodes, memory |
+| `rag/` | ingest, index, retrieval variants, claim verifier, embedders |
+| `mcp_servers/` | Marketplace, Portfolio and Workspace servers |
+| `apps/` | FastAPI backend and React web app |
+| `evals/` | runners and metrics (result files come from real runs) |
+| `docs/` | first drafts of the architecture, runbook, report and blog |
+| also | `gigsim/`, `synth/`, `data_pipeline/`, `infra/`, `scripts/` |
+
+## Things it got wrong that I caught
+
+1. **Hosting plan.** The plan assumed free Hugging Face Docker Spaces. Those now need a paid
+   subscription, so we moved the deployment to Render's free tier.
+2. **Embeddings.** The first fix for the 512 MB host used the Nomic embedding API, which turned out
+   to be paid. The deployed embedder changed to bge-small through fastembed, with its own index, and
+   the difference is written up in `docs/rag_notes.md`.
+3. **Scam-flag fix.** The first fix for false scam flags was going to be tested on the same dev jobs
+   that suggested it. I had it re-tested on a fresh, disjoint sample instead, where it cost some bid
+   F1.
