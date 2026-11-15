@@ -10,6 +10,7 @@ anything is sent or any Connects are spent. A team of LangGraph agents does the 
 the marketplace and the portfolio only through MCP servers.
 
 - **Live app:** https://gigbid-3g0a.onrender.com (free tier: the first visit after a quiet spell can take about a minute). Reviewer login: in the private comment on the Classroom submission.
+- **Demo video:** https://drive.google.com/file/d/12j2BvMtTN-7vI_BqbtmasswhbHF9h4Ds/view?usp=sharing
 - **Author:** Muqarrab · i230511 · Section C (AI-4016, Assignment II)
 
 ## What it does
